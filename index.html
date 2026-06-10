@@ -3,89 +3,186 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Supreme Art — Custom Fabrication & Signage</title>
-  <meta name="description" content="Supreme Art is a custom fabrication and signage factory delivering precision metalwork, signage, and architectural elements." />
+  <title>Supreme Art — We Print Everything</title>
+  <meta name="description" content="Supreme Art is a print factory: large-format, signage, packaging and fine detail printing. Designed, printed and finished in-house." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- CMYK loading pass -->
+  <div class="press-loader" id="loader" aria-hidden="true">
+    <div class="press-loader__bars">
+      <span style="--c:#22d3ee"></span>
+      <span style="--c:#e840a0"></span>
+      <span style="--c:#facc15"></span>
+      <span style="--c:#111"></span>
+    </div>
+    <div class="press-loader__label">Warming up the press…</div>
+  </div>
+
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="/">Supreme&nbsp;Art</a>
+      <a class="brand" href="/">
+        <span class="brand__mark"></span>
+        Supreme&nbsp;Art
+      </a>
       <nav class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
         <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-cta">Get a quote</a>
       </nav>
     </div>
   </header>
 
   <main>
+    <!-- HERO -->
     <section class="hero">
-      <div class="container">
-        <h1>Custom fabrication, built to spec.</h1>
-        <p class="lead">
-          Precision metalwork, signage, and architectural elements —
-          designed, cut, and finished in-house.
-        </p>
-        <a class="btn" href="#contact">Request a quote</a>
+      <div class="halftone" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <p class="eyebrow">Print factory · since day one</p>
+          <h1 class="hero__title">
+            We print
+            <span class="rotator" aria-live="polite">
+              <span class="rotator__word">banners</span>
+              <span class="rotator__word">signage</span>
+              <span class="rotator__word">packaging</span>
+              <span class="rotator__word">posters</span>
+              <span class="rotator__word">everything</span>
+            </span>
+          </h1>
+          <p class="lead">
+            Large-format, signage, packaging and fine-detail printing —
+            designed, printed and finished under one roof. Press-ready in days,
+            not weeks.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--accent" href="#contact">Start a print job</a>
+            <button class="btn btn--ghost" id="printBtn" type="button">Run the press ▸</button>
+          </div>
+          <div class="stat-row">
+            <div class="stat"><b data-count="2400">0</b><span>jobs printed / yr</span></div>
+            <div class="stat"><b data-count="48">0</b><span>hr turnaround</span></div>
+            <div class="stat"><b data-count="16">0</b><span>print beds</span></div>
+          </div>
+        </div>
+
+        <!-- Animated printer -->
+        <div class="printer" aria-hidden="true">
+          <div class="printer__body">
+            <div class="printer__slot"></div>
+            <div class="printhead" id="printhead"></div>
+          </div>
+          <div class="printer__sheet" id="sheet">
+            <div class="sheet__ink sheet__ink--c"></div>
+            <div class="sheet__ink sheet__ink--m"></div>
+            <div class="sheet__ink sheet__ink--y"></div>
+            <div class="sheet__ink sheet__ink--k"></div>
+            <span class="sheet__logo">SA</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="services" class="section">
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Banners</span><span>•</span><span>Vinyl</span><span>•</span>
+        <span>Signage</span><span>•</span><span>Packaging</span><span>•</span>
+        <span>Posters</span><span>•</span><span>Stickers</span><span>•</span>
+        <span>Vehicle Wraps</span><span>•</span><span>Backlit</span><span>•</span>
+        <span>Banners</span><span>•</span><span>Vinyl</span><span>•</span>
+        <span>Signage</span><span>•</span><span>Packaging</span><span>•</span>
+        <span>Posters</span><span>•</span><span>Stickers</span><span>•</span>
+        <span>Vehicle Wraps</span><span>•</span><span>Backlit</span><span>•</span>
+      </div>
+    </div>
+
+    <!-- WORK -->
+    <section id="work" class="section">
       <div class="container">
-        <h2>What we do</h2>
-        <div class="grid">
-          <article class="card">
-            <h3>Metal Fabrication</h3>
-            <p>CNC cutting, welding, and finishing for one-off and production runs.</p>
+        <h2 class="reveal">From file to finished.</h2>
+        <p class="prose reveal">Hover a sample to watch the colour passes lay down.</p>
+        <div class="work-grid">
+          <article class="swatch reveal" style="--a:#22d3ee;--b:#0ea5b7">
+            <div class="swatch__pass"></div>
+            <h3>Large Format</h3>
+            <p>Banners, backdrops & building wraps up to 5m wide.</p>
           </article>
-          <article class="card">
+          <article class="swatch reveal" style="--a:#e840a0;--b:#b81f76">
+            <div class="swatch__pass"></div>
             <h3>Signage</h3>
-            <p>Dimensional letters, illuminated signs, and storefront branding.</p>
+            <p>Illuminated, dimensional & storefront branding.</p>
           </article>
-          <article class="card">
-            <h3>Architectural</h3>
-            <p>Railings, panels, and custom features for interiors and facades.</p>
+          <article class="swatch reveal" style="--a:#facc15;--b:#d39e00">
+            <div class="swatch__pass"></div>
+            <h3>Packaging</h3>
+            <p>Boxes, labels & retail-ready short runs.</p>
+          </article>
+          <article class="swatch reveal" style="--a:#a78bfa;--b:#7c5cf0">
+            <div class="swatch__pass"></div>
+            <h3>Fine Detail</h3>
+            <p>Posters, art prints & photographic reproduction.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section section-alt">
+    <!-- PROCESS -->
+    <section id="process" class="section section-alt">
       <div class="container">
-        <h2>About Supreme Art</h2>
-        <p class="prose">
-          We're a full-service fabrication shop combining traditional
-          craftsmanship with modern CNC and finishing equipment. From a single
-          prototype to a full production order, we handle design, fabrication,
-          and finishing under one roof.
-        </p>
+        <h2 class="reveal">How a job runs the floor.</h2>
+        <ol class="process">
+          <li class="reveal"><span class="process__num">01</span><h3>Prepress</h3><p>We colour-correct, proof and lock your file to print spec.</p></li>
+          <li class="reveal"><span class="process__num">02</span><h3>Press</h3><p>CMYK passes lay down on the bed — sharp, saturated, repeatable.</p></li>
+          <li class="reveal"><span class="process__num">03</span><h3>Finish</h3><p>Cut, laminate, grommet, fold and mount in-house.</p></li>
+          <li class="reveal"><span class="process__num">04</span><h3>Ship</h3><p>Boxed, palletised and out the door — on schedule.</p></li>
+        </ol>
       </div>
     </section>
 
-    <section id="contact" class="section">
+    <!-- SERVICES -->
+    <section id="services" class="section">
       <div class="container">
-        <h2>Get in touch</h2>
-        <p class="prose">
-          Tell us about your project and we'll get back to you with a quote.
-        </p>
+        <h2 class="reveal">Everything under one roof.</h2>
+        <div class="grid">
+          <article class="card reveal"><h3>Design & Prepress</h3><p>Artwork setup, proofing and colour management.</p></article>
+          <article class="card reveal"><h3>Digital & Wide-Format</h3><p>Eco-solvent, UV and latex on almost any substrate.</p></article>
+          <article class="card reveal"><h3>Finishing</h3><p>Laminating, cutting, grommets, mounting & framing.</p></article>
+          <article class="card reveal"><h3>Installation</h3><p>On-site signage and wrap installation by our crew.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section cta">
+      <div class="halftone halftone--soft" aria-hidden="true"></div>
+      <div class="container cta__inner reveal">
+        <h2>Got a file? Let's print it.</h2>
+        <p class="prose">Send us your artwork and quantities — we'll come back with a quote and a timeline.</p>
+        <div class="contact-actions">
+          <a class="btn btn--accent" href="mailto:info@supremeart.com">Email the press</a>
+          <a class="btn btn--ghost" href="tel:+10000000000">Call the floor</a>
+        </div>
         <ul class="contact-list">
-          <li><strong>Email:</strong> <a href="mailto:info@supremeart.com">info@supremeart.com</a></li>
-          <li><strong>Phone:</strong> <a href="tel:+10000000000">(000) 000-0000</a></li>
-          <li><strong>Address:</strong> 123 Factory Rd, Your City</li>
+          <li><strong>Email</strong> info@supremeart.com</li>
+          <li><strong>Phone</strong> (000) 000-0000</li>
+          <li><strong>Floor</strong> 123 Factory Rd, Your City</li>
         </ul>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>&copy; <span id="year"></span> Supreme Art. All rights reserved.</p>
+    <div class="container footer__inner">
+      <span class="brand"><span class="brand__mark"></span> Supreme&nbsp;Art</span>
+      <p>&copy; <span id="year"></span> Supreme Art. Printed with pride.</p>
     </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
