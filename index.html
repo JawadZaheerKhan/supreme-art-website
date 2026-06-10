@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Supreme Art — We Print Everything</title>
-  <meta name="description" content="Supreme Art is a print factory: large-format, signage, packaging and fine detail printing. Designed, printed and finished in-house." />
+  <title>Supreme Art — Pharmaceutical Packaging & Printing</title>
+  <meta name="description" content="Supreme Art manufactures pharmaceutical folding cartons — the paper boxes medicines come in. Printed, die-cut, folded and glued in-house in Peshawar." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -14,10 +16,7 @@
   <!-- CMYK loading pass -->
   <div class="press-loader" id="loader" aria-hidden="true">
     <div class="press-loader__bars">
-      <span style="--c:#22d3ee"></span>
-      <span style="--c:#e840a0"></span>
-      <span style="--c:#facc15"></span>
-      <span style="--c:#111"></span>
+      <span></span><span></span><span></span><span></span>
     </div>
     <div class="press-loader__label">Warming up the press…</div>
   </div>
@@ -25,64 +24,97 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="/">
-        <span class="brand__mark"></span>
-        Supreme&nbsp;Art
+        <img src="logo.png" alt="Supreme Art" class="brand__logo" />
       </a>
       <nav class="nav-links">
-        <a href="#work">Work</a>
-        <a href="#process">Process</a>
-        <a href="#services">Services</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#quality">Quality</a>
         <a href="#contact" class="nav-cta">Get a quote</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="halftone" aria-hidden="true"></div>
-      <div class="container hero__inner">
-        <div class="hero__copy">
-          <p class="eyebrow">Print factory · since day one</p>
-          <h1 class="hero__title">
-            We print
-            <span class="rotator" aria-live="polite">
-              <span class="rotator__word">banners</span>
-              <span class="rotator__word">signage</span>
-              <span class="rotator__word">packaging</span>
-              <span class="rotator__word">posters</span>
-              <span class="rotator__word">everything</span>
-            </span>
-          </h1>
-          <p class="lead">
-            Large-format, signage, packaging and fine-detail printing —
-            designed, printed and finished under one roof. Press-ready in days,
-            not weeks.
-          </p>
-          <div class="hero__actions">
-            <a class="btn btn--accent" href="#contact">Start a print job</a>
-            <button class="btn btn--ghost" id="printBtn" type="button">Run the press ▸</button>
-          </div>
-          <div class="stat-row">
-            <div class="stat"><b data-count="2400">0</b><span>jobs printed / yr</span></div>
-            <div class="stat"><b data-count="48">0</b><span>hr turnaround</span></div>
-            <div class="stat"><b data-count="16">0</b><span>print beds</span></div>
+    <!-- ============ SCROLL STORY: paper → print → cut → box ============ -->
+    <section class="scrolly" id="story">
+      <div class="stage" id="stage">
+
+        <!-- Landing headline (fades as you scroll) -->
+        <div class="landing" id="landing">
+          <h1>We make the box<br />your medicine comes in.</h1>
+          <p>Pharmaceutical folding cartons — printed, die-cut and glued under one roof.</p>
+          <div class="scroll-cue"><span></span>Scroll</div>
+        </div>
+
+        <!-- The scene -->
+        <div class="scene" id="scene">
+          <div class="sheet-wrap">
+            <div class="sheet-bg"></div>
+
+            <div class="fold-viewport">
+              <div class="fold-scene">
+                <div class="carton">
+                  <!-- front panel -->
+                  <div class="panel panel--front">
+                    <div class="art art--front">
+                      <img src="logo.png" alt="" class="art__logo" />
+                      <div class="art__band"></div>
+                      <div class="art__name">Paracetamol</div>
+                      <div class="art__dose">500&nbsp;mg &middot; 20 tablets</div>
+                      <div class="art__lines"><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <!-- left side -->
+                  <div class="panel panel--left">
+                    <div class="art art--side"><div class="art__band art__band--v"></div><span class="art__vtext">Paracetamol 500&nbsp;mg</span></div>
+                  </div>
+                  <!-- right side + back chained -->
+                  <div class="panel panel--right">
+                    <div class="art art--side"><div class="art__band art__band--v"></div><span class="art__vtext">20 tablets</span></div>
+                    <div class="panel panel--back">
+                      <div class="art art--back">
+                        <div class="art__lines art__lines--long"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                        <div class="art__barcode"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- top & bottom flaps -->
+                  <div class="panel panel--top"><div class="art art--flap"><span>SUPREME ART</span></div></div>
+                  <div class="panel panel--bottom"><div class="art art--flap"><span>BATCH ·  EXP</span></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- die-cut lines -->
+            <svg class="cut-svg" viewBox="0 0 700 460" aria-hidden="true">
+              <path class="cutpath" pathLength="1"
+                d="M75,85 L160,85 L160,25 L350,25 L350,85 L625,85 L625,375 L350,375 L350,435 L160,435 L160,375 L75,375 Z" />
+              <g class="creases">
+                <line x1="160" y1="85" x2="160" y2="375" />
+                <line x1="350" y1="85" x2="350" y2="375" />
+                <line x1="435" y1="85" x2="435" y2="375" />
+                <line x1="160" y1="85" x2="350" y2="85" />
+                <line x1="160" y1="375" x2="350" y2="375" />
+              </g>
+            </svg>
+
+            <!-- unprinted paper cover + travelling print head -->
+            <div class="print-cover"></div>
+            <div class="print-head" id="printHead"></div>
           </div>
         </div>
 
-        <!-- Animated printer -->
-        <div class="printer" aria-hidden="true">
-          <div class="printer__body">
-            <div class="printer__slot"></div>
-            <div class="printhead" id="printhead"></div>
-          </div>
-          <div class="printer__sheet" id="sheet">
-            <div class="sheet__ink sheet__ink--c"></div>
-            <div class="sheet__ink sheet__ink--m"></div>
-            <div class="sheet__ink sheet__ink--y"></div>
-            <div class="sheet__ink sheet__ink--k"></div>
-            <span class="sheet__logo">SA</span>
-          </div>
+        <!-- step captions -->
+        <div class="captions">
+          <p class="caption" data-step="0"><b>01 — Paper.</b> Pharma-grade board, batch-traceable.</p>
+          <p class="caption" data-step="1"><b>02 — Print.</b> Offset CMYK on Heidelberg presses.</p>
+          <p class="caption" data-step="2"><b>03 — Die-cut.</b> Creased and cut to the millimetre.</p>
+          <p class="caption" data-step="3"><b>04 — Box.</b> Folded, glued, ready for the line.</p>
+        </div>
+
+        <!-- progress dots -->
+        <div class="dots" aria-hidden="true">
+          <span data-step="0"></span><span data-step="1"></span><span data-step="2"></span><span data-step="3"></span>
         </div>
       </div>
     </section>
@@ -90,87 +122,77 @@
     <!-- MARQUEE -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
-        <span>Banners</span><span>•</span><span>Vinyl</span><span>•</span>
-        <span>Signage</span><span>•</span><span>Packaging</span><span>•</span>
-        <span>Posters</span><span>•</span><span>Stickers</span><span>•</span>
-        <span>Vehicle Wraps</span><span>•</span><span>Backlit</span><span>•</span>
-        <span>Banners</span><span>•</span><span>Vinyl</span><span>•</span>
-        <span>Signage</span><span>•</span><span>Packaging</span><span>•</span>
-        <span>Posters</span><span>•</span><span>Stickers</span><span>•</span>
-        <span>Vehicle Wraps</span><span>•</span><span>Backlit</span><span>•</span>
+        <span>Tablet cartons</span><span>•</span><span>Syrup cartons</span><span>•</span>
+        <span>Blister cartons</span><span>•</span><span>Ointment cartons</span><span>•</span>
+        <span>Drop &amp; vial cartons</span><span>•</span><span>Sachet boxes</span><span>•</span>
+        <span>Tablet cartons</span><span>•</span><span>Syrup cartons</span><span>•</span>
+        <span>Blister cartons</span><span>•</span><span>Ointment cartons</span><span>•</span>
+        <span>Drop &amp; vial cartons</span><span>•</span><span>Sachet boxes</span><span>•</span>
       </div>
     </div>
 
-    <!-- WORK -->
-    <section id="work" class="section">
+    <!-- CAPABILITIES -->
+    <section id="capabilities" class="section">
       <div class="container">
-        <h2 class="reveal">From file to finished.</h2>
-        <p class="prose reveal">Hover a sample to watch the colour passes lay down.</p>
-        <div class="work-grid">
-          <article class="swatch reveal" style="--a:#22d3ee;--b:#0ea5b7">
-            <div class="swatch__pass"></div>
-            <h3>Large Format</h3>
-            <p>Banners, backdrops & building wraps up to 5m wide.</p>
+        <p class="eyebrow reveal">Capabilities</p>
+        <h2 class="reveal">One factory. The whole carton.</h2>
+        <div class="grid">
+          <article class="card reveal">
+            <span class="card__num">01</span>
+            <h3>Offset Printing</h3>
+            <p>Heidelberg Speedmaster presses for sharp, colour-accurate runs — from short batches to full production.</p>
           </article>
-          <article class="swatch reveal" style="--a:#e840a0;--b:#b81f76">
-            <div class="swatch__pass"></div>
-            <h3>Signage</h3>
-            <p>Illuminated, dimensional & storefront branding.</p>
+          <article class="card reveal">
+            <span class="card__num">02</span>
+            <h3>Die-Cutting &amp; Creasing</h3>
+            <p>Precision dies for clean cuts and crisp folds, so every carton closes the same way every time.</p>
           </article>
-          <article class="swatch reveal" style="--a:#facc15;--b:#d39e00">
-            <div class="swatch__pass"></div>
-            <h3>Packaging</h3>
-            <p>Boxes, labels & retail-ready short runs.</p>
+          <article class="card reveal">
+            <span class="card__num">03</span>
+            <h3>Folding &amp; Gluing</h3>
+            <p>High-speed folder-gluers deliver cartons flat-packed and machine-ready for your filling line.</p>
           </article>
-          <article class="swatch reveal" style="--a:#a78bfa;--b:#7c5cf0">
-            <div class="swatch__pass"></div>
-            <h3>Fine Detail</h3>
-            <p>Posters, art prints & photographic reproduction.</p>
+          <article class="card reveal">
+            <span class="card__num">04</span>
+            <h3>Prepress &amp; Proofing</h3>
+            <p>Artwork checks, dielines and physical proofs before a single sheet runs.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- PROCESS -->
-    <section id="process" class="section section-alt">
+    <!-- QUALITY -->
+    <section id="quality" class="section section-alt">
       <div class="container">
-        <h2 class="reveal">How a job runs the floor.</h2>
-        <ol class="process">
-          <li class="reveal"><span class="process__num">01</span><h3>Prepress</h3><p>We colour-correct, proof and lock your file to print spec.</p></li>
-          <li class="reveal"><span class="process__num">02</span><h3>Press</h3><p>CMYK passes lay down on the bed — sharp, saturated, repeatable.</p></li>
-          <li class="reveal"><span class="process__num">03</span><h3>Finish</h3><p>Cut, laminate, grommet, fold and mount in-house.</p></li>
-          <li class="reveal"><span class="process__num">04</span><h3>Ship</h3><p>Boxed, palletised and out the door — on schedule.</p></li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section id="services" class="section">
-      <div class="container">
-        <h2 class="reveal">Everything under one roof.</h2>
-        <div class="grid">
-          <article class="card reveal"><h3>Design & Prepress</h3><p>Artwork setup, proofing and colour management.</p></article>
-          <article class="card reveal"><h3>Digital & Wide-Format</h3><p>Eco-solvent, UV and latex on almost any substrate.</p></article>
-          <article class="card reveal"><h3>Finishing</h3><p>Laminating, cutting, grommets, mounting & framing.</p></article>
-          <article class="card reveal"><h3>Installation</h3><p>On-site signage and wrap installation by our crew.</p></article>
+        <p class="eyebrow reveal">Quality</p>
+        <h2 class="reveal">Built for pharma standards.</h2>
+        <p class="prose reveal">
+          Medicine packaging doesn't get second chances. We run documented quality
+          assurance across every stage — incoming board, colour control on press,
+          dimensional checks after die-cutting, and final inspection before dispatch —
+          with full batch traceability.
+        </p>
+        <div class="stat-row reveal">
+          <div class="stat"><b data-count="25">0</b><span>+ years in print</span></div>
+          <div class="stat"><b data-count="100">0</b><span>% in-house production</span></div>
+          <div class="stat"><b data-count="48">0</b><span>hr proofing turnaround</span></div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact" class="section cta">
-      <div class="halftone halftone--soft" aria-hidden="true"></div>
       <div class="container cta__inner reveal">
-        <h2>Got a file? Let's print it.</h2>
-        <p class="prose">Send us your artwork and quantities — we'll come back with a quote and a timeline.</p>
+        <h2>Have a carton to make?</h2>
+        <p class="prose prose--center">Send us your artwork or dieline — we'll come back with a quote and a timeline.</p>
         <div class="contact-actions">
-          <a class="btn btn--accent" href="mailto:info@supremeart.pk">Email the press</a>
+          <a class="btn btn--accent" href="mailto:info@supremeart.pk">Email the factory</a>
           <a class="btn btn--ghost" href="tel:+923135585784">Call the floor</a>
         </div>
         <ul class="contact-list">
           <li><strong>Email</strong> info@supremeart.pk</li>
           <li><strong>Phone</strong> 0313 5585784</li>
-          <li><strong>Floor</strong> Industrial Estate, Hayatabad, Peshawar</li>
+          <li><strong>Factory</strong> Industrial Estate, Hayatabad, Peshawar</li>
         </ul>
       </div>
     </section>
@@ -178,8 +200,8 @@
 
   <footer class="site-footer">
     <div class="container footer__inner">
-      <span class="brand"><span class="brand__mark"></span> Supreme&nbsp;Art</span>
-      <p>&copy; <span id="year"></span> Supreme Art. Printed with pride.</p>
+      <img src="logo.png" alt="Supreme Art" class="footer__logo" />
+      <p>&copy; <span id="year"></span> Supreme Art (Pvt) Ltd. Printed with pride.</p>
     </div>
   </footer>
 
