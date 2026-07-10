@@ -1,0 +1,26 @@
+name: Trigger Vercel deploy hook
+
+# Vercel's Hobby plan only auto-deploys commits authored by the project owner.
+# For anyone else's pushes, this workflow calls a Vercel Deploy Hook instead.
+on:
+  push:
+    branches: [main, dev]
+
+jobs:
+  trigger:
+    # Owner's pushes already deploy via the native Vercel integration
+    if: github.actor != 'JawadZaheerKhan'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call the deploy hook for this branch
+        env:
+          HOOK_MAIN: ${{ secrets.VERCEL_DEPLOY_HOOK_MAIN }}
+          HOOK_DEV: ${{ secrets.VERCEL_DEPLOY_HOOK_DEV }}
+        run: |
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then HOOK="$HOOK_MAIN"; else HOOK="$HOOK_DEV"; fi
+          if [ -z "$HOOK" ]; then
+            echo "No deploy hook secret configured for branch ${GITHUB_REF_NAME} — skipping."
+            exit 0
+          fi
+          echo "Triggering Vercel deploy for ${GITHUB_REF_NAME}…"
+          curl -sf -X POST "$HOOK"
