@@ -1,12 +1,12 @@
 :root {
-  --bg: #f7f5f1;
-  --surface: #ffffff;
-  --surface-alt: #f0ede7;
-  --text: #17171a;
-  --muted: #6d7077;
-  --accent: #b3202a;       /* logo red */
-  --ink: #1c1c1f;          /* logo black */
-  --border: #e3dfd6;
+  --bg: #0a0a0b;
+  --surface: #161619;
+  --surface-alt: #101013;
+  --text: #f5f5f7;
+  --muted: #9a9aa2;
+  --accent: #e0343f;       /* logo red, brightened for dark bg */
+  --ink: #1c1c1f;          /* logo black — used on white carton artwork */
+  --border: #2a2a2f;
   --c: #00a8cc;
   --m: #d6347f;
   --y: #e8b400;
@@ -47,7 +47,7 @@ a { color: inherit; }
 .press-loader__bars span:nth-child(1){ background: var(--c); animation-delay: 0s; }
 .press-loader__bars span:nth-child(2){ background: var(--m); animation-delay: .12s; }
 .press-loader__bars span:nth-child(3){ background: var(--y); animation-delay: .24s; }
-.press-loader__bars span:nth-child(4){ background: var(--ink); animation-delay: .36s; }
+.press-loader__bars span:nth-child(4){ background: #d0d0d4; animation-delay: .36s; }
 .press-loader__label { color: var(--muted); font-size: .9rem; letter-spacing: .04em; }
 @keyframes barpulse {
   0%, 100% { transform: scaleY(.4); opacity: .5; }
@@ -57,7 +57,7 @@ a { color: inherit; }
 /* ---------- Header ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 20;
-  background: rgba(247,245,241,.85);
+  background: rgba(10,10,11,.85);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
