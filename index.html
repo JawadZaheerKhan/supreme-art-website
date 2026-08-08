@@ -23,18 +23,21 @@
 
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="/">
+      <a class="brand" href="#top">
         <img src="logo.png" alt="Supreme Art" class="brand__logo" />
       </a>
       <nav class="nav-links">
-        <a href="#capabilities">Capabilities</a>
+        <a href="#about">About</a>
+        <a href="#capabilities">Products</a>
         <a href="#quality">Quality</a>
+        <a href="#careers">Careers</a>
+        <a href="#news">News</a>
         <a href="#contact" class="nav-cta">Get a quote</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <!-- ============ SCROLL STORY: paper → print → cut → box ============ -->
     <section class="scrolly" id="story">
       <div class="stage" id="stage">
@@ -43,6 +46,10 @@
         <div class="landing" id="landing">
           <h1>We make the box<br />your medicine comes in.</h1>
           <p>Pharmaceutical folding cartons — printed, die-cut and glued under one roof.</p>
+          <div class="hero-actions">
+            <a class="btn btn--accent" href="#contact">Get a quote</a>
+            <a class="btn btn--ghost" href="#capabilities">Our capabilities</a>
+          </div>
           <div class="scroll-cue"><span></span>Scroll</div>
         </div>
 
@@ -131,11 +138,46 @@
       </div>
     </div>
 
-    <!-- CAPABILITIES -->
-    <section id="capabilities" class="section">
+    <!-- ABOUT -->
+    <section id="about" class="section">
       <div class="container">
-        <p class="eyebrow reveal">Capabilities</p>
+        <p class="eyebrow reveal">About us</p>
+        <h2 class="section-head reveal">A pharmaceutical carton maker, from prepress to pallet.</h2>
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <p>
+              Supreme Art is a Peshawar-based manufacturer of pharmaceutical folding
+              cartons — the printed paper boxes that carry tablets, syrups, blisters and
+              vials. We run the entire process under one roof, so your artwork becomes a
+              finished, machine-ready carton without leaving our floor.
+            </p>
+            <p>
+              For pharma brands, packaging is part of patient safety. That's why every job
+              runs against documented quality controls, full batch traceability, and a
+              team that has been printing for decades.
+            </p>
+            <ul class="about-points">
+              <li>Offset printing, die-cutting, folding &amp; gluing in-house</li>
+              <li>Pharma-grade board with batch traceability</li>
+              <li>Short runs to full production volumes</li>
+              <li>Prepress, dielines and physical proofing on site</li>
+            </ul>
+          </div>
+          <aside class="about-panel reveal">
+            <div class="about-stat"><b><span data-count="25">0</span>+</b><span>Years of printing expertise</span></div>
+            <div class="about-stat"><b><span data-count="100">0</span>%</b><span>Production kept in-house</span></div>
+            <div class="about-stat"><b><span data-count="6">0</span></b><span>Carton formats we specialise in</span></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES / PRODUCTS -->
+    <section id="capabilities" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow reveal">Products &amp; Capabilities</p>
         <h2 class="reveal">One factory. The whole carton.</h2>
+        <p class="lead reveal">From the first proof to the flat-packed, glued carton on your filling line — every stage happens here.</p>
         <div class="grid">
           <article class="card reveal">
             <span class="card__num">01</span>
@@ -162,7 +204,7 @@
     </section>
 
     <!-- QUALITY -->
-    <section id="quality" class="section section-alt">
+    <section id="quality" class="section">
       <div class="container">
         <p class="eyebrow reveal">Quality</p>
         <h2 class="reveal">Built for pharma standards.</h2>
@@ -180,8 +222,72 @@
       </div>
     </section>
 
+    <!-- CAREERS -->
+    <section id="careers" class="section careers">
+      <div class="container">
+        <p class="eyebrow reveal">Careers</p>
+        <h2 class="reveal">Build your career in print.</h2>
+        <p class="lead reveal">We're a hands-on factory that values craft and precision. If that's you, we'd like to hear from you.</p>
+        <div class="careers-grid">
+          <article class="role reveal">
+            <span class="role-type">Full-time · Peshawar</span>
+            <h3>Offset Press Operator</h3>
+            <p>Run and maintain our Heidelberg presses, holding colour and register across production runs.</p>
+          </article>
+          <article class="role reveal">
+            <span class="role-type">Full-time · Peshawar</span>
+            <h3>Prepress Designer</h3>
+            <p>Prepare artwork, dielines and proofs, bridging brand files and the pressroom.</p>
+          </article>
+          <article class="role reveal">
+            <span class="role-type">Full-time · Peshawar</span>
+            <h3>Quality Inspector</h3>
+            <p>Check board, colour and dimensions at every stage, keeping batches traceable and compliant.</p>
+          </article>
+        </div>
+        <a class="btn btn--accent reveal" href="mailto:info@supremeart.pk?subject=Careers%20at%20Supreme%20Art">Send us your CV</a>
+      </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news" class="section">
+      <div class="container">
+        <p class="eyebrow reveal">News &amp; Updates</p>
+        <h2 class="reveal">What's happening at the factory.</h2>
+        <div class="news-grid">
+          <article class="post reveal">
+            <div class="post__thumb"></div>
+            <div class="post__body">
+              <span class="post__date">Aug 2026</span>
+              <h3>Expanding our folding-carton capacity</h3>
+              <p>New folder-gluer capacity means faster turnaround on high-volume pharma runs.</p>
+              <a class="post__link" href="#contact">Read more →</a>
+            </div>
+          </article>
+          <article class="post reveal">
+            <div class="post__thumb"></div>
+            <div class="post__body">
+              <span class="post__date">Jun 2026</span>
+              <h3>Colour-accuracy on every press pass</h3>
+              <p>How our press-side colour control keeps pharma branding consistent, batch after batch.</p>
+              <a class="post__link" href="#contact">Read more →</a>
+            </div>
+          </article>
+          <article class="post reveal">
+            <div class="post__thumb"></div>
+            <div class="post__body">
+              <span class="post__date">Apr 2026</span>
+              <h3>Our commitment to pharma-grade quality</h3>
+              <p>A look inside the documented checks behind every carton that leaves our floor.</p>
+              <a class="post__link" href="#contact">Read more →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACT -->
-    <section id="contact" class="section cta">
+    <section id="contact" class="section cta section-alt">
       <div class="container cta__inner reveal">
         <h2>Have a carton to make?</h2>
         <p class="prose prose--center">Send us your artwork or dieline — we'll come back with a quote and a timeline.</p>
@@ -199,9 +305,35 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer__inner">
-      <img src="logo.png" alt="Supreme Art" class="footer__logo" />
-      <p>&copy; <span id="year"></span> Supreme Art (Pvt) Ltd. Printed with pride.</p>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="logo.png" alt="Supreme Art" class="footer__logo" />
+          <p>Pharmaceutical folding cartons — printed, die-cut, folded and glued under one roof in Peshawar.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About us</a></li>
+            <li><a href="#capabilities">Products</a></li>
+            <li><a href="#quality">Quality</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#news">News</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:info@supremeart.pk">info@supremeart.pk</a></li>
+            <li><a href="tel:+923135585784">0313 5585784</a></li>
+            <li>Industrial Estate, Hayatabad, Peshawar</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Supreme Art (Pvt) Ltd. All rights reserved.</p>
+        <p>Printed with pride in Peshawar, Pakistan.</p>
+      </div>
     </div>
   </footer>
 
