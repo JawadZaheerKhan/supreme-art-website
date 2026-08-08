@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Supreme Art — Pharmaceutical Packaging & Printing</title>
-  <meta name="description" content="Supreme Art manufactures pharmaceutical folding cartons — the paper boxes medicines come in. Printed, die-cut, folded and glued in-house in Peshawar." />
+  <meta name="description" content="Supreme Art manufactures pharmaceutical folding cartons — printed, die-cut, folded and glued in-house in Peshawar, Pakistan." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,114 +15,149 @@
 <body>
   <!-- CMYK loading pass -->
   <div class="press-loader" id="loader" aria-hidden="true">
-    <div class="press-loader__bars">
-      <span></span><span></span><span></span><span></span>
-    </div>
+    <div class="press-loader__bars"><span></span><span></span><span></span><span></span></div>
     <div class="press-loader__label">Warming up the press…</div>
   </div>
 
+  <!-- ============ SHARED HEADER ============ -->
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="#top">
+      <a class="brand" href="index.html">
         <img src="logo.png" alt="Supreme Art" class="brand__logo" />
       </a>
       <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#capabilities">Products</a>
-        <a href="#quality">Quality</a>
-        <a href="#careers">Careers</a>
-        <a href="#news">News</a>
-        <a href="#contact" class="nav-cta">Get a quote</a>
+        <a href="index.html" class="current">Home</a>
+        <span class="has-dropdown">
+          <a href="about.html">About us</a>
+          <span class="dropdown">
+            <a href="about.html">Company overview</a>
+            <a href="quality.html">Quality &amp; standards</a>
+            <a href="careers.html">Careers</a>
+          </span>
+        </span>
+        <a href="products.html">Products</a>
+        <a href="quality.html">Quality</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html" class="nav-cta">Get a quote</a>
       </nav>
     </div>
   </header>
 
-  <main id="top">
-    <!-- ============ SCROLL STORY: paper → print → cut → box ============ -->
-    <section class="scrolly" id="story">
-      <div class="stage" id="stage">
+  <main>
+    <!-- ============ HERO (Packages-style: animation band, title below) ============ -->
+    <section class="pk-hero" id="home-hero">
+      <div class="pk-hero__stage">
+        <!-- Animated printing-process emblem -->
+        <div class="hero-emblem" aria-label="Our printing process: paper, print, die-cut, fold, deliver">
+          <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" role="img">
+            <defs>
+              <radialGradient id="gC" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#5ad6ef"/><stop offset="1" stop-color="#00a8cc"/></radialGradient>
+              <radialGradient id="gM" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#f072ac"/><stop offset="1" stop-color="#d6347f"/></radialGradient>
+              <radialGradient id="gY" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#f6d152"/><stop offset="1" stop-color="#e8b400"/></radialGradient>
+              <radialGradient id="gB" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#58a4db"/><stop offset="1" stop-color="#1b6fb3"/></radialGradient>
+              <radialGradient id="gK" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#43434d"/><stop offset="1" stop-color="#17171a"/></radialGradient>
+              <filter id="ndShadow" x="-40%" y="-40%" width="180%" height="180%">
+                <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#08192a" flood-opacity="0.45"/>
+              </filter>
+            </defs>
 
-        <!-- Landing headline (fades as you scroll) -->
-        <div class="landing" id="landing">
-          <h1>We make the box<br />your medicine comes in.</h1>
-          <p>Pharmaceutical folding cartons — printed, die-cut and glued under one roof.</p>
-          <div class="hero-actions">
-            <a class="btn btn--accent" href="#contact">Get a quote</a>
-            <a class="btn btn--ghost" href="#capabilities">Our capabilities</a>
-          </div>
-          <div class="scroll-cue"><span></span>Scroll</div>
-        </div>
+            <!-- spokes -->
+            <g stroke="rgba(20,45,70,.12)" stroke-width="2">
+              <line x1="230" y1="230" x2="230" y2="65" />
+              <line x1="230" y1="230" x2="387" y2="179" />
+              <line x1="230" y1="230" x2="327" y2="364" />
+              <line x1="230" y1="230" x2="133" y2="364" />
+              <line x1="230" y1="230" x2="73"  y2="179" />
+            </g>
 
-        <!-- The scene -->
-        <div class="scene" id="scene">
-          <div class="sheet-wrap">
-            <div class="sheet-bg"></div>
-
-            <div class="fold-viewport">
-              <div class="fold-scene">
-                <div class="carton">
-                  <!-- front panel -->
-                  <div class="panel panel--front">
-                    <div class="art art--front">
-                      <img src="logo.png" alt="" class="art__logo" />
-                      <div class="art__band"></div>
-                      <div class="art__name">Paracetamol</div>
-                      <div class="art__dose">500&nbsp;mg &middot; 20 tablets</div>
-                      <div class="art__lines"><i></i><i></i><i></i></div>
-                    </div>
-                  </div>
-                  <!-- left side -->
-                  <div class="panel panel--left">
-                    <div class="art art--side"><div class="art__band art__band--v"></div><span class="art__vtext">Paracetamol 500&nbsp;mg</span></div>
-                  </div>
-                  <!-- right side + back chained -->
-                  <div class="panel panel--right">
-                    <div class="art art--side"><div class="art__band art__band--v"></div><span class="art__vtext">20 tablets</span></div>
-                    <div class="panel panel--back">
-                      <div class="art art--back">
-                        <div class="art__lines art__lines--long"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                        <div class="art__barcode"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- top & bottom flaps -->
-                  <div class="panel panel--top"><div class="art art--flap"><span>SUPREME ART</span></div></div>
-                  <div class="panel panel--bottom"><div class="art art--flap"><span>BATCH ·  EXP</span></div></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- die-cut lines -->
-            <svg class="cut-svg" viewBox="0 0 700 460" aria-hidden="true">
-              <path class="cutpath" pathLength="1"
-                d="M75,85 L160,85 L160,25 L350,25 L350,85 L625,85 L625,375 L350,375 L350,435 L160,435 L160,375 L75,375 Z" />
-              <g class="creases">
-                <line x1="160" y1="85" x2="160" y2="375" />
-                <line x1="350" y1="85" x2="350" y2="375" />
-                <line x1="435" y1="85" x2="435" y2="375" />
-                <line x1="160" y1="85" x2="350" y2="85" />
-                <line x1="160" y1="375" x2="350" y2="375" />
+            <!-- rotating CMYK ring -->
+            <g>
+              <g fill="none" stroke-width="5" stroke-linecap="round">
+                <path d="M240.5,110.5 A120,120 0 0 1 349.5,219.5" stroke="#00a8cc"/>
+                <path d="M349.5,240.5 A120,120 0 0 1 240.5,349.5" stroke="#d6347f"/>
+                <path d="M219.5,349.5 A120,120 0 0 1 110.5,240.5" stroke="#e8b400"/>
+                <path d="M110.5,219.5 A120,120 0 0 1 219.5,110.5" stroke="#17171a"/>
               </g>
-            </svg>
+              <animateTransform attributeName="transform" type="rotate" from="0 230 230" to="360 230 230" dur="34s" repeatCount="indefinite"/>
+            </g>
 
-            <!-- unprinted paper cover + travelling print head -->
-            <div class="print-cover"></div>
-            <div class="print-head" id="printHead"></div>
-          </div>
-        </div>
+            <!-- orbiting dot -->
+            <g>
+              <circle cx="230" cy="110" r="8" fill="#1b6fb3"/>
+              <circle cx="230" cy="110" r="14" fill="#1b6fb3" opacity=".2"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 230 230" to="360 230 230" dur="9s" repeatCount="indefinite"/>
+            </g>
 
-        <!-- step captions -->
-        <div class="captions">
-          <p class="caption" data-step="0"><b>01 — Paper.</b> Pharma-grade board, batch-traceable.</p>
-          <p class="caption" data-step="1"><b>02 — Print.</b> Offset CMYK on Heidelberg presses.</p>
-          <p class="caption" data-step="2"><b>03 — Die-cut.</b> Creased and cut to the millimetre.</p>
-          <p class="caption" data-step="3"><b>04 — Box.</b> Folded, glued, ready for the line.</p>
-        </div>
+            <!-- travelling flow glow (behind nodes) -->
+            <g class="emblem-glows" fill="none" stroke-width="4">
+              <circle class="emblem-glow" cx="230" cy="65"  r="60" stroke="#00a8cc"/>
+              <circle class="emblem-glow" cx="387" cy="179" r="60" stroke="#d6347f"/>
+              <circle class="emblem-glow" cx="327" cy="364" r="60" stroke="#e8b400"/>
+              <circle class="emblem-glow" cx="133" cy="364" r="60" stroke="#1b6fb3"/>
+              <circle class="emblem-glow" cx="73"  cy="179" r="60" stroke="#bfbfc7"/>
+            </g>
 
-        <!-- progress dots -->
-        <div class="dots" aria-hidden="true">
-          <span data-step="0"></span><span data-step="1"></span><span data-step="2"></span><span data-step="3"></span>
+            <!-- process nodes -->
+            <g class="emblem-nodes">
+              <!-- 01 PAPER -->
+              <g class="emblem-node">
+                <circle cx="230" cy="65" r="50" fill="url(#gC)" filter="url(#ndShadow)"/>
+                <g transform="translate(230,57)" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M-8,-12 H4 L10,-6 V12 H-8 Z"/><path d="M4,-12 V-6 H10"/>
+                </g>
+                <text class="emblem-label" x="230" y="88" font-size="16" text-anchor="middle">PAPER</text>
+                <circle cx="230" cy="18" r="13" fill="#fff"/>
+                <text class="emblem-badge-num" x="230" y="23" font-size="14" text-anchor="middle" fill="#00a8cc">1</text>
+              </g>
+              <!-- 02 PRINT -->
+              <g class="emblem-node">
+                <circle cx="387" cy="179" r="50" fill="url(#gM)" filter="url(#ndShadow)"/>
+                <path transform="translate(387,171)" d="M0,-13 C7,-3 10,1 10,5 A10,10 0 1 1 -10,5 C-10,1 -7,-3 0,-13 Z" fill="#fff"/>
+                <text class="emblem-label" x="387" y="202" font-size="16" text-anchor="middle">PRINT</text>
+                <circle cx="424" cy="150" r="13" fill="#fff"/>
+                <text class="emblem-badge-num" x="424" y="155" font-size="14" text-anchor="middle" fill="#d6347f">2</text>
+              </g>
+              <!-- 03 DIE-CUT -->
+              <g class="emblem-node">
+                <circle cx="327" cy="364" r="50" fill="url(#gY)" filter="url(#ndShadow)"/>
+                <rect x="316" y="345" width="22" height="22" rx="3" fill="none" stroke="#fff" stroke-width="2.4" stroke-dasharray="4 3"/>
+                <text class="emblem-label" x="327" y="388" font-size="14" text-anchor="middle">DIE-CUT</text>
+                <circle cx="356" cy="405" r="13" fill="#fff"/>
+                <text class="emblem-badge-num" x="356" y="410" font-size="14" text-anchor="middle" fill="#c99a00">3</text>
+              </g>
+              <!-- 04 FOLD -->
+              <g class="emblem-node">
+                <circle cx="133" cy="364" r="50" fill="url(#gB)" filter="url(#ndShadow)"/>
+                <g transform="translate(133,360)" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M-11,7 L0,-7 L11,7"/><path d="M0,-7 V9" stroke-dasharray="3 3"/>
+                </g>
+                <text class="emblem-label" x="133" y="388" font-size="16" text-anchor="middle">FOLD</text>
+                <circle cx="104" cy="405" r="13" fill="#fff"/>
+                <text class="emblem-badge-num" x="104" y="410" font-size="14" text-anchor="middle" fill="#1b6fb3">4</text>
+              </g>
+              <!-- 05 DELIVER -->
+              <g class="emblem-node">
+                <circle cx="73" cy="179" r="50" fill="url(#gK)" filter="url(#ndShadow)"/>
+                <g transform="translate(73,171)" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M-11,-5 L0,-11 L11,-5 L11,9 L0,15 L-11,9 Z"/><path d="M-11,-5 L0,1 L11,-5"/><path d="M0,1 V15"/>
+                </g>
+                <text class="emblem-label" x="73" y="202" font-size="14" text-anchor="middle">DELIVER</text>
+                <circle cx="26" cy="150" r="13" fill="#fff"/>
+                <text class="emblem-badge-num" x="26" y="155" font-size="14" text-anchor="middle" fill="#17171a">5</text>
+              </g>
+            </g>
+
+            <!-- center medallion -->
+            <circle cx="230" cy="230" r="72" fill="#fff" filter="url(#ndShadow)"/>
+            <circle cx="230" cy="230" r="72" fill="none" stroke="#e3e9f0" stroke-width="1.5"/>
+            <text class="emblem-center-sub"   x="230" y="215" font-size="12" text-anchor="middle">OUR</text>
+            <text class="emblem-center-title" x="230" y="245" font-size="25" text-anchor="middle">PROCESS</text>
+          </svg>
         </div>
+      </div>
+      <div class="pk-hero__intro container">
+        <h1>Supreme Art</h1>
+        <p>The box your medicine comes in.</p>
       </div>
     </section>
 
@@ -138,172 +173,144 @@
       </div>
     </div>
 
-    <!-- ABOUT -->
-    <section id="about" class="section">
+    <!-- ABOUT TEASER -->
+    <section class="section">
       <div class="container">
-        <p class="eyebrow reveal">About us</p>
-        <h2 class="section-head reveal">A pharmaceutical carton maker, from prepress to pallet.</h2>
-        <div class="about-grid">
-          <div class="about-copy reveal">
+        <div class="split">
+          <div class="split__media reveal">
+            <div class="media media--tall">
+              <span class="media__chip">📷 Factory / building photo</span>
+            </div>
+          </div>
+          <div class="split__body reveal">
+            <p class="eyebrow">Who we are</p>
+            <h2>A pharmaceutical carton maker, from prepress to pallet.</h2>
             <p>
               Supreme Art is a Peshawar-based manufacturer of pharmaceutical folding
               cartons — the printed paper boxes that carry tablets, syrups, blisters and
-              vials. We run the entire process under one roof, so your artwork becomes a
-              finished, machine-ready carton without leaving our floor.
-            </p>
-            <p>
-              For pharma brands, packaging is part of patient safety. That's why every job
-              runs against documented quality controls, full batch traceability, and a
-              team that has been printing for decades.
+              vials. We run the entire process in-house, so your artwork becomes a
+              finished, machine-ready carton without ever leaving our floor.
             </p>
             <ul class="about-points">
               <li>Offset printing, die-cutting, folding &amp; gluing in-house</li>
-              <li>Pharma-grade board with batch traceability</li>
-              <li>Short runs to full production volumes</li>
-              <li>Prepress, dielines and physical proofing on site</li>
+              <li>Pharma-grade board with full batch traceability</li>
+              <li>Short runs through to full production volumes</li>
             </ul>
+            <p style="margin-top:24px"><a class="btn btn--accent" href="about.html">More about us</a></p>
           </div>
-          <aside class="about-panel reveal">
-            <div class="about-stat"><b><span data-count="25">0</span>+</b><span>Years of printing expertise</span></div>
-            <div class="about-stat"><b><span data-count="100">0</span>%</b><span>Production kept in-house</span></div>
-            <div class="about-stat"><b><span data-count="6">0</span></b><span>Carton formats we specialise in</span></div>
-          </aside>
         </div>
       </div>
     </section>
 
-    <!-- CAPABILITIES / PRODUCTS -->
-    <section id="capabilities" class="section section-alt">
+    <!-- PRODUCTS TEASER -->
+    <section class="section band">
       <div class="container">
-        <p class="eyebrow reveal">Products &amp; Capabilities</p>
-        <h2 class="reveal">One factory. The whole carton.</h2>
-        <p class="lead reveal">From the first proof to the flat-packed, glued carton on your filling line — every stage happens here.</p>
+        <p class="eyebrow reveal">What we make</p>
+        <h2 class="reveal">Folding cartons for every dosage form.</h2>
+        <p class="lead reveal">From tablets to syrups, we produce the full range of pharmaceutical secondary packaging.</p>
         <div class="grid">
-          <article class="card reveal">
-            <span class="card__num">01</span>
-            <h3>Offset Printing</h3>
-            <p>Heidelberg Speedmaster presses for sharp, colour-accurate runs — from short batches to full production.</p>
+          <article class="card reveal" style="padding:0;overflow:hidden">
+            <div class="media" style="min-height:190px;border-radius:0"><span class="media__chip">📷 Tablet cartons</span></div>
+            <div style="padding:22px 26px 26px"><h3>Tablet &amp; capsule cartons</h3><p>Blister and strip packs, tamper-evident closures.</p></div>
           </article>
-          <article class="card reveal">
-            <span class="card__num">02</span>
-            <h3>Die-Cutting &amp; Creasing</h3>
-            <p>Precision dies for clean cuts and crisp folds, so every carton closes the same way every time.</p>
+          <article class="card reveal" style="padding:0;overflow:hidden">
+            <div class="media" style="min-height:190px;border-radius:0"><span class="media__chip">📷 Syrup cartons</span></div>
+            <div style="padding:22px 26px 26px"><h3>Syrup &amp; liquid cartons</h3><p>Bottle cartons with partitions and inserts.</p></div>
           </article>
-          <article class="card reveal">
-            <span class="card__num">03</span>
-            <h3>Folding &amp; Gluing</h3>
-            <p>High-speed folder-gluers deliver cartons flat-packed and machine-ready for your filling line.</p>
+          <article class="card reveal" style="padding:0;overflow:hidden">
+            <div class="media" style="min-height:190px;border-radius:0"><span class="media__chip">📷 Vial &amp; ampoule</span></div>
+            <div style="padding:22px 26px 26px"><h3>Vial &amp; ampoule packs</h3><p>Precision cartons with die-cut fitments.</p></div>
           </article>
-          <article class="card reveal">
-            <span class="card__num">04</span>
-            <h3>Prepress &amp; Proofing</h3>
-            <p>Artwork checks, dielines and physical proofs before a single sheet runs.</p>
+          <article class="card reveal" style="padding:0;overflow:hidden">
+            <div class="media" style="min-height:190px;border-radius:0"><span class="media__chip">📷 Leaflets &amp; inserts</span></div>
+            <div style="padding:22px 26px 26px"><h3>Leaflets &amp; inserts</h3><p>Folded package inserts and outer sleeves.</p></div>
           </article>
+        </div>
+        <p style="margin-top:30px" class="reveal"><a class="btn btn--ghost" href="products.html">See all products</a></p>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES / PROCESS -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow reveal">Our capabilities</p>
+        <h2 class="reveal">One factory. The whole carton.</h2>
+        <div class="grid">
+          <article class="card reveal"><span class="card__num">01</span><h3>Offset Printing</h3><p>Heidelberg presses for sharp, colour-accurate runs.</p></article>
+          <article class="card reveal"><span class="card__num">02</span><h3>Die-Cutting &amp; Creasing</h3><p>Precision dies for clean cuts and crisp folds.</p></article>
+          <article class="card reveal"><span class="card__num">03</span><h3>Folding &amp; Gluing</h3><p>High-speed folder-gluers, flat-packed and machine-ready.</p></article>
+          <article class="card reveal"><span class="card__num">04</span><h3>Prepress &amp; Proofing</h3><p>Artwork checks, dielines and physical proofs.</p></article>
         </div>
       </div>
     </section>
 
-    <!-- QUALITY -->
-    <section id="quality" class="section">
+    <!-- QUALITY HIGHLIGHT -->
+    <section class="section band">
       <div class="container">
-        <p class="eyebrow reveal">Quality</p>
-        <h2 class="reveal">Built for pharma standards.</h2>
-        <p class="prose reveal">
-          Medicine packaging doesn't get second chances. We run documented quality
-          assurance across every stage — incoming board, colour control on press,
-          dimensional checks after die-cutting, and final inspection before dispatch —
-          with full batch traceability.
-        </p>
-        <div class="stat-row reveal">
-          <div class="stat"><b data-count="25">0</b><span>+ years in print</span></div>
-          <div class="stat"><b data-count="100">0</b><span>% in-house production</span></div>
-          <div class="stat"><b data-count="48">0</b><span>hr proofing turnaround</span></div>
+        <div class="split split--reverse">
+          <div class="split__media reveal">
+            <div class="media media--tall"><span class="media__chip">📷 Quality / inspection photo</span></div>
+          </div>
+          <div class="split__body reveal">
+            <p class="eyebrow">Quality</p>
+            <h2>Built for pharma standards.</h2>
+            <p>
+              Medicine packaging doesn't get second chances. We run documented quality
+              assurance across every stage — incoming board, colour control on press,
+              dimensional checks after die-cutting, and final inspection before dispatch.
+            </p>
+            <div class="stat-row" style="margin-top:26px">
+              <div class="stat"><b data-count="25">0</b><span>+ years in print</span></div>
+              <div class="stat"><b data-count="100">0</b><span>% in-house</span></div>
+              <div class="stat"><b data-count="48">0</b><span>hr proofing</span></div>
+            </div>
+            <p style="margin-top:26px"><a class="btn btn--accent" href="quality.html">Our quality process</a></p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CAREERS -->
-    <section id="careers" class="section careers">
+    <!-- FACTORY GALLERY -->
+    <section class="section">
       <div class="container">
-        <p class="eyebrow reveal">Careers</p>
-        <h2 class="reveal">Build your career in print.</h2>
-        <p class="lead reveal">We're a hands-on factory that values craft and precision. If that's you, we'd like to hear from you.</p>
-        <div class="careers-grid">
-          <article class="role reveal">
-            <span class="role-type">Full-time · Peshawar</span>
-            <h3>Offset Press Operator</h3>
-            <p>Run and maintain our Heidelberg presses, holding colour and register across production runs.</p>
-          </article>
-          <article class="role reveal">
-            <span class="role-type">Full-time · Peshawar</span>
-            <h3>Prepress Designer</h3>
-            <p>Prepare artwork, dielines and proofs, bridging brand files and the pressroom.</p>
-          </article>
-          <article class="role reveal">
-            <span class="role-type">Full-time · Peshawar</span>
-            <h3>Quality Inspector</h3>
-            <p>Check board, colour and dimensions at every stage, keeping batches traceable and compliant.</p>
-          </article>
+        <p class="eyebrow reveal">Inside the factory</p>
+        <h2 class="reveal">Where your cartons are made.</h2>
+        <div class="gallery reveal">
+          <div class="media media--wide"><span class="media__chip">📷 Pressroom</span></div>
+          <div class="media"><span class="media__chip">📷 Die-cutting</span></div>
+          <div class="media"><span class="media__chip">📷 Folder-gluer</span></div>
+          <div class="media media--wide"><span class="media__chip">📷 Finished cartons</span></div>
         </div>
-        <a class="btn btn--accent reveal" href="mailto:info@supremeart.pk?subject=Careers%20at%20Supreme%20Art">Send us your CV</a>
       </div>
     </section>
 
-    <!-- NEWS -->
-    <section id="news" class="section">
+    <!-- NEWS TEASER -->
+    <section id="news" class="section band">
       <div class="container">
-        <p class="eyebrow reveal">News &amp; Updates</p>
+        <p class="eyebrow reveal">News &amp; updates</p>
         <h2 class="reveal">What's happening at the factory.</h2>
         <div class="news-grid">
-          <article class="post reveal">
-            <div class="post__thumb"></div>
-            <div class="post__body">
-              <span class="post__date">Aug 2026</span>
-              <h3>Expanding our folding-carton capacity</h3>
-              <p>New folder-gluer capacity means faster turnaround on high-volume pharma runs.</p>
-              <a class="post__link" href="#contact">Read more →</a>
-            </div>
-          </article>
-          <article class="post reveal">
-            <div class="post__thumb"></div>
-            <div class="post__body">
-              <span class="post__date">Jun 2026</span>
-              <h3>Colour-accuracy on every press pass</h3>
-              <p>How our press-side colour control keeps pharma branding consistent, batch after batch.</p>
-              <a class="post__link" href="#contact">Read more →</a>
-            </div>
-          </article>
-          <article class="post reveal">
-            <div class="post__thumb"></div>
-            <div class="post__body">
-              <span class="post__date">Apr 2026</span>
-              <h3>Our commitment to pharma-grade quality</h3>
-              <p>A look inside the documented checks behind every carton that leaves our floor.</p>
-              <a class="post__link" href="#contact">Read more →</a>
-            </div>
-          </article>
+          <article class="post reveal"><div class="post__thumb"></div><div class="post__body"><span class="post__date">Aug 2026</span><h3>Expanding our folding-carton capacity</h3><p>New folder-gluer capacity means faster turnaround on high-volume runs.</p><a class="post__link" href="contact.html">Read more →</a></div></article>
+          <article class="post reveal"><div class="post__thumb"></div><div class="post__body"><span class="post__date">Jun 2026</span><h3>Colour-accuracy on every press pass</h3><p>How press-side colour control keeps pharma branding consistent.</p><a class="post__link" href="contact.html">Read more →</a></div></article>
+          <article class="post reveal"><div class="post__thumb"></div><div class="post__body"><span class="post__date">Apr 2026</span><h3>Our commitment to pharma-grade quality</h3><p>Inside the documented checks behind every carton we ship.</p><a class="post__link" href="contact.html">Read more →</a></div></article>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section cta section-alt">
-      <div class="container cta__inner reveal">
+    <!-- CTA BAND -->
+    <section class="cta-band">
+      <div class="container">
         <h2>Have a carton to make?</h2>
-        <p class="prose prose--center">Send us your artwork or dieline — we'll come back with a quote and a timeline.</p>
-        <div class="contact-actions">
-          <a class="btn btn--accent" href="mailto:info@supremeart.pk">Email the factory</a>
+        <p>Send us your artwork or dieline — we'll come back with a quote and a timeline.</p>
+        <div class="hero-actions" style="justify-content:center">
+          <a class="btn btn--accent" href="contact.html">Get a quote</a>
           <a class="btn btn--ghost" href="tel:+923135585784">Call the floor</a>
         </div>
-        <ul class="contact-list">
-          <li><strong>Email</strong> info@supremeart.pk</li>
-          <li><strong>Phone</strong> 0313 5585784</li>
-          <li><strong>Factory</strong> Industrial Estate, Hayatabad, Peshawar</li>
-        </ul>
       </div>
     </section>
   </main>
 
+  <!-- ============ SHARED FOOTER ============ -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top">
@@ -314,11 +321,11 @@
         <div class="footer-col">
           <h4>Company</h4>
           <ul>
-            <li><a href="#about">About us</a></li>
-            <li><a href="#capabilities">Products</a></li>
-            <li><a href="#quality">Quality</a></li>
-            <li><a href="#careers">Careers</a></li>
-            <li><a href="#news">News</a></li>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="quality.html">Quality</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
