@@ -41,14 +41,22 @@ a { color: inherit; }
   transition: opacity .5s ease, visibility .5s ease;
 }
 .press-loader.done { opacity: 0; visibility: hidden; }
-.press-spinner {
-  width: 62px; height: 62px; border-radius: 50%;
-  background: conic-gradient(from 0deg, var(--c), var(--m), var(--y), var(--ink), var(--c));
-  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 7px), #000 calc(100% - 6px));
-          mask: radial-gradient(farthest-side, #0000 calc(100% - 7px), #000 calc(100% - 6px));
-  animation: spin .9s linear infinite;
+.brand-loading { display: grid; justify-items: center; gap: 24px; }
+.brand-loading .press-logo {
+  width: 220px; max-width: 62vw; height: auto;
+  animation: logopulse 1.8s ease-in-out infinite;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes logopulse { 0%, 100% { opacity: .8; } 50% { opacity: 1; } }
+.press-bar {
+  position: relative; width: 220px; max-width: 62vw; height: 4px;
+  border-radius: 999px; background: var(--surface-alt); overflow: hidden;
+}
+.press-bar span {
+  position: absolute; top: 0; height: 100%; width: 42%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--c), var(--m), var(--y), var(--ink));
+  animation: barslide 1.2s ease-in-out infinite;
+}
+@keyframes barslide { 0% { left: -45%; } 100% { left: 100%; } }
 .press-loader__label { color: var(--muted); font-size: .9rem; letter-spacing: .04em; }
 
 /* ---------- Header ---------- */
