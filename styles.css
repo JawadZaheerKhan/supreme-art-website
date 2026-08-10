@@ -518,6 +518,34 @@ a { color: inherit; }
   70%, 100% { transform: scale(1.55); opacity: 0; }
 }
 
+/* ---------- Animated printing press ---------- */
+.press-cover { transform-box: fill-box; transform-origin: center bottom; animation: pressCover 4.2s ease-in-out infinite; }
+.press-head  { animation: pressHead 4.2s ease-in-out infinite; }
+.press-sheet { animation: pressSheet 4.2s ease-in-out infinite; }
+@keyframes pressHead {
+  0%   { transform: translateY(0);     opacity: 0; }
+  6%   { transform: translateY(0);     opacity: 1; }
+  55%  { transform: translateY(240px); opacity: 1; }
+  60%  { transform: translateY(240px); opacity: 0; }
+  100% { transform: translateY(0);     opacity: 0; }
+}
+@keyframes pressCover {
+  0%    { transform: scaleY(1); }
+  6%    { transform: scaleY(1); }
+  55%   { transform: scaleY(0); }
+  90%   { transform: scaleY(0); }
+  90.6% { transform: scaleY(1); }
+  100%  { transform: scaleY(1); }
+}
+@keyframes pressSheet {
+  0%   { transform: translateX(0);    opacity: 1; }
+  60%  { transform: translateX(0);    opacity: 1; }
+  78%  { transform: translateX(0);    opacity: 1; }
+  88%  { transform: translateX(96px); opacity: 0; }
+  90.5%{ transform: translateX(0);    opacity: 0; }
+  100% { transform: translateX(0);    opacity: 1; }
+}
+
 .emblem-label { font-family: var(--display); font-weight: 700; fill: #fff; letter-spacing: .02em; }
 .emblem-badge-num { font-family: var(--display); font-weight: 700; }
 .emblem-center-title { font-family: var(--display); font-weight: 700; fill: var(--accent); letter-spacing: .01em; }

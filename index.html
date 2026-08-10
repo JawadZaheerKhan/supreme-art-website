@@ -49,116 +49,64 @@
     <!-- ============ HERO (Packages-style: animation band, title below) ============ -->
     <section class="pk-hero" id="home-hero">
       <div class="pk-hero__stage">
-        <!-- Animated printing-process emblem -->
-        <div class="hero-emblem" aria-label="Our printing process: paper, print, die-cut, fold, deliver">
+        <!-- Animated printing press -->
+        <div class="hero-emblem" aria-label="A printing press printing a pharmaceutical carton">
           <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" role="img">
             <defs>
-              <radialGradient id="gC" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#5ad6ef"/><stop offset="1" stop-color="#00a8cc"/></radialGradient>
-              <radialGradient id="gM" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#f072ac"/><stop offset="1" stop-color="#d6347f"/></radialGradient>
-              <radialGradient id="gY" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#f6d152"/><stop offset="1" stop-color="#e8b400"/></radialGradient>
-              <radialGradient id="gB" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#58a4db"/><stop offset="1" stop-color="#1b6fb3"/></radialGradient>
-              <radialGradient id="gK" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#43434d"/><stop offset="1" stop-color="#17171a"/></radialGradient>
-              <filter id="ndShadow" x="-40%" y="-40%" width="180%" height="180%">
-                <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#08192a" flood-opacity="0.45"/>
+              <linearGradient id="inkbar" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#00a8cc"/>
+                <stop offset=".34" stop-color="#d6347f"/>
+                <stop offset=".67" stop-color="#e8b400"/>
+                <stop offset="1" stop-color="#1c1c1f"/>
+              </linearGradient>
+              <filter id="sheetShadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0a1c2b" flood-opacity="0.16"/>
+              </filter>
+              <filter id="headShadow" x="-40%" y="-70%" width="180%" height="240%">
+                <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0a1c2b" flood-opacity="0.35"/>
               </filter>
             </defs>
 
-            <!-- spokes -->
-            <g stroke="rgba(20,45,70,.12)" stroke-width="2">
-              <line x1="230" y1="230" x2="230" y2="65" />
-              <line x1="230" y1="230" x2="387" y2="179" />
-              <line x1="230" y1="230" x2="327" y2="364" />
-              <line x1="230" y1="230" x2="133" y2="364" />
-              <line x1="230" y1="230" x2="73"  y2="179" />
-            </g>
+            <!-- press frame -->
+            <rect x="112" y="366" width="236" height="16" rx="8" fill="#cdd6df"/>
+            <rect x="120" y="92"  width="9"   height="280" rx="4" fill="#dbe2ea"/>
+            <rect x="331" y="92"  width="9"   height="280" rx="4" fill="#dbe2ea"/>
+            <rect x="118" y="86"  width="224" height="14" rx="7" fill="#c4cdd8"/>
 
-            <!-- rotating CMYK ring -->
-            <g>
-              <g fill="none" stroke-width="5" stroke-linecap="round">
-                <path d="M240.5,110.5 A120,120 0 0 1 349.5,219.5" stroke="#00a8cc"/>
-                <path d="M349.5,240.5 A120,120 0 0 1 240.5,349.5" stroke="#d6347f"/>
-                <path d="M219.5,349.5 A120,120 0 0 1 110.5,240.5" stroke="#e8b400"/>
-                <path d="M110.5,219.5 A120,120 0 0 1 219.5,110.5" stroke="#17171a"/>
-              </g>
-              <animateTransform attributeName="transform" type="rotate" from="0 230 230" to="360 230 230" dur="34s" repeatCount="indefinite"/>
-            </g>
-
-            <!-- orbiting comet (synced to the flow highlight) -->
-            <g>
-              <circle cx="166.4" cy="128.2" r="3.4" fill="#1b6fb3" opacity=".14"/>
-              <circle cx="181.2" cy="120.4" r="4.6" fill="#1b6fb3" opacity=".26"/>
-              <circle cx="196.9" cy="114.6" r="5.8" fill="#1b6fb3" opacity=".45"/>
-              <circle cx="213.3" cy="111.2" r="7" fill="#1b6fb3" opacity=".7"/>
-              <circle cx="230" cy="110" r="14" fill="#1b6fb3" opacity=".18"/>
-              <circle cx="230" cy="110" r="8.5" fill="#1b6fb3"/>
-              <animateTransform attributeName="transform" type="rotate" from="0 230 230" to="360 230 230" dur="5s" repeatCount="indefinite"/>
-            </g>
-
-            <!-- travelling flow glow (behind nodes) -->
-            <g class="emblem-glows" fill="none" stroke-width="4">
-              <circle class="emblem-glow" cx="230" cy="65"  r="60" stroke="#00a8cc"/>
-              <circle class="emblem-glow" cx="387" cy="179" r="60" stroke="#d6347f"/>
-              <circle class="emblem-glow" cx="327" cy="364" r="60" stroke="#e8b400"/>
-              <circle class="emblem-glow" cx="133" cy="364" r="60" stroke="#1b6fb3"/>
-              <circle class="emblem-glow" cx="73"  cy="179" r="60" stroke="#bfbfc7"/>
-            </g>
-
-            <!-- process nodes -->
-            <g class="emblem-nodes">
-              <!-- 01 PAPER -->
-              <g class="emblem-node">
-                <circle cx="230" cy="65" r="50" fill="url(#gC)" filter="url(#ndShadow)"/>
-                <g transform="translate(230,57)" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M-8,-12 H4 L10,-6 V12 H-8 Z"/><path d="M4,-12 V-6 H10"/>
+            <!-- the sheet: gets printed, then ejects -->
+            <g class="press-sheet">
+              <rect x="145" y="104" width="170" height="250" rx="6" fill="#ffffff" filter="url(#sheetShadow)"/>
+              <!-- printed carton artwork -->
+              <g>
+                <rect x="164" y="124" width="15" height="15" rx="2" fill="#00a8cc"/>
+                <rect x="183" y="124" width="15" height="15" rx="2" fill="#d6347f"/>
+                <rect x="202" y="124" width="15" height="15" rx="2" fill="#e8b400"/>
+                <rect x="221" y="124" width="15" height="15" rx="2" fill="#1c1c1f"/>
+                <rect x="164" y="152" width="132" height="14" rx="3" fill="#1b6fb3"/>
+                <text x="230" y="192" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14" text-anchor="middle" fill="#17171a">SUPREME ART</text>
+                <rect x="176" y="206" width="108" height="6" rx="3" fill="#d7dde4"/>
+                <rect x="176" y="220" width="86"  height="6" rx="3" fill="#d7dde4"/>
+                <rect x="176" y="234" width="64"  height="6" rx="3" fill="#d7dde4"/>
+                <g fill="#17171a">
+                  <rect x="168" y="300" width="3" height="34"/><rect x="175" y="300" width="5" height="34"/>
+                  <rect x="184" y="300" width="2" height="34"/><rect x="190" y="300" width="4" height="34"/>
+                  <rect x="198" y="300" width="3" height="34"/><rect x="205" y="300" width="5" height="34"/>
+                  <rect x="214" y="300" width="2" height="34"/><rect x="220" y="300" width="4" height="34"/>
+                  <rect x="228" y="300" width="3" height="34"/><rect x="235" y="300" width="5" height="34"/>
+                  <rect x="244" y="300" width="2" height="34"/><rect x="250" y="300" width="4" height="34"/>
+                  <rect x="258" y="300" width="3" height="34"/><rect x="265" y="300" width="5" height="34"/>
+                  <rect x="274" y="300" width="3" height="34"/><rect x="281" y="300" width="4" height="34"/>
                 </g>
-                <text class="emblem-label" x="230" y="88" font-size="16" text-anchor="middle">PAPER</text>
-                <circle cx="230" cy="18" r="13" fill="#fff"/>
-                <text class="emblem-badge-num" x="230" y="23" font-size="14" text-anchor="middle" fill="#00a8cc">1</text>
               </g>
-              <!-- 02 PRINT -->
-              <g class="emblem-node">
-                <circle cx="387" cy="179" r="50" fill="url(#gM)" filter="url(#ndShadow)"/>
-                <path transform="translate(387,171)" d="M0,-13 C7,-3 10,1 10,5 A10,10 0 1 1 -10,5 C-10,1 -7,-3 0,-13 Z" fill="#fff"/>
-                <text class="emblem-label" x="387" y="202" font-size="16" text-anchor="middle">PRINT</text>
-                <circle cx="424" cy="150" r="13" fill="#fff"/>
-                <text class="emblem-badge-num" x="424" y="155" font-size="14" text-anchor="middle" fill="#d6347f">2</text>
-              </g>
-              <!-- 03 DIE-CUT -->
-              <g class="emblem-node">
-                <circle cx="327" cy="364" r="50" fill="url(#gY)" filter="url(#ndShadow)"/>
-                <rect x="316" y="345" width="22" height="22" rx="3" fill="none" stroke="#fff" stroke-width="2.4" stroke-dasharray="4 3"/>
-                <text class="emblem-label" x="327" y="388" font-size="14" text-anchor="middle">DIE-CUT</text>
-                <circle cx="356" cy="405" r="13" fill="#fff"/>
-                <text class="emblem-badge-num" x="356" y="410" font-size="14" text-anchor="middle" fill="#c99a00">3</text>
-              </g>
-              <!-- 04 FOLD -->
-              <g class="emblem-node">
-                <circle cx="133" cy="364" r="50" fill="url(#gB)" filter="url(#ndShadow)"/>
-                <g transform="translate(133,360)" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M-11,7 L0,-7 L11,7"/><path d="M0,-7 V9" stroke-dasharray="3 3"/>
-                </g>
-                <text class="emblem-label" x="133" y="388" font-size="16" text-anchor="middle">FOLD</text>
-                <circle cx="104" cy="405" r="13" fill="#fff"/>
-                <text class="emblem-badge-num" x="104" y="410" font-size="14" text-anchor="middle" fill="#1b6fb3">4</text>
-              </g>
-              <!-- 05 DELIVER -->
-              <g class="emblem-node">
-                <circle cx="73" cy="179" r="50" fill="url(#gK)" filter="url(#ndShadow)"/>
-                <g transform="translate(73,171)" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M-11,-5 L0,-11 L11,-5 L11,9 L0,15 L-11,9 Z"/><path d="M-11,-5 L0,1 L11,-5"/><path d="M0,1 V15"/>
-                </g>
-                <text class="emblem-label" x="73" y="202" font-size="14" text-anchor="middle">DELIVER</text>
-                <circle cx="26" cy="150" r="13" fill="#fff"/>
-                <text class="emblem-badge-num" x="26" y="155" font-size="14" text-anchor="middle" fill="#17171a">5</text>
-              </g>
+              <!-- unprinted paper cover: recedes downward as it prints -->
+              <rect class="press-cover" x="145" y="104" width="170" height="250" rx="6" fill="#ffffff"/>
             </g>
 
-            <!-- center medallion -->
-            <circle class="medallion-pulse" cx="230" cy="230" r="72" fill="none" stroke="#1b6fb3" stroke-width="2"/>
-            <circle cx="230" cy="230" r="72" fill="#fff" filter="url(#ndShadow)"/>
-            <circle cx="230" cy="230" r="72" fill="none" stroke="#e3e9f0" stroke-width="1.5"/>
-            <text class="emblem-center-sub"   x="230" y="215" font-size="12" text-anchor="middle">OUR</text>
-            <text class="emblem-center-title" x="230" y="245" font-size="25" text-anchor="middle">PROCESS</text>
+            <!-- CMYK print head sweeping down -->
+            <g class="press-head">
+              <rect x="143" y="104" width="174" height="14" rx="7" fill="url(#inkbar)" filter="url(#headShadow)"/>
+              <rect x="143" y="106" width="174" height="3" rx="1.5" fill="#ffffff" opacity=".55"/>
+            </g>
           </svg>
         </div>
       </div>
