@@ -379,6 +379,21 @@ a { color: inherit; }
 .post__link { margin-top: auto; color: var(--accent); font-weight: 600; text-decoration: none; font-size: .95rem; }
 .post__link:hover { text-decoration: underline; }
 
+/* ---------- Clients / logo wall ---------- */
+.clients-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px 34px; margin-top: 36px; }
+.client { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 150px; }
+.client__badge {
+  position: relative; width: 114px; height: 114px; border-radius: 50%;
+  background: var(--surface); border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(22,32,46,.07); display: grid; place-items: center;
+  transition: transform .2s, box-shadow .2s;
+}
+.client:hover .client__badge { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(22,32,46,.12); }
+.client__mono { font-family: var(--display); font-weight: 700; font-size: 1.85rem; letter-spacing: .02em; }
+.client__logo { position: absolute; inset: 11px; width: calc(100% - 22px); height: calc(100% - 22px);
+  object-fit: contain; border-radius: 50%; background: #fff; }
+.client__name { font-size: .92rem; font-weight: 600; color: var(--text); text-align: center; }
+
 /* ---------- Footer (corporate) ---------- */
 .site-footer { border-top: 1px solid var(--border); padding: 56px 0 28px; background: var(--surface-alt); }
 .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
