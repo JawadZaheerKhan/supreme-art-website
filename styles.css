@@ -556,6 +556,16 @@ a { color: inherit; }
 }
 .media--tall { min-height: 460px; }
 
+/* when a real photo is applied */
+.media--has-photo { background-size: cover; background-position: center; }
+.media--has-photo::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(9,26,41,.5), rgba(9,26,41,0) 55%);
+}
+.media--has-photo .media__chip {
+  background: rgba(9,26,41,.55); color: #fff; border-color: rgba(255,255,255,.25);
+}
+
 /* ---------- Split (image + text) ---------- */
 .split {
   display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
