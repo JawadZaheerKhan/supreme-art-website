@@ -507,6 +507,17 @@ a { color: inherit; }
 .emblem-node:nth-child(5) { animation-delay: .75s; }
 @keyframes emblemPop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
+/* hover interaction on process nodes */
+.emblem-node { transition: transform .22s ease; }
+.emblem-node:hover { transform: scale(1.07); }
+
+/* pulse ring emanating from the centre medallion */
+.medallion-pulse { transform-box: fill-box; transform-origin: center; animation: medpulse 2.8s ease-out infinite; }
+@keyframes medpulse {
+  0%   { transform: scale(1);    opacity: .45; }
+  70%, 100% { transform: scale(1.55); opacity: 0; }
+}
+
 .emblem-label { font-family: var(--display); font-weight: 700; fill: #fff; letter-spacing: .02em; }
 .emblem-badge-num { font-family: var(--display); font-weight: 700; }
 .emblem-center-title { font-family: var(--display); font-weight: 700; fill: var(--accent); letter-spacing: .01em; }

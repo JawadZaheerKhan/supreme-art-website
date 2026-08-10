@@ -83,11 +83,15 @@
               <animateTransform attributeName="transform" type="rotate" from="0 230 230" to="360 230 230" dur="34s" repeatCount="indefinite"/>
             </g>
 
-            <!-- orbiting dot -->
+            <!-- orbiting comet (synced to the flow highlight) -->
             <g>
-              <circle cx="230" cy="110" r="8" fill="#1b6fb3"/>
-              <circle cx="230" cy="110" r="14" fill="#1b6fb3" opacity=".2"/>
-              <animateTransform attributeName="transform" type="rotate" from="0 230 230" to="360 230 230" dur="9s" repeatCount="indefinite"/>
+              <circle cx="166.4" cy="128.2" r="3.4" fill="#1b6fb3" opacity=".14"/>
+              <circle cx="181.2" cy="120.4" r="4.6" fill="#1b6fb3" opacity=".26"/>
+              <circle cx="196.9" cy="114.6" r="5.8" fill="#1b6fb3" opacity=".45"/>
+              <circle cx="213.3" cy="111.2" r="7" fill="#1b6fb3" opacity=".7"/>
+              <circle cx="230" cy="110" r="14" fill="#1b6fb3" opacity=".18"/>
+              <circle cx="230" cy="110" r="8.5" fill="#1b6fb3"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 230 230" to="360 230 230" dur="5s" repeatCount="indefinite"/>
             </g>
 
             <!-- travelling flow glow (behind nodes) -->
@@ -150,6 +154,7 @@
             </g>
 
             <!-- center medallion -->
+            <circle class="medallion-pulse" cx="230" cy="230" r="72" fill="none" stroke="#1b6fb3" stroke-width="2"/>
             <circle cx="230" cy="230" r="72" fill="#fff" filter="url(#ndShadow)"/>
             <circle cx="230" cy="230" r="72" fill="none" stroke="#e3e9f0" stroke-width="1.5"/>
             <text class="emblem-center-sub"   x="230" y="215" font-size="12" text-anchor="middle">OUR</text>
