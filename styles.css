@@ -545,6 +545,10 @@ a { color: inherit; }
   90.5%{ transform: translateX(0);    opacity: 0; }
   100% { transform: translateX(0);    opacity: 1; }
 }
+.led { animation: ledblink 1.4s ease-in-out infinite; }
+@keyframes ledblink { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
+.ink-drip { animation: inkdrip .9s ease-in-out infinite; }
+@keyframes inkdrip { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
 
 .emblem-label { font-family: var(--display); font-weight: 700; fill: #fff; letter-spacing: .02em; }
 .emblem-badge-num { font-family: var(--display); font-weight: 700; }

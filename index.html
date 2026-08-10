@@ -59,6 +59,9 @@
                 <stop offset=".67" stop-color="#e8b400"/>
                 <stop offset="1" stop-color="#1c1c1f"/>
               </linearGradient>
+              <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#eef2f7"/><stop offset="1" stop-color="#c3ccd8"/>
+              </linearGradient>
               <filter id="sheetShadow" x="-30%" y="-30%" width="160%" height="160%">
                 <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0a1c2b" flood-opacity="0.16"/>
               </filter>
@@ -67,11 +70,59 @@
               </filter>
             </defs>
 
-            <!-- press frame -->
-            <rect x="112" y="366" width="236" height="16" rx="8" fill="#cdd6df"/>
-            <rect x="120" y="92"  width="9"   height="280" rx="4" fill="#dbe2ea"/>
-            <rect x="331" y="92"  width="9"   height="280" rx="4" fill="#dbe2ea"/>
-            <rect x="118" y="86"  width="224" height="14" rx="7" fill="#c4cdd8"/>
+            <!-- machine base + control panel -->
+            <rect x="86" y="360" width="300" height="34" rx="9" fill="url(#metal)" stroke="#b4bdc9" stroke-width="1"/>
+            <rect x="170" y="366" width="120" height="22" rx="5" fill="#9aa4b2"/>
+            <rect x="176" y="370" width="42" height="14" rx="2" fill="#1b6fb3"/>
+            <rect x="180" y="373" width="14" height="3" rx="1.5" fill="#bfe0ff"/>
+            <circle class="led" cx="234" cy="377" r="4" fill="#33c26b"/>
+            <circle class="led" cx="248" cy="377" r="4" fill="#e8b400" style="animation-delay:.5s"/>
+            <circle class="led" cx="262" cy="377" r="4" fill="#d6347f" style="animation-delay:.9s"/>
+            <rect x="274" y="371" width="10" height="12" rx="2" fill="#c3ccd8"/>
+
+            <!-- output stack (printed cartons pile up) -->
+            <g>
+              <rect x="308" y="352" width="46" height="8" rx="2" fill="#ffffff" stroke="#e3e9f0"/>
+              <rect x="312" y="345" width="46" height="8" rx="2" fill="#ffffff" stroke="#e3e9f0"/>
+              <rect x="316" y="338" width="46" height="8" rx="2" fill="#ffffff" stroke="#e3e9f0"/>
+              <rect x="320" y="340" width="12" height="2" fill="#1b6fb3"/>
+            </g>
+
+            <!-- side rails with bolts -->
+            <rect x="118" y="92" width="11" height="272" rx="4" fill="url(#metal)" stroke="#b4bdc9"/>
+            <rect x="331" y="92" width="11" height="272" rx="4" fill="url(#metal)" stroke="#b4bdc9"/>
+            <g fill="#aeb8c4">
+              <circle cx="123.5" cy="104" r="2.6"/><circle cx="123.5" cy="230" r="2.6"/><circle cx="123.5" cy="352" r="2.6"/>
+              <circle cx="336.5" cy="104" r="2.6"/><circle cx="336.5" cy="230" r="2.6"/><circle cx="336.5" cy="352" r="2.6"/>
+            </g>
+
+            <!-- drive gears (left) -->
+            <g>
+              <circle cx="92" cy="300" r="22" fill="none" stroke="#aeb8c4" stroke-width="9" stroke-dasharray="6 10"/>
+              <circle cx="92" cy="300" r="17" fill="#c3ccd8"/><circle cx="92" cy="300" r="7" fill="#eef2f7"/><circle cx="92" cy="300" r="2.5" fill="#aeb8c4"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 92 300" to="360 92 300" dur="6s" repeatCount="indefinite"/>
+            </g>
+            <g>
+              <circle cx="92" cy="343" r="15" fill="none" stroke="#aeb8c4" stroke-width="8" stroke-dasharray="5 8"/>
+              <circle cx="92" cy="343" r="11" fill="#c3ccd8"/><circle cx="92" cy="343" r="4.5" fill="#eef2f7"/>
+              <animateTransform attributeName="transform" type="rotate" from="360 92 343" to="0 92 343" dur="6s" repeatCount="indefinite"/>
+            </g>
+
+            <!-- CMYK ink tanks on top -->
+            <g>
+              <rect x="182" y="46" width="22" height="36" rx="3" fill="#eef2f7" stroke="#cdd6df"/>
+              <rect x="208" y="46" width="22" height="36" rx="3" fill="#eef2f7" stroke="#cdd6df"/>
+              <rect x="234" y="46" width="22" height="36" rx="3" fill="#eef2f7" stroke="#cdd6df"/>
+              <rect x="260" y="46" width="22" height="36" rx="3" fill="#eef2f7" stroke="#cdd6df"/>
+              <rect x="184" y="62" width="18" height="18" rx="2" fill="#00a8cc"/>
+              <rect x="210" y="58" width="18" height="22" rx="2" fill="#d6347f"/>
+              <rect x="236" y="66" width="18" height="14" rx="2" fill="#e8b400"/>
+              <rect x="262" y="60" width="18" height="20" rx="2" fill="#1c1c1f"/>
+              <g fill="#c3ccd8"><rect x="188" y="41" width="10" height="6" rx="2"/><rect x="214" y="41" width="10" height="6" rx="2"/><rect x="240" y="41" width="10" height="6" rx="2"/><rect x="266" y="41" width="10" height="6" rx="2"/></g>
+            </g>
+
+            <!-- carriage track -->
+            <rect x="112" y="84" width="240" height="15" rx="7" fill="url(#metal)" stroke="#b4bdc9"/>
 
             <!-- the sheet: gets printed, then ejects -->
             <g class="press-sheet">
@@ -104,8 +155,15 @@
 
             <!-- CMYK print head sweeping down -->
             <g class="press-head">
-              <rect x="143" y="104" width="174" height="14" rx="7" fill="url(#inkbar)" filter="url(#headShadow)"/>
-              <rect x="143" y="106" width="174" height="3" rx="1.5" fill="#ffffff" opacity=".55"/>
+              <rect x="140" y="102" width="180" height="15" rx="7" fill="url(#inkbar)" filter="url(#headShadow)"/>
+              <rect x="140" y="104" width="180" height="3" rx="1.5" fill="#ffffff" opacity=".55"/>
+              <g fill="#1c1c1f" opacity=".5"><path d="M168,117 h5 l-2.5,4 z"/><path d="M208,117 h5 l-2.5,4 z"/><path d="M248,117 h5 l-2.5,4 z"/><path d="M288,117 h5 l-2.5,4 z"/></g>
+              <g>
+                <circle class="ink-drip" cx="170" cy="124" r="2.3" fill="#00a8cc"/>
+                <circle class="ink-drip" cx="210" cy="124" r="2.3" fill="#d6347f" style="animation-delay:.2s"/>
+                <circle class="ink-drip" cx="250" cy="124" r="2.3" fill="#e8b400" style="animation-delay:.4s"/>
+                <circle class="ink-drip" cx="290" cy="124" r="2.3" fill="#1c1c1f" style="animation-delay:.6s"/>
+              </g>
             </g>
           </svg>
         </div>
