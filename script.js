@@ -104,6 +104,45 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
+// Assign photos to .media placeholders based on their caption label
+(function () {
+  var map = [
+    ['tablet', 'images/p-tablet.jpg'],
+    ['syrup', 'images/p-syrup.jpg'],
+    ['blister', 'images/p-blister.jpg'],
+    ['ointment', 'images/p-ointment.jpg'],
+    ['vial', 'images/p-vial.jpg'],
+    ['ampoule', 'images/p-vial.jpg'],
+    ['leaflet', 'images/p-leaflet.jpg'],
+    ['insert', 'images/p-leaflet.jpg'],
+    ['die-cut', 'images/diecutting.jpg'],
+    ['folder-gluer', 'images/foldergluer.jpg'],
+    ['pressroom', 'images/pressroom.jpg'],
+    ['press', 'images/pressroom.jpg'],
+    ['finished cartons', 'images/cartons.jpg'],
+    ['carton', 'images/cartons.jpg'],
+    ['factory', 'images/factory.jpg'],
+    ['building', 'images/factory.jpg'],
+    ['quality', 'images/quality.jpg'],
+    ['inspection', 'images/quality.jpg'],
+    ['team', 'images/team.jpg'],
+    ['floor', 'images/team.jpg']
+  ];
+  document.querySelectorAll('.media').forEach(function (m) {
+    var chip = m.querySelector('.media__chip');
+    if (!chip) return;
+    var t = chip.textContent.toLowerCase();
+    for (var i = 0; i < map.length; i++) {
+      if (t.indexOf(map[i][0]) > -1) {
+        m.style.backgroundImage = "url('" + map[i][1] + "')";
+        m.classList.add('media--has-photo');
+        chip.textContent = chip.textContent.replace('📷', '').trim();
+        break;
+      }
+    }
+  });
+})();
+
 // Animated stat counters
 const countIO = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
