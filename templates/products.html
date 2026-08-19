@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+{{> loader}}
+{{> header}}
+
+  <main>
+{{> banner}}
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.range.eyebrow }}</p>
+        <h2 class="reveal">{{ page.range.heading }}</h2>
+        <p class="lead reveal">{{ page.range.lead }}</p>
+        <div class="grid">
+          {{#each page.range.items}}<article class="card reveal" style="padding:0;overflow:hidden">
+            <div class="media" style="min-height:190px;border-radius:0">{{> media}}</div>
+            <div style="padding:22px 26px 26px"><h3>{{ title }}</h3><p>{{ text }}</p></div>
+          </article>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+    <section class="section band">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.capabilities.eyebrow }}</p>
+        <h2 class="reveal">{{ page.capabilities.heading }}</h2>
+{{> capabilities}}
+      </div>
+    </section>
+
+{{> cta}}
+  </main>
+
+{{> footer}}
+
+  <script src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+{
+  "title": "Supreme Art — Pharmaceutical Packaging & Printing",
+  "description": "Supreme Art manufactures pharmaceutical folding cartons — printed, die-cut, folded and glued in-house in Peshawar, Pakistan.",
+  "hero": {
+    "title": "Supreme Art",
+    "tagline": "The box your medicine comes in.",
+    "slides": [
+      {
+        "image": "/images/pressroom.jpg",
+        "alt": "Offset printing press"
+      },
+      {
+        "image": "/images/foldergluer.jpg",
+        "alt": "Printing machine"
+      },
+      {
+        "image": "/images/diecutting.jpg",
+        "alt": "Paper cutting machine"
+      },
+      {
+        "image": "/images/factory.jpg",
+        "alt": "Print production line"
+      }
+    ]
+  },
+  "marquee": [
+    "Tablet cartons",
+    "Syrup cartons",
+    "Blister cartons",
+    "Ointment cartons",
+    "Drop & vial cartons",
+    "Sachet boxes"
+  ],
+  "about": {
+    "eyebrow": "Who we are",
+    "heading": "A pharmaceutical carton maker, from prepress to pallet.",
+    "text": "Supreme Art is a Peshawar-based manufacturer of pharmaceutical folding cartons — the printed paper boxes that carry tablets, syrups, blisters and vials. We run the entire process in-house, so your artwork becomes a finished, machine-ready carton without ever leaving our floor.",
+    "points": [
+      "Offset printing, die-cutting, folding & gluing in-house",
+      "Pharma-grade board with full batch traceability",
+      "Short runs through to full production volumes"
+    ],
+    "button_label": "More about us",
+    "button_href": "about.html",
+    "media": {
+      "alt": "Factory / building photo",
+      "image": ""
+    }
+  },
+  "products": {
+    "eyebrow": "What we make",
+    "heading": "Folding cartons for every dosage form.",
+    "lead": "From tablets to syrups, we produce the full range of pharmaceutical secondary packaging.",
+    "items": [
+      {
+        "title": "Tablet & capsule cartons",
+        "text": "Blister and strip packs, tamper-evident closures.",
+        "alt": "Tablet cartons",
+        "image": ""
+      },
+      {
+        "title": "Syrup & liquid cartons",
+        "text": "Bottle cartons with partitions and inserts.",
+        "alt": "Syrup cartons",
+        "image": ""
+      },
+      {
+        "title": "Vial & ampoule packs",
+        "text": "Precision cartons with die-cut fitments.",
+        "alt": "Vial & ampoule",
+        "image": ""
+      },
+      {
+        "title": "Leaflets & inserts",
+        "text": "Folded package inserts and outer sleeves.",
+        "alt": "Leaflets & inserts",
+        "image": ""
+      }
+    ],
+    "button_label": "See all products",
+    "button_href": "products.html"
+  },
+  "capabilities": {
+    "eyebrow": "Our capabilities",
+    "heading": "One factory. The whole carton."
+  },
+  "quality": {
+    "eyebrow": "Quality",
+    "heading": "Built for pharma standards.",
+    "text": "Medicine packaging doesn't get second chances. We run documented quality assurance across every stage — incoming board, colour control on press, dimensional checks after die-cutting, and final inspection before dispatch.",
+    "stats": [
+      {
+        "number": 25,
+        "label": "+ years in print"
+      },
+      {
+        "number": 100,
+        "label": "% in-house"
+      },
+      {
+        "number": 48,
+        "label": "hr proofing"
+      }
+    ],
+    "button_label": "Our quality process",
+    "button_href": "quality.html",
+    "media": {
+      "alt": "Quality / inspection photo",
+      "image": ""
+    }
+  },
+  "gallery": {
+    "eyebrow": "Inside the factory",
+    "heading": "Where your cartons are made."
+  },
+  "clients": {
+    "eyebrow": "Trusted by",
+    "heading": "Our clients.",
+    "lead": "Pharmaceutical and consumer brands that rely on Supreme Art for their packaging.",
+    "items": [
+      {
+        "name": "SwaaD",
+        "logo": "/images/clients/stanley.png",
+        "initials": "SW",
+        "colour": "#00a8cc"
+      },
+      {
+        "name": "Global Pharmaceuticals",
+        "logo": "/images/clients/global.png",
+        "initials": "GP",
+        "colour": "#d6347f"
+      },
+      {
+        "name": "Ferozsons",
+        "logo": "/images/clients/ferozsons.png",
+        "initials": "FZ",
+        "colour": "#1b6fb3"
+      },
+      {
+        "name": "Shaigan",
+        "logo": "/images/clients/shaigan.png",
+        "initials": "SH",
+        "colour": "#c99a00"
+      },
+      {
+        "name": "Herbion",
+        "logo": "/images/clients/herbion.png",
+        "initials": "HB",
+        "colour": "#2e9e5b"
+      },
+      {
+        "name": "Evolution",
+        "logo": "/images/clients/evolution.png",
+        "initials": "EV",
+        "colour": "#17171a"
+      },
+      {
+        "name": "Danas",
+        "logo": "/images/clients/danas.jpg",
+        "initials": "DA",
+        "colour": "#1aa5b8"
+      },
+      {
+        "name": "Stanley Pharmaceuticals",
+        "logo": "/images/clients/stanley-pharma.png",
+        "initials": "ST",
+        "colour": "#2e9e5b"
+      },
+      {
+        "name": "Bio-Labs",
+        "logo": "/images/clients/biolabs.jpg",
+        "initials": "BL",
+        "colour": "#1b6fb3"
+      }
+    ]
+  },
+  "news": {
+    "eyebrow": "News & updates",
+    "heading": "What's happening at the factory.",
+    "posts": [
+      {
+        "date": "Aug 2026",
+        "title": "Expanding our folding-carton capacity",
+        "text": "New folder-gluer capacity means faster turnaround on high-volume runs.",
+        "href": "contact.html"
+      },
+      {
+        "date": "Jun 2026",
+        "title": "Colour-accuracy on every press pass",
+        "text": "How press-side colour control keeps pharma branding consistent.",
+        "href": "contact.html"
+      },
+      {
+        "date": "Apr 2026",
+        "title": "Our commitment to pharma-grade quality",
+        "text": "Inside the documented checks behind every carton we ship.",
+        "href": "contact.html"
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Have a carton to make?",
+    "text": "Send us your artwork or dieline — we'll come back with a quote and a timeline.",
+    "primary_label": "Get a quote",
+    "primary_href": "contact.html",
+    "secondary_label": "Call the floor",
+    "secondary_href": "tel:+923135585784"
+  }
+}

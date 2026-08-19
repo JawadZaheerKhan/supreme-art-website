@@ -1,0 +1,53 @@
+{
+  "title": "Careers — Supreme Art",
+  "description": "Build your career in print at Supreme Art — a hands-on pharmaceutical carton factory in Peshawar that values craft and precision.",
+  "banner": {
+    "crumb": "Careers",
+    "heading": "Careers"
+  },
+  "intro": {
+    "eyebrow": "Work with us",
+    "heading": "Build your career in print.",
+    "paragraphs": [
+      "We're a hands-on factory that values craft and precision. Our team keeps pharma brands supplied with packaging they can trust — and we're always glad to hear from people who take pride in getting the details right.",
+      "If that sounds like you, send us your CV and tell us what you do best."
+    ],
+    "button_label": "Send us your CV",
+    "media": {
+      "alt": "Team / floor photo",
+      "image": ""
+    }
+  },
+  "roles": {
+    "eyebrow": "Open roles",
+    "heading": "Where you could fit in.",
+    "items": [
+      {
+        "type": "Full-time · Peshawar",
+        "title": "Offset Press Operator",
+        "text": "Run and maintain our Heidelberg presses, holding colour and register across production runs."
+      },
+      {
+        "type": "Full-time · Peshawar",
+        "title": "Prepress Designer",
+        "text": "Prepare artwork, dielines and proofs, bridging brand files and the pressroom."
+      },
+      {
+        "type": "Full-time · Peshawar",
+        "title": "Quality Inspector",
+        "text": "Check board, colour and dimensions at every stage, keeping batches traceable and compliant."
+      }
+    ],
+    "footnote_before": "Don't see your role? We still want to hear from good people — ",
+    "footnote_link": "email us your CV",
+    "footnote_after": "."
+  },
+  "cta": {
+    "heading": "Ready to join us?",
+    "text": "Send your CV and a short note about what you'd like to do.",
+    "primary_label": "Apply now",
+    "primary_href": "mailto:info@supremeart.pk?subject=Careers%20at%20Supreme%20Art",
+    "secondary_label": "About Supreme Art",
+    "secondary_href": "about.html"
+  }
+}

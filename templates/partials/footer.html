@@ -1,0 +1,29 @@
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="{{ site.logo }}" alt="Supreme Art" class="footer__logo" />
+          <p>{{ site.footer.blurb }}</p>
+        </div>
+        <div class="footer-col">
+          <h4>{{ site.footer.company_heading }}</h4>
+          <ul>
+            {{#each site.footer.company_links}}<li><a href="{{ href }}">{{ label }}</a></li>
+            {{/each}}
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>{{ site.footer.contact_heading }}</h4>
+          <ul>
+            <li><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></li>
+            <li><a href="tel:{{ site.contact.phone_link }}">{{ site.contact.phone }}</a></li>
+            <li>{{ site.contact.address }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> {{ site.footer.copyright }}</p>
+        <p>{{ site.footer.tagline }}</p>
+      </div>
+    </div>
+  </footer>

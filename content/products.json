@@ -1,0 +1,27 @@
+{
+  "title": "Products — Supreme Art",
+  "description": "Pharmaceutical folding cartons for every dosage form — tablet, syrup, blister, ointment, vial and sachet cartons, plus leaflets and inserts.",
+  "banner": { "crumb": "Products", "heading": "Products" },
+  "range": {
+    "eyebrow": "What we make",
+    "heading": "Folding cartons for every dosage form.",
+    "lead": "From tablets to syrups, we produce the full range of pharmaceutical secondary packaging — printed, die-cut, folded and glued to your specification.",
+    "items": [
+      { "title": "Tablet & capsule cartons", "text": "For blister and strip packs, with tamper-evident closures.", "alt": "Tablet cartons", "image": "" },
+      { "title": "Syrup & liquid cartons", "text": "Bottle cartons with partitions and inserts to protect the fill.", "alt": "Syrup cartons", "image": "" },
+      { "title": "Blister cartons", "text": "Sized precisely to your blister format for a secure fit.", "alt": "Blister cartons", "image": "" },
+      { "title": "Ointment & tube cartons", "text": "Slim cartons for creams, gels and tubes.", "alt": "Ointment cartons", "image": "" },
+      { "title": "Vial & ampoule packs", "text": "Precision cartons with die-cut fitments to hold vials in place.", "alt": "Vial & ampoule", "image": "" },
+      { "title": "Leaflets & inserts", "text": "Folded package inserts and outer sleeves to complete the pack.", "alt": "Leaflets & inserts", "image": "" }
+    ]
+  },
+  "capabilities": { "eyebrow": "How it's made", "heading": "One factory. The whole carton." },
+  "cta": {
+    "heading": "Need a specific carton?",
+    "text": "Send us your artwork or dieline and we'll come back with a quote and a timeline.",
+    "primary_label": "Get a quote",
+    "primary_href": "contact.html",
+    "secondary_label": "Our quality process",
+    "secondary_href": "quality.html"
+  }
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+{{> loader}}
+{{> header}}
+
+  <main>
+{{> banner}}
+
+    <section class="section">
+      <div class="container">
+        <div class="split">
+          <div class="split__media reveal"><div class="media media--tall">{{#with page.intro.media}}{{> media}}{{/with}}</div></div>
+          <div class="split__body reveal">
+            <p class="eyebrow">{{ page.intro.eyebrow }}</p>
+            <h2>{{ page.intro.heading }}</h2>
+            {{#each page.intro.paragraphs}}<p>{{ . }}</p>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.values.eyebrow }}</p>
+        <h2 class="reveal">{{ page.values.heading }}</h2>
+        <div class="grid">
+          {{#each page.values.items}}<article class="card reveal"><span class="card__num">{{ tag }}</span><h3>{{ title }}</h3><p>{{ text }}</p></article>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.numbers.eyebrow }}</p>
+        <h2 class="reveal">{{ page.numbers.heading }}</h2>
+        <div class="stat-row reveal" style="margin-top:24px">
+          {{#each page.numbers.stats}}<div class="stat"><b data-count="{{ number }}">0</b><span>{{ label }}</span></div>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+    <section class="section band">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.gallery.eyebrow }}</p>
+        <h2 class="reveal">{{ page.gallery.heading }}</h2>
+{{> gallery}}
+      </div>
+    </section>
+
+{{> cta}}
+  </main>
+
+{{> footer}}
+
+  <script src="/script.js"></script>
+</body>
+</html>

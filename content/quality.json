@@ -1,0 +1,61 @@
+{
+  "title": "Quality — Supreme Art",
+  "description": "Documented quality assurance across every stage of pharmaceutical carton production — from incoming board to final inspection, with full batch traceability.",
+  "banner": {
+    "crumb": "Quality",
+    "heading": "Quality & standards"
+  },
+  "commitment": {
+    "eyebrow": "Our commitment",
+    "heading": "Built for pharma standards.",
+    "text": "Medicine packaging doesn't get second chances. We run documented quality assurance across every stage of production, with full batch traceability — so what leaves our floor is exactly what you approved.",
+    "stats": [
+      {
+        "number": 25,
+        "label": "+ years in print"
+      },
+      {
+        "number": 100,
+        "label": "% in-house"
+      },
+      {
+        "number": 48,
+        "label": "hr proofing"
+      }
+    ],
+    "media": {
+      "alt": "Quality / inspection photo",
+      "image": ""
+    }
+  },
+  "process": {
+    "eyebrow": "Our process",
+    "heading": "Quality checks at every stage.",
+    "steps": [
+      {
+        "title": "Incoming board",
+        "text": "Every batch of pharma-grade board is checked for grammage, thickness and consistency before it runs."
+      },
+      {
+        "title": "Colour control on press",
+        "text": "Press-side colour management keeps branding accurate and consistent across the entire run."
+      },
+      {
+        "title": "Dimensional checks",
+        "text": "Cartons are measured after die-cutting to confirm cuts and creases hold to the millimetre."
+      },
+      {
+        "title": "Final inspection",
+        "text": "A final QA pass before dispatch, with batch records kept for full traceability."
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Packaging you can rely on.",
+    "text": "Talk to us about your quality requirements and we'll show you how we meet them.",
+    "primary_label": "Get in touch",
+    "primary_href": "contact.html",
+    "secondary_label": "About Supreme Art",
+    "secondary_href": "about.html"
+  }
+}

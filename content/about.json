@@ -1,0 +1,43 @@
+{
+  "title": "About us — Supreme Art",
+  "description": "Supreme Art is a Peshawar-based manufacturer of pharmaceutical folding cartons, running the whole process — prepress, printing, die-cutting, folding and gluing — in-house.",
+  "banner": { "crumb": "About us", "heading": "About Supreme Art" },
+  "intro": {
+    "eyebrow": "Who we are",
+    "heading": "The paper box your medicine comes in — made under one roof.",
+    "paragraphs": [
+      "Supreme Art (Pvt) Ltd is a Peshawar-based manufacturer of pharmaceutical folding cartons. From the first proof to the flat-packed, glued carton on your filling line, every stage of production happens in our own facility.",
+      "We work with pharmaceutical brands who need packaging that is accurate, consistent and traceable — because for medicine, the box is part of patient safety."
+    ],
+    "media": { "alt": "Factory / building photo", "image": "" }
+  },
+  "values": {
+    "eyebrow": "What drives us",
+    "heading": "Our values.",
+    "items": [
+      { "tag": "Quality", "title": "Get it right", "text": "Documented checks at every stage, so every carton meets pharma standards." },
+      { "tag": "Precision", "title": "To the millimetre", "text": "Clean cuts, crisp creases and colour that stays consistent across runs." },
+      { "tag": "Trust", "title": "Traceable & reliable", "text": "Full batch traceability and timelines you can plan production around." },
+      { "tag": "Craft", "title": "Decades in print", "text": "An experienced team that treats every job like it carries our name." }
+    ]
+  },
+  "numbers": {
+    "eyebrow": "By the numbers",
+    "heading": "Built on experience.",
+    "stats": [
+      { "number": 25, "label": "+ years in print" },
+      { "number": 100, "label": "% in-house production" },
+      { "number": 48, "label": "hr proofing turnaround" },
+      { "number": 6, "label": "carton formats" }
+    ]
+  },
+  "gallery": { "eyebrow": "Inside the factory", "heading": "Where your cartons are made." },
+  "cta": {
+    "heading": "Have a carton to make?",
+    "text": "Send us your artwork or dieline — we'll come back with a quote and a timeline.",
+    "primary_label": "Get a quote",
+    "primary_href": "contact.html",
+    "secondary_label": "See our products",
+    "secondary_href": "products.html"
+  }
+}

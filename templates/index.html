@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+{{> loader}}
+{{> header}}
+
+  <main>
+    <!-- HERO -->
+    <section class="pk-hero" id="home-hero">
+      <div class="pk-hero__stage pk-hero__stage--photos" aria-label="Printing machines at work">
+        <div class="hero-slideshow">
+          {{#each page.hero.slides}}<img src="{{ image }}" alt="{{ alt }}" />
+          {{/each}}
+        </div>
+      </div>
+      <div class="pk-hero__intro container">
+        <h1>{{ page.hero.title }}</h1>
+        <p>{{ page.hero.tagline }}</p>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        {{#each page.marquee}}<span>{{ . }}</span><span>•</span>{{/each}}
+        {{#each page.marquee}}<span>{{ . }}</span><span>•</span>{{/each}}
+      </div>
+    </div>
+
+    <!-- ABOUT TEASER -->
+    <section class="section">
+      <div class="container">
+        <div class="split">
+          <div class="split__media reveal">
+            <div class="media media--tall">{{#with page.about.media}}{{> media}}{{/with}}</div>
+          </div>
+          <div class="split__body reveal">
+            <p class="eyebrow">{{ page.about.eyebrow }}</p>
+            <h2>{{ page.about.heading }}</h2>
+            <p>{{ page.about.text }}</p>
+            <ul class="about-points">
+              {{#each page.about.points}}<li>{{ . }}</li>
+              {{/each}}
+            </ul>
+            <p style="margin-top:24px"><a class="btn btn--accent" href="{{ page.about.button_href }}">{{ page.about.button_label }}</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS TEASER -->
+    <section class="section band">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.products.eyebrow }}</p>
+        <h2 class="reveal">{{ page.products.heading }}</h2>
+        <p class="lead reveal">{{ page.products.lead }}</p>
+        <div class="grid">
+          {{#each page.products.items}}<article class="card reveal" style="padding:0;overflow:hidden">
+            <div class="media" style="min-height:190px;border-radius:0">{{> media}}</div>
+            <div style="padding:22px 26px 26px"><h3>{{ title }}</h3><p>{{ text }}</p></div>
+          </article>
+          {{/each}}
+        </div>
+        <p style="margin-top:30px" class="reveal"><a class="btn btn--ghost" href="{{ page.products.button_href }}">{{ page.products.button_label }}</a></p>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.capabilities.eyebrow }}</p>
+        <h2 class="reveal">{{ page.capabilities.heading }}</h2>
+{{> capabilities}}
+      </div>
+    </section>
+
+    <!-- QUALITY HIGHLIGHT -->
+    <section class="section band">
+      <div class="container">
+        <div class="split split--reverse">
+          <div class="split__media reveal">
+            <div class="media media--tall">{{#with page.quality.media}}{{> media}}{{/with}}</div>
+          </div>
+          <div class="split__body reveal">
+            <p class="eyebrow">{{ page.quality.eyebrow }}</p>
+            <h2>{{ page.quality.heading }}</h2>
+            <p>{{ page.quality.text }}</p>
+            <div class="stat-row" style="margin-top:26px">
+              {{#each page.quality.stats}}<div class="stat"><b data-count="{{ number }}">0</b><span>{{ label }}</span></div>
+              {{/each}}
+            </div>
+            <p style="margin-top:26px"><a class="btn btn--accent" href="{{ page.quality.button_href }}">{{ page.quality.button_label }}</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FACTORY GALLERY -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.gallery.eyebrow }}</p>
+        <h2 class="reveal">{{ page.gallery.heading }}</h2>
+{{> gallery}}
+      </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section id="clients" class="section">
+      <div class="container" style="text-align:center">
+        <p class="eyebrow reveal">{{ page.clients.eyebrow }}</p>
+        <h2 class="reveal">{{ page.clients.heading }}</h2>
+        <p class="lead reveal" style="margin-left:auto;margin-right:auto">{{ page.clients.lead }}</p>
+        <div class="clients-row reveal">
+          {{#each page.clients.items}}<div class="client">
+            <div class="client__badge">
+              <img class="client__logo" src="{{ logo }}" alt="{{ name }}" onerror="this.style.display='none'">
+              <span class="client__mono" style="color:{{ colour }}">{{ initials }}</span>
+            </div>
+            <span class="client__name">{{ name }}</span>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news" class="section band">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.news.eyebrow }}</p>
+        <h2 class="reveal">{{ page.news.heading }}</h2>
+        <div class="news-grid">
+          {{#each page.news.posts}}<article class="post reveal"><div class="post__thumb"></div><div class="post__body"><span class="post__date">{{ date }}</span><h3>{{ title }}</h3><p>{{ text }}</p><a class="post__link" href="{{ href }}">Read more →</a></div></article>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+{{> cta}}
+  </main>
+
+{{> footer}}
+
+  <script src="/script.js"></script>
+</body>
+</html>

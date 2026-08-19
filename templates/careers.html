@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+{{> loader}}
+{{> header}}
+
+  <main>
+{{> banner}}
+
+    <section class="section">
+      <div class="container">
+        <div class="split">
+          <div class="split__media reveal"><div class="media media--tall">{{#with page.intro.media}}{{> media}}{{/with}}</div></div>
+          <div class="split__body reveal">
+            <p class="eyebrow">{{ page.intro.eyebrow }}</p>
+            <h2>{{ page.intro.heading }}</h2>
+            {{#each page.intro.paragraphs}}<p>{{ . }}</p>
+            {{/each}}
+            <p style="margin-top:20px"><a class="btn btn--accent" href="mailto:{{ site.contact.email }}?subject=Careers%20at%20Supreme%20Art">{{ page.intro.button_label }}</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.roles.eyebrow }}</p>
+        <h2 class="reveal">{{ page.roles.heading }}</h2>
+        <div class="careers-grid">
+          {{#each page.roles.items}}<article class="role reveal"><span class="role-type">{{ type }}</span><h3>{{ title }}</h3><p>{{ text }}</p></article>
+          {{/each}}
+        </div>
+        <p class="reveal" style="color:var(--muted);margin-top:22px">{{ page.roles.footnote_before }}<a href="mailto:{{ site.contact.email }}?subject=Careers%20at%20Supreme%20Art">{{ page.roles.footnote_link }}</a>{{ page.roles.footnote_after }}</p>
+      </div>
+    </section>
+
+{{> cta}}
+  </main>
+
+{{> footer}}
+
+  <script src="/script.js"></script>
+</body>
+</html>
