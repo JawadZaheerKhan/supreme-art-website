@@ -506,7 +506,7 @@ a { color: inherit; }
 }
 .pk-hero__intro { text-align: center; padding: 22px 24px 70px; }
 .pk-hero__intro h1 {
-  color: var(--accent); margin: 0 0 14px; line-height: 1.05;
+  color: #b3202a; margin: 0 0 14px; line-height: 1.05;
   font-size: clamp(2.4rem, 5.2vw, 3.9rem);
 }
 .pk-hero__intro p {
