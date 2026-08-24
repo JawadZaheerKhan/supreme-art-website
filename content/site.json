@@ -9,6 +9,7 @@
         "href": "about.html",
         "slug": "about",
         "dropdown": [
+          { "label": "Company profile", "href": "about.html#company-profile" },
           { "label": "Company overview", "href": "about.html" },
           { "label": "Quality & standards", "href": "quality.html" },
           { "label": "Careers", "href": "careers.html" }
