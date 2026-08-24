@@ -13,6 +13,21 @@
 
     <section class="section">
       <div class="container">
+        <p class="eyebrow reveal">{{ page.leadership.eyebrow }}</p>
+        <h2 class="reveal">{{ page.leadership.heading }}</h2>
+        <div class="team">
+          {{#each page.leadership.people}}<article class="person reveal">
+            <div class="person__photo"><img src="{{ image }}" alt="{{ name }}" loading="lazy" /></div>
+            <h3 class="person__name">{{ name }}</h3>
+            <p class="person__role">{{ role }}</p>
+          </article>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
         <div class="split">
           <div class="split__media reveal"><div class="media media--tall">{{#with page.intro.media}}{{> media}}{{/with}}</div></div>
           <div class="split__body reveal">

@@ -2,6 +2,14 @@
   "title": "About us — Supreme Art",
   "description": "Supreme Art is a Peshawar-based manufacturer of pharmaceutical folding cartons, running the whole process — prepress, printing, die-cutting, folding and gluing — in-house.",
   "banner": { "crumb": "About us", "heading": "About Supreme Art" },
+  "leadership": {
+    "eyebrow": "Company profile",
+    "heading": "Leadership",
+    "people": [
+      { "name": "Muslim Khan", "role": "Director & Founder", "image": "/images/team/muslim-khan.jpg" },
+      { "name": "Sajjad Zaheer", "role": "CEO & Founder", "image": "/images/team/sajjad-zaheer.jpg" }
+    ]
+  },
   "intro": {
     "eyebrow": "Who we are",
     "heading": "The paper box your medicine comes in — made under one roof.",
