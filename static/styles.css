@@ -79,6 +79,16 @@ a { color: inherit; }
 }
 .nav-cta:hover { background: var(--accent-dark); }
 
+/* mobile menu button (hidden on desktop) */
+.nav-toggle {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 44px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer;
+}
+.nav-toggle span { display: block; width: 24px; height: 2px; margin: 0 auto; background: var(--text); border-radius: 2px; transition: transform .22s ease, opacity .22s ease; }
+.site-header.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.site-header.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+.site-header.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
@@ -521,7 +531,28 @@ a { color: inherit; }
   .footer-brand { grid-column: 1 / -1; }
 }
 @media (max-width: 780px) {
-  .nav-links a:not(.nav-cta) { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 30px rgba(22,32,46,.10);
+    padding: 8px 22px 18px; display: none;
+  }
+  .site-header.nav-open .nav-links { display: flex; }
+  .nav-links > a,
+  .nav-links .has-dropdown > a { padding: 13px 4px; font-size: 1.05rem; border-bottom: 1px solid var(--border); }
+  .nav-links .has-dropdown { position: static; }
+  .nav-links .has-dropdown > a::after { float: right; color: var(--muted); }
+  .nav-links .has-dropdown .dropdown,
+  .nav-links .has-dropdown:hover .dropdown,
+  .nav-links .has-dropdown:focus-within .dropdown {
+    position: static; left: auto; transform: none; opacity: 1; visibility: visible;
+    min-width: 0; border: 0; box-shadow: none; border-radius: 0; z-index: auto;
+    padding: 0 0 4px 14px; background: transparent; display: block;
+  }
+  .nav-links .has-dropdown .dropdown a { font-size: 1rem; padding: 11px 6px; color: var(--muted); white-space: normal; border-bottom: 1px solid var(--border); }
+  .nav-cta { margin-top: 14px; text-align: center; padding: 13px; border-bottom: 0; }
   .dots { right: 12px; }
   .captions { bottom: 4vh; }
   .caption { font-size: .92rem; }

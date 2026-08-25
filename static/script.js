@@ -8,6 +8,23 @@ window.addEventListener('load', () => {
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Mobile nav — hamburger toggle
+(function () {
+  const header = document.querySelector('.site-header');
+  const toggle = header && header.querySelector('.nav-toggle');
+  if (!toggle) return;
+  toggle.addEventListener('click', () => {
+    const open = header.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  header.querySelectorAll('.nav-links a').forEach((a) => {
+    a.addEventListener('click', () => {
+      header.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+
 /* ============================================================
    Scroll story: paper → print → die-cut → folded carton
    ============================================================ */
