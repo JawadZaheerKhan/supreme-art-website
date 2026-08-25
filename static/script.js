@@ -1,10 +1,15 @@
 // Year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// CMYK loader — hide after first paint
+// CMYK loader — hide after first paint, then let the hero play in
 window.addEventListener('load', () => {
-  setTimeout(() => document.getElementById('loader').classList.add('done'), 800);
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('done');
+    document.documentElement.classList.add('hero-in');
+  }, 800);
 });
+// safety net: never leave the hero hidden if `load` never fires
+setTimeout(() => document.documentElement.classList.add('hero-in'), 4000);
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

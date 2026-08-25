@@ -676,18 +676,58 @@ a { color: inherit; }
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(to bottom, rgba(255,255,255,0) 80%, #ffffff 100%);
 }
-.pk-hero__intro { text-align: center; padding: 22px 24px 70px; }
-.pk-hero__intro h1 {
-  color: #b3202a; margin: 0 0 14px; line-height: 1.05;
-  font-size: clamp(2.4rem, 5.2vw, 3.9rem);
+.pk-hero__intro { text-align: left; padding: 58px 24px 10px; }
+
+/* Big stacked wordmark. Each line sits in its own clipping box and rises
+   into place once the loader clears, so the name arrives first and settles
+   above the photo strip. */
+.hero-word {
+  margin: 0;
+  font-family: "Anton", var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(3.2rem, 23vw, 11.5rem);
+  line-height: .86;
+  letter-spacing: -.005em;
+  color: #17171a;
 }
-.pk-hero__intro p {
-  color: var(--muted); margin: 0 auto; max-width: 640px; font-weight: 500;
-  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+.hero-word__line { display: block; overflow: hidden; padding-bottom: .04em; }
+.hero-word__line > span { display: inline-block; will-change: transform; }
+.hero-word__dot {
+  display: inline-block;
+  width: .17em; height: .17em;
+  margin-left: .09em;
+  background: #b3202a;
+  transform-origin: center bottom;
 }
+/* start hidden only when JS can bring them back */
+.js .hero-word__line > span { transform: translateY(110%); }
+.js .hero-word__dot { transform: scale(0); }
+.hero-in .hero-word__line > span {
+  transform: translateY(0);
+  transition: transform 1s cubic-bezier(.16, 1, .3, 1);
+}
+.hero-in .hero-word__line:nth-child(2) > span { transition-delay: .12s; }
+.hero-in .hero-word__dot {
+  transform: scale(1);
+  transition: transform .5s cubic-bezier(.34, 1.56, .64, 1) .6s;
+}
+/* the strip of photos drifts up just after the name lands */
+.js .photo-marquee { opacity: 0; transform: translateY(48px); }
+.hero-in .photo-marquee {
+  opacity: 1; transform: none;
+  transition: opacity .9s ease .3s, transform 1s cubic-bezier(.16, 1, .3, 1) .3s;
+}
+
 @media (max-width: 780px) {
   .pk-hero__stage { min-height: 46vh; padding: 36px 20px 12px; }
   .pk-hero__stage .hero-emblem svg { max-width: 340px; }
+  .pk-hero__intro { padding: 34px 24px 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .hero-word__line > span,
+  .js .hero-word__dot,
+  .js .photo-marquee { transform: none; opacity: 1; }
 }
 
 /* ---------- Animated printing-process emblem ---------- */
