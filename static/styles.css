@@ -333,7 +333,38 @@ a { color: inherit; }
 /* desktop: fixed-height section with a sticky 100vh pin that crossfades */
 .proc { position: relative; }
 .proc__pin { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; }
-.proc__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; width: 100%; }
+.proc__inner { display: grid; grid-template-columns: 1fr 0.92fr 0.5fr; gap: 42px; align-items: center; width: 100%; }
+
+/* folding carton on the side */
+.proc-box { position: relative; align-self: center; }
+.proc-box__scene { position: relative; width: 100%; aspect-ratio: 3 / 4; perspective: 1300px; --intro: 0; --print: 0; --cut: 0; --foldA: 0; --foldB: 0; --view: 0; }
+.proc-box__rot {
+  position: absolute; left: 50%; top: 50%; width: 360px; height: 410px;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%)
+    scale(calc(0.6 * (0.92 + var(--intro) * 0.08)))
+    rotateX(calc(var(--view) * -14deg)) rotateY(calc(var(--view) * -30deg));
+  opacity: var(--intro);
+}
+.proc-box .carton { left: 85px; top: 60px; }
+/* the artwork "prints" onto the blank board as --print rises */
+.proc-box .art { opacity: var(--print); }
+/* travelling print head sweeps down the front during printing */
+.proc-box .panel--front::after {
+  content: ""; position: absolute; left: -5px; right: -5px; height: 3px; border-radius: 3px;
+  top: calc(var(--print) * 100%); margin-top: -1.5px;
+  background: linear-gradient(90deg, var(--c), var(--m), var(--y), var(--ink));
+  opacity: calc(4 * var(--print) * (1 - var(--print)));
+}
+/* die-cut outline strokes in over the flat blank, then clears as it folds */
+.proc-box__cut { position: absolute; left: 0; top: 0; width: 360px; height: 410px; overflow: visible; pointer-events: none; opacity: calc(var(--cut) * (1 - var(--foldA))); }
+.proc-box__cut .cutline { fill: none; stroke: #c0392f; stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--cut)); }
+.proc-box__cut .creaseline { fill: none; stroke: #9aa3ad; stroke-width: 1; stroke-dasharray: 5 5; opacity: .5; }
+
+@media (max-width: 1080px) {
+  .proc__inner { grid-template-columns: 1fr 1fr; }
+  .proc-box { display: none; }
+}
 .proc__stage { position: relative; height: 76vh; border-radius: 18px; overflow: hidden; background: var(--surface-alt); box-shadow: 0 24px 60px rgba(23,23,26,.14); }
 .proc__stage::after { content: ""; position: absolute; inset: 0; border-radius: 18px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.05); pointer-events: none; }
 .proc__shot {
