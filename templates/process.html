@@ -27,12 +27,16 @@
             </div>
             <div class="proc__text">
               {{#each page.steps}}<div class="proc__cap{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}">
+                <span class="proc__ghost" aria-hidden="true">{{ num }}</span>
                 <span class="proc__num">{{ num }}</span>
                 <h2>{{ title }}</h2>
                 <p>{{ text }}</p>
               </div>
               {{/each}}
-              <div class="proc__dots">{{#each page.steps}}<span class="proc__dot{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}"></span>{{/each}}</div>
+              <div class="proc__meter">
+                <span class="proc__count"><b class="proc__cur">01</b> / <span class="proc__total">10</span></span>
+                <span class="proc__bar"><span class="proc__bar-fill"></span></span>
+              </div>
             </div>
           </div>
         </div>
@@ -65,8 +69,12 @@
 
     var shots = [].slice.call(section.querySelectorAll('.proc__shot'));
     var caps  = [].slice.call(section.querySelectorAll('.proc__cap'));
-    var dots  = [].slice.call(section.querySelectorAll('.proc__dot'));
+    var bar   = section.querySelector('.proc__bar-fill');
+    var curEl = section.querySelector('.proc__cur');
     var n = caps.length, cur = -1, ticking = false;
+    var pad = function (i) { return (i < 10 ? '0' : '') + i; };
+    var totalEl = section.querySelector('.proc__total');
+    if (totalEl) totalEl.textContent = pad(n);
 
     // The section is tall; the pin stays for its whole height. Scroll
     // progress through it (0..1) maps to which step is showing.
@@ -76,13 +84,14 @@
       cur = i;
       for (var a = 0; a < shots.length; a++) shots[a].classList.toggle('on', a === i);
       for (var b = 0; b < caps.length; b++)  caps[b].classList.toggle('on', b === i);
-      for (var c = 0; c < dots.length; c++)  dots[c].classList.toggle('on', c === i);
+      if (curEl) curEl.textContent = pad(i + 1);
     }
     function update() {
       ticking = false;
       var total = section.offsetHeight - window.innerHeight;
       var p = Math.min(1, Math.max(0, -section.getBoundingClientRect().top / total));
       activate(Math.min(n - 1, Math.floor(p * n)));
+      if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
     }
     function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
 

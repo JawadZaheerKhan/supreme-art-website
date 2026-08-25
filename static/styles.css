@@ -334,23 +334,42 @@ a { color: inherit; }
 .proc { position: relative; }
 .proc__pin { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; }
 .proc__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; width: 100%; }
-.proc__stage { position: relative; height: 76vh; border-radius: 18px; overflow: hidden; background: var(--surface-alt); }
+.proc__stage { position: relative; height: 76vh; border-radius: 18px; overflow: hidden; background: var(--surface-alt); box-shadow: 0 24px 60px rgba(23,23,26,.14); }
+.proc__stage::after { content: ""; position: absolute; inset: 0; border-radius: 18px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.05); pointer-events: none; }
 .proc__shot {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  opacity: 0; transform: scale(1.05); transition: opacity .6s ease, transform 6s ease;
+  opacity: 0; transform: scale(1); transition: opacity .8s ease;
 }
-.proc__shot.on { opacity: 1; transform: scale(1); }
+.proc__shot.on { opacity: 1; transform: scale(1.07); transition: opacity .8s ease, transform 9s ease-out; }
+
 .proc__text { position: relative; height: 76vh; }
 .proc__cap {
-  position: absolute; left: 0; right: 0; top: 50%;
-  transform: translateY(-42%); opacity: 0; transition: opacity .5s ease, transform .5s ease;
+  position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%);
+  opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility .45s ease;
 }
-.proc__cap.on { opacity: 1; transform: translateY(-50%); }
-.proc__cap h2 { margin: 8px 0 12px; font-size: clamp(1.7rem, 3vw, 2.6rem); }
+.proc__cap.on { opacity: 1; visibility: visible; }
+.proc__cap > .proc__num, .proc__cap > h2, .proc__cap > p {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .55s ease, transform .7s cubic-bezier(.16, 1, .3, 1);
+}
+.proc__cap.on > .proc__num { opacity: 1; transform: none; transition-delay: .05s; }
+.proc__cap.on > h2 { opacity: 1; transform: none; transition-delay: .13s; }
+.proc__cap.on > p  { opacity: 1; transform: none; transition-delay: .21s; }
+.proc__cap h2 { margin: 10px 0 14px; font-size: clamp(1.7rem, 3vw, 2.7rem); }
 .proc__cap p { margin: 0; color: var(--muted); font-size: 1.15rem; max-width: 34ch; }
-.proc__dots { position: absolute; left: 0; bottom: 4vh; display: flex; gap: 9px; }
-.proc__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background .3s, transform .3s; }
-.proc__dot.on { background: var(--accent); transform: scale(1.3); }
+.proc__ghost {
+  position: absolute; top: -12vh; right: 0; z-index: -1; pointer-events: none;
+  font-family: var(--display); font-weight: 700; line-height: 1;
+  font-size: clamp(7rem, 17vh, 13rem); color: var(--surface-alt);
+  opacity: 0; transition: opacity .6s ease;
+}
+.proc__cap.on .proc__ghost { opacity: 1; }
+
+.proc__meter { position: absolute; left: 0; bottom: 5vh; display: flex; flex-direction: column; gap: 11px; }
+.proc__count { font-family: var(--display); font-weight: 600; color: var(--muted); font-size: .95rem; letter-spacing: .1em; }
+.proc__count b { color: var(--accent); }
+.proc__bar { display: block; width: 190px; height: 4px; border-radius: 2px; background: var(--border); overflow: hidden; }
+.proc__bar-fill { display: block; height: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); transition: transform .12s linear; }
 
 /* mobile / reduced-motion: simple stacked steps */
 .proc-mob { display: none; }
