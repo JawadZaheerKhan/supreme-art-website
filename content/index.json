@@ -2,8 +2,8 @@
   "title": "Supreme Art — Pharmaceutical Packaging & Printing",
   "description": "Supreme Art manufactures pharmaceutical folding cartons — printed, die-cut, folded and glued in-house in Peshawar, Pakistan.",
   "hero": {
-    "line1": "Supreme",
-    "line2": "Art",
+    "title": "Supreme Art",
+    "tagline": "The box your medicine comes in.",
     "slides": [
       {
         "image": "/images/pressroom.jpg",
@@ -23,6 +23,14 @@
       }
     ]
   },
+  "marquee": [
+    "Tablet cartons",
+    "Syrup cartons",
+    "Blister cartons",
+    "Ointment cartons",
+    "Drop & vial cartons",
+    "Sachet boxes"
+  ],
   "about": {
     "eyebrow": "Who we are",
     "heading": "A pharmaceutical carton maker, from prepress to pallet.",
@@ -197,152 +205,5 @@
     "primary_href": "contact.html",
     "secondary_label": "Call the floor",
     "secondary_href": "tel:+923135585784"
-  },
-  "showcase": [
-    {
-      "src": "/images/showcase/01.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/02.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/03.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/04.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/05.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/06.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/07.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/08.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/09.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/10.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/11.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/12.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/13.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/14.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/15.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/16.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/17.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/18.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/19.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/20.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/21.jpg",
-      "w": 495,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/22.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/23.jpg",
-      "w": 420,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/24.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/25.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/26.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/27.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/28.jpg",
-      "w": 746,
-      "h": 560
-    },
-    {
-      "src": "/images/showcase/29.jpg",
-      "w": 746,
-      "h": 560
-    }
-  ]
+  }
 }

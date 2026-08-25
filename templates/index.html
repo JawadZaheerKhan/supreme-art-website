@@ -18,18 +18,16 @@
         </div>
       </div>
       <div class="pk-hero__intro container">
-        <h1 class="hero-word">
-          <span class="hero-word__line"><span>{{ page.hero.line1 }}</span></span>
-          <span class="hero-word__line"><span>{{ page.hero.line2 }}<i class="hero-word__dot" aria-hidden="true"></i></span></span>
-        </h1>
+        <h1>{{ page.hero.title }}</h1>
+        <p>{{ page.hero.tagline }}</p>
       </div>
     </section>
 
-    <!-- PHOTO MARQUEE -->
-    <div class="photo-marquee" aria-label="Life and work at Supreme Art">
-      <div class="photo-marquee__track">
-        {{#each page.showcase}}<div class="photo-marquee__item"><img src="{{ src }}" width="{{ w }}" height="{{ h }}" alt="" loading="lazy" /></div>
-        {{/each}}
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        {{#each page.marquee}}<span>{{ . }}</span><span>•</span>{{/each}}
+        {{#each page.marquee}}<span>{{ . }}</span><span>•</span>{{/each}}
       </div>
     </div>
 
