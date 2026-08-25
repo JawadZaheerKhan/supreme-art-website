@@ -279,46 +279,54 @@ a { color: inherit; }
 .dots span.active { background: var(--accent); transform: scale(1.3); }
 
 /* ---------- Photo marquee ---------- */
+/* Photos ride a rightward conveyor, small at the left edge and growing to
+   full size at the right. script.js sizes and places every item, so the
+   track is a plain positioning context — no flex, no CSS animation. */
 .photo-marquee {
+  --pm-h: 360px;   /* height of a full-size photo */
+  --pm-gap: 22px;  /* space between photos, constant at every size */
   overflow: hidden;
-  padding: 40px 0 56px;
+  padding: 34px 0 46px;
   background: var(--bg);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
+/* default (and no-JS) state: a plain row of photos */
 .photo-marquee__track {
   display: flex;
-  gap: 22px;
+  gap: var(--pm-gap);
+  align-items: flex-end;
   width: max-content;
-  /* strip is duplicated; -50% brings the copy exactly onto the original.
-     from -50% to 0 = the row travels to the right. */
-  animation: photo-scroll 70s linear infinite;
-  will-change: transform;
 }
-.photo-marquee:hover .photo-marquee__track { animation-play-state: paused; }
 .photo-marquee__item {
   flex: 0 0 auto;
-  height: 300px;
+  height: var(--pm-h);
   border-radius: 10px;
   overflow: hidden;
-  background: var(--surface);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .10);
+  background: var(--surface-alt);
 }
 .photo-marquee__item img {
   display: block;
   height: 100%;
   width: auto;
-  object-fit: cover;
 }
-@keyframes photo-scroll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+/* script.js adds this once it takes over placing the photos */
+.photo-marquee--live .photo-marquee__track {
+  display: block;
+  position: relative;
+  height: var(--pm-h);
+  width: auto;
+}
+.photo-marquee--live .photo-marquee__item {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  /* JS writes translateX + scale; growth is upward from the baseline */
+  transform-origin: left bottom;
+  will-change: transform;
+}
 
 @media (max-width: 720px) {
-  .photo-marquee { padding: 24px 0 32px; }
-  .photo-marquee__track { gap: 14px; animation-duration: 55s; }
-  .photo-marquee__item { height: 210px; border-radius: 8px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .photo-marquee__track { animation: none; }
+  .photo-marquee { --pm-h: 260px; --pm-gap: 14px; padding: 22px 0 30px; }
+  .photo-marquee__item { border-radius: 8px; }
 }
 
 /* ---------- Sections ---------- */

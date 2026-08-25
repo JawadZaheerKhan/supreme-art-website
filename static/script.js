@@ -26,6 +26,125 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 })();
 
 /* ============================================================
+   Home photo marquee — a rightward conveyor of photos that are
+   small at the left edge and full size at the right.
+
+   Each item is placed by hand rather than by flex: its scale comes
+   from where it sits across the viewport, and the next item starts
+   right after the *scaled* width of the previous one, so the gap
+   stays constant while the photos grow. Items that run off the right
+   are recycled to the head of the queue, which makes the loop endless
+   without duplicating any markup.
+   ============================================================ */
+(function () {
+  const marquee = document.querySelector('.photo-marquee');
+  if (!marquee) return;
+  const track = marquee.querySelector('.photo-marquee__track');
+  const items = [].slice.call(track.children);
+  if (!items.length) return;
+
+  const MIN = 0.36;   // scale at the left edge
+  const MAX = 1;      // scale at the right edge
+  const CURVE = 0.55; // <1 grows quickly on the left, then eases out
+  const SPEED = 58;   // px per second
+
+  // scale for an item whose left edge sits at x
+  const px = (v) => parseFloat(getComputedStyle(marquee).getPropertyValue(v)) || 0;
+  let widths = [];  // unscaled width of each item
+  let gap = 22;
+  let vw = 0;
+
+  const measure = () => {
+    gap = px('--pm-gap');
+    vw = marquee.clientWidth;
+    // width/height attributes on the <img> give the right box even
+    // before the photo itself has downloaded
+    widths = items.map((el) => el.offsetWidth);
+  };
+
+  const scaleAt = (x, w) => {
+    // two passes: guess from the left edge, refine using the centre
+    let s = MIN;
+    for (let k = 0; k < 2; k++) {
+      let t = (x + (w * s) / 2) / vw;
+      t = t < 0 ? 0 : t > 1 ? 1 : t;
+      s = MIN + (MAX - MIN) * Math.pow(t, CURVE);
+    }
+    return s;
+  };
+
+  // order[0] is the leftmost photo; head is its left edge, in px
+  let order = items.map((_, i) => i);
+  let head = 0;
+  let last = 0;
+  let running = false;
+  let paused = false;
+
+  const layout = () => {
+    // recycle: photo that has left the right-hand end comes back at the front
+    let guard = items.length * 2;
+    while (head > 0 && guard--) {
+      order.unshift(order.pop());
+      head -= widths[order[0]] * MIN + gap;
+    }
+    guard = items.length * 2;
+    while (head + widths[order[0]] * MIN + gap < 0 && guard--) {
+      head += widths[order[0]] * MIN + gap;
+      order.push(order.shift());
+    }
+
+    let x = head;
+    for (let k = 0; k < order.length; k++) {
+      const i = order[k];
+      const w = widths[i];
+      const s = scaleAt(x, w);
+      items[i].style.transform =
+        'translate3d(' + x.toFixed(1) + 'px,0,0) scale(' + s.toFixed(4) + ')';
+      x += w * s + gap;
+    }
+  };
+
+  const frame = (now) => {
+    if (!running) return;
+    const dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
+    last = now;
+    if (!paused) head += SPEED * dt;
+    layout();
+    requestAnimationFrame(frame);
+  };
+
+  measure(); // widths come from the plain flex row, before we take over
+  marquee.classList.add('photo-marquee--live');
+  layout();
+
+  if (reducedMotion) return; // photos stay where they are, no conveyor
+
+  marquee.addEventListener('mouseenter', () => { paused = true; });
+  marquee.addEventListener('mouseleave', () => { paused = false; });
+  window.addEventListener('resize', () => { measure(); layout(); });
+
+  // only animate while the strip is actually on screen
+  new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting && !running) {
+        running = true; last = 0; requestAnimationFrame(frame);
+      } else if (!e.isIntersecting) {
+        running = false;
+      }
+    });
+  }).observe(marquee);
+
+  // photos are lazy so the page stays light; warm them in the background
+  // in queue order so none of them pops in blank as it scrolls on
+  window.addEventListener('load', () => {
+    items.forEach((el, k) => setTimeout(() => {
+      const img = el.querySelector('img');
+      if (img && !img.complete) new Image().src = img.src;
+    }, k * 200));
+  });
+})();
+
+/* ============================================================
    Scroll story: paper → print → die-cut → folded carton
    ============================================================ */
 const scrolly = document.getElementById('story');

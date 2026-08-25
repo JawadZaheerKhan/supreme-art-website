@@ -26,8 +26,7 @@
     <!-- PHOTO MARQUEE -->
     <div class="photo-marquee" aria-label="Life and work at Supreme Art">
       <div class="photo-marquee__track">
-        {{#each page.showcase}}<div class="photo-marquee__item"><img src="{{ . }}" alt="" loading="lazy" /></div>
-        {{/each}}{{#each page.showcase}}<div class="photo-marquee__item" aria-hidden="true"><img src="{{ . }}" alt="" loading="lazy" /></div>
+        {{#each page.showcase}}<div class="photo-marquee__item"><img src="{{ src }}" width="{{ w }}" height="{{ h }}" alt="" loading="lazy" /></div>
         {{/each}}
       </div>
     </div>
