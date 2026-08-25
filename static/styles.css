@@ -8,6 +8,7 @@
   --accent-dark: #14568c;   /* darker blue for hovers */
   --accent-soft: rgba(27,111,179,.12);
   --ink: #1c1c1f;           /* used on white carton artwork */
+  --brand-red: #9d2a2f;     /* the brownish red from the logo */
   --border: #e3e9f0;
   --c: #00a8cc;
   --m: #d6347f;
@@ -643,18 +644,24 @@ a { color: inherit; }
 }
 .main-hero__text { max-width: 620px; }
 
-/* ---------- Packages-style hero: animation band + centered title below ---------- */
-.pk-hero { background: #fff; }
-.pk-hero__stage {
-  display: flex; align-items: center; justify-content: center;
-  min-height: 60vh; padding: 56px 24px 22px;
-  background: radial-gradient(1000px 520px at 50% 42%, #e9f1fb 0%, #f6fafd 55%, #ffffff 100%);
+/* ---------- Hero: the name is on screen from the first frame, with the
+   photo strip riding along the bottom of the same view ---------- */
+.pk-hero {
+  position: relative;
   overflow: hidden;
+  min-height: calc(100vh - 69px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #faf8f6;
 }
-.pk-hero__stage .hero-emblem svg { max-width: 560px; }
-
-/* full-bleed printing-machine slideshow */
-.pk-hero__stage--photos { position: relative; padding: 0; min-height: 64vh; overflow: hidden; background: #0a1c2b; }
+/* the printing-machine slideshow, washed back so it reads as texture
+   behind the wordmark rather than competing with it */
+.pk-hero__bg { position: absolute; inset: 0; z-index: 0; }
+.pk-hero__bg::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(250,248,246,.94) 0%, rgba(250,248,246,.91) 45%, rgba(250,248,246,.97) 100%);
+}
 .hero-slideshow { position: absolute; inset: 0; }
 .hero-slideshow img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
@@ -671,12 +678,14 @@ a { color: inherit; }
   27%  { opacity: 0; }
   100% { opacity: 0; transform: scale(1); }
 }
-/* soft fade into the white title section below */
-.pk-hero__stage--photos::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 80%, #ffffff 100%);
+.pk-hero__intro { position: relative; z-index: 1; text-align: left; padding: 6vh 24px 0; }
+.pk-hero .photo-marquee {
+  position: relative; z-index: 1;
+  background: transparent;
+  /* keep the strip inside the first screen on short windows */
+  --pm-h: min(360px, 38vh);
+  padding: 26px 0 30px;
 }
-.pk-hero__intro { text-align: left; padding: 58px 24px 10px; }
 
 /* Big stacked wordmark. Each line sits in its own clipping box and rises
    into place once the loader clears, so the name arrives first and settles
@@ -686,10 +695,10 @@ a { color: inherit; }
   font-family: "Anton", var(--display);
   font-weight: 400;
   text-transform: uppercase;
-  font-size: clamp(3.2rem, 23vw, 11.5rem);
+  font-size: clamp(3.2rem, min(23vw, 21vh), 11.5rem);
   line-height: .86;
   letter-spacing: -.005em;
-  color: #17171a;
+  color: var(--brand-red);
 }
 .hero-word__line { display: block; overflow: hidden; padding-bottom: .04em; }
 .hero-word__line > span { display: inline-block; will-change: transform; }
@@ -697,7 +706,7 @@ a { color: inherit; }
   display: inline-block;
   width: .17em; height: .17em;
   margin-left: .09em;
-  background: #b3202a;
+  background: var(--brand-red);
   transform-origin: center bottom;
 }
 /* start hidden only when JS can bring them back */
@@ -720,16 +729,14 @@ a { color: inherit; }
 }
 
 @media (max-width: 780px) {
-  .pk-hero__stage { min-height: 46vh; padding: 36px 20px 12px; }
-  .pk-hero__stage .hero-emblem svg { max-width: 340px; }
-  .pk-hero__intro { padding: 34px 24px 6px; }
+  .pk-hero { min-height: calc(100vh - 69px); }
+  .pk-hero__intro { padding: 4vh 24px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .js .hero-word__line > span,
   .js .hero-word__dot,
   .js .photo-marquee { transform: none; opacity: 1; }
 }
-
 /* ---------- Animated printing-process emblem ---------- */
 .hero-emblem { display: flex; justify-content: center; }
 .hero-emblem svg { width: 100%; max-width: 440px; height: auto; animation: emblemFloat 6s ease-in-out infinite; }
