@@ -9,29 +9,29 @@
 {{> header}}
 
   <main>
-    <!-- HERO: name on screen from the first frame, photo strip beneath it -->
+    <!-- HERO -->
     <section class="pk-hero" id="home-hero">
-      <div class="pk-hero__bg" aria-hidden="true">
+      <div class="pk-hero__stage pk-hero__stage--photos" aria-label="Printing machines at work">
         <div class="hero-slideshow">
-          {{#each page.hero.slides}}<img src="{{ image }}" alt="" />
+          {{#each page.hero.slides}}<img src="{{ image }}" alt="{{ alt }}" />
           {{/each}}
         </div>
       </div>
-
       <div class="pk-hero__intro container">
         <h1 class="hero-word">
           <span class="hero-word__line"><span>{{ page.hero.line1 }}</span></span>
           <span class="hero-word__line"><span>{{ page.hero.line2 }}<i class="hero-word__dot" aria-hidden="true"></i></span></span>
         </h1>
       </div>
-
-      <div class="photo-marquee" aria-label="Life and work at Supreme Art">
-        <div class="photo-marquee__track">
-          {{#each page.showcase}}<div class="photo-marquee__item"><img src="{{ src }}" width="{{ w }}" height="{{ h }}" alt="" loading="lazy" /></div>
-          {{/each}}
-        </div>
-      </div>
     </section>
+
+    <!-- PHOTO MARQUEE -->
+    <div class="photo-marquee" aria-label="Life and work at Supreme Art">
+      <div class="photo-marquee__track">
+        {{#each page.showcase}}<div class="photo-marquee__item"><img src="{{ src }}" width="{{ w }}" height="{{ h }}" alt="" loading="lazy" /></div>
+        {{/each}}
+      </div>
+    </div>
 
     <!-- ABOUT TEASER -->
     <section class="section">
