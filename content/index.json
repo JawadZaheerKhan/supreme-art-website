@@ -23,14 +23,6 @@
       }
     ]
   },
-  "marquee": [
-    "Tablet cartons",
-    "Syrup cartons",
-    "Blister cartons",
-    "Ointment cartons",
-    "Drop & vial cartons",
-    "Sachet boxes"
-  ],
   "about": {
     "eyebrow": "Who we are",
     "heading": "A pharmaceutical carton maker, from prepress to pallet.",
@@ -205,5 +197,36 @@
     "primary_href": "contact.html",
     "secondary_label": "Call the floor",
     "secondary_href": "tel:+923135585784"
-  }
+  },
+  "showcase": [
+    "/images/showcase/01.jpg",
+    "/images/showcase/02.jpg",
+    "/images/showcase/03.jpg",
+    "/images/showcase/04.jpg",
+    "/images/showcase/05.jpg",
+    "/images/showcase/06.jpg",
+    "/images/showcase/07.jpg",
+    "/images/showcase/08.jpg",
+    "/images/showcase/09.jpg",
+    "/images/showcase/10.jpg",
+    "/images/showcase/11.jpg",
+    "/images/showcase/12.jpg",
+    "/images/showcase/13.jpg",
+    "/images/showcase/14.jpg",
+    "/images/showcase/15.jpg",
+    "/images/showcase/16.jpg",
+    "/images/showcase/17.jpg",
+    "/images/showcase/18.jpg",
+    "/images/showcase/19.jpg",
+    "/images/showcase/20.jpg",
+    "/images/showcase/21.jpg",
+    "/images/showcase/22.jpg",
+    "/images/showcase/23.jpg",
+    "/images/showcase/24.jpg",
+    "/images/showcase/25.jpg",
+    "/images/showcase/26.jpg",
+    "/images/showcase/27.jpg",
+    "/images/showcase/28.jpg",
+    "/images/showcase/29.jpg"
+  ]
 }
