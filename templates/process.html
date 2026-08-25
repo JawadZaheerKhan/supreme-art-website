@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+{{> gtm-body}}
+{{> loader}}
+{{> header}}
+
+  <main>
+{{> banner}}
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow reveal">Our process</p>
+        <p class="proc-intro reveal">{{ page.intro }}</p>
+
+        <div class="scrolly" id="proc">
+          <div class="scrolly__media" aria-hidden="true">
+            {{#each page.steps}}<img class="scrolly__img{{#if @index}}{{else}} is-active{{/if}}" data-step="{{ @index }}" src="{{ image }}" alt="" loading="lazy" />
+            {{/each}}
+          </div>
+          <div class="scrolly__steps">
+            {{#each page.steps}}<div class="scrolly__step{{#if @index}}{{else}} is-active{{/if}}" data-step="{{ @index }}">
+              <div class="scrolly__mobimg"><img src="{{ image }}" alt="{{ title }}" loading="lazy" /></div>
+              <span class="scrolly__num">{{ num }}</span>
+              <h2>{{ title }}</h2>
+              <p>{{ text }}</p>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+{{> cta}}
+  </main>
+
+{{> footer}}
+
+  <script src="/script.js"></script>
+  <script>
+  (function () {
+    var section = document.getElementById('proc');
+    if (!section) return;
+    var steps = [].slice.call(section.querySelectorAll('.scrolly__step'));
+    var imgs = [].slice.call(section.querySelectorAll('.scrolly__img'));
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cur = -1, ticking = false;
+    // Activate whichever step sits closest to the middle of the viewport.
+    function update() {
+      ticking = false;
+      var mid = window.innerHeight / 2, best = 0, bestDist = Infinity;
+      for (var i = 0; i < steps.length; i++) {
+        var r = steps[i].getBoundingClientRect();
+        var dist = Math.abs(r.top + r.height / 2 - mid);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+      }
+      if (best === cur) return;
+      cur = best;
+      for (var k = 0; k < imgs.length; k++) imgs[k].classList.toggle('is-active', k === best);
+      for (var j = 0; j < steps.length; j++) steps[j].classList.toggle('is-active', j === best);
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+  </script>
+</body>
+</html>
