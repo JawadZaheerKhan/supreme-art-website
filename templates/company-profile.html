@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+{{> gtm-body}}
+{{> loader}}
+{{> header}}
+
+  <main>
+{{> banner}}
+
+    <section class="section" id="company-profile">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.leadership.eyebrow }}</p>
+        <h2 class="reveal">{{ page.leadership.heading }}</h2>
+        <div class="team">
+          {{#each page.leadership.people}}<article class="person reveal">
+            <div class="person__photo"><img src="{{ image }}" alt="{{ name }}" loading="lazy" /></div>
+            <h3 class="person__name">{{ name }}</h3>
+            <p class="person__role">{{ role }}</p>
+          </article>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+{{> cta}}
+  </main>
+
+{{> footer}}
+
+  <script src="/script.js"></script>
+</body>
+</html>
