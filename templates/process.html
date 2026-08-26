@@ -41,35 +41,7 @@
 
             <!-- folding carton, assembles as you scroll (aligned to the steps) -->
             <div class="proc-box" aria-hidden="true">
-              <div class="proc-box__scene">
-                <div class="proc-box__rot">
-                  <div class="carton">
-                    <div class="panel panel--front">
-                      <div class="art art--front">
-                        <img src="/logo.png" alt="" class="art__logo" />
-                        <div class="art__band"></div>
-                        <div class="art__name">Paracetamol</div>
-                        <div class="art__dose">500&nbsp;mg &middot; 20 tablets</div>
-                        <div class="art__lines"><i></i><i></i><i></i></div>
-                      </div>
-                    </div>
-                    <div class="panel panel--left"><div class="art art--side"><div class="art__band art__band--v"></div><span class="art__vtext">Paracetamol 500&nbsp;mg</span></div></div>
-                    <div class="panel panel--right">
-                      <div class="art art--side"><div class="art__band art__band--v"></div><span class="art__vtext">20 tablets</span></div>
-                      <div class="panel panel--back"><div class="art art--back">
-                        <div class="art__lines art__lines--long"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                        <div class="art__barcode"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                      </div></div>
-                    </div>
-                    <div class="panel panel--top"><div class="art art--flap"><span>SUPREME ART</span></div></div>
-                    <div class="panel panel--bottom"><div class="art art--flap"><span>BATCH &middot; EXP</span></div></div>
-                  </div>
-                  <svg class="proc-box__cut" viewBox="0 0 360 410" aria-hidden="true">
-                    <path class="cutline" pathLength="1" vector-effect="non-scaling-stroke" d="M85,2 H275 V60 H358 V350 H275 V408 H85 V350 H2 V60 H85 Z" />
-                    <path class="creaseline" vector-effect="non-scaling-stroke" d="M85,60 V350 M275,60 V350 M85,60 H275 M85,350 H275" />
-                  </svg>
-                </div>
-              </div>
+{{> carton-scene}}
             </div>
           </div>
         </div>
@@ -77,6 +49,10 @@
 
       <!-- Mobile / reduced-motion: simple stacked steps -->
       <div class="proc-mob container">
+        <!-- same carton, folding as you scroll the steps -->
+        <div class="proc-mob__box proc-box" aria-hidden="true">
+{{> carton-scene}}
+        </div>
         {{#each page.steps}}<article class="proc-mob__step reveal">
           <div class="proc-mob__img"><img src="{{ image }}" alt="{{ title }}" loading="lazy" /></div>
           <span class="proc__num">{{ num }}</span>
@@ -144,6 +120,47 @@
     setHeight();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', function () { setHeight(); update(); });
+    update();
+  })();
+
+  // phones: the stacked steps get the same carton, pinned at the top and
+  // folding as you scroll down the list
+  (function () {
+    var wrap  = document.querySelector('.proc-mob');
+    var scene = wrap && wrap.querySelector('.proc-mob__box .proc-box__scene');
+    if (!scene) return;
+
+    var set = function (k, v) { scene.style.setProperty(k, v); };
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // show the finished carton rather than animating it
+      set('--intro', 1); set('--print', 1); set('--cut', 0);
+      set('--foldA', 1); set('--foldB', 1); set('--view', 1);
+      return;
+    }
+
+    var mq = window.matchMedia('(max-width: 860px)');
+    var norm = function (v, a, b) { return Math.min(1, Math.max(0, (v - a) / (b - a))); };
+    var ease = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      if (!mq.matches) return;
+      var r = wrap.getBoundingClientRect();
+      var total = r.height - window.innerHeight;
+      if (total <= 0) return;
+      var p = Math.min(1, Math.max(0, -r.top / total));
+      set('--intro', norm(p, 0, 0.05).toFixed(3));
+      set('--print', norm(p, 0.36, 0.50).toFixed(3));
+      set('--cut',   norm(p, 0.58, 0.70).toFixed(3));
+      set('--foldA', ease(norm(p, 0.70, 0.82)).toFixed(3));
+      set('--foldB', ease(norm(p, 0.78, 0.90)).toFixed(3));
+      set('--view',  ease(norm(p, 0.70, 1.0)).toFixed(3));
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
     update();
   })();
   </script>
