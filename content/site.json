@@ -16,6 +16,7 @@
         ]
       },
       { "label": "Products", "href": "products.html", "slug": "products", "dropdown": [] },
+      { "label": "Process", "href": "process.html", "slug": "process", "dropdown": [] },
       { "label": "Quality", "href": "quality.html", "slug": "quality", "dropdown": [] },
       { "label": "Careers", "href": "careers.html", "slug": "careers", "dropdown": [] }
     ],
