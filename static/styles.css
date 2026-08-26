@@ -334,9 +334,10 @@ a { color: inherit; }
   transition: transform .2s, box-shadow .2s;
 }
 .person:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(23,23,26,.08); }
-/* photos run at their own proportions — never cropped or zoomed */
-.person__photo { background: var(--surface-alt); }
-.person__photo img { width: 100%; height: auto; display: block; }
+/* both photos share one frame so the two cards always line up; each
+   person's `focus` decides which part of their photo the frame keeps */
+.person__photo { aspect-ratio: 1 / 1; background: var(--surface-alt); overflow: hidden; }
+.person__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .person__name { margin: 13px 15px 1px; font-size: 1rem; }
 .person__role { margin: 0 15px 14px; color: var(--accent); font-weight: 600; font-size: .8rem; }
 /* phones: keep both side by side so the photos stay small */
