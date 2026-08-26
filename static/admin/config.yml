@@ -71,12 +71,17 @@ collections:
             hint: Used in the footer, on the contact page and by the Call buttons.
             fields:
               - { name: email, label: Email address, widget: string }
-              - { name: phone, label: Phone (as displayed), widget: string }
+              - { name: phone, label: Primary phone (as displayed), widget: string }
               - name: phone_link
-                label: Phone (dialling format)
+                label: Primary phone (dialling format)
                 widget: string
                 hint: What Call buttons actually dial — international format, e.g. +923135585784
               - { name: address, label: Address (short), widget: string }
+              - { name: phone_secondary, label: Additional phone (as displayed), widget: string }
+              - name: phone_secondary_link
+                label: Additional phone (dialling format)
+                widget: string
+                hint: International format, e.g. +923135585784
               - { name: address_long, label: Address (full), widget: string }
           - name: capabilities
             label: Capability cards

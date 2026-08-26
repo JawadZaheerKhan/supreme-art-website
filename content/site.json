@@ -23,8 +23,10 @@
   },
   "contact": {
     "email": "info@supremeart.pk",
-    "phone": "0313 5585784",
-    "phone_link": "+923135585784",
+    "phone": "0334 9644597",
+    "phone_link": "+923349644597",
+    "phone_secondary": "0313 5585784",
+    "phone_secondary_link": "+923135585784",
     "address": "Industrial Estate, Hayatabad, Peshawar",
     "address_long": "Industrial Estate, Hayatabad, Peshawar, Pakistan"
   },
