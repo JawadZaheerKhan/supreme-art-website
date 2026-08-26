@@ -8,20 +8,27 @@ window.addEventListener('load', () => {
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Mobile nav — hamburger toggle
+// Menu panel — the header button opens the full-width nav
 (function () {
   const header = document.querySelector('.site-header');
-  const toggle = header && header.querySelector('.nav-toggle');
-  if (!toggle) return;
-  toggle.addEventListener('click', () => {
-    const open = header.classList.toggle('nav-open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  header.querySelectorAll('.nav-links a').forEach((a) => {
-    a.addEventListener('click', () => {
-      header.classList.remove('nav-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
+  const btn = header && header.querySelector('.menu-btn');
+  if (!btn) return;
+  const panel = header.querySelector('.menu-panel');
+
+  const setOpen = (open) => {
+    header.classList.toggle('menu-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    // stop the page scrolling behind the open panel
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  const isOpen = () => header.classList.contains('menu-open');
+
+  btn.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!isOpen()); });
+  // a link takes you somewhere, so close on the way out
+  panel.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen()) setOpen(false); });
+  document.addEventListener('click', (e) => {
+    if (isOpen() && !header.contains(e.target)) setOpen(false);
   });
 })();
 

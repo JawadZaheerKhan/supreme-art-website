@@ -1,17 +1,25 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="index.html"><img src="{{ site.logo }}" alt="Supreme Art" class="brand__logo" /></a>
-      <nav class="nav-links">
-        {{#each nav}}{{#if dropdown}}<span class="has-dropdown">
-          <a href="{{ href }}"{{#if current}} class="current"{{/if}}>{{ label }}</a>
-          <span class="dropdown">
-            {{#each dropdown}}<a href="{{ href }}">{{ label }}</a>
-            {{/each}}
-          </span>
-        </span>
-        {{else}}<a href="{{ href }}"{{#if current}} class="current"{{/if}}>{{ label }}</a>
-        {{/if}}{{/each}}<a href="{{ site.nav.cta.href }}" class="nav-cta">{{ site.nav.cta.label }}</a>
-      </nav>
-      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button class="menu-btn" type="button" aria-controls="mainmenu" aria-expanded="false">
+        <span class="menu-btn__label">Menu</span>
+        <span class="menu-btn__circle" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+
+    <div class="menu-panel" id="mainmenu">
+      <div class="container menu-panel__inner">
+        {{#each menu}}<nav class="menu-col">
+          {{#each links}}<a href="{{ href }}"{{#if current}} class="current"{{/if}}>{{ label }}</a>
+          {{/each}}
+        </nav>
+        {{/each}}<div class="menu-col menu-col--meta">
+          <a class="menu-quote" href="{{ site.nav.cta.href }}">{{ site.nav.cta.label }}</a>
+          <a class="menu-meta__line" href="tel:{{ site.contact.phone_link }}">{{ site.contact.phone }}</a>
+          <a class="menu-meta__line" href="tel:{{ site.contact.phone_secondary_link }}">{{ site.contact.phone_secondary }}</a>
+          <a class="menu-meta__line" href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
+          <p class="menu-meta__line menu-meta__addr">{{ site.contact.address }}</p>
+        </div>
+      </div>
     </div>
   </header>
