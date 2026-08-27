@@ -245,15 +245,13 @@ for (const file of pages) {
   const page = content[slug];
   if (!page) throw new Error(`templates/${file} has no matching content/${slug}.json`);
 
-  // Mark the entry for the page being rendered, so the header partial can
+  // Mark the nav entry for the page being rendered, so the header partial can
   // highlight it without the template needing an equality test.
-  const menu = site.nav.menu.map((col) => ({
-    links: col.links.map((link) => ({ ...link, current: link.slug === slug })),
-  }));
+  const nav = site.nav.links.map((link) => ({ ...link, current: link.slug === slug }));
 
   const where = `templates/${file}`;
   const tree = parse(readFileSync(join(TEMPLATES, file), 'utf8'), where);
-  const html = render(tree.body, [{ value: { site, page, menu, slug } }], { where, partials: new Map() });
+  const html = render(tree.body, [{ value: { site, page, nav, slug } }], { where, partials: new Map() });
   writeFileSync(join(DIST, file), html);
 }
 

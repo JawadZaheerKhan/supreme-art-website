@@ -3,109 +3,24 @@
   "favicon": "/favicon.png",
   "nav": {
     "links": [
-      {
-        "label": "Home",
-        "href": "index.html",
-        "slug": "index",
-        "dropdown": []
-      },
+      { "label": "Home", "href": "index.html", "slug": "index", "dropdown": [] },
       {
         "label": "About us",
         "href": "about.html",
         "slug": "about",
         "dropdown": [
-          {
-            "label": "Company profile",
-            "href": "company-profile.html"
-          },
-          {
-            "label": "Company overview",
-            "href": "about.html"
-          },
-          {
-            "label": "Quality & standards",
-            "href": "quality.html"
-          },
-          {
-            "label": "Careers",
-            "href": "careers.html"
-          }
+          { "label": "Company profile", "href": "company-profile.html" },
+          { "label": "Company overview", "href": "about.html" },
+          { "label": "Quality & standards", "href": "quality.html" },
+          { "label": "Careers", "href": "careers.html" }
         ]
       },
-      {
-        "label": "Products",
-        "href": "products.html",
-        "slug": "products",
-        "dropdown": []
-      },
-      {
-        "label": "Process",
-        "href": "process.html",
-        "slug": "process",
-        "dropdown": []
-      },
-      {
-        "label": "Quality",
-        "href": "quality.html",
-        "slug": "quality",
-        "dropdown": []
-      },
-      {
-        "label": "Careers",
-        "href": "careers.html",
-        "slug": "careers",
-        "dropdown": []
-      }
+      { "label": "Products", "href": "products.html", "slug": "products", "dropdown": [] },
+      { "label": "Process", "href": "process.html", "slug": "process", "dropdown": [] },
+      { "label": "Quality", "href": "quality.html", "slug": "quality", "dropdown": [] },
+      { "label": "Careers", "href": "careers.html", "slug": "careers", "dropdown": [] }
     ],
-    "cta": {
-      "label": "Get a quote",
-      "href": "contact.html"
-    },
-    "menu": [
-      {
-        "links": [
-          {
-            "label": "Home",
-            "href": "index.html",
-            "slug": "index"
-          },
-          {
-            "label": "Products",
-            "href": "products.html",
-            "slug": "products"
-          },
-          {
-            "label": "Process",
-            "href": "process.html",
-            "slug": "process"
-          }
-        ]
-      },
-      {
-        "links": [
-          {
-            "label": "About us",
-            "href": "about.html",
-            "slug": "about"
-          },
-          {
-            "label": "Company profile",
-            "href": "company-profile.html",
-            "slug": "company-profile"
-          },
-          {
-            "label": "Quality",
-            "href": "quality.html",
-            "slug": "quality"
-          },
-          {
-            "label": "Careers",
-            "href": "careers.html",
-            "slug": "careers"
-          }
-        ]
-      }
-    ]
+    "cta": { "label": "Get a quote", "href": "contact.html" }
   },
   "contact": {
     "email": "info@supremeart.pk",
@@ -117,69 +32,26 @@
     "address_long": "Industrial Estate, Hayatabad, Peshawar, Pakistan"
   },
   "capabilities": [
-    {
-      "title": "Offset Printing",
-      "text": "Heidelberg presses for sharp, colour-accurate runs."
-    },
-    {
-      "title": "Die-Cutting & Creasing",
-      "text": "Precision dies for clean cuts and crisp folds."
-    },
-    {
-      "title": "Folding & Gluing",
-      "text": "High-speed folder-gluers, flat-packed and machine-ready."
-    },
-    {
-      "title": "Prepress & Proofing",
-      "text": "Artwork checks, dielines and physical proofs."
-    }
+    { "title": "Offset Printing", "text": "Heidelberg presses for sharp, colour-accurate runs." },
+    { "title": "Die-Cutting & Creasing", "text": "Precision dies for clean cuts and crisp folds." },
+    { "title": "Folding & Gluing", "text": "High-speed folder-gluers, flat-packed and machine-ready." },
+    { "title": "Prepress & Proofing", "text": "Artwork checks, dielines and physical proofs." }
   ],
   "gallery": [
-    {
-      "alt": "Pressroom",
-      "image": "",
-      "wide": true
-    },
-    {
-      "alt": "Die-cutting",
-      "image": "",
-      "wide": false
-    },
-    {
-      "alt": "Folder-gluer",
-      "image": "",
-      "wide": false
-    },
-    {
-      "alt": "Finished cartons",
-      "image": "",
-      "wide": true
-    }
+    { "alt": "Pressroom", "image": "", "wide": true },
+    { "alt": "Die-cutting", "image": "", "wide": false },
+    { "alt": "Folder-gluer", "image": "", "wide": false },
+    { "alt": "Finished cartons", "image": "", "wide": true }
   ],
   "footer": {
     "blurb": "Pharmaceutical folding cartons — printed, die-cut, folded and glued under one roof in Peshawar.",
     "company_heading": "Company",
     "company_links": [
-      {
-        "label": "About us",
-        "href": "about.html"
-      },
-      {
-        "label": "Products",
-        "href": "products.html"
-      },
-      {
-        "label": "Quality",
-        "href": "quality.html"
-      },
-      {
-        "label": "Careers",
-        "href": "careers.html"
-      },
-      {
-        "label": "Contact",
-        "href": "contact.html"
-      }
+      { "label": "About us", "href": "about.html" },
+      { "label": "Products", "href": "products.html" },
+      { "label": "Quality", "href": "quality.html" },
+      { "label": "Careers", "href": "careers.html" },
+      { "label": "Contact", "href": "contact.html" }
     ],
     "contact_heading": "Contact",
     "copyright": "Supreme Art (Pvt) Ltd. All rights reserved.",
