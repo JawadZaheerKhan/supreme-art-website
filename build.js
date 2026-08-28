@@ -251,7 +251,7 @@ for (const file of pages) {
 
   const where = `templates/${file}`;
   const tree = parse(readFileSync(join(TEMPLATES, file), 'utf8'), where);
-  const html = render(tree.body, [{ value: { site, page, nav, slug } }], { where, partials: new Map() });
+  const html = render(tree.body, [{ value: { site, page, nav, content, slug } }], { where, partials: new Map() });
   writeFileSync(join(DIST, file), html);
 }
 

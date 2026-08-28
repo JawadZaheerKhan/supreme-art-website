@@ -69,6 +69,28 @@
       </div>
     </section>
 
+    <!-- PROCESS STRIP: a quiet preview; the full experience lives on its own page -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.process.eyebrow }}</p>
+        <div class="proc-strip__head reveal">
+          <h2>{{ page.process.heading }}</h2>
+          <p class="lead">{{ page.process.lead }}</p>
+          <a class="proc-strip__all" href="{{ page.process.button_href }}">{{ page.process.button_label }} &rarr;</a>
+        </div>
+      </div>
+      <div class="proc-strip reveal">
+        <div class="proc-strip__track">
+          {{#each content.process.steps}}<a class="proc-step" href="process.html">
+            <span class="proc-step__img"><img src="{{ image }}" alt="" loading="lazy" /></span>
+            <span class="proc-step__num">{{ num }}</span>
+            <span class="proc-step__title">{{ title }}</span>
+          </a>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
     <!-- CAPABILITIES -->
     <section class="section">
       <div class="container">

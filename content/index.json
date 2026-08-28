@@ -80,6 +80,13 @@
     "button_label": "See all products",
     "button_href": "products.html"
   },
+  "process": {
+    "eyebrow": "How it's made",
+    "heading": "From artwork to flat-packed carton.",
+    "lead": "Ten stages, all under one roof in Peshawar.",
+    "button_label": "See the full process",
+    "button_href": "process.html"
+  },
   "capabilities": {
     "eyebrow": "Our capabilities",
     "heading": "One factory. The whole carton."
