@@ -49,31 +49,43 @@
   },
   "products": {
     "eyebrow": "What we make",
-    "heading": "Folding cartons for every dosage form.",
-    "lead": "From tablets to syrups, we produce the full range of pharmaceutical secondary packaging.",
+    "heading": "Packaging for pharmaceutical and food products.",
+    "lead": "We produce printed cartons, leaflets and labels for medicines and food products.",
     "items": [
       {
-        "title": "Tablet & capsule cartons",
-        "text": "Blister and strip packs, tamper-evident closures.",
-        "alt": "Tablet cartons",
+        "title": "Tablet packaging",
+        "text": "Cartons for tablet blister and strip packs.",
+        "alt": "Tablet packaging",
         "image": ""
       },
       {
-        "title": "Syrup & liquid cartons",
-        "text": "Bottle cartons with partitions and inserts.",
-        "alt": "Syrup cartons",
+        "title": "Capsule packaging",
+        "text": "Cartons for capsule blister, strip and bottle formats.",
+        "alt": "Capsule packaging",
         "image": ""
       },
       {
-        "title": "Vial & ampoule packs",
-        "text": "Precision cartons with die-cut fitments.",
-        "alt": "Vial & ampoule",
+        "title": "Syrup packaging",
+        "text": "Protective bottle cartons with optional inserts.",
+        "alt": "Syrup packaging",
         "image": ""
       },
       {
         "title": "Leaflets & inserts",
-        "text": "Folded package inserts and outer sleeves.",
-        "alt": "Leaflets & inserts",
+        "text": "Printed and folded product-information inserts.",
+        "alt": "Pharmaceutical leaflets and inserts",
+        "image": ""
+      },
+      {
+        "title": "Labels",
+        "text": "Colour-accurate labels for bottles and products.",
+        "alt": "Printed product labels",
+        "image": ""
+      },
+      {
+        "title": "Food packaging",
+        "text": "Printed folding cartons for food products.",
+        "alt": "Printed food packaging",
         "image": ""
       }
     ],
