@@ -1286,3 +1286,6 @@ a { color: inherit; }
     background: rgba(255,255,255,.96);
   }
 }
+/* Final homepage wordmark and strip adjustment */
+.home-page .marquee { display: none; }
+.home-page .editorial-hero h1 { color: #b3202a; }
