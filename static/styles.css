@@ -1235,3 +1235,20 @@ a { color: inherit; }
     padding-top: 12px;
   }
 }
+/* Logo-inspired homepage wordmark */
+.home-page .editorial-hero h1 {
+  font-family: "Michroma", "Eurostile Extended", "Bank Gothic", sans-serif;
+  font-size: clamp(2.35rem, 4.75vw, 5.65rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: .055em;
+  text-transform: none;
+  white-space: normal;
+}
+@media (max-width: 780px) {
+  .home-page .editorial-hero h1 {
+    font-size: clamp(2rem, 9.2vw, 3.4rem);
+    line-height: 1.16;
+    letter-spacing: .035em;
+  }
+}
