@@ -29,24 +29,39 @@
     }
   },
   "process": {
-    "eyebrow": "Our process",
+    "eyebrow": "Quality assurance",
     "heading": "Quality checks at every stage.",
+    "intro": "From incoming paperboard to the cartons released for delivery, our QC team records and verifies the details that protect every product, print run and customer approval.",
     "steps": [
       {
-        "title": "Incoming board",
-        "text": "Every batch of pharma-grade board is checked for grammage, thickness and consistency before it runs."
+        "title": "Incoming board inspection",
+        "text": "Before printing begins, every paperboard batch is checked for grammage, thickness, surface condition and overall quality.",
+        "image": ""
       },
       {
-        "title": "Colour control on press",
-        "text": "Press-side colour management keeps branding accurate and consistent across the entire run."
+        "title": "Shade card approval",
+        "text": "A reference shade card is prepared for every product and approved before the final printing run is released.",
+        "image": ""
       },
       {
-        "title": "Dimensional checks",
-        "text": "Cartons are measured after die-cutting to confirm cuts and creases hold to the millimetre."
+        "title": "Printing quality control",
+        "text": "During printing, our QC team uses a colour spectrophotometer to verify colour shades while also checking registration and text content against the approved proof.",
+        "image": ""
       },
       {
-        "title": "Final inspection",
-        "text": "A final QA pass before dispatch, with batch records kept for full traceability."
+        "title": "Coating inspection",
+        "text": "Applied finishes, including UV and spot UV coatings, are checked for coverage, alignment, consistency and the required appearance.",
+        "image": ""
+      },
+      {
+        "title": "Conversion checks",
+        "text": "After die-cutting, breaking and folder gluing, cartons are checked for dimensions, crease quality, clean edges and secure pasting.",
+        "image": ""
+      },
+      {
+        "title": "Final inspection & release",
+        "text": "Finished cartons receive a final quality inspection. Approved packs are identified with QC status stickers before they are cleared for delivery.",
+        "image": ""
       }
     ]
   },

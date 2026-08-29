@@ -501,6 +501,33 @@ a { color: inherit; }
 .proc-static .proc { display: none; }
 .proc-static .proc-mob { display: block; }
 
+/* Quality page uses the process scroller with future-photo placeholders. */
+.quality-proc .proc__inner { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
+.proc__shot.proc__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+  background: linear-gradient(145deg, var(--surface-alt), var(--surface));
+}
+.proc__placeholder span,
+.proc-mob__placeholder span { font-weight: 600; line-height: 1.55; }
+.proc-mob__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+  background: linear-gradient(145deg, var(--surface-alt), var(--surface));
+}
+
+
+
 /* ---------- Stats ---------- */
 .stat-row { display: flex; gap: 48px; flex-wrap: wrap; }
 .stat b { font-family: var(--display); font-size: 2.4rem; display: block; line-height: 1; color: var(--accent); }

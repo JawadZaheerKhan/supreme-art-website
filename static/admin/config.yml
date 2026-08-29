@@ -416,14 +416,16 @@ collections:
             fields:
               - { name: eyebrow, label: Small label above heading, widget: string }
               - { name: heading, label: Heading, widget: string }
+              - { name: intro, label: Introduction, widget: text }
               - name: steps
-                label: Process steps
+                label: Quality checkpoints
                 widget: list
                 summary: '{{fields.title}}'
                 hint: Numbered automatically in the order listed here.
                 fields:
                   - { name: title, label: Title, widget: string }
                   - { name: text, label: Description, widget: text }
+                  - { name: image, label: Photo, widget: image, required: false, hint: Upload this checkpoint photo when it is ready. }
           - name: cta
             label: 'Section — Closing call to action'
             widget: object

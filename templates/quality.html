@@ -29,13 +29,46 @@
     </section>
 
     <section class="section band">
-      <div class="container narrow">
+      <div class="container">
         <p class="eyebrow reveal">{{ page.process.eyebrow }}</p>
-        <h2 class="reveal">{{ page.process.heading }}</h2>
-        <div class="steps">
-          {{#each page.process.steps}}<div class="step reveal"><div class="step__n">{{ @n }}</div><div><h3>{{ title }}</h3><p>{{ text }}</p></div></div>
-          {{/each}}
+        <h2 class="reveal" style="margin-bottom:12px">{{ page.process.heading }}</h2>
+        <p class="proc-intro reveal">{{ page.process.intro }}</p>
+      </div>
+
+      <!-- Desktop: quality checkpoints crossfade as the page scrolls -->
+      <div class="proc quality-proc" id="quality-proc" aria-hidden="true">
+        <div class="proc__pin">
+          <div class="proc__inner container">
+            <div class="proc__stage">
+              {{#each page.process.steps}}{{#if image}}<img class="proc__shot{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}" src="{{ image }}" alt="" loading="lazy" />{{else}}<div class="proc__shot proc__placeholder{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}"><span>Photo space<br />{{ title }}</span></div>{{/if}}
+              {{/each}}
+            </div>
+            <div class="proc__text">
+              {{#each page.process.steps}}<div class="proc__cap{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}">
+                <span class="proc__ghost" aria-hidden="true">{{ @num }}</span>
+                <span class="proc__num">{{ @num }}</span>
+                <h2>{{ title }}</h2>
+                <p>{{ text }}</p>
+              </div>
+              {{/each}}
+              <div class="proc__meter">
+                <span class="proc__count"><b class="proc__cur">01</b> / <span class="proc__total">06</span></span>
+                <span class="proc__bar"><span class="proc__bar-fill"></span></span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <!-- Mobile / reduced-motion: stacked quality checkpoints -->
+      <div class="proc-mob container">
+        {{#each page.process.steps}}<article class="proc-mob__step reveal">
+          <div class="proc-mob__img">{{#if image}}<img src="{{ image }}" alt="{{ title }}" loading="lazy" />{{else}}<div class="proc-mob__placeholder"><span>Photo space<br />{{ title }}</span></div>{{/if}}</div>
+          <span class="proc__num">{{ @num }}</span>
+          <h2>{{ title }}</h2>
+          <p>{{ text }}</p>
+        </article>
+        {{/each}}
       </div>
     </section>
 
@@ -45,5 +78,46 @@
 {{> footer}}
 
   <script src="/script.js"></script>
+  <script>
+  (function () {
+    var section = document.getElementById('quality-proc');
+    if (!section) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('proc-static');
+      return;
+    }
+    var shots = [].slice.call(section.querySelectorAll('.proc__shot'));
+    var caps = [].slice.call(section.querySelectorAll('.proc__cap'));
+    var bar = section.querySelector('.proc__bar-fill');
+    var curEl = section.querySelector('.proc__cur');
+    var totalEl = section.querySelector('.proc__total');
+    var n = caps.length, cur = -1, ticking = false;
+    var pad = function (i) { return (i < 10 ? '0' : '') + i; };
+    if (totalEl) totalEl.textContent = pad(n);
+
+    function setHeight() { section.style.height = (n * 40 + 20) + 'vh'; }
+    function activate(i) {
+      if (i === cur) return;
+      cur = i;
+      for (var a = 0; a < shots.length; a++) shots[a].classList.toggle('on', a === i);
+      for (var b = 0; b < caps.length; b++) caps[b].classList.toggle('on', b === i);
+      if (curEl) curEl.textContent = pad(i + 1);
+    }
+    function update() {
+      ticking = false;
+      var total = section.offsetHeight - window.innerHeight;
+      var p = Math.min(1, Math.max(0, -section.getBoundingClientRect().top / total));
+      activate(Math.min(n - 1, Math.floor(p * n)));
+      if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+    setHeight();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () { setHeight(); update(); });
+    update();
+  })();
+  </script>
 </body>
 </html>
