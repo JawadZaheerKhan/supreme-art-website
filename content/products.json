@@ -7,8 +7,8 @@
     "heading": "Packaging for pharmaceutical and food products.",
     "lead": "From medicine cartons to food packs, leaflets and labels, we print and finish every product to your artwork, dimensions and required specification.",
     "items": [
-      { "title": "Tablet packaging", "text": "Printed cartons made to fit tablet blister and strip packs, with accurate dimensions and clear product information.", "alt": "Tablet packaging", "image": "" },
-      { "title": "Capsule packaging", "text": "Precisely produced cartons for capsule blister, strip and bottle formats in a range of pack sizes.", "alt": "Capsule packaging", "image": "" },
+      { "title": "Tablet packaging", "text": "Printed cartons made to fit tablet blister and strip packs, with accurate dimensions and clear product information.", "alt": "Tablet packaging", "image": "/images/products/tablet-packaging.png" },
+      { "title": "Capsule packaging", "text": "Precisely produced cartons for capsule blister, strip and bottle formats in a range of pack sizes.", "alt": "Capsule packaging", "image": "/images/products/capsule-packaging.png" },
       { "title": "Syrup packaging", "text": "Protective bottle cartons for syrups and liquid medicines, with partitions or inserts where required.", "alt": "Syrup packaging", "image": "" },
       { "title": "Leaflets & inserts", "text": "Printed and folded information leaflets and package inserts prepared to fit inside the finished pack.", "alt": "Pharmaceutical leaflets and inserts", "image": "" },
       { "title": "Labels", "text": "Clear, colour-accurate printed labels for bottles, products and outer packaging.", "alt": "Printed product labels", "image": "" },
