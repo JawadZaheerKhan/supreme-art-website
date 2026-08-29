@@ -1,19 +1,20 @@
 {
   "title": "Our process — Supreme Art",
-  "description": "How Supreme Art makes pharmaceutical folding cartons — from prepress and printing to die-cutting, folding, gluing and dispatch, all under one roof.",
+  "description": "How Supreme Art makes pharmaceutical folding cartons — from design and CTP plate making through printing, quality control, finishing and delivery.",
   "banner": { "crumb": "Our process", "heading": "How your cartons are made" },
-  "intro": "Scroll through every stage — from the first proof to the flat-packed carton, each step happens under one roof in our Peshawar facility.",
+  "intro": "Scroll through every stage — from the initial design to the packed cartons delivered to your facility, each production step is carefully controlled under one roof in Peshawar.",
   "steps": [
-    { "num": "01", "title": "Designing", "text": "Your artwork and carton layout are designed and prepared by our in-house design team.", "image": "/images/process/design.jpg" },
-    { "num": "02", "title": "Prepress & proofing", "text": "Artwork, dielines and colour targets are checked and proofed before a single sheet runs.", "image": "/images/process/01.jpg" },
-    { "num": "03", "title": "Board & materials", "text": "Pharma-grade board and inks are received, batch-logged and stored ready for the job.", "image": "/images/process/02.jpg" },
-    { "num": "04", "title": "Dies & plates", "text": "Cutting dies and printing plates are prepared and mounted for the run.", "image": "/images/process/03.jpg" },
-    { "num": "05", "title": "Offset printing", "text": "The carton is printed across the sheet on our Heidelberg offset presses.", "image": "/images/process/04.jpg" },
-    { "num": "06", "title": "Colour control", "text": "Operators pull sheets and check colour against the approved target throughout the run.", "image": "/images/process/05.jpg" },
-    { "num": "07", "title": "Die-cutting & creasing", "text": "Every blank is cut and creased out of the printed sheet in one stroke.", "image": "/images/process/06.jpg" },
-    { "num": "08", "title": "Folding & gluing", "text": "Blanks are folded and glued into finished, flat-packed cartons.", "image": "/images/process/07.jpg" },
-    { "num": "09", "title": "Inspection", "text": "Finished cartons are inspected for print, dimension and finish before dispatch.", "image": "/images/process/08.jpg" },
-    { "num": "10", "title": "Packing & dispatch", "text": "Cartons are counted, packed and made ready for your filling line.", "image": "/images/process/09.jpg" }
+    { "num": "01", "title": "Designing", "text": "Artwork and carton layouts are created and prepared by our in-house design team.", "image": "/images/process/design.jpg" },
+    { "num": "02", "title": "Plate making", "text": "Using our computer-to-plate (CTP) system, printing plates are produced for the offset press.", "image": "/images/process/01.jpg" },
+    { "num": "03", "title": "Cutting", "text": "Stock paperboard is cut to the precise sheet size required by the printing machine.", "image": "/images/process/02.jpg" },
+    { "num": "04", "title": "Printing", "text": "The approved carton design is printed onto the prepared sheets using offset printing presses.", "image": "/images/process/04.jpg" },
+    { "num": "05", "title": "Proofing & QC", "text": "Our quality-control team checks colour shades, registration and text content against the approved proof.", "image": "/images/process/05.jpg" },
+    { "num": "06", "title": "Coating", "text": "The printed sheets receive the specified protective or decorative coating for the required finish.", "image": "/images/process/03.jpg" },
+    { "num": "07", "title": "Die-cutting", "text": "The coated sheets are cut and creased into individual unit-carton blanks.", "image": "/images/process/06.jpg" },
+    { "num": "08", "title": "Breaking", "text": "Waste board is removed from around the die-cut cartons, separating the individual blanks cleanly.", "image": "/images/process/07.jpg" },
+    { "num": "09", "title": "Sorting", "text": "An automated inspection machine uses 3D cameras to check every unit carton for colour, print and overall quality.", "image": "/images/process/08.jpg" },
+    { "num": "10", "title": "Pasting & folder gluing", "text": "The inspected unit cartons are folded, glued and joined before being packed into bundles or boxes.", "image": "/images/process/07.jpg" },
+    { "num": "11", "title": "Delivery", "text": "The finished cartons are securely packed and delivered to the client, ready for the filling line.", "image": "/images/process/09.jpg" }
   ],
   "cta": {
     "heading": "Have a carton to make?",
