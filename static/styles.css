@@ -988,3 +988,148 @@ a { color: inherit; }
   .captions { position: relative; bottom: auto; display: flex; flex-direction: column; gap: 6px; }
   .dots { display: none; }
 }
+/* ---------- Editorial home hero ---------- */
+.editorial-hero {
+  padding: 18px;
+  color: #0a2e49;
+  background: #eef4f8;
+}
+.editorial-hero__frame {
+  position: relative;
+  min-height: calc(100vh - 104px);
+  max-width: 1500px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(10,46,73,.22);
+  background:
+    linear-gradient(90deg, transparent 33.333%, rgba(10,46,73,.16) 33.333%, rgba(10,46,73,.16) calc(33.333% + 1px), transparent calc(33.333% + 1px), transparent 66.666%, rgba(10,46,73,.16) 66.666%, rgba(10,46,73,.16) calc(66.666% + 1px), transparent calc(66.666% + 1px)),
+    linear-gradient(145deg, #dbeaf4 0%, #edf5f9 48%, #c7deec 100%);
+}
+.editorial-hero__utility {
+  min-height: 46px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  border-bottom: 1px solid rgba(10,46,73,.22);
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.editorial-hero__utility span { padding: 0 22px; }
+.editorial-hero__utility span:nth-child(2) { text-align: center; }
+.editorial-hero__utility span:last-child { text-align: right; }
+.editorial-hero__stage {
+  min-height: clamp(350px, 54vh, 590px);
+  display: grid;
+  grid-template-columns: 1fr 2.05fr 1fr;
+  align-items: end;
+  gap: 20px;
+  padding: 34px clamp(20px, 4vw, 66px) 20px;
+}
+.editorial-hero__visual {
+  position: relative;
+  align-self: stretch;
+  min-height: 330px;
+  overflow: hidden;
+  border-radius: 48% 48% 14% 14% / 24% 24% 10% 10%;
+  box-shadow: 0 30px 70px rgba(9,45,70,.2);
+  background: #153f5d;
+}
+.editorial-hero .hero-slideshow { position: absolute; inset: 0; }
+.editorial-hero .hero-slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: heroSlides 18s infinite;
+  filter: saturate(.78) contrast(1.04);
+}
+.editorial-hero .hero-slideshow img:nth-child(1) { animation-delay: 0s; }
+.editorial-hero .hero-slideshow img:nth-child(2) { animation-delay: 4.5s; }
+.editorial-hero .hero-slideshow img:nth-child(3) { animation-delay: 9s; }
+.editorial-hero .hero-slideshow img:nth-child(4) { animation-delay: 13.5s; }
+.editorial-hero__visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(8,35,54,.05), rgba(8,35,54,.26));
+}
+.editorial-hero__note {
+  margin: 0 0 22px;
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.editorial-hero__note--right { text-align: right; }
+.editorial-hero__copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 clamp(20px, 4vw, 66px) 8px;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.editorial-hero__copy p { margin: 0; }
+.editorial-hero__copy a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.editorial-hero__copy a:hover { color: var(--accent-dark); }
+.editorial-hero h1 {
+  margin: 0;
+  padding: 0 clamp(14px, 2.5vw, 38px) 18px;
+  color: #0b3553;
+  font-size: clamp(4rem, 11.5vw, 10.8rem);
+  font-weight: 500;
+  line-height: .82;
+  letter-spacing: -.075em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+@media (max-width: 780px) {
+  .editorial-hero { padding: 10px; }
+  .editorial-hero__frame { min-height: calc(100svh - 88px); }
+  .editorial-hero__utility {
+    grid-template-columns: 1fr 1fr;
+    font-size: .56rem;
+    letter-spacing: .09em;
+  }
+  .editorial-hero__utility span { padding: 0 12px; }
+  .editorial-hero__utility span:nth-child(2) { display: none; }
+  .editorial-hero__stage {
+    min-height: 56vh;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    padding: 20px 18px 14px;
+  }
+  .editorial-hero__visual {
+    min-height: 0;
+    border-radius: 44% 44% 12% 12% / 18% 18% 8% 8%;
+  }
+  .editorial-hero__note { display: none; }
+  .editorial-hero__copy {
+    align-items: flex-end;
+    padding: 8px 14px 12px;
+    font-size: .58rem;
+    letter-spacing: .07em;
+  }
+  .editorial-hero__copy p { max-width: 145px; }
+  .editorial-hero__copy a { text-align: right; }
+  .editorial-hero h1 {
+    padding: 0 8px 16px;
+    font-size: clamp(3.2rem, 17.3vw, 6rem);
+    line-height: .88;
+    white-space: normal;
+  }
+}
