@@ -1370,25 +1370,3 @@ a { color: inherit; }
   margin: 0;
   background: #b3202a;
 }
-/* ---------- Correct carton fold geometry ---------- */
-.proc-box .panel--left {
-  transform: rotateY(calc(var(--foldA) * 90deg));
-}
-.proc-box .panel--right {
-  transform: rotateY(calc(var(--foldA) * -90deg));
-}
-.proc-box .panel--back {
-  transform: rotateY(calc(var(--foldA) * -90deg));
-}
-.proc-box .panel--top {
-  transform: rotateX(calc(var(--foldB) * -90deg));
-}
-.proc-box .panel--bottom {
-  transform: rotateX(calc(var(--foldB) * 90deg));
-}
-.proc-box__rot {
-  transform: translate(-50%, -50%)
-    scale(calc(var(--box-scale, .6) * (0.92 + var(--intro) * 0.08)))
-    rotateX(calc(var(--view) * -12deg))
-    rotateY(calc(var(--view) * -34deg));
-}
