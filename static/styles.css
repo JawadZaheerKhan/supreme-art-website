@@ -1252,3 +1252,37 @@ a { color: inherit; }
     letter-spacing: .035em;
   }
 }
+/* ---------- Lighter home hero balance ---------- */
+.home-page .site-header {
+  background: rgba(255,255,255,.94);
+  border-bottom-color: rgba(10,46,73,.14);
+}
+.home-page .editorial-hero__utility {
+  color: #0a3553;
+  background: rgba(255,255,255,.86);
+  border-top-color: rgba(10,46,73,.12);
+  border-bottom-color: rgba(10,46,73,.16);
+}
+.home-page .editorial-hero__copy {
+  color: #0a3553;
+  background: rgba(255,255,255,.95);
+  border-top: 1px solid rgba(10,46,73,.12);
+}
+.home-page .editorial-hero__copy a:hover {
+  color: var(--accent);
+}
+.home-page .editorial-hero h1 {
+  color: #103b5c;
+  background:
+    radial-gradient(circle at 50% 0%, #ffffff 0%, #fbfcfd 58%, #eef4f7 100%);
+  text-shadow: none;
+  border-top: 1px solid rgba(10,46,73,.1);
+}
+@media (max-width: 780px) {
+  .home-page .editorial-hero__utility {
+    background: rgba(255,255,255,.9);
+  }
+  .home-page .editorial-hero__copy {
+    background: rgba(255,255,255,.96);
+  }
+}
