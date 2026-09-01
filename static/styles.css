@@ -1410,3 +1410,10 @@ a { color: inherit; }
 .proc__pair-dots i:nth-child(2) {
   animation-duration: 8s;
 }
+
+/* Keep unused space around uncropped Process photos clean and white. */
+.proc__stage,
+.proc__pair,
+.proc-mob__img--pair {
+  background: transparent;
+}
