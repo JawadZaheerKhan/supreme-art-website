@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex" />
-    <title>Supreme Art — Edit the site</title>
-    <link rel="icon" type="image/png" href="/uploads/favicon.png" />
-  </head>
-  <body>
-    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Supreme Art — Website Editor</title>
+  <link rel="icon" type="image/png" href="/uploads/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body><main class="shell">
+  <section id="login" class="login-card" hidden>
+    <img src="/logo.png" alt="Supreme Art" /><p class="eyebrow">Private website editor</p><h1>Welcome back</h1>
+    <p class="muted">Enter the Supreme Art CMS password. No GitHub login is required.</p>
+    <form id="login-form"><label>Password<input id="password" type="password" autocomplete="current-password" required /></label>
+      <button type="submit">Sign in</button><p id="login-message" class="message" role="status"></p></form>
+  </section>
+  <section id="editor" hidden>
+    <header class="topbar"><div class="identity"><img src="/logo.png" alt="" /><div><span>Supreme Art</span><small>Website editor</small></div></div>
+      <div class="top-actions"><a href="/" target="_blank" rel="noopener">View website ↗</a><button id="logout" class="button-secondary">Sign out</button></div></header>
+    <div class="workspace"><aside><p class="eyebrow">Choose a page</p><nav id="page-nav"></nav></aside>
+      <section class="content-panel"><div class="panel-heading"><div><p class="eyebrow">Editing</p><h1 id="page-title">Home page</h1></div><button id="save" disabled>Save changes</button></div>
+        <div id="notice" class="notice" role="status"></div><div id="fields" class="fields"></div></section></div>
+  </section>
+</main><script type="module" src="/admin/admin.js"></script></body>
 </html>
