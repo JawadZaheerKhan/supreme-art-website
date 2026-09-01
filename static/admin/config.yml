@@ -530,3 +530,38 @@ collections:
               - { name: message_placeholder, label: Message placeholder text, widget: string }
               - { name: submit_label, label: Submit button text, widget: string }
               - { name: note, label: Note under the button, widget: string }
+      # --------------------------------------------------------- process page
+      - name: process
+        label: Process page
+        file: content/process.json
+        fields:
+          - { name: title, label: Browser tab / search result title, widget: string }
+          - { name: description, label: Search engine description, widget: text }
+          - name: banner
+            label: Page banner
+            widget: object
+            fields:
+              - { name: crumb, label: Small label, widget: string }
+              - { name: heading, label: Main heading, widget: string }
+          - { name: intro, label: Introduction, widget: text }
+          - name: steps
+            label: Process stages
+            widget: list
+            min: 1
+            summary: '{{fields.num}} — {{fields.title}}'
+            fields:
+              - { name: num, label: Step number, widget: string }
+              - { name: title, label: Stage title, widget: string }
+              - { name: text, label: Description, widget: text }
+              - { name: image, label: First photo, widget: image }
+              - { name: image_2, label: Second photo, widget: image, required: false, hint: Optional. If left empty, the first photo uses the complete picture area. }
+          - name: cta
+            label: Closing call to action
+            widget: object
+            fields:
+              - { name: heading, label: Heading, widget: string }
+              - { name: text, label: Paragraph, widget: text }
+              - { name: primary_label, label: First button text, widget: string }
+              - { name: primary_href, label: First button links to, widget: string }
+              - { name: secondary_label, label: Second button text, widget: string }
+              - { name: secondary_href, label: Second button links to, widget: string }

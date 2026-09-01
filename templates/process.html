@@ -22,7 +22,10 @@
         <div class="proc__pin">
           <div class="proc__inner container">
             <div class="proc__stage">
-              {{#each page.steps}}<img class="proc__shot{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}" src="{{ image }}" alt="" loading="lazy" />
+              {{#each page.steps}}<div class="proc__shot proc__pair{{#if image_2}}{{else}} proc__pair--single{{/if}}{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}">
+                <img src="{{ image }}" alt="" loading="lazy" />
+                {{#if image_2}}<img src="{{ image_2 }}" alt="" loading="lazy" />{{/if}}
+              </div>
               {{/each}}
             </div>
             <div class="proc__text">
@@ -54,7 +57,10 @@
 {{> carton-scene}}
         </div>
         {{#each page.steps}}<article class="proc-mob__step reveal">
-          <div class="proc-mob__img"><img src="{{ image }}" alt="{{ title }}" loading="lazy" /></div>
+          <div class="proc-mob__img proc-mob__img--pair{{#if image_2}}{{else}} proc-mob__img--single{{/if}}">
+            <img src="{{ image }}" alt="{{ title }}" loading="lazy" />
+            {{#if image_2}}<img src="{{ image_2 }}" alt="{{ title }}" loading="lazy" />{{/if}}
+          </div>
           <span class="proc__num">{{ num }}</span>
           <h2>{{ title }}</h2>
           <p>{{ text }}</p>
