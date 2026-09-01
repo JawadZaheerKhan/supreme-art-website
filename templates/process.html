@@ -25,6 +25,7 @@
               {{#each page.steps}}<div class="proc__shot proc__pair{{#if image_2}}{{else}} proc__pair--single{{/if}}{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}">
                 <img src="{{ image }}" alt="" loading="lazy" />
                 {{#if image_2}}<img src="{{ image_2 }}" alt="" loading="lazy" />{{/if}}
+                {{#if image_2}}<span class="proc__pair-dots"><i></i><i></i></span>{{/if}}
               </div>
               {{/each}}
             </div>
@@ -60,6 +61,7 @@
           <div class="proc-mob__img proc-mob__img--pair{{#if image_2}}{{else}} proc-mob__img--single{{/if}}">
             <img src="{{ image }}" alt="{{ title }}" loading="lazy" />
             {{#if image_2}}<img src="{{ image_2 }}" alt="{{ title }}" loading="lazy" />{{/if}}
+            {{#if image_2}}<span class="proc__pair-dots"><i></i><i></i></span>{{/if}}
           </div>
           <span class="proc__num">{{ num }}</span>
           <h2>{{ title }}</h2>
