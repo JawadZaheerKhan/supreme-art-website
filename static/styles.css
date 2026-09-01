@@ -1382,3 +1382,31 @@ a { color: inherit; }
   50%, 93% { background: #fff; transform: scale(1.25); }
 }
 .proc__stage .proc__pair { position: absolute; }
+
+/* Wider Process gallery: preserve complete photos and autoplay paired shots. */
+@media (min-width: 1081px) {
+  .proc__inner {
+    grid-template-columns: minmax(0, 1.42fr) minmax(320px, .82fr) minmax(150px, .28fr);
+    gap: 30px;
+    max-width: 1540px;
+  }
+  .proc__stage,
+  .proc__text {
+    height: min(72vh, 680px);
+  }
+}
+.proc__stage { background: #f4f7f9; }
+.proc__pair:not(.proc__pair--single) img,
+.proc-mob__img--pair:not(.proc-mob__img--single) img,
+.proc__pair--single img,
+.proc-mob__img--single img {
+  object-fit: contain;
+}
+.proc__pair:not(.proc__pair--single) img:first-of-type,
+.proc-mob__img--pair:not(.proc-mob__img--single) img:first-of-type,
+.proc__pair:not(.proc__pair--single) img:nth-of-type(2),
+.proc-mob__img--pair:not(.proc-mob__img--single) img:nth-of-type(2),
+.proc__pair-dots i:first-child,
+.proc__pair-dots i:nth-child(2) {
+  animation-duration: 8s;
+}
