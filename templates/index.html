@@ -3,37 +3,23 @@
 <head>
 {{> head}}
 </head>
-<body class="photo-zoom-page home-page">
+<body>
 {{> gtm-body}}
 {{> loader}}
 {{> header}}
 
   <main>
     <!-- HERO -->
-    <section class="editorial-hero" id="home-hero">
-      <div class="editorial-hero__frame">
-        <div class="editorial-hero__utility" aria-label="Supreme Art introduction">
-          <span>Pharmaceutical &amp; food packaging</span>
-          <span>Design · Print · Finish</span>
-          <span>Peshawar, Pakistan</span>
+    <section class="pk-hero" id="home-hero">
+      <div class="pk-hero__stage pk-hero__stage--photos" aria-label="Printing machines at work">
+        <div class="hero-slideshow">
+          {{#each page.hero.slides}}<img src="{{ image }}" alt="{{ alt }}" />
+          {{/each}}
         </div>
-
-        <div class="editorial-hero__stage">
-          <p class="editorial-hero__note editorial-hero__note--left">Packaging engineered<br />for lasting impressions</p>
-          <div class="editorial-hero__visual" aria-label="Supreme Art production facilities">
-            <div class="hero-slideshow">
-              {{#each page.hero.slides}}<img src="{{ image }}" alt="{{ alt }}" />
-              {{/each}}
-            </div>
-          </div>
-          <p class="editorial-hero__note editorial-hero__note--right">From artwork<br />to delivery</p>
-        </div>
-
-        <div class="editorial-hero__copy">
-          <p>{{ page.hero.tagline }}</p>
-          <a href="products.html">Explore our packaging <span aria-hidden="true">↗</span></a>
-        </div>
+      </div>
+      <div class="pk-hero__intro container">
         <h1>{{ page.hero.title }}</h1>
+        <p>{{ page.hero.tagline }}</p>
       </div>
     </section>
 
