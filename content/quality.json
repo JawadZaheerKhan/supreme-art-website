@@ -41,7 +41,9 @@
       {
         "title": "Shade card approval",
         "text": "A reference shade card is prepared for every product and approved before the final printing run is released.",
-        "image": ""
+        "image": "/images/quality/shade-card-1.jpg",
+        "image_2": "/images/quality/shade-card-2.jpg",
+        "image_3": "/images/quality/shade-card-3.jpg"
       },
       {
         "title": "Printing quality control",
@@ -51,7 +53,7 @@
       {
         "title": "Coating inspection",
         "text": "Applied finishes, including UV and spot UV coatings, are checked for coverage, alignment, consistency and the required appearance.",
-        "image": ""
+        "image": "/images/quality/coating-inspection-1.jpg"
       },
       {
         "title": "Conversion checks",
@@ -62,6 +64,11 @@
         "title": "Final inspection & release",
         "text": "Finished cartons receive a final quality inspection. Approved packs are identified with QC status stickers before they are cleared for delivery.",
         "image": ""
+      },
+      {
+        "title": "Digital job card tracking system",
+        "text": "Tablets installed at every production stage allow operators to record each product job card as work progresses. Clients also receive access to this digital tracking system so they can follow the status of their products with us.",
+        "image": "/images/quality/digital-job-card-tracking.jpg"
       }
     ]
   },

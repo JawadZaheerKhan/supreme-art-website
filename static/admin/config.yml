@@ -425,7 +425,9 @@ collections:
                 fields:
                   - { name: title, label: Title, widget: string }
                   - { name: text, label: Description, widget: text }
-                  - { name: image, label: Photo, widget: image, required: false, hint: Upload this checkpoint photo when it is ready. }
+                  - { name: image, label: First photo, widget: image, required: false, hint: Upload this checkpoint photo when it is ready. }
+                  - { name: image_2, label: Second photo, widget: image, required: false, hint: Optional. Hidden when left empty. }
+                  - { name: image_3, label: Third photo, widget: image, required: false, hint: Optional. Hidden when left empty. }
           - name: cta
             label: 'Section — Closing call to action'
             widget: object

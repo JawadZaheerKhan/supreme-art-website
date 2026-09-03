@@ -40,7 +40,7 @@
         <div class="proc__pin">
           <div class="proc__inner container">
             <div class="proc__stage">
-              {{#each page.process.steps}}{{#if image}}<img class="proc__shot{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}" src="{{ image }}" alt="" loading="lazy" />{{else}}<div class="proc__shot proc__placeholder{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}"><span>Photo space<br />{{ title }}</span></div>{{/if}}
+              {{#each page.process.steps}}{{#if image}}<div class="proc__shot quality-gallery{{#if image_3}} quality-gallery--three{{else}}{{#if image_2}} quality-gallery--two{{else}} quality-gallery--one{{/if}}{{/if}}{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}"><img src="{{ image }}" alt="" loading="lazy" />{{#if image_2}}<img src="{{ image_2 }}" alt="" loading="lazy" />{{/if}}{{#if image_3}}<img src="{{ image_3 }}" alt="" loading="lazy" />{{/if}}{{#if image_2}}<span class="quality-gallery__dots"><i></i><i></i>{{#if image_3}}<i></i>{{/if}}</span>{{/if}}</div>{{else}}<div class="proc__shot proc__placeholder{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}"><span>Photo space<br />{{ title }}</span></div>{{/if}}
               {{/each}}
             </div>
             <div class="proc__text">
@@ -52,7 +52,7 @@
               </div>
               {{/each}}
               <div class="proc__meter">
-                <span class="proc__count"><b class="proc__cur">01</b> / <span class="proc__total">06</span></span>
+                <span class="proc__count"><b class="proc__cur">01</b> / <span class="proc__total">07</span></span>
                 <span class="proc__bar"><span class="proc__bar-fill"></span></span>
               </div>
             </div>
@@ -63,7 +63,7 @@
       <!-- Mobile / reduced-motion: stacked quality checkpoints -->
       <div class="proc-mob container">
         {{#each page.process.steps}}<article class="proc-mob__step reveal">
-          <div class="proc-mob__img">{{#if image}}<img src="{{ image }}" alt="{{ title }}" loading="lazy" />{{else}}<div class="proc-mob__placeholder"><span>Photo space<br />{{ title }}</span></div>{{/if}}</div>
+          {{#if image}}<div class="proc-mob__img quality-gallery{{#if image_3}} quality-gallery--three{{else}}{{#if image_2}} quality-gallery--two{{else}} quality-gallery--one{{/if}}{{/if}}"><img src="{{ image }}" alt="{{ title }}" loading="lazy" />{{#if image_2}}<img src="{{ image_2 }}" alt="{{ title }}" loading="lazy" />{{/if}}{{#if image_3}}<img src="{{ image_3 }}" alt="{{ title }}" loading="lazy" />{{/if}}{{#if image_2}}<span class="quality-gallery__dots"><i></i><i></i>{{#if image_3}}<i></i>{{/if}}</span>{{/if}}</div>{{else}}<div class="proc-mob__img"><div class="proc-mob__placeholder"><span>Photo space<br />{{ title }}</span></div></div>{{/if}}
           <span class="proc__num">{{ @num }}</span>
           <h2>{{ title }}</h2>
           <p>{{ text }}</p>
