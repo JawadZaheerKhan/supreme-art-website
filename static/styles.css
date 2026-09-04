@@ -1510,3 +1510,46 @@ a { color: inherit; }
     background: transparent;
   }
 }
+
+/* ---------- Mobile photo gallery correction ---------- */
+@media (max-width: 860px) {
+  .proc-mob__img,
+  .quality-gallery.proc-mob__img {
+    position: relative;
+    inset: auto;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: auto;
+    overflow: visible;
+    background: transparent;
+  }
+  .proc-mob__img img,
+  .quality-gallery.proc-mob__img img {
+    position: relative;
+    inset: auto;
+    top: auto;
+    left: auto;
+    grid-area: 1 / 1;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 72vh;
+    object-fit: contain;
+    border-radius: 14px;
+    box-shadow: 0 14px 34px rgba(23,23,26,.13);
+    transform: none;
+  }
+  .photo-zoom-page .proc-mob__img--single img,
+  .photo-zoom-page .quality-gallery--one.proc-mob__img img {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .proc-mob__img .proc__pair-dots,
+  .proc-mob__img .quality-gallery__dots {
+    bottom: 12px;
+  }
+}
