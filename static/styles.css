@@ -1598,3 +1598,20 @@ a { color: inherit; }
     display: none;
   }
 }
+
+/* Ensure legacy desktop fade rules can never hide phone swipe slides. */
+@media (max-width: 860px) {
+  .photo-zoom-page .proc-mob__img.proc-mob__img--pair img {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
