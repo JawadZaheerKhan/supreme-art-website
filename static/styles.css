@@ -1553,3 +1553,48 @@ a { color: inherit; }
     bottom: 12px;
   }
 }
+
+/* ---------- Mobile swipe galleries ---------- */
+@media (max-width: 860px) {
+  .proc-mob__img--pair,
+  .quality-gallery.proc-mob__img {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    touch-action: pan-x pan-y;
+  }
+  .proc-mob__img--pair::-webkit-scrollbar,
+  .quality-gallery.proc-mob__img::-webkit-scrollbar {
+    display: none;
+  }
+  .photo-zoom-page .proc-mob__img--pair img,
+  .photo-zoom-page .quality-gallery.proc-mob__img img {
+    position: relative;
+    inset: auto;
+    top: auto;
+    left: auto;
+    flex: 0 0 100%;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: none;
+    object-fit: contain;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+  .proc-mob__img .proc__pair-dots,
+  .proc-mob__img .quality-gallery__dots {
+    display: none;
+  }
+}
