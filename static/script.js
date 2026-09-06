@@ -273,6 +273,34 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     requestAnimationFrame(() => positionIndicator(activeLink, false));
   }
 
+  function setupDropdownIndicator(dropdown) {
+    const dropdownLinks = [...dropdown.querySelectorAll(':scope > a')];
+    const matched = dropdownLinks.find((link) => {
+      const linkPath = new URL(link.href, window.location.href).pathname.replace(/index\.html$/, '');
+      return linkPath === pagePath;
+    });
+
+    function positionDropdown(link, animate) {
+      if (!link) return;
+      dropdownLinks.forEach((item) => item.classList.toggle('sub-flow-target', item === link));
+      dropdown.style.setProperty('--sub-flow-y', `${link.offsetTop}px`);
+      dropdown.style.setProperty('--sub-flow-h', `${link.offsetHeight}px`);
+      dropdown.classList.add('sub-flow-ready');
+      if (animate && !reducedMotion) {
+        dropdown.classList.remove('is-sub-flowing');
+        void dropdown.offsetWidth;
+        dropdown.classList.add('is-sub-flowing');
+      }
+    }
+
+    dropdownLinks.forEach((link) => {
+      link.addEventListener('mouseenter', () => positionDropdown(link, true));
+      link.addEventListener('focus', () => positionDropdown(link, true));
+    });
+    dropdown.addEventListener('mouseleave', () => positionDropdown(matched, true));
+    if (matched) requestAnimationFrame(() => positionDropdown(matched, false));
+  }
+
   nav.querySelectorAll('a').forEach((link) => {
     link.addEventListener('mouseenter', () => positionIndicator(link, true));
     link.addEventListener('focus', () => positionIndicator(link, true));
@@ -288,6 +316,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   });
 
   nav.addEventListener('mouseleave', () => positionIndicator(activeLink, true));
+  nav.querySelectorAll('.dropdown').forEach(setupDropdownIndicator);
   toggle?.addEventListener('click', syncIndicator);
   window.addEventListener('resize', syncIndicator);
   syncIndicator();
