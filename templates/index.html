@@ -3,23 +3,32 @@
 <head>
 {{> head}}
 </head>
-<body>
+<body class="home-page">
 {{> gtm-body}}
 {{> loader}}
 {{> header}}
 
   <main>
-    <!-- HERO -->
-    <section class="pk-hero" id="home-hero">
-      <div class="pk-hero__stage pk-hero__stage--photos" aria-label="Printing machines at work">
-        <div class="hero-slideshow">
-          {{#each page.hero.slides}}<img src="{{ image }}" alt="{{ alt }}" />
-          {{/each}}
+    <!-- HOME SCROLL STORY -->
+    <section class="home-story" id="home-hero" aria-label="Supreme Art introduction">
+      <div class="home-story__sticky">
+        <div class="home-story__media" aria-hidden="true">
+          <img src="/images/home/press-room-hero-source.jpg" alt="" />
+          <span class="home-story__shade"></span>
         </div>
-      </div>
-      <div class="pk-hero__intro container">
-        <h1>{{ page.hero.title }}</h1>
-        <p>{{ page.hero.tagline }}</p>
+        <div class="home-story__scenes" aria-live="polite">
+          <div class="home-story__scene is-active" data-home-stage="0">
+            <h1>Supreme Art</h1>
+          </div>
+          <div class="home-story__scene" data-home-stage="1">
+            <h2>Pharmaceutical Packaging Specialist</h2>
+          </div>
+          <div class="home-story__scene" data-home-stage="2">
+            <h2>1.5 Million Per Day<br />Production Capacity</h2>
+          </div>
+        </div>
+        <div class="home-story__progress" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="home-story__hint" aria-hidden="true">Scroll to explore <span>↓</span></p>
       </div>
     </section>
 

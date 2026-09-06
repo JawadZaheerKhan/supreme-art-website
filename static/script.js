@@ -178,3 +178,73 @@ const countIO = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.6 });
 document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
+
+/* Homepage three-stage scroll story */
+(function () {
+  const story = document.querySelector('.home-story');
+  if (!story) return;
+
+  const scenes = [...story.querySelectorAll('[data-home-stage]')];
+  const dots = [...story.querySelectorAll('.home-story__progress span')];
+  const header = document.querySelector('.site-header');
+  let activeStage = -1;
+  let ticking = false;
+
+  function showStage(index) {
+    index = Math.max(0, Math.min(scenes.length - 1, index));
+    if (index === activeStage) return;
+    activeStage = index;
+    story.dataset.activeStage = String(index);
+    scenes.forEach((sceneEl, sceneIndex) => sceneEl.classList.toggle('is-active', sceneIndex === index));
+    dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
+  }
+
+  function updateStory() {
+    const rect = story.getBoundingClientRect();
+    const travel = Math.max(1, story.offsetHeight - window.innerHeight);
+    const progress = Math.max(0, Math.min(1, -rect.top / travel));
+    showStage(Math.round(progress * (scenes.length - 1)));
+    header?.classList.toggle('is-over-hero', rect.bottom > 68 && rect.top < 68);
+    ticking = false;
+  }
+
+  function requestUpdate() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateStory);
+  }
+
+  showStage(0);
+  updateStory();
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+
+  if (reducedMotion) return;
+
+  const nav = header?.querySelector('.nav-links');
+  if (!nav || window.matchMedia('(max-width: 780px)').matches) return;
+  const links = [...nav.querySelectorAll(':scope > a, :scope > .has-dropdown > a')];
+  const activeLink = nav.querySelector('a.current') || links[0];
+
+  function positionIndicator(link, animate) {
+    if (!link) return;
+    const navRect = nav.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    nav.style.setProperty('--nav-flow-x', `${linkRect.left - navRect.left}px`);
+    nav.style.setProperty('--nav-flow-w', `${linkRect.width}px`);
+    nav.classList.add('nav-flow-ready');
+    if (animate) {
+      nav.classList.remove('is-flowing');
+      void nav.offsetWidth;
+      nav.classList.add('is-flowing');
+    }
+  }
+
+  requestAnimationFrame(() => positionIndicator(activeLink, false));
+  links.forEach((link) => {
+    link.addEventListener('mouseenter', () => positionIndicator(link, true));
+    link.addEventListener('focus', () => positionIndicator(link, true));
+  });
+  nav.addEventListener('mouseleave', () => positionIndicator(activeLink, true));
+  window.addEventListener('resize', () => positionIndicator(activeLink, false));
+})();
