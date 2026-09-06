@@ -1665,16 +1665,16 @@ a { color: inherit; }
 .home-page main { margin-top: 0; }
 .home-story { position: relative; height: 300svh; background: #071522; }
 .home-story__sticky { position: sticky; top: 0; height: 100svh; min-height: 540px; overflow: hidden; color: #fff; }
-.home-story__media { position: absolute; inset: 0; overflow: hidden; background: #0b1c29; }
+.home-story__media { position: absolute; inset: 0; overflow: hidden; background: transparent; }
 .home-story__media img {
-  width: 100%; height: 100%; object-fit: contain; object-position: 50% 50%;
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%;
   filter: brightness(1.04) contrast(1.02) saturate(.96);
   transform: scale(1); transform-origin: 50% 58%;
   transition: transform .82s cubic-bezier(.16,1,.3,1), object-position .82s cubic-bezier(.16,1,.3,1), filter .82s ease;
   will-change: transform;
 }
-.home-story[data-active-stage="1"] .home-story__media img { transform: scale(1.34); transform-origin: 50% 68%; }
-.home-story[data-active-stage="2"] .home-story__media img { transform: scale(2.2); transform-origin: 50% 72%; }
+.home-story[data-active-stage="1"] .home-story__media img { transform: scale(1.32); transform-origin: 50% 68%; }
+.home-story[data-active-stage="2"] .home-story__media img { transform: scale(1.48); transform-origin: 50% 72%; }
 .home-story__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(3,15,25,.48), rgba(3,15,25,.12) 38%, rgba(3,15,25,.48)), linear-gradient(90deg, rgba(3,15,25,.44), transparent 55%, rgba(3,15,25,.12)); }
 .home-story__scenes { position: absolute; inset: 0; }
 .home-story__scene {
@@ -1688,8 +1688,9 @@ a { color: inherit; }
 .home-story__scene[data-home-stage="2"] { justify-content: flex-start; padding-top: clamp(126px, 16vh, 170px); }
 .home-story__eyebrow { margin: 0 0 18px; color: #d9ecfb; font-size: clamp(.68rem, .9vw, .85rem); font-weight: 700; letter-spacing: .34em; text-transform: uppercase; text-shadow: 0 2px 16px rgba(0,0,0,.55); }
 .home-story__scene h1, .home-story__scene h2 { width: min(1100px, 92vw); margin: 0; color: #fff; font-family: "Michroma", "Eurostile Extended", sans-serif; font-weight: 400; line-height: 1.04; text-wrap: balance; text-shadow: 0 5px 32px rgba(0,0,0,.7); }
-.home-story__scene h1 { font-size: clamp(3.1rem, 8.7vw, 8.8rem); letter-spacing: .035em; }
-.home-story__scene h2 { font-size: clamp(2rem, 5.4vw, 5.6rem); letter-spacing: .015em; }
+.home-story__scene h1 { font-size: clamp(3rem, 8vw, 8rem); letter-spacing: .035em; white-space: nowrap; }
+.home-story__scene[data-home-stage="1"] h2 { font-size: clamp(2.2rem, 5vw, 5rem); letter-spacing: .015em; }
+.home-story__scene[data-home-stage="2"] h2 { font-size: clamp(2.4rem, 5vw, 5.6rem); letter-spacing: .015em; }
 .home-story__progress { position: absolute; z-index: 4; right: clamp(18px, 3vw, 42px); top: 50%; display: grid; gap: 11px; transform: translateY(-50%); }
 .home-story__progress span { width: 7px; height: 7px; border: 1px solid rgba(255,255,255,.82); border-radius: 50%; transition: height .45s ease, background .3s ease; }
 .home-story__progress span.is-active { height: 34px; border-radius: 9px; background: #fff; }
@@ -1705,11 +1706,12 @@ a { color: inherit; }
   .home-page .site-header .nav-links > .has-dropdown > a { color: var(--muted); border-radius: 0; }
   .home-page .site-header .nav-links a.current { color: var(--accent); }
   .home-story__scene { padding: 96px 28px 68px; }
-  .home-story__scene h1 { font-size: clamp(2.7rem, 15vw, 5rem); line-height: 1.02; }
-  .home-story__scene h2 { font-size: clamp(1.85rem, 9vw, 3.5rem); line-height: 1.12; }
+  .home-story__scene h1 { font-size: clamp(2.2rem, 10.5vw, 3.25rem); line-height: .98; }
+  .home-story__scene[data-home-stage="1"] h2 { font-size: clamp(2.3rem, 12vw, 4rem); line-height: .98; }
+  .home-story__scene[data-home-stage="2"] h2 { font-size: clamp(2.1rem, 10vw, 3.8rem); line-height: .98; }
   .home-story__media img { object-fit: cover; object-position: 50% 50%; }
-  .home-story[data-active-stage="1"] .home-story__media img { transform: scale(1.24); transform-origin: 50% 68%; }
-  .home-story[data-active-stage="2"] .home-story__media img { transform: scale(1.82); transform-origin: 50% 72%; }
+  .home-story[data-active-stage="1"] .home-story__media img { transform: scale(1.32); transform-origin: 50% 68%; }
+  .home-story[data-active-stage="2"] .home-story__media img { transform: scale(1.48); transform-origin: 50% 72%; }
   .home-story__scene[data-home-stage="0"] { padding-top: clamp(118px, 18vh, 165px); }
   .home-story__progress { right: 14px; }
   .home-story__hint { white-space: nowrap; }
