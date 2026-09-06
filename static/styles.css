@@ -1797,3 +1797,10 @@ a { color: inherit; }
   .site-header .nav-links > a,
   .site-header .nav-links > .has-dropdown > a { animation: none !important; transition: none !important; }
 }
+/* Keep labels readable while the liquid selector is travelling. */
+.site-header .nav-links > a.current:not(.nav-flow-target),
+.site-header .nav-links > .has-dropdown > a.current:not(.nav-flow-target) { color: var(--muted) !important; }
+.site-header .nav-links > a:not(.nav-flow-target):not(.nav-cta):hover,
+.site-header .nav-links > .has-dropdown > a:not(.nav-flow-target):hover { color: var(--accent) !important; }
+.home-page .site-header.is-over-hero .nav-links > a:not(.nav-flow-target):not(.nav-cta):hover,
+.home-page .site-header.is-over-hero .nav-links > .has-dropdown > a:not(.nav-flow-target):hover { color: #fff !important; }

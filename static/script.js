@@ -236,6 +236,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   });
   const activeLink = topLevelLink(nav.querySelector('a.current') || matchingLink || topLinks[0]);
   let navigationTimer;
+  let targetTimer;
 
   function isMobile() {
     return window.matchMedia('(max-width: 780px)').matches;
@@ -248,8 +249,13 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   function positionIndicator(link, animate) {
     link = topLevelLink(link);
     if (!link || link.offsetParent === null) return;
+    clearTimeout(targetTimer);
     nav.querySelectorAll('.nav-flow-target').forEach((item) => item.classList.remove('nav-flow-target'));
-    link.classList.add('nav-flow-target');
+    if (animate && !reducedMotion) {
+      targetTimer = setTimeout(() => link.classList.add('nav-flow-target'), 520);
+    } else {
+      link.classList.add('nav-flow-target');
+    }
     const navRect = nav.getBoundingClientRect();
     const linkRect = link.getBoundingClientRect();
 
@@ -275,6 +281,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 
   function setupDropdownIndicator(dropdown) {
     const dropdownLinks = [...dropdown.querySelectorAll(':scope > a')];
+    let subTargetTimer;
     const matched = dropdownLinks.find((link) => {
       const linkPath = new URL(link.href, window.location.href).pathname.replace(/index\.html$/, '');
       return linkPath === pagePath;
@@ -282,7 +289,13 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 
     function positionDropdown(link, animate) {
       if (!link) return;
-      dropdownLinks.forEach((item) => item.classList.toggle('sub-flow-target', item === link));
+      clearTimeout(subTargetTimer);
+      dropdownLinks.forEach((item) => item.classList.remove('sub-flow-target'));
+      if (animate && !reducedMotion) {
+        subTargetTimer = setTimeout(() => link.classList.add('sub-flow-target'), 400);
+      } else {
+        link.classList.add('sub-flow-target');
+      }
       dropdown.style.setProperty('--sub-flow-y', `${link.offsetTop}px`);
       dropdown.style.setProperty('--sub-flow-h', `${link.offsetHeight}px`);
       dropdown.classList.add('sub-flow-ready');
@@ -294,16 +307,12 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     }
 
     dropdownLinks.forEach((link) => {
-      link.addEventListener('mouseenter', () => positionDropdown(link, true));
-      link.addEventListener('focus', () => positionDropdown(link, true));
+      link.addEventListener('click', () => positionDropdown(link, true));
     });
-    dropdown.addEventListener('mouseleave', () => positionDropdown(matched, true));
     if (matched) requestAnimationFrame(() => positionDropdown(matched, false));
   }
 
   nav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('mouseenter', () => positionIndicator(link, true));
-    link.addEventListener('focus', () => positionIndicator(link, true));
     link.addEventListener('click', (event) => {
       if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const url = new URL(link.href, window.location.href);
@@ -311,11 +320,10 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       event.preventDefault();
       clearTimeout(navigationTimer);
       positionIndicator(link, true);
-      navigationTimer = setTimeout(() => { window.location.href = url.href; }, reducedMotion ? 0 : 480);
+      navigationTimer = setTimeout(() => { window.location.href = url.href; }, reducedMotion ? 0 : 1050);
     });
   });
 
-  nav.addEventListener('mouseleave', () => positionIndicator(activeLink, true));
   nav.querySelectorAll('.dropdown').forEach(setupDropdownIndicator);
   toggle?.addEventListener('click', syncIndicator);
   window.addEventListener('resize', syncIndicator);
