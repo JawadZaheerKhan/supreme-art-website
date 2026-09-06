@@ -290,9 +290,13 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     function positionDropdown(link, animate) {
       if (!link) return;
       clearTimeout(subTargetTimer);
-      dropdownLinks.forEach((item) => item.classList.remove('sub-flow-target'));
+      dropdownLinks.forEach((item) => item.classList.remove('sub-flow-target', 'sub-flow-pending'));
       if (animate && !reducedMotion) {
-        subTargetTimer = setTimeout(() => link.classList.add('sub-flow-target'), 400);
+        link.classList.add('sub-flow-pending');
+        subTargetTimer = setTimeout(() => {
+          link.classList.remove('sub-flow-pending');
+          link.classList.add('sub-flow-target');
+        }, 400);
       } else {
         link.classList.add('sub-flow-target');
       }
@@ -307,7 +311,18 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     }
 
     dropdownLinks.forEach((link) => {
+      link.addEventListener('mouseenter', () => positionDropdown(link, true));
+      link.addEventListener('focus', () => positionDropdown(link, true));
       link.addEventListener('click', () => positionDropdown(link, true));
+    });
+    dropdown.addEventListener('mouseleave', () => {
+      if (matched) {
+        positionDropdown(matched, true);
+      } else {
+        clearTimeout(subTargetTimer);
+        dropdownLinks.forEach((item) => item.classList.remove('sub-flow-target', 'sub-flow-pending'));
+        dropdown.classList.remove('sub-flow-ready', 'is-sub-flowing');
+      }
     });
     if (matched) requestAnimationFrame(() => positionDropdown(matched, false));
   }
