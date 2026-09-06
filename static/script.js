@@ -248,6 +248,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   function positionIndicator(link, animate) {
     link = topLevelLink(link);
     if (!link || link.offsetParent === null) return;
+    nav.querySelectorAll('.nav-flow-target').forEach((item) => item.classList.remove('nav-flow-target'));
+    link.classList.add('nav-flow-target');
     const navRect = nav.getBoundingClientRect();
     const linkRect = link.getBoundingClientRect();
 

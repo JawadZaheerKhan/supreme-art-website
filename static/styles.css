@@ -1741,6 +1741,9 @@ a { color: inherit; }
 }
 .site-header .nav-links > a.current,
 .site-header .nav-links > .has-dropdown > a.current { color: #fff; transform: scale(1.04); }
+.site-header .nav-links a.nav-flow-target,
+.home-page .site-header .nav-links a.nav-flow-target,
+.home-page .site-header:not(.is-over-hero) .nav-links a.nav-flow-target { color: #fff !important; }
 .site-header .nav-links > a:not(.current):not(.nav-cta):hover,
 .site-header .nav-links > .has-dropdown > a:not(.current):hover { color: #fff; }
 
