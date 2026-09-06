@@ -364,7 +364,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   function updateOverview() {
     if (!overview) return;
     const progress = storyProgress(overview);
-    const eased = 1 - Math.pow(1 - progress, 3);
+    const revealProgress = Math.min(1, progress / 0.38);
+    const eased = 1 - Math.pow(1 - revealProgress, 3);
     overview.style.setProperty('--overview-progress', eased.toFixed(4));
     overview.style.setProperty('--overview-opacity', (0.18 + eased * 0.82).toFixed(4));
     overview.style.setProperty('--overview-y', `${((1 - eased) * 105).toFixed(2)}px`);
@@ -376,14 +377,18 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     overview.style.setProperty('--overview-bar-width', `${(progress * 100).toFixed(2)}%`);
   }
 
-  function showProduct(index) {
-    if (!productCards.length || index === activeProduct) return;
+  function showProduct(index, localProgress) {
+    if (!productCards.length) return;
     activeProduct = index;
+    const currentIsPlaced = localProgress >= 0.52 || (index === productCards.length - 1 && localProgress >= 0.46);
     productCards.forEach((card, cardIndex) => {
-      card.classList.toggle('is-before', cardIndex < index);
-      card.classList.toggle('is-active', cardIndex === index);
-      card.classList.toggle('is-after', cardIndex > index);
-      card.setAttribute('aria-hidden', cardIndex === index ? 'false' : 'true');
+      const placed = cardIndex < index || (cardIndex === index && currentIsPlaced);
+      const popping = cardIndex === index && !currentIsPlaced;
+      card.classList.toggle('is-placed', placed);
+      card.classList.toggle('is-popping', popping);
+      card.classList.toggle('is-awaiting', cardIndex > index);
+      card.classList.remove('is-before', 'is-active', 'is-after');
+      card.setAttribute('aria-hidden', cardIndex > index ? 'true' : 'false');
     });
     if (productCount) productCount.textContent = String(index + 1).padStart(2, '0');
   }
@@ -391,7 +396,10 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   function updateProducts() {
     if (!products || !productCards.length) return;
     const progress = storyProgress(products);
-    showProduct(Math.min(productCards.length - 1, Math.floor(progress * productCards.length)));
+    const sequence = Math.min(productCards.length - 0.0001, progress * productCards.length);
+    const index = Math.min(productCards.length - 1, Math.floor(sequence));
+    const localProgress = sequence - index;
+    showProduct(index, localProgress);
   }
 
   function update() {
@@ -407,7 +415,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   }
 
   products?.style.setProperty('--product-count', productCards.length || 1);
-  showProduct(0);
+  showProduct(0, 0);
   update();
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', requestUpdate);
