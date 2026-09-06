@@ -420,3 +420,68 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', requestUpdate);
 })();
+/* Homepage process tunnel scroll chapter */
+(function () {
+  const story = document.querySelector('[data-home-process]');
+  if (!story) return;
+
+  const scenes = [...story.querySelectorAll('[data-process-card]')];
+  const count = story.querySelector('.home-process-story__count b');
+  const bar = story.querySelector('.home-process-story__progress span');
+  let ticking = false;
+
+  function updateProcessStory() {
+    const rect = story.getBoundingClientRect();
+    const travel = Math.max(1, story.offsetHeight - window.innerHeight);
+    const progress = Math.max(0, Math.min(1, -rect.top / travel));
+    const sequence = Math.min(scenes.length - 1, progress * (scenes.length - 1));
+    const index = Math.min(scenes.length - 1, Math.floor(sequence));
+    const local = index === scenes.length - 1 ? 0 : sequence - index;
+    const maxScale = window.matchMedia('(max-width: 780px)').matches ? 1.72 : 2.18;
+
+    scenes.forEach((scene, sceneIndex) => {
+      let scale = .58;
+      let opacity = 0;
+      let zIndex = 0;
+      let copyOpacity = 0;
+      let copyY = 34;
+
+      if (sceneIndex === index) {
+        scale = 1 + local * (maxScale - 1);
+        opacity = 1 - Math.max(0, (local - .62) / .38);
+        zIndex = 3;
+        copyOpacity = 1 - Math.max(0, (local - .36) / .34);
+        copyY = -local * 42;
+      } else if (sceneIndex === index + 1) {
+        const arrive = 1 - Math.pow(1 - local, 3);
+        scale = .58 + arrive * .42;
+        opacity = Math.min(1, local * 1.7);
+        zIndex = 2;
+        copyOpacity = Math.max(0, (local - .55) / .34);
+        copyY = (1 - local) * 42;
+      }
+
+      scene.style.setProperty('--process-scale', scale.toFixed(4));
+      scene.style.setProperty('--process-opacity', opacity.toFixed(4));
+      scene.style.setProperty('--process-copy-opacity', Math.min(1, copyOpacity).toFixed(4));
+      scene.style.setProperty('--process-copy-y', `${copyY.toFixed(2)}px`);
+      scene.style.zIndex = String(zIndex);
+      scene.setAttribute('aria-hidden', sceneIndex === index || sceneIndex === index + 1 ? 'false' : 'true');
+    });
+
+    if (count) count.textContent = String(index + 1).padStart(2, '0');
+    if (bar) bar.style.width = `${(progress * 100).toFixed(2)}%`;
+    ticking = false;
+  }
+
+  function requestProcessUpdate() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateProcessStory);
+  }
+
+  story.style.setProperty('--process-count', scenes.length || 1);
+  updateProcessStory();
+  window.addEventListener('scroll', requestProcessUpdate, { passive: true });
+  window.addEventListener('resize', requestProcessUpdate);
+})();
