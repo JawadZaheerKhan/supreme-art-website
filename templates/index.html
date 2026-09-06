@@ -40,14 +40,15 @@
       </div>
     </div>
 
-    <!-- ABOUT TEASER -->
-    <section class="section">
-      <div class="container">
-        <div class="split">
-          <div class="split__media reveal">
-            <div class="media media--tall">{{#with page.about.media}}{{> media}}{{/with}}</div>
+    <!-- WHO WE ARE SCROLL CHAPTER -->
+    <section class="home-overview-story" data-home-overview aria-label="Who we are">
+      <div class="home-overview-story__sticky">
+        <div class="container home-overview-story__layout">
+          <div class="home-overview-story__media">
+            <img src="/images/factory.jpg" alt="Supreme Art factory" loading="lazy" />
+            <span class="home-overview-story__number" aria-hidden="true">02</span>
           </div>
-          <div class="split__body reveal">
+          <div class="home-overview-story__copy">
             <p class="eyebrow">{{ page.about.eyebrow }}</p>
             <h2>{{ page.about.heading }}</h2>
             <p>{{ page.about.text }}</p>
@@ -55,26 +56,40 @@
               {{#each page.about.points}}<li>{{ . }}</li>
               {{/each}}
             </ul>
-            <p style="margin-top:24px"><a class="btn btn--accent" href="{{ page.about.button_href }}">{{ page.about.button_label }}</a></p>
+            <p class="home-overview-story__action"><a class="btn btn--accent" href="{{ page.about.button_href }}">{{ page.about.button_label }}</a></p>
           </div>
         </div>
+        <div class="home-overview-story__progress" aria-hidden="true"><span></span></div>
       </div>
     </section>
 
-    <!-- PRODUCTS TEASER -->
-    <section class="section band">
-      <div class="container">
-        <p class="eyebrow reveal">{{ page.products.eyebrow }}</p>
-        <h2 class="reveal">{{ page.products.heading }}</h2>
-        <p class="lead reveal">{{ page.products.lead }}</p>
-        <div class="grid">
-          {{#each page.products.items}}<article class="card reveal" style="padding:0;overflow:hidden">
-            <div class="media" style="min-height:190px;border-radius:0">{{> media}}</div>
-            <div style="padding:22px 26px 26px"><h3>{{ title }}</h3><p>{{ text }}</p></div>
-          </article>
-          {{/each}}
+    <!-- PRODUCTS SCROLL CHAPTER -->
+    <section class="home-products-story" data-home-products aria-label="Our products">
+      <div class="home-products-story__sticky">
+        <div class="container home-products-story__inner">
+          <div class="home-products-story__heading">
+            <div>
+              <p class="eyebrow">{{ page.products.eyebrow }}</p>
+              <h2>{{ page.products.heading }}</h2>
+            </div>
+            <p class="lead">{{ page.products.lead }}</p>
+          </div>
+          <div class="home-products-story__stage">
+            {{#each page.products.items}}<article class="home-product-card" data-product-card="{{ @index }}">
+              <div class="home-product-card__media">{{> media}}</div>
+              <div class="home-product-card__body">
+                <span class="home-product-card__number">{{ @num }}</span>
+                <h3>{{ title }}</h3>
+                <p>{{ text }}</p>
+              </div>
+            </article>
+            {{/each}}
+          </div>
+          <div class="home-products-story__footer">
+            <span class="home-products-story__count"><b>01</b> / {{ page.products.items.length }}</span>
+            <a class="btn btn--ghost" href="{{ page.products.button_href }}">{{ page.products.button_label }}</a>
+          </div>
         </div>
-        <p style="margin-top:30px" class="reveal"><a class="btn btn--ghost" href="{{ page.products.button_href }}">{{ page.products.button_label }}</a></p>
       </div>
     </section>
 
