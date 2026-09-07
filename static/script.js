@@ -239,7 +239,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   let targetTimer;
 
   function isMobile() {
-    return window.matchMedia('(max-width: 780px)').matches;
+    return window.matchMedia('(max-width: 1024px)').matches;
   }
 
   function topLevelLink(link) {
@@ -659,7 +659,10 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     let index=-1,busy=false,touchStart=null,touchConsumed=false,finishTimer,releaseTimer;
     const counter=story.querySelector(countSelector);
     items.forEach(item=>{item.classList.remove('is-popping','is-placed');item.setAttribute('aria-hidden','true')});
-    function pinned(){const rect=story.getBoundingClientRect();return rect.top<=2&&rect.bottom>=innerHeight-2}
+    const compactLayout=matchMedia("(max-width: 1024px) and (max-height: 600px)");
+    function syncLayout(){clearTimeout(finishTimer);clearTimeout(releaseTimer);busy=false;index=-1;items.forEach(item=>{item.classList.remove("is-placed","is-popping");item.setAttribute("aria-hidden",compactLayout.matches?"false":"true")})}
+    compactLayout.addEventListener("change",syncLayout);syncLayout();
+    function pinned(){if(compactLayout.matches)return false;const rect=story.getBoundingClientRect();return rect.top<=2&&rect.bottom>=innerHeight-2}
     function finalScrollPosition(next){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight),top=scrollY+rect.top;return top+travel*((next+1)/(items.length+1))}
     function renderBefore(next){items.forEach((item,n)=>{item.classList.toggle('is-placed',n<next);item.classList.toggle('is-popping',n===next);item.setAttribute('aria-hidden',n<=next?'false':'true')})}
     function animate(next){
