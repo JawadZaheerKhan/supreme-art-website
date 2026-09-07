@@ -429,6 +429,9 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const count = story.querySelector('.home-process-story__count b');
   const bar = story.querySelector('.home-process-story__progress span');
   let ticking = false;
+  let wheelLocked = false;
+  let wheelLockStarted = 0;
+  let wheelUnlockTimer;
 
   function updateProcessStory() {
     const rect = story.getBoundingClientRect();
@@ -479,6 +482,46 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     ticking = true;
     requestAnimationFrame(updateProcessStory);
   }
+
+  function processStep() {
+    const rect = story.getBoundingClientRect();
+    const travel = Math.max(1, story.offsetHeight - window.innerHeight);
+    const progress = Math.max(0, Math.min(1, -rect.top / travel));
+    return Math.round(progress * (scenes.length - 1));
+  }
+
+  function scrollToProcessStep(step) {
+    const travel = Math.max(1, story.offsetHeight - window.innerHeight);
+    const top = window.scrollY + story.getBoundingClientRect().top;
+    window.scrollTo({ top: top + travel * (step / (scenes.length - 1)), behavior: 'smooth' });
+  }
+
+  function scheduleWheelUnlock() {
+    window.clearTimeout(wheelUnlockTimer);
+    const remaining = Math.max(180, 700 - (performance.now() - wheelLockStarted));
+    wheelUnlockTimer = window.setTimeout(() => { wheelLocked = false; }, remaining);
+  }
+
+  story.addEventListener('wheel', (event) => {
+    if (reducedMotion || Math.abs(event.deltaY) < 1) return;
+    if (wheelLocked) {
+      event.preventDefault();
+      scheduleWheelUnlock();
+      return;
+    }
+    const rect = story.getBoundingClientRect();
+    const pinned = rect.top <= 1 && rect.bottom >= window.innerHeight - 1;
+    if (!pinned) return;
+    const current = processStep();
+    const direction = event.deltaY > 0 ? 1 : -1;
+    const next = Math.max(0, Math.min(scenes.length - 1, current + direction));
+    if (next === current) return;
+    event.preventDefault();
+    wheelLocked = true;
+    wheelLockStarted = performance.now();
+    scrollToProcessStep(next);
+    scheduleWheelUnlock();
+  }, { passive: false });
 
   story.style.setProperty('--process-count', scenes.length || 1);
   updateProcessStory();
