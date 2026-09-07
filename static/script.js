@@ -652,7 +652,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const closingBar=closing?.querySelector('.home-closing-story__progress span');
   let ticking=false;
   const progressOf=el=>{const r=el.getBoundingClientRect(),t=Math.max(1,el.offsetHeight-innerHeight);return Math.max(0,Math.min(1,-r.top/t))};
-  function updateClients(){if(!clients||!clientCards.length)return;const p=progressOf(clients),s=Math.min(clientCards.length-.0001,p*clientCards.length),i=Math.floor(s),local=s-i,placed=local>=.24||p===0;clientCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&placed));card.classList.toggle('is-popping',n===i&&!placed);card.setAttribute('aria-hidden',n>i?'true':'false')});if(clientCount)clientCount.textContent=String(i+1).padStart(2,'0')}
+  function updateClients(){if(!clients||!clientCards.length||clients.classList.contains('is-client-transitioning'))return;const p=progressOf(clients),s=Math.min(clientCards.length-.0001,p*clientCards.length),i=Math.floor(s),local=s-i,placed=local>=.24||p===0;clientCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&placed));card.classList.toggle('is-popping',n===i&&!placed);card.setAttribute('aria-hidden',n>i?'true':'false')});if(clientCount)clientCount.textContent=String(i+1).padStart(2,'0')}
   function updateClosing(){if(!closing||!newsCards.length)return;const p=progressOf(closing),s=Math.min(newsCards.length-.0001,p*newsCards.length),i=Math.floor(s),local=s-i;newsCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&(local>=.24||p===0)));card.classList.toggle('is-popping',n===i&&local<.24&&p>0)});if(closingBar)closingBar.style.width=`${(p*100).toFixed(2)}%`}  function update(){updateClients();updateClosing();ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}
   clients?.style.setProperty('--client-count',clientCards.length||1);closing?.style.setProperty('--closing-count',newsCards.length||1);update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request);
 })();
@@ -686,7 +686,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   function lockStory(selector,itemSelector,twoPhase=false){
     const story=document.querySelector(selector);if(!story||reducedMotion)return;
     const items=[...story.querySelectorAll(itemSelector)];let locked=false,started=0,timer,settleTimer;
-    function unlockLater(){clearTimeout(timer);const remaining=Math.max(180,(twoPhase?1100:720)-(performance.now()-started));timer=setTimeout(()=>{locked=false},remaining)}
+    function unlockLater(){clearTimeout(timer);const remaining=Math.max(180,(twoPhase?1350:720)-(performance.now()-started));timer=setTimeout(()=>{locked=false},remaining)}
     story.addEventListener('wheel',event=>{
       if(Math.abs(event.deltaY)<1)return;if(locked){event.preventDefault();unlockLater();return}
       const rect=story.getBoundingClientRect();if(!(rect.top<=1&&rect.bottom>=innerHeight-1))return;
@@ -696,8 +696,23 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       event.preventDefault();locked=true;started=performance.now();const top=scrollY+rect.top;
       if(twoPhase){
         clearTimeout(settleTimer);
-        scrollTo({top:top+travel*((next+.1)/items.length),behavior:'smooth'});
-        settleTimer=setTimeout(()=>scrollTo({top:top+travel*((next+.6)/items.length),behavior:'smooth'}),320);
+        story.classList.add('is-client-transitioning');
+        items.forEach((item,index)=>{
+          item.classList.toggle('is-placed',index<next);
+          item.classList.toggle('is-popping',index===next);
+          item.setAttribute('aria-hidden',index>next?'true':'false');
+        });
+        const count=story.querySelector('.home-clients-story__count b');
+        if(count)count.textContent=String(next+1).padStart(2,'0');
+        settleTimer=setTimeout(()=>{
+          items[next].classList.remove('is-popping');
+          items[next].classList.add('is-placed');
+          scrollTo({top:top+travel*((next+.6)/items.length),behavior:'smooth'});
+        },520);
+        setTimeout(()=>{
+          story.classList.remove('is-client-transitioning');
+          dispatchEvent(new Event('scroll'));
+        },1250);
       }else{
         scrollTo({top:top+travel*((next+.6)/items.length),behavior:'smooth'});
       }
