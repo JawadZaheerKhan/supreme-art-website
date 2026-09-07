@@ -2147,3 +2147,7 @@ a { color: inherit; }
 .home-news-card.is-placed { transform:translate3d(-50%,-50%,0) scale(.86); }
 .home-closing-story__stage:has(.home-news-card.is-popping:not(:nth-child(2))) .home-news-card.is-placed:nth-child(2) { opacity:0; }
 @media(max-width:780px){.home-client-card:nth-child(1){left:25%;top:12%}.home-client-card:nth-child(2){left:75%;top:12%}.home-client-card:nth-child(3){left:25%;top:31%}.home-client-card:nth-child(4){left:75%;top:31%}.home-client-card:nth-child(5){left:25%;top:50%}.home-client-card:nth-child(6){left:75%;top:50%}.home-client-card:nth-child(7){left:25%;top:69%}.home-client-card:nth-child(8){left:75%;top:69%}.home-client-card:nth-child(9){left:50%;top:88%}.home-client-card.is-popping{left:50%;top:50%}.home-news-card{width:min(76vw,330px)}.home-news-card:nth-child(1){left:50%;top:22%}.home-news-card:nth-child(2){left:50%;top:50%}.home-news-card:nth-child(3){left:50%;top:78%}.home-news-card.is-popping{left:50%;top:50%}.home-news-card.is-placed{transform:translate3d(-50%,-50%,0) scale(.7)}}
+/* Equal News cards and locked one-card scrolling. */
+.home-news-card { height:360px; box-sizing:border-box; display:flex; flex-direction:column; }
+.home-news-card .post__link { margin-top:auto; }
+@media(max-width:780px){.home-news-card{height:260px}}
