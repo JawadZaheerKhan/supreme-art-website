@@ -399,7 +399,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     const sequence = Math.min(productCards.length - 0.0001, progress * productCards.length);
     const index = Math.min(productCards.length - 1, Math.floor(sequence));
     const localProgress = sequence - index;
-    showProduct(index, localProgress);
+    showProduct(index, progress === 0 ? .6 : localProgress);
   }
 
   function update() {
@@ -652,7 +652,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const closingBar=closing?.querySelector('.home-closing-story__progress span');
   let ticking=false;
   const progressOf=el=>{const r=el.getBoundingClientRect(),t=Math.max(1,el.offsetHeight-innerHeight);return Math.max(0,Math.min(1,-r.top/t))};
-  function updateClients(){if(!clients||!clientCards.length)return;const p=progressOf(clients),s=Math.min(clientCards.length-.0001,p*clientCards.length),i=Math.floor(s),local=s-i,placed=local>=.24;clientCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&placed));card.classList.toggle('is-popping',n===i&&!placed);card.setAttribute('aria-hidden',n>i?'true':'false')});if(clientCount)clientCount.textContent=String(i+1).padStart(2,'0')}
+  function updateClients(){if(!clients||!clientCards.length)return;const p=progressOf(clients),s=Math.min(clientCards.length-.0001,p*clientCards.length),i=Math.floor(s),local=s-i,placed=local>=.24||p===0;clientCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&placed));card.classList.toggle('is-popping',n===i&&!placed);card.setAttribute('aria-hidden',n>i?'true':'false')});if(clientCount)clientCount.textContent=String(i+1).padStart(2,'0')}
   function updateClosing(){if(!closing||!newsCards.length)return;const p=progressOf(closing),s=Math.min(newsCards.length-.0001,p*newsCards.length),i=Math.floor(s),local=s-i;newsCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&(local>=.24||p===0)));card.classList.toggle('is-popping',n===i&&local<.24&&p>0)});if(closingBar)closingBar.style.width=`${(p*100).toFixed(2)}%`}  function update(){updateClients();updateClosing();ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}
   clients?.style.setProperty('--client-count',clientCards.length||1);closing?.style.setProperty('--closing-count',newsCards.length||1);update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request);
 })();
@@ -680,4 +680,23 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     scrollTo({top:top+travel*((next+.5)/cards.length),behavior:'smooth'});
     unlockLater();
   },{passive:false});
+})();
+/* Complete one Product or Client accumulation step per wheel gesture. */
+(function(){
+  function lockStory(selector,itemSelector){
+    const story=document.querySelector(selector);if(!story||reducedMotion)return;
+    const items=[...story.querySelectorAll(itemSelector)];let locked=false,started=0,timer;
+    function unlockLater(){clearTimeout(timer);const remaining=Math.max(180,720-(performance.now()-started));timer=setTimeout(()=>{locked=false},remaining)}
+    story.addEventListener('wheel',event=>{
+      if(Math.abs(event.deltaY)<1)return;if(locked){event.preventDefault();unlockLater();return}
+      const rect=story.getBoundingClientRect();if(!(rect.top<=1&&rect.bottom>=innerHeight-1))return;
+      const travel=Math.max(1,story.offsetHeight-innerHeight),p=Math.max(0,Math.min(1,-rect.top/travel));
+      const current=Math.min(items.length-1,Math.floor(p*items.length));
+      const next=Math.max(0,Math.min(items.length-1,current+(event.deltaY>0?1:-1)));if(next===current)return;
+      event.preventDefault();locked=true;started=performance.now();const top=scrollY+rect.top;
+      scrollTo({top:top+travel*((next+.6)/items.length),behavior:'smooth'});unlockLater();
+    },{passive:false});
+  }
+  lockStory('[data-home-products]','[data-product-card]');
+  lockStory('[data-home-clients]','[data-client-card]');
 })();
