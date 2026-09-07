@@ -592,9 +592,14 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 })();
 /* Standalone contact scroll reveal */
 (function(){const story=document.querySelector('[data-home-contact]');if(!story)return;let ticking=false;function update(){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight),p=Math.max(0,Math.min(1,-rect.top/travel)),e=1-Math.pow(1-p,3);story.style.setProperty('--contact-opacity',e.toFixed(3));story.style.setProperty('--contact-scale',(.78+e*.22).toFixed(3));ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request)})();
-/* Native touch/wheel scrolling with gentle settle-to-stage behavior. */
+/* Native touch/wheel scrolling with guaranteed pop-then-settle stages. */
 (function(){
   if(reducedMotion)return;
+  document.querySelectorAll('[data-home-products] img,[data-home-process] img,[data-home-quality] img,[data-home-clients] img').forEach(img=>{
+    img.loading='eager';
+    img.decoding='async';
+    if(img.decode)img.decode().catch(()=>{});
+  });
   const stories=[
     {el:document.querySelector('[data-home-process]'),count:document.querySelectorAll('[data-process-card]').length,type:'tunnel'},
     {el:document.querySelector('[data-home-products]'),count:document.querySelectorAll('[data-product-card]').length,type:'accumulate'},
@@ -602,7 +607,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     {el:document.querySelector('[data-home-clients]'),count:document.querySelectorAll('[data-client-card]').length,type:'accumulate'},
     {el:document.querySelector('[data-home-closing]'),count:document.querySelectorAll('[data-closing-card]').length,type:'accumulate'}
   ].filter(item=>item.el&&item.count>1);
-  let settling=false,settleTimer,direction=0,touchY=null;
+  let settling=false,settleTimer,direction=0,touchY=null,phaseTimer,releaseTimer;
   const clampIndex=(value,count)=>Math.max(0,Math.min(count-1,value));
   function settle(){
     if(settling)return;
@@ -617,19 +622,28 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     }else{
       const previous=Number(saved),candidate=clampIndex(previous+direction,story.count);
       if(candidate===previous&&((direction>0&&previous===story.count-1)||(direction<0&&previous===0)))return;
-      index=candidate;
+      index=direction===0?previous:candidate;
     }
     index=clampIndex(index,story.count);
     story.el.dataset.settledIndex=String(index);
-    const targetProgress=story.type==='tunnel'?index/(story.count-1):(index+.68)/story.count;
-    const target=scrollY+rect.top+travel*targetProgress;
+    const sectionTop=scrollY+rect.top;
     direction=0;
-    if(Math.abs(target-scrollY)<3)return;
+    clearTimeout(phaseTimer);clearTimeout(releaseTimer);
     settling=true;
-    scrollTo({top:target,behavior:'smooth'});
-    setTimeout(()=>{settling=false},460);
+    if(story.type==='accumulate'){
+      const popTarget=sectionTop+travel*((index+.12)/story.count);
+      const finalTarget=sectionTop+travel*((index+.72)/story.count);
+      scrollTo({top:popTarget,behavior:'auto'});
+      phaseTimer=setTimeout(()=>scrollTo({top:finalTarget,behavior:'smooth'}),220);
+      releaseTimer=setTimeout(()=>{settling=false},680);
+    }else{
+      const target=sectionTop+travel*(index/(story.count-1));
+      if(Math.abs(target-scrollY)<3){settling=false;return}
+      scrollTo({top:target,behavior:'smooth'});
+      releaseTimer=setTimeout(()=>{settling=false},460);
+    }
   }
-  function queueSettle(){if(settling)return;clearTimeout(settleTimer);settleTimer=setTimeout(settle,130)}
+  function queueSettle(){if(settling)return;clearTimeout(settleTimer);settleTimer=setTimeout(settle,55)}
   addEventListener('wheel',event=>{if(Math.abs(event.deltaY)>1)direction=event.deltaY>0?1:-1},{passive:true});
   addEventListener('touchstart',event=>{touchY=event.touches[0]?.clientY??null},{passive:true});
   addEventListener('touchmove',event=>{if(touchY===null)return;const nextY=event.touches[0]?.clientY??touchY;if(Math.abs(nextY-touchY)>2)direction=nextY<touchY?1:-1;touchY=nextY},{passive:true});
