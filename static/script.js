@@ -652,7 +652,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 /* One gesture owns one complete Product, Client, or News animation. */
 (function(){
   if(reducedMotion)return;
-  function setup(selector,itemSelector,countSelector){
+  function setup(selector,itemSelector,countSelector,timing={pop:280,total:820}){
     const story=document.querySelector(selector);if(!story)return;
     const items=[...story.querySelectorAll(itemSelector)];if(!items.length)return;
     story.dataset.gestureControlled='true';
@@ -671,8 +671,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
         items[next].classList.remove('is-popping');
         items[next].classList.add('is-placed');
         scrollTo({top:finalScrollPosition(next),behavior:'smooth'});
-      },280);
-      releaseTimer=setTimeout(()=>{busy=false},820);
+      },timing.pop);
+      releaseTimer=setTimeout(()=>{busy=false},timing.total);
       return true;
     }
     function move(direction,event){
@@ -691,7 +691,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     },{passive:false});
     story.addEventListener('touchend',()=>{touchStart=null;touchConsumed=false},{passive:true});
   }
-  setup('[data-home-products]','[data-product-card]','.home-products-story__count b');
-  setup('[data-home-clients]','[data-client-card]','.home-clients-story__count b');
+  const productClientTiming={pop:1200,total:2400};
+  setup('[data-home-products]','[data-product-card]','.home-products-story__count b',productClientTiming);
+  setup('[data-home-clients]','[data-client-card]','.home-clients-story__count b',productClientTiming);
   setup('[data-home-closing]','[data-closing-card]',null);
 })();
