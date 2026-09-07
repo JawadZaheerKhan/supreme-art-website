@@ -11,13 +11,13 @@
         "dropdown": [
           { "label": "Company profile", "href": "company-profile.html" },
           { "label": "Company overview", "href": "about.html" },
-          { "label": "Quality & standards", "href": "quality.html" },
+          { "label": "Quality Control", "href": "quality.html" },
           { "label": "Careers", "href": "careers.html" }
         ]
       },
       { "label": "Products", "href": "products.html", "slug": "products", "dropdown": [] },
       { "label": "Process", "href": "process.html", "slug": "process", "dropdown": [] },
-      { "label": "Quality", "href": "quality.html", "slug": "quality", "dropdown": [] },
+      { "label": "Quality Control", "href": "quality.html", "slug": "quality", "dropdown": [] },
       { "label": "Careers", "href": "careers.html", "slug": "careers", "dropdown": [] }
     ],
     "cta": { "label": "Get a quote", "href": "contact.html" }
@@ -49,7 +49,7 @@
     "company_links": [
       { "label": "About us", "href": "about.html" },
       { "label": "Products", "href": "products.html" },
-      { "label": "Quality", "href": "quality.html" },
+      { "label": "Quality Control", "href": "quality.html" },
       { "label": "Careers", "href": "careers.html" },
       { "label": "Contact", "href": "contact.html" }
     ],

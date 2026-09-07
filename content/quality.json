@@ -1,9 +1,9 @@
 {
-  "title": "Quality — Supreme Art",
+  "title": "Quality Control — Supreme Art",
   "description": "Documented quality assurance across every stage of pharmaceutical carton production — from incoming board to final inspection, with full batch traceability.",
   "banner": {
-    "crumb": "Quality",
-    "heading": "Quality & standards"
+    "crumb": "Quality Control",
+    "heading": "Quality Control"
   },
   "commitment": {
     "eyebrow": "Our commitment",
@@ -36,7 +36,8 @@
       {
         "title": "Incoming board inspection",
         "text": "Before printing begins, every paperboard batch is checked for grammage, thickness, surface condition and overall quality.",
-        "image": "/images/quality.jpg"
+        "image": "/images/quality/incoming-board-inspection-1.png",
+        "image_2": "/images/quality/incoming-board-inspection-2.png"
       },
       {
         "title": "Shade card approval",
@@ -56,7 +57,7 @@
         "image": "/images/quality/coating-inspection-1.jpg"
       },
       {
-        "title": "Digital job card tracking system",
+        "title": "Digital Product Tracking",
         "text": "Tablets installed at every production stage allow operators to record each product job card as work progresses. Clients also receive access to this digital tracking system so they can follow the status of their products with us.",
         "image": "/images/quality/digital-job-card-tracking.jpg"
       }
