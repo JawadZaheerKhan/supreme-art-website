@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "dist",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4599", "--directory", "dist"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["serve.js", "4599", "dist"],
       "port": 4599
     }
   ]
