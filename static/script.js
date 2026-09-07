@@ -649,12 +649,12 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const clientCards=clients?[...clients.querySelectorAll('[data-client-card]')]:[];
   const clientCount=clients?.querySelector('.home-clients-story__count b');
   const newsCards=closing?[...closing.querySelectorAll('[data-closing-card]')]:[];
-  const contact=closing?.querySelector('[data-closing-contact]');
   const closingBar=closing?.querySelector('.home-closing-story__progress span');
   let ticking=false;
   const progressOf=el=>{const r=el.getBoundingClientRect(),t=Math.max(1,el.offsetHeight-innerHeight);return Math.max(0,Math.min(1,-r.top/t))};
   function updateClients(){if(!clients||!clientCards.length)return;const p=progressOf(clients),s=Math.min(clientCards.length-.0001,p*clientCards.length),i=Math.floor(s),local=s-i,placed=local>=.52;clientCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&placed));card.classList.toggle('is-popping',n===i&&!placed);card.setAttribute('aria-hidden',n>i?'true':'false')});if(clientCount)clientCount.textContent=String(i+1).padStart(2,'0')}
-  function updateClosing(){if(!closing)return;const p=progressOf(closing),total=newsCards.length+1,s=Math.min(total-.0001,p*total),i=Math.floor(s),local=s-i,isContact=i>=newsCards.length;closing.classList.toggle('is-contact',isContact);newsCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||isContact);card.classList.toggle('is-popping',n===i&&local<.52&&!isContact)});contact?.classList.toggle('is-active',isContact);if(closingBar)closingBar.style.width=`${(p*100).toFixed(2)}%`}
-  function update(){updateClients();updateClosing();ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}
-  clients?.style.setProperty('--client-count',clientCards.length||1);closing?.style.setProperty('--closing-count',newsCards.length+1);update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request);
+  function updateClosing(){if(!closing||!newsCards.length)return;const p=progressOf(closing),s=Math.min(newsCards.length-.0001,p*newsCards.length),i=Math.floor(s),local=s-i;newsCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&local>=.52));card.classList.toggle('is-popping',n===i&&local<.52)});if(closingBar)closingBar.style.width=`${(p*100).toFixed(2)}%`}  function update(){updateClients();updateClosing();ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}
+  clients?.style.setProperty('--client-count',clientCards.length||1);closing?.style.setProperty('--closing-count',newsCards.length||1);update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request);
 })();
+/* Standalone contact scroll reveal */
+(function(){const story=document.querySelector('[data-home-contact]');if(!story)return;let ticking=false;function update(){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight),p=Math.max(0,Math.min(1,-rect.top/travel)),e=1-Math.pow(1-p,3);story.style.setProperty('--contact-opacity',e.toFixed(3));story.style.setProperty('--contact-scale',(.78+e*.22).toFixed(3));ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request)})();

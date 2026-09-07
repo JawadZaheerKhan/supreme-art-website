@@ -167,14 +167,18 @@
           <div class="home-closing-story__stage">
             {{#each page.news.posts}}<article class="home-news-card" data-closing-card="{{ @index }}">
               <span class="post__date">{{ date }}</span><h3>{{ title }}</h3><p>{{ text }}</p><a class="post__link" href="{{ href }}">Read more &rarr;</a>
-            </article>{{/each}}
-            <div class="home-contact-card" data-closing-contact>
-              <h2>{{ page.cta.heading }}</h2><p>{{ page.cta.text }}</p>
-              <div class="hero-actions"><a class="btn btn--accent" href="{{ page.cta.primary_href }}">{{ page.cta.primary_label }}</a><a class="btn btn--ghost" href="{{ page.cta.secondary_href }}">{{ page.cta.secondary_label }}</a></div>
-            </div>
-          </div>
+            </article>{{/each}}</div>
           <div class="home-closing-story__progress" aria-hidden="true"><span></span></div>
         </div>
+      </div>
+    </section>
+    <!-- STANDALONE CONTACT CHAPTER -->
+    <section class="home-contact-story" data-home-contact aria-label="Contact Supreme Art">
+      <div class="home-contact-story__inner container">
+        <p class="eyebrow">Start a project</p>
+        <h2>{{ page.cta.heading }}</h2>
+        <p>{{ page.cta.text }}</p>
+        <div class="hero-actions"><a class="btn btn--accent" href="{{ page.cta.primary_href }}">{{ page.cta.primary_label }}</a><a class="btn btn--ghost" href="{{ page.cta.secondary_href }}">{{ page.cta.secondary_label }}</a></div>
       </div>
     </section>
   </main>
