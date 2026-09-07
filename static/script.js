@@ -443,6 +443,12 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     const maxScale = window.matchMedia('(max-width: 780px)').matches ? 1.72 : 2.18;
 
     scenes.forEach((scene, sceneIndex) => {
+      const rendered = sceneIndex === index || sceneIndex === index + 1;
+      scene.classList.toggle('is-rendered', rendered);
+      if (!rendered) {
+        scene.setAttribute('aria-hidden', 'true');
+        return;
+      }
       let scale = .58;
       let opacity = 0;
       let zIndex = 0;
@@ -478,6 +484,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   }
 
   function requestProcessUpdate() {
+    const rect = story.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(updateProcessStory);
@@ -556,6 +564,12 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     const maxScale = window.matchMedia('(max-width: 780px)').matches ? 1.72 : 2.18;
 
     scenes.forEach((scene, sceneIndex) => {
+      const rendered = sceneIndex === index || sceneIndex === index + 1;
+      scene.classList.toggle('is-rendered', rendered);
+      if (!rendered) {
+        scene.setAttribute('aria-hidden', 'true');
+        return;
+      }
       let scale = .58;
       let opacity = 0;
       let zIndex = 0;
@@ -588,6 +602,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   }
 
   function requestQualityUpdate() {
+    const rect = story.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(updateQualityStory);
