@@ -394,6 +394,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   }
 
   function updateProducts() {
+    if (products?.dataset.gestureControlled === 'true') return;
     if (!products || !productCards.length) return;
     const progress = storyProgress(products);
     const sequence = Math.min(productCards.length - 0.0001, progress * productCards.length);
@@ -586,8 +587,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const closingBar=closing?.querySelector('.home-closing-story__progress span');
   let ticking=false;
   const progressOf=el=>{const r=el.getBoundingClientRect(),t=Math.max(1,el.offsetHeight-innerHeight);return Math.max(0,Math.min(1,-r.top/t))};
-  function updateClients(){if(!clients||!clientCards.length)return;const p=progressOf(clients),s=Math.min(clientCards.length-.0001,p*clientCards.length),i=Math.floor(s),local=s-i,placed=local>=.52;clientCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&placed));card.classList.toggle('is-popping',n===i&&!placed);card.setAttribute('aria-hidden',n>i?'true':'false')});if(clientCount)clientCount.textContent=String(i+1).padStart(2,'0')}
-  function updateClosing(){if(!closing||!newsCards.length)return;const p=progressOf(closing),s=Math.min(newsCards.length-.0001,p*newsCards.length),i=Math.floor(s),local=s-i;newsCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&local>=.52));card.classList.toggle('is-popping',n===i&&local<.52)});if(closingBar)closingBar.style.width=`${(p*100).toFixed(2)}%`}  function update(){updateClients();updateClosing();ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}
+  function updateClients(){if(clients?.dataset.gestureControlled==='true')return;if(!clients||!clientCards.length)return;const p=progressOf(clients),s=Math.min(clientCards.length-.0001,p*clientCards.length),i=Math.floor(s),local=s-i,placed=local>=.52;clientCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&placed));card.classList.toggle('is-popping',n===i&&!placed);card.setAttribute('aria-hidden',n>i?'true':'false')});if(clientCount)clientCount.textContent=String(i+1).padStart(2,'0')}
+  function updateClosing(){if(closing?.dataset.gestureControlled==='true')return;if(!closing||!newsCards.length)return;const p=progressOf(closing),s=Math.min(newsCards.length-.0001,p*newsCards.length),i=Math.floor(s),local=s-i;newsCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&local>=.52));card.classList.toggle('is-popping',n===i&&local<.52)});if(closingBar)closingBar.style.width=`${(p*100).toFixed(2)}%`}  function update(){updateClients();updateClosing();ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}
   clients?.style.setProperty('--client-count',clientCards.length||1);closing?.style.setProperty('--closing-count',newsCards.length||1);update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request);
 })();
 /* Standalone contact scroll reveal */
@@ -602,10 +603,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   });
   const stories=[
     {el:document.querySelector('[data-home-process]'),count:document.querySelectorAll('[data-process-card]').length,type:'tunnel'},
-    {el:document.querySelector('[data-home-products]'),count:document.querySelectorAll('[data-product-card]').length,type:'accumulate'},
     {el:document.querySelector('[data-home-quality]'),count:document.querySelectorAll('[data-quality-card]').length,type:'tunnel'},
-    {el:document.querySelector('[data-home-clients]'),count:document.querySelectorAll('[data-client-card]').length,type:'accumulate'},
-    {el:document.querySelector('[data-home-closing]'),count:document.querySelectorAll('[data-closing-card]').length,type:'accumulate'}
   ].filter(item=>item.el&&item.count>1);
   let settling=false,settleTimer,direction=0,touchY=null,phaseTimer,releaseTimer;
   const clampIndex=(value,count)=>Math.max(0,Math.min(count-1,value));
@@ -650,4 +648,50 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   addEventListener('touchend',()=>{touchY=null;queueSettle()},{passive:true});
   addEventListener('scroll',queueSettle,{passive:true});
   if('onscrollend' in window)addEventListener('scrollend',settle,{passive:true});
+})();
+/* One gesture owns one complete Product, Client, or News animation. */
+(function(){
+  if(reducedMotion)return;
+  function setup(selector,itemSelector,countSelector){
+    const story=document.querySelector(selector);if(!story)return;
+    const items=[...story.querySelectorAll(itemSelector)];if(!items.length)return;
+    story.dataset.gestureControlled='true';
+    let index=-1,busy=false,touchStart=null,touchConsumed=false,finishTimer,releaseTimer;
+    const counter=story.querySelector(countSelector);
+    items.forEach(item=>{item.classList.remove('is-popping','is-placed');item.setAttribute('aria-hidden','true')});
+    function pinned(){const rect=story.getBoundingClientRect();return rect.top<=2&&rect.bottom>=innerHeight-2}
+    function finalScrollPosition(next){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight),top=scrollY+rect.top;return top+travel*((next+1)/(items.length+1))}
+    function renderBefore(next){items.forEach((item,n)=>{item.classList.toggle('is-placed',n<next);item.classList.toggle('is-popping',n===next);item.setAttribute('aria-hidden',n<=next?'false':'true')})}
+    function animate(next){
+      if(busy||next<0||next>=items.length)return false;
+      busy=true;index=next;clearTimeout(finishTimer);clearTimeout(releaseTimer);
+      renderBefore(next);
+      if(counter)counter.textContent=String(next+1).padStart(2,'0');
+      finishTimer=setTimeout(()=>{
+        items[next].classList.remove('is-popping');
+        items[next].classList.add('is-placed');
+        scrollTo({top:finalScrollPosition(next),behavior:'smooth'});
+      },280);
+      releaseTimer=setTimeout(()=>{busy=false},820);
+      return true;
+    }
+    function move(direction,event){
+      if(!pinned())return false;
+      if(busy){event?.preventDefault();return true}
+      const next=index+direction;
+      if(next<0||next>=items.length)return false;
+      event?.preventDefault();return animate(next);
+    }
+    story.addEventListener('wheel',event=>{if(Math.abs(event.deltaY)<1)return;move(event.deltaY>0?1:-1,event)},{passive:false});
+    story.addEventListener('touchstart',event=>{touchStart=event.touches[0]?.clientY??null;touchConsumed=false},{passive:true});
+    story.addEventListener('touchmove',event=>{
+      if(touchStart===null)return;const y=event.touches[0]?.clientY??touchStart,delta=touchStart-y;
+      if(touchConsumed||Math.abs(delta)<18){if(touchConsumed)event.preventDefault();return}
+      if(move(delta>0?1:-1,event))touchConsumed=true;
+    },{passive:false});
+    story.addEventListener('touchend',()=>{touchStart=null;touchConsumed=false},{passive:true});
+  }
+  setup('[data-home-products]','[data-product-card]','.home-products-story__count b');
+  setup('[data-home-clients]','[data-client-card]','.home-clients-story__count b');
+  setup('[data-home-closing]','[data-closing-card]',null);
 })();
