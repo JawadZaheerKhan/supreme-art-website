@@ -683,10 +683,10 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 })();
 /* Complete one Product or Client accumulation step per wheel gesture. */
 (function(){
-  function lockStory(selector,itemSelector){
+  function lockStory(selector,itemSelector,twoPhase=false){
     const story=document.querySelector(selector);if(!story||reducedMotion)return;
-    const items=[...story.querySelectorAll(itemSelector)];let locked=false,started=0,timer;
-    function unlockLater(){clearTimeout(timer);const remaining=Math.max(180,720-(performance.now()-started));timer=setTimeout(()=>{locked=false},remaining)}
+    const items=[...story.querySelectorAll(itemSelector)];let locked=false,started=0,timer,settleTimer;
+    function unlockLater(){clearTimeout(timer);const remaining=Math.max(180,(twoPhase?1100:720)-(performance.now()-started));timer=setTimeout(()=>{locked=false},remaining)}
     story.addEventListener('wheel',event=>{
       if(Math.abs(event.deltaY)<1)return;if(locked){event.preventDefault();unlockLater();return}
       const rect=story.getBoundingClientRect();if(!(rect.top<=1&&rect.bottom>=innerHeight-1))return;
@@ -694,9 +694,16 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       const current=Math.min(items.length-1,Math.floor(p*items.length));
       const next=Math.max(0,Math.min(items.length-1,current+(event.deltaY>0?1:-1)));if(next===current)return;
       event.preventDefault();locked=true;started=performance.now();const top=scrollY+rect.top;
-      scrollTo({top:top+travel*((next+.6)/items.length),behavior:'smooth'});unlockLater();
+      if(twoPhase){
+        clearTimeout(settleTimer);
+        scrollTo({top:top+travel*((next+.1)/items.length),behavior:'smooth'});
+        settleTimer=setTimeout(()=>scrollTo({top:top+travel*((next+.6)/items.length),behavior:'smooth'}),320);
+      }else{
+        scrollTo({top:top+travel*((next+.6)/items.length),behavior:'smooth'});
+      }
+      unlockLater();
     },{passive:false});
   }
   lockStory('[data-home-products]','[data-product-card]');
-  lockStory('[data-home-clients]','[data-client-card]');
+  lockStory('[data-home-clients]','[data-client-card]',true);
 })();
