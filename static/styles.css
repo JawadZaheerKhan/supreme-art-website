@@ -2151,3 +2151,16 @@ a { color: inherit; }
 .home-news-card { height:360px; box-sizing:border-box; display:flex; flex-direction:column; }
 .home-news-card .post__link { margin-top:auto; }
 @media(max-width:780px){.home-news-card{height:260px}}
+/* Circular embossed client badges with centre-to-grid movement. */
+.home-client-card { background:transparent; border:0; box-shadow:none; transition-duration:.85s; }
+.home-client-card .client__badge {
+  width:112px; height:112px; overflow:hidden; border-radius:50%;
+  background:#fff; border:1px solid rgba(17,58,88,.12);
+  box-shadow:0 12px 28px rgba(18,54,82,.16), inset 0 1px 0 rgba(255,255,255,.95);
+  transition:box-shadow .35s ease;
+}
+.home-client-card .client__logo { inset:11px; width:calc(100% - 22px); height:calc(100% - 22px); border-radius:50%; background:#fff; }
+.home-client-card.is-popping { transform:translate3d(-50%,-50%,0) scale(1.65); }
+.home-client-card.is-popping .client__badge { box-shadow:0 24px 55px rgba(18,54,82,.28), inset 0 1px 0 rgba(255,255,255,.95); }
+.home-client-card.is-placed { transform:translate3d(-50%,-50%,0) scale(1); }
+@media(max-width:780px){.home-client-card .client__badge{width:88px;height:88px}.home-client-card .client__logo{inset:8px;width:calc(100% - 16px);height:calc(100% - 16px)}.home-client-card.is-popping{transform:translate3d(-50%,-50%,0) scale(1.48)}.home-client-card.is-placed{transform:translate3d(-50%,-50%,0) scale(.82)}}
