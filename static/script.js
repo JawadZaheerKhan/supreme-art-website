@@ -399,7 +399,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     const sequence = Math.min(productCards.length - 0.0001, progress * productCards.length);
     const index = Math.min(productCards.length - 1, Math.floor(sequence));
     const localProgress = sequence - index;
-    showProduct(index, progress === 0 ? .6 : localProgress);
+    showProduct(index, localProgress);
   }
 
   function update() {
@@ -491,45 +491,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     requestAnimationFrame(updateProcessStory);
   }
 
-  function processStep() {
-    const rect = story.getBoundingClientRect();
-    const travel = Math.max(1, story.offsetHeight - window.innerHeight);
-    const progress = Math.max(0, Math.min(1, -rect.top / travel));
-    return Math.round(progress * (scenes.length - 1));
-  }
-
-  function scrollToProcessStep(step) {
-    const travel = Math.max(1, story.offsetHeight - window.innerHeight);
-    const top = window.scrollY + story.getBoundingClientRect().top;
-    window.scrollTo({ top: top + travel * (step / (scenes.length - 1)), behavior: 'smooth' });
-  }
-
-  function scheduleWheelUnlock() {
-    window.clearTimeout(wheelUnlockTimer);
-    const remaining = Math.max(180, 700 - (performance.now() - wheelLockStarted));
-    wheelUnlockTimer = window.setTimeout(() => { wheelLocked = false; }, remaining);
-  }
-
-  story.addEventListener('wheel', (event) => {
-    if (reducedMotion || Math.abs(event.deltaY) < 1) return;
-    if (wheelLocked) {
-      event.preventDefault();
-      scheduleWheelUnlock();
-      return;
-    }
-    const rect = story.getBoundingClientRect();
-    const pinned = rect.top <= 1 && rect.bottom >= window.innerHeight - 1;
-    if (!pinned) return;
-    const current = processStep();
-    const direction = event.deltaY > 0 ? 1 : -1;
-    const next = Math.max(0, Math.min(scenes.length - 1, current + direction));
-    if (next === current) return;
-    event.preventDefault();
-    wheelLocked = true;
-    wheelLockStarted = performance.now();
-    scrollToProcessStep(next);
-    scheduleWheelUnlock();
-  }, { passive: false });
 
   story.style.setProperty('--process-count', scenes.length || 1);
   updateProcessStory();
@@ -609,33 +570,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     requestAnimationFrame(updateQualityStory);
   }
 
-  function scheduleWheelUnlock() {
-    window.clearTimeout(wheelUnlockTimer);
-    const remaining = Math.max(180, 700 - (performance.now() - wheelLockStarted));
-    wheelUnlockTimer = window.setTimeout(() => { wheelLocked = false; }, remaining);
-  }
-
-  story.addEventListener('wheel', (event) => {
-    if (reducedMotion || Math.abs(event.deltaY) < 1) return;
-    if (wheelLocked) {
-      event.preventDefault();
-      scheduleWheelUnlock();
-      return;
-    }
-    const rect = story.getBoundingClientRect();
-    if (!(rect.top <= 1 && rect.bottom >= window.innerHeight - 1)) return;
-    const { progress, travel } = storyPosition();
-    const current = Math.round(progress * (scenes.length - 1));
-    const direction = event.deltaY > 0 ? 1 : -1;
-    const next = Math.max(0, Math.min(scenes.length - 1, current + direction));
-    if (next === current) return;
-    event.preventDefault();
-    wheelLocked = true;
-    wheelLockStarted = performance.now();
-    const top = window.scrollY + rect.top;
-    window.scrollTo({ top: top + travel * (next / (scenes.length - 1)), behavior: 'smooth' });
-    scheduleWheelUnlock();
-  }, { passive: false });
 
   story.style.setProperty('--quality-count', scenes.length || 1);
   updateQualityStory();
@@ -652,73 +586,54 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const closingBar=closing?.querySelector('.home-closing-story__progress span');
   let ticking=false;
   const progressOf=el=>{const r=el.getBoundingClientRect(),t=Math.max(1,el.offsetHeight-innerHeight);return Math.max(0,Math.min(1,-r.top/t))};
-  function updateClients(){if(!clients||!clientCards.length||clients.classList.contains('is-client-transitioning'))return;const p=progressOf(clients),s=Math.min(clientCards.length-.0001,p*clientCards.length),i=Math.floor(s),local=s-i,placed=local>=.24||p===0;clientCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&placed));card.classList.toggle('is-popping',n===i&&!placed);card.setAttribute('aria-hidden',n>i?'true':'false')});if(clientCount)clientCount.textContent=String(i+1).padStart(2,'0')}
-  function updateClosing(){if(!closing||!newsCards.length)return;const p=progressOf(closing),s=Math.min(newsCards.length-.0001,p*newsCards.length),i=Math.floor(s),local=s-i;newsCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&(local>=.24||p===0)));card.classList.toggle('is-popping',n===i&&local<.24&&p>0)});if(closingBar)closingBar.style.width=`${(p*100).toFixed(2)}%`}  function update(){updateClients();updateClosing();ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}
+  function updateClients(){if(!clients||!clientCards.length)return;const p=progressOf(clients),s=Math.min(clientCards.length-.0001,p*clientCards.length),i=Math.floor(s),local=s-i,placed=local>=.52;clientCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&placed));card.classList.toggle('is-popping',n===i&&!placed);card.setAttribute('aria-hidden',n>i?'true':'false')});if(clientCount)clientCount.textContent=String(i+1).padStart(2,'0')}
+  function updateClosing(){if(!closing||!newsCards.length)return;const p=progressOf(closing),s=Math.min(newsCards.length-.0001,p*newsCards.length),i=Math.floor(s),local=s-i;newsCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&local>=.52));card.classList.toggle('is-popping',n===i&&local<.52)});if(closingBar)closingBar.style.width=`${(p*100).toFixed(2)}%`}  function update(){updateClients();updateClosing();ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}
   clients?.style.setProperty('--client-count',clientCards.length||1);closing?.style.setProperty('--closing-count',newsCards.length||1);update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request);
 })();
 /* Standalone contact scroll reveal */
 (function(){const story=document.querySelector('[data-home-contact]');if(!story)return;let ticking=false;function update(){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight),p=Math.max(0,Math.min(1,-rect.top/travel)),e=1-Math.pow(1-p,3);story.style.setProperty('--contact-opacity',e.toFixed(3));story.style.setProperty('--contact-scale',(.78+e*.22).toFixed(3));ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request)})();
-/* Lock the News chapter to one complete card per wheel gesture. */
+/* Native touch/wheel scrolling with gentle settle-to-stage behavior. */
 (function(){
-  const story=document.querySelector('[data-home-closing]');
-  if(!story||reducedMotion)return;
-  const cards=[...story.querySelectorAll('[data-closing-card]')];
-  let locked=false,started=0,timer;
-  function unlockLater(){clearTimeout(timer);const remaining=Math.max(180,700-(performance.now()-started));timer=setTimeout(()=>{locked=false},remaining)}
-  story.addEventListener('wheel',event=>{
-    if(Math.abs(event.deltaY)<1)return;
-    if(locked){event.preventDefault();unlockLater();return}
-    const rect=story.getBoundingClientRect();
-    if(!(rect.top<=1&&rect.bottom>=innerHeight-1))return;
-    const travel=Math.max(1,story.offsetHeight-innerHeight);
+  if(reducedMotion)return;
+  const stories=[
+    {el:document.querySelector('[data-home-process]'),count:document.querySelectorAll('[data-process-card]').length,type:'tunnel'},
+    {el:document.querySelector('[data-home-products]'),count:document.querySelectorAll('[data-product-card]').length,type:'accumulate'},
+    {el:document.querySelector('[data-home-quality]'),count:document.querySelectorAll('[data-quality-card]').length,type:'tunnel'},
+    {el:document.querySelector('[data-home-clients]'),count:document.querySelectorAll('[data-client-card]').length,type:'accumulate'},
+    {el:document.querySelector('[data-home-closing]'),count:document.querySelectorAll('[data-closing-card]').length,type:'accumulate'}
+  ].filter(item=>item.el&&item.count>1);
+  let settling=false,settleTimer,direction=0,touchY=null;
+  const clampIndex=(value,count)=>Math.max(0,Math.min(count-1,value));
+  function settle(){
+    if(settling)return;
+    const story=stories.find(item=>{const r=item.el.getBoundingClientRect();return r.top<=2&&r.bottom>=innerHeight-2});
+    if(!story)return;
+    const rect=story.el.getBoundingClientRect(),travel=Math.max(1,story.el.offsetHeight-innerHeight);
     const progress=Math.max(0,Math.min(1,-rect.top/travel));
-    const current=Math.min(cards.length-1,Math.floor(progress*cards.length));
-    const next=Math.max(0,Math.min(cards.length-1,current+(event.deltaY>0?1:-1)));
-    if(next===current)return;
-    event.preventDefault();locked=true;started=performance.now();
-    const top=scrollY+rect.top;
-    scrollTo({top:top+travel*((next+.5)/cards.length),behavior:'smooth'});
-    unlockLater();
-  },{passive:false});
-})();
-/* Complete one Product or Client accumulation step per wheel gesture. */
-(function(){
-  function lockStory(selector,itemSelector,twoPhase=false){
-    const story=document.querySelector(selector);if(!story||reducedMotion)return;
-    const items=[...story.querySelectorAll(itemSelector)];let locked=false,started=0,timer,settleTimer;
-    function unlockLater(){clearTimeout(timer);const remaining=Math.max(180,(twoPhase?1350:720)-(performance.now()-started));timer=setTimeout(()=>{locked=false},remaining)}
-    story.addEventListener('wheel',event=>{
-      if(Math.abs(event.deltaY)<1)return;if(locked){event.preventDefault();unlockLater();return}
-      const rect=story.getBoundingClientRect();if(!(rect.top<=1&&rect.bottom>=innerHeight-1))return;
-      const travel=Math.max(1,story.offsetHeight-innerHeight),p=Math.max(0,Math.min(1,-rect.top/travel));
-      const current=Math.min(items.length-1,Math.floor(p*items.length));
-      const next=Math.max(0,Math.min(items.length-1,current+(event.deltaY>0?1:-1)));if(next===current)return;
-      event.preventDefault();locked=true;started=performance.now();const top=scrollY+rect.top;
-      if(twoPhase){
-        clearTimeout(settleTimer);
-        story.classList.add('is-client-transitioning');
-        items.forEach((item,index)=>{
-          item.classList.toggle('is-placed',index<next);
-          item.classList.toggle('is-popping',index===next);
-          item.setAttribute('aria-hidden',index>next?'true':'false');
-        });
-        const count=story.querySelector('.home-clients-story__count b');
-        if(count)count.textContent=String(next+1).padStart(2,'0');
-        settleTimer=setTimeout(()=>{
-          items[next].classList.remove('is-popping');
-          items[next].classList.add('is-placed');
-          scrollTo({top:top+travel*((next+.6)/items.length),behavior:'smooth'});
-        },520);
-        setTimeout(()=>{
-          story.classList.remove('is-client-transitioning');
-          dispatchEvent(new Event('scroll'));
-        },1250);
-      }else{
-        scrollTo({top:top+travel*((next+.6)/items.length),behavior:'smooth'});
-      }
-      unlockLater();
-    },{passive:false});
+    const saved=story.el.dataset.settledIndex;
+    let index;
+    if(saved===undefined){
+      index=story.type==='tunnel'?Math.round(progress*(story.count-1)):Math.floor(progress*story.count);
+    }else{
+      const previous=Number(saved),candidate=clampIndex(previous+direction,story.count);
+      if(candidate===previous&&((direction>0&&previous===story.count-1)||(direction<0&&previous===0)))return;
+      index=candidate;
+    }
+    index=clampIndex(index,story.count);
+    story.el.dataset.settledIndex=String(index);
+    const targetProgress=story.type==='tunnel'?index/(story.count-1):(index+.68)/story.count;
+    const target=scrollY+rect.top+travel*targetProgress;
+    direction=0;
+    if(Math.abs(target-scrollY)<3)return;
+    settling=true;
+    scrollTo({top:target,behavior:'smooth'});
+    setTimeout(()=>{settling=false},460);
   }
-  lockStory('[data-home-products]','[data-product-card]');
-  lockStory('[data-home-clients]','[data-client-card]',true);
+  function queueSettle(){if(settling)return;clearTimeout(settleTimer);settleTimer=setTimeout(settle,130)}
+  addEventListener('wheel',event=>{if(Math.abs(event.deltaY)>1)direction=event.deltaY>0?1:-1},{passive:true});
+  addEventListener('touchstart',event=>{touchY=event.touches[0]?.clientY??null},{passive:true});
+  addEventListener('touchmove',event=>{if(touchY===null)return;const nextY=event.touches[0]?.clientY??touchY;if(Math.abs(nextY-touchY)>2)direction=nextY<touchY?1:-1;touchY=nextY},{passive:true});
+  addEventListener('touchend',()=>{touchY=null;queueSettle()},{passive:true});
+  addEventListener('scroll',queueSettle,{passive:true});
+  if('onscrollend' in window)addEventListener('scrollend',settle,{passive:true});
 })();
