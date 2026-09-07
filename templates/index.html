@@ -115,36 +115,28 @@
         <div class="home-process-story__progress" aria-hidden="true"><span></span></div>
       </div>
     </section>
-    <!-- CAPABILITIES -->
-    <section class="section">
-      <div class="container">
-        <p class="eyebrow reveal">{{ page.capabilities.eyebrow }}</p>
-        <h2 class="reveal">{{ page.capabilities.heading }}</h2>
-{{> capabilities}}
-      </div>
-    </section>
-
-    <!-- QUALITY HIGHLIGHT -->
-    <section class="section band">
-      <div class="container">
-        <div class="split split--reverse">
-          <div class="split__media reveal">
-            <div class="media media--tall">{{#with page.quality.media}}{{> media}}{{/with}}</div>
-          </div>
-          <div class="split__body reveal">
-            <p class="eyebrow">{{ page.quality.eyebrow }}</p>
-            <h2>{{ page.quality.heading }}</h2>
-            <p>{{ page.quality.text }}</p>
-            <div class="stat-row" style="margin-top:26px">
-              {{#each page.quality.stats}}<div class="stat"><b data-count="{{ number }}">0</b><span>{{ label }}</span></div>
-              {{/each}}
+    <!-- QUALITY TUNNEL SCROLL CHAPTER -->
+    <section class="home-quality-story" data-home-quality aria-label="Quality assurance">
+      <div class="home-quality-story__sticky">
+        <div class="home-quality-story__scenes">
+          {{#each content.quality.process.steps}}<article class="home-process-scene home-quality-scene" data-quality-card="{{ @index }}">
+            <img src="{{ image }}" alt="{{ title }} at Supreme Art" loading="lazy" />
+            <span class="home-process-scene__shade" aria-hidden="true"></span>
+            <div class="container home-process-scene__copy">
+              <span class="home-process-scene__num">{{ @num }}</span>
+              <p class="eyebrow">Quality assurance</p>
+              <h2>{{ title }}</h2>
+              <p>{{ text }}</p>
             </div>
-            <p style="margin-top:26px"><a class="btn btn--accent" href="{{ page.quality.button_href }}">{{ page.quality.button_label }}</a></p>
-          </div>
+          </article>{{/each}}
         </div>
+        <div class="home-quality-story__chrome container">
+          <span class="home-quality-story__count"><b>01</b> / {{ content.quality.process.steps.length }}</span>
+          <a class="home-quality-story__all" href="quality.html">Explore quality &rarr;</a>
+        </div>
+        <div class="home-quality-story__progress" aria-hidden="true"><span></span></div>
       </div>
     </section>
-
     <!-- FACTORY GALLERY -->
     <section class="section">
       <div class="container">

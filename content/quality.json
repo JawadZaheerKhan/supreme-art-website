@@ -36,7 +36,7 @@
       {
         "title": "Incoming board inspection",
         "text": "Before printing begins, every paperboard batch is checked for grammage, thickness, surface condition and overall quality.",
-        "image": ""
+        "image": "/images/quality.jpg"
       },
       {
         "title": "Shade card approval",
@@ -48,7 +48,7 @@
       {
         "title": "Printing quality control",
         "text": "During printing, our QC team uses a colour spectrophotometer to verify colour shades while also checking registration and text content against the approved proof.",
-        "image": ""
+        "image": "/images/process/proofing-qc-1.jpg"
       },
       {
         "title": "Coating inspection",
@@ -58,12 +58,12 @@
       {
         "title": "Conversion checks",
         "text": "After die-cutting, breaking and folder gluing, cartons are checked for dimensions, crease quality, clean edges and secure pasting.",
-        "image": ""
+        "image": "/images/process/die-cutting-1.jpg"
       },
       {
         "title": "Final inspection & release",
         "text": "Finished cartons receive a final quality inspection. Approved packs are identified with QC status stickers before they are cleared for delivery.",
-        "image": ""
+        "image": "/images/cartons.jpg"
       },
       {
         "title": "Digital job card tracking system",

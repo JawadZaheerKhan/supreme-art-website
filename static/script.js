@@ -528,3 +528,101 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   window.addEventListener('scroll', requestProcessUpdate, { passive: true });
   window.addEventListener('resize', requestProcessUpdate);
 })();
+/* Homepage quality tunnel scroll chapter */
+(function () {
+  const story = document.querySelector('[data-home-quality]');
+  if (!story) return;
+
+  const scenes = [...story.querySelectorAll('[data-quality-card]')];
+  const count = story.querySelector('.home-quality-story__count b');
+  const bar = story.querySelector('.home-quality-story__progress span');
+  let ticking = false;
+  let wheelLocked = false;
+  let wheelLockStarted = 0;
+  let wheelUnlockTimer;
+
+  function storyPosition() {
+    const rect = story.getBoundingClientRect();
+    const travel = Math.max(1, story.offsetHeight - window.innerHeight);
+    const progress = Math.max(0, Math.min(1, -rect.top / travel));
+    return { progress, travel };
+  }
+
+  function updateQualityStory() {
+    const { progress } = storyPosition();
+    const sequence = Math.min(scenes.length - 1, progress * (scenes.length - 1));
+    const index = Math.min(scenes.length - 1, Math.floor(sequence));
+    const local = index === scenes.length - 1 ? 0 : sequence - index;
+    const maxScale = window.matchMedia('(max-width: 780px)').matches ? 1.72 : 2.18;
+
+    scenes.forEach((scene, sceneIndex) => {
+      let scale = .58;
+      let opacity = 0;
+      let zIndex = 0;
+      let copyOpacity = 0;
+      let copyY = 34;
+      if (sceneIndex === index) {
+        scale = 1 + local * (maxScale - 1);
+        opacity = 1 - Math.max(0, (local - .62) / .38);
+        zIndex = 3;
+        copyOpacity = 1 - Math.max(0, (local - .36) / .34);
+        copyY = -local * 42;
+      } else if (sceneIndex === index + 1) {
+        const arrive = 1 - Math.pow(1 - local, 3);
+        scale = .58 + arrive * .42;
+        opacity = Math.min(1, local * 1.7);
+        zIndex = 2;
+        copyOpacity = Math.max(0, (local - .55) / .34);
+        copyY = (1 - local) * 42;
+      }
+      scene.style.setProperty('--process-scale', scale.toFixed(4));
+      scene.style.setProperty('--process-opacity', opacity.toFixed(4));
+      scene.style.setProperty('--process-copy-opacity', Math.min(1, copyOpacity).toFixed(4));
+      scene.style.setProperty('--process-copy-y', `${copyY.toFixed(2)}px`);
+      scene.style.zIndex = String(zIndex);
+      scene.setAttribute('aria-hidden', sceneIndex === index || sceneIndex === index + 1 ? 'false' : 'true');
+    });
+    if (count) count.textContent = String(index + 1).padStart(2, '0');
+    if (bar) bar.style.width = `${(progress * 100).toFixed(2)}%`;
+    ticking = false;
+  }
+
+  function requestQualityUpdate() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateQualityStory);
+  }
+
+  function scheduleWheelUnlock() {
+    window.clearTimeout(wheelUnlockTimer);
+    const remaining = Math.max(180, 700 - (performance.now() - wheelLockStarted));
+    wheelUnlockTimer = window.setTimeout(() => { wheelLocked = false; }, remaining);
+  }
+
+  story.addEventListener('wheel', (event) => {
+    if (reducedMotion || Math.abs(event.deltaY) < 1) return;
+    if (wheelLocked) {
+      event.preventDefault();
+      scheduleWheelUnlock();
+      return;
+    }
+    const rect = story.getBoundingClientRect();
+    if (!(rect.top <= 1 && rect.bottom >= window.innerHeight - 1)) return;
+    const { progress, travel } = storyPosition();
+    const current = Math.round(progress * (scenes.length - 1));
+    const direction = event.deltaY > 0 ? 1 : -1;
+    const next = Math.max(0, Math.min(scenes.length - 1, current + direction));
+    if (next === current) return;
+    event.preventDefault();
+    wheelLocked = true;
+    wheelLockStarted = performance.now();
+    const top = window.scrollY + rect.top;
+    window.scrollTo({ top: top + travel * (next / (scenes.length - 1)), behavior: 'smooth' });
+    scheduleWheelUnlock();
+  }, { passive: false });
+
+  story.style.setProperty('--quality-count', scenes.length || 1);
+  updateQualityStory();
+  window.addEventListener('scroll', requestQualityUpdate, { passive: true });
+  window.addEventListener('resize', requestQualityUpdate);
+})();
