@@ -2279,3 +2279,44 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .services-motion-grid > .card { opacity: 1; transform: none; }
 }
+/* Frosted navigation pills; the existing blue indicator remains the active state. */
+.site-header .nav-links > a:not(.nav-cta),
+.site-header .nav-links > .has-dropdown > a {
+  border-radius: 999px;
+  background: linear-gradient(145deg, rgba(255,255,255,.42), rgba(220,234,245,.14));
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 0 0 1px rgba(125,158,185,.18), 0 3px 12px rgba(21,50,73,.05);
+  transition: background .4s ease, box-shadow .4s ease, color .45s ease, transform .55s cubic-bezier(.16,1,.3,1);
+}
+.home-page .site-header.is-over-hero .nav-links > a:not(.nav-cta),
+.home-page .site-header.is-over-hero .nav-links > .has-dropdown > a {
+  background: linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,.04));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 0 0 1px rgba(255,255,255,.16), 0 4px 16px rgba(0,12,24,.1);
+}
+.site-header .nav-links > a:not(.nav-cta):hover,
+.site-header .nav-links > .has-dropdown > a:hover {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8), inset 0 0 0 1px rgba(140,184,217,.35), 0 5px 18px rgba(20,70,105,.12);
+}
+/* Let the blue sliding pill show through without changing its colour. */
+.site-header .nav-links.nav-flow-ready > a.nav-flow-target:not(.nav-cta),
+.site-header .nav-links.nav-flow-ready > .has-dropdown > a.nav-flow-target {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.22);
+}
+.site-header .nav-links a:focus-visible,
+.site-header .nav-toggle:focus-visible { outline: 2px solid #4097ce; outline-offset: 3px; }
+.site-header .dropdown { background: rgba(248,252,255,.88); -webkit-backdrop-filter: blur(22px) saturate(150%); backdrop-filter: blur(22px) saturate(150%); }
+@media (max-width: 1024px) {
+  .site-header .nav-toggle { border-radius: 14px; background: rgba(180,205,225,.12); box-shadow: inset 0 0 0 1px rgba(148,177,201,.2); }
+  .site-header.nav-open .nav-links,
+  .home-page .site-header.nav-open .nav-links { background: rgba(248,252,255,.94); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+  .site-header.nav-open .nav-links > a:not(.nav-cta),
+  .site-header.nav-open .nav-links > .has-dropdown > a { border-radius: 999px; }
+  .home-page .site-header.nav-open .nav-links a:not(.nav-flow-target):not(.nav-cta) { color: var(--muted); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header .nav-links > a, .site-header .nav-links > .has-dropdown > a { transition: none; }
+}
