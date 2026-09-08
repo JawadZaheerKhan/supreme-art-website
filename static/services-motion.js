@@ -1,7 +1,7 @@
 /* Animate real grid cards; their layout slots remain reserved throughout. */
 (() => {
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
-  const speed = 1.2; // Slightly quicker Services playback; retain the shared easing.
+  const speed = 1.2; // Keep the existing playback speed independent of loading and scrolling.
   if (preference.matches || !Element.prototype.animate) return;
   const groups = [...document.querySelectorAll('[data-services-section]')].map(section => {
     const grid = section.querySelector('.grid, .finishes-features');
@@ -19,6 +19,11 @@
   let stopped = false;
   const headerBottom = () => Math.max(0, document.querySelector('.site-header')?.getBoundingClientRect().bottom || 0) + 16;
   const visible = rect => rect.bottom > headerBottom() && rect.top < innerHeight - 32;
+  const readyToPlay = rect => {
+    const top = headerBottom(), bottom = innerHeight - 32;
+    const shown = Math.max(0, Math.min(rect.bottom, bottom) - Math.max(rect.top, top));
+    return shown >= Math.min(rect.height * .45, (bottom - top) * .45);
+  };
   const settle = card => {
     card.classList.remove('service-card-pending', 'service-card-moving');
     card.dataset.serviceState = 'placed';
@@ -80,7 +85,7 @@
         const card = group.cards[group.index];
         const rect = card.getBoundingClientRect();
         if (rect.bottom <= headerBottom()) { settle(card); group.index++; continue; }
-        if (rect.top >= innerHeight - 32) break;
+        if (!readyToPlay(rect)) break;
         group.index++;
         play(group, card);
         return;
@@ -93,7 +98,15 @@
   const observer = new IntersectionObserver(schedule, { rootMargin: '-80px 0px -32px 0px' });
   groups.forEach(group => observer.observe(group.grid));
   addEventListener('scroll', schedule, { passive: true });
-  addEventListener('resize', () => { cancelActive(); schedule(); }, { passive: true });
+  let viewportWidth = innerWidth;
+  addEventListener('resize', () => {
+    // Mobile browser bars change height during scrolling: do not snap a running card into place.
+    if (innerWidth !== viewportWidth) {
+      viewportWidth = innerWidth;
+      cancelActive();
+    }
+    schedule();
+  }, { passive: true });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) active?.animation?.pause();
     else { active?.animation?.play(); schedule(); }
