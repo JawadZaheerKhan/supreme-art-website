@@ -345,7 +345,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 
   nav.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', (event) => {
-      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (isMobile() || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const url = new URL(link.href, window.location.href);
       if (url.origin !== window.location.origin || url.href === window.location.href) return;
       event.preventDefault();
@@ -543,17 +543,15 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     photos.forEach(photo => { photo.draggable = false; });
     gallery.classList.add('is-swipeable');
     gallery.closest('.proc')?.removeAttribute('aria-hidden');
-    const controls = document.createElement('div');
-    controls.className = 'gallery-controls';
-    ['Previous photo', 'Next photo'].forEach((label, i) => {
+    dots.forEach((dot, i) => {
       const button = document.createElement('button');
       button.type = 'button';
-      button.textContent = i ? '›' : '‹';
-      button.setAttribute('aria-label', label);
-      button.addEventListener('click', () => move(i ? 1 : -1));
-      controls.append(button);
+      button.className = 'gallery-dot';
+      button.setAttribute('aria-label', 'Show photo ' + (i + 1) + ' of ' + photos.length);
+      dot.replaceWith(button);
+      button.append(dot);
+      button.addEventListener('click', () => show(i));
     });
-    gallery.append(controls);
     gallery.addEventListener('keydown', event => {
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
       event.preventDefault();
@@ -569,7 +567,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       selected = (next + photos.length) % photos.length;
       gallery.classList.add('is-manual-gallery');
       photos.forEach((photo, i) => photo.classList.toggle('is-selected', i === selected));
-      dots.forEach((dot, i) => dot.classList.toggle('is-selected', i === selected));
+      dots.forEach((dot, i) => { dot.classList.toggle('is-selected', i === selected); dot.parentElement.setAttribute('aria-pressed', String(i === selected)); });
     }
     function move(direction) { show(current() + direction); }
     gallery.addEventListener('wheel', event => {

@@ -2375,6 +2375,27 @@ a { color: inherit; }
   .home-page [data-services-section] .home-client-card { padding: 16px 8px; }
 }
 .proc__stage .proc__shot:not(.on) { visibility: hidden; }
-.gallery-controls { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 12px; z-index: 5; pointer-events: none; }
-.gallery-controls button { pointer-events: auto; width: 42px; height: 42px; border: 1px solid #ffffff80; border-radius: 50%; background: #071a2bd9; color: white; font: 30px/1 sans-serif; cursor: pointer; }
 .gallery-controls button:focus-visible { outline: 3px solid #63c5ed; outline-offset: 3px; }
+/* Clickable photo dots affect the photo selection, never the stage zoom transform. */
+.proc__stage .proc__pair-dots, .proc__stage .quality-gallery__dots { gap: 0; padding: 3px 5px; }
+.gallery-dot { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+.gallery-dot i { display: block; pointer-events: none; transition: box-shadow .2s ease; }
+.gallery-dot:hover, .gallery-dot:focus-visible { background: rgba(255,255,255,.18); }
+.gallery-dot:hover i, .gallery-dot:focus-visible i { box-shadow: 0 0 0 4px rgba(255,255,255,.2); }
+.gallery-dot:focus-visible { outline: 2px solid #85cef6; outline-offset: 1px; }
+/* The autoplay dots now sit inside buttons; keep their original sequence timing. */
+.proc__pair-dots .gallery-dot:nth-child(2) i { animation-name: processDotTwo; }
+.quality-gallery--two .gallery-dot:nth-child(2) i { animation-name: qualityDotTwoTwo; }
+.quality-gallery--three .gallery-dot:nth-child(2) i { animation-name: qualityDotTwoThree; }
+.quality-gallery--three .gallery-dot:nth-child(3) i { animation-name: qualityDotThreeThree; }
+
+@media (max-width: 1024px) {
+  .site-header .nav-links .has-dropdown,
+  .site-header .nav-links .has-dropdown .dropdown,
+  .site-header .nav-links .has-dropdown:hover .dropdown,
+  .site-header .nav-links .has-dropdown:focus-within .dropdown {
+    left: auto; right: auto; transform: none; width: 100%; min-width: 0;
+  }
+  .site-header .nav-links a { transform: none !important; }
+  .site-header .nav-links { overflow-x: hidden; }
+}.proc__stage .proc__shot.is-manual-gallery .gallery-dot i { animation: none; }
