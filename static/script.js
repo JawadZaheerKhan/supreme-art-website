@@ -365,11 +365,19 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   // indicator as the layout settles so it keeps tracking the active tab
   // instead of being left pointing at where the tab used to be.
   if (!reducedMotion) {
-    let lastY = window.scrollY, ticking = false, condenseTimer;
+    let lastY = window.scrollY, ticking = false, trackUntil = 0;
     function reposition() {
-      positionIndicator(activeLink, false);
-      clearTimeout(condenseTimer);
-      condenseTimer = setTimeout(() => positionIndicator(activeLink, false), 650);
+      // Track the tab's live position every frame while it collapses/expands,
+      // with the indicator's own transition off, so it moves in exact lockstep
+      // instead of jumping to a stale target once the layout has already moved.
+      nav.classList.add('is-tracking');
+      trackUntil = performance.now() + 650;
+      const frame = (now) => {
+        positionIndicator(activeLink, false);
+        if (now < trackUntil) requestAnimationFrame(frame);
+        else nav.classList.remove('is-tracking');
+      };
+      requestAnimationFrame(frame);
     }
     function onScroll() {
       if (ticking) return;
