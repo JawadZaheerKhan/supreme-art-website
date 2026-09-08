@@ -2491,4 +2491,29 @@ a { color: inherit; }
   .site-header .nav-links > .has-dropdown:not(:has(> a.current)) {
     max-width: 150px;
   }
+  /* "About us" has no hover on touch, so tap toggles the dropdown open
+     instead (see script.js) rather than it being unreachable on phones. */
+  .site-header .nav-links .has-dropdown.dropdown-open .dropdown {
+    opacity: 1; visibility: visible;
+  }
+  /* The home page's own header treatment predates the shared glass bar and
+     still overrode tab padding/colour and hid the indicator outright below
+     780px - bring it back in line with every other page. */
+  .home-page .site-header .nav-links {
+    background-color: rgba(118,118,126,.34);
+  }
+  .home-page .site-header .nav-links::before {
+    display: block;
+  }
+  .home-page .site-header .nav-links > a,
+  .home-page .site-header .nav-links > .has-dropdown > a {
+    padding: 7px 12px;
+    font-size: .8rem;
+    border-radius: 999px;
+    color: var(--muted);
+  }
+  .home-page .site-header .nav-links a.current,
+  .home-page .site-header:not(.is-over-hero) .nav-links a.current {
+    color: #fff;
+  }
 }

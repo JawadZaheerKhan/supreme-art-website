@@ -41,6 +41,29 @@ const cardMotion = Object.freeze({ reveal: 1100, hold: 100, slide: 1100, gap: 10
   });
 })();
 
+// "About us" reveals its dropdown on hover on desktop, but phones have no
+// hover - tapping it there toggles the dropdown open instead of navigating
+// straight through (a second tap, or a dropdown link, still navigates).
+(function () {
+  const wraps = document.querySelectorAll('.has-dropdown');
+  if (!wraps.length) return;
+  const desktop = () => window.matchMedia('(min-width: 1025px)').matches;
+  wraps.forEach((wrap) => {
+    const trigger = wrap.querySelector(':scope > a');
+    trigger?.addEventListener('click', (event) => {
+      if (desktop() || wrap.classList.contains('dropdown-open')) return;
+      event.preventDefault();
+      wraps.forEach((w) => { if (w !== wrap) w.classList.remove('dropdown-open'); });
+      wrap.classList.add('dropdown-open');
+    });
+  });
+  document.addEventListener('click', (event) => {
+    wraps.forEach((wrap) => {
+      if (!wrap.contains(event.target)) wrap.classList.remove('dropdown-open');
+    });
+  });
+})();
+
 /* ============================================================
    Scroll story: paper → print → die-cut → folded carton
    ============================================================ */
