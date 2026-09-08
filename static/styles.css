@@ -2316,6 +2316,34 @@ a { color: inherit; }
   .site-header.nav-open .nav-links > .has-dropdown > a { border-radius: 999px; }
   .home-page .site-header.nav-open .nav-links a:not(.nav-flow-target):not(.nav-cta) { color: var(--muted); }
 }
+/* Mobile menu: match the glass pills used on desktop, and let the "About
+   us" row (which wraps its link + submenu in a span) fill the row like
+   every other tab instead of shrinking to its own text width. */
+@media (max-width: 1024px) {
+  .site-header.nav-open .nav-links > a,
+  .site-header.nav-open .nav-links > .has-dropdown > a {
+    display: block;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .site-header.nav-open .nav-links > a:active,
+  .site-header.nav-open .nav-links > .has-dropdown > a:active {
+    background: rgba(128,128,128,.16);
+  }
+  .site-header.nav-open .nav-links .has-dropdown > a::after { display: none; }
+  .site-header.nav-open .nav-links .dropdown {
+    padding: 2px 12px 10px;
+    display: grid;
+    gap: 2px;
+  }
+  .site-header.nav-open .nav-links .dropdown a {
+    border-bottom: 0;
+    border-radius: 999px;
+    padding: 11px 16px 11px 30px;
+    font-size: .92rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .site-header.nav-open .nav-links .dropdown a:active { background: rgba(128,128,128,.16); }
+}
 @media (prefers-reduced-motion: reduce) {
   .site-header .nav-links, .site-header .nav-links > a, .site-header .nav-links > .has-dropdown > a { transition: none; }
 }
