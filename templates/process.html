@@ -22,10 +22,11 @@
         <div class="proc__pin">
           <div class="proc__inner container">
             <div class="proc__stage">
-              {{#each page.steps}}<div class="proc__shot proc__pair{{#if image_2}}{{else}} proc__pair--single{{/if}}{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}">
+              {{#each page.steps}}<div class="proc__shot {{#if image_3}}quality-gallery quality-gallery--three{{else}}proc__pair{{#if image_2}}{{else}} proc__pair--single{{/if}}{{/if}}{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}">
                 {{#if image}}<img src="{{ image }}" alt="" loading="lazy" />{{/if}}
                 {{#if image_2}}<img src="{{ image_2 }}" alt="" loading="lazy" />{{/if}}
-                {{#if image_2}}<span class="proc__pair-dots"><i></i><i></i></span>{{/if}}
+                {{#if image_3}}<img src="{{ image_3 }}" alt="" loading="lazy" />{{/if}}
+                {{#if image_2}}<span class="{{#if image_3}}quality-gallery__dots{{else}}proc__pair-dots{{/if}}"><i></i><i></i>{{#if image_3}}<i></i>{{/if}}</span>{{/if}}
               </div>
               {{/each}}
             </div>
@@ -61,7 +62,8 @@
           {{#if image}}<div class="proc-mob__img proc-mob__img--pair{{#if image_2}}{{else}} proc-mob__img--single{{/if}}">
             <img src="{{ image }}" alt="{{ title }}" loading="lazy" />
             {{#if image_2}}<img src="{{ image_2 }}" alt="{{ title }}" loading="lazy" />{{/if}}
-            {{#if image_2}}<span class="proc__pair-dots"><i></i><i></i></span>{{/if}}
+            {{#if image_3}}<img src="{{ image_3 }}" alt="{{ title }}" loading="lazy" />{{/if}}
+            {{#if image_2}}<span class="{{#if image_3}}quality-gallery__dots{{else}}proc__pair-dots{{/if}}"><i></i><i></i>{{#if image_3}}<i></i>{{/if}}</span>{{/if}}
           </div>{{/if}}
           <span class="proc__num">{{ num }}</span>
           <h2>{{ title }}</h2>
