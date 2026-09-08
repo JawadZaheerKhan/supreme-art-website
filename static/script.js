@@ -254,10 +254,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   let navigationTimer;
   let targetTimer;
 
-  function isMobile() {
-    return window.matchMedia('(max-width: 1024px)').matches;
-  }
-
   function topLevelLink(link) {
     return link.closest('.has-dropdown')?.querySelector(':scope > a') || link;
   }
@@ -275,13 +271,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     const navRect = nav.getBoundingClientRect();
     const linkRect = link.getBoundingClientRect();
 
-    if (isMobile()) {
-      nav.style.setProperty('--nav-flow-y', `${linkRect.top - navRect.top}px`);
-      nav.style.setProperty('--nav-flow-h', `${linkRect.height}px`);
-    } else {
-      nav.style.setProperty('--nav-flow-x', `${linkRect.left - navRect.left}px`);
-      nav.style.setProperty('--nav-flow-w', `${linkRect.width}px`);
-    }
+    nav.style.setProperty('--nav-flow-x', `${linkRect.left - navRect.left}px`);
+    nav.style.setProperty('--nav-flow-w', `${linkRect.width}px`);
 
     nav.classList.add('nav-flow-ready');
     if (animate && !reducedMotion) {
@@ -345,7 +336,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 
   nav.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', (event) => {
-      if (isMobile() || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const url = new URL(link.href, window.location.href);
       if (url.origin !== window.location.origin || url.href === window.location.href) return;
       event.preventDefault();
@@ -359,6 +350,11 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   toggle?.addEventListener('click', syncIndicator);
   window.addEventListener('resize', syncIndicator);
   syncIndicator();
+  // Fonts finishing their swap-in after the first measurement (e.g. loading
+  // straight into a page whose current tab is a long label) can leave the
+  // indicator a few pixels off - resync once everything has actually settled.
+  document.fonts?.ready?.then(syncIndicator);
+  window.addEventListener('load', syncIndicator);
 
   // Condense the bar to just the current tab while scrolling down; scrolling
   // up (or being near the top) restores the full bar. Reposition the liquid
@@ -371,7 +367,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       // with the indicator's own transition off, so it moves in exact lockstep
       // instead of jumping to a stale target once the layout has already moved.
       nav.classList.add('is-tracking');
-      trackUntil = performance.now() + 650;
+      trackUntil = performance.now() + 800;
       const frame = (now) => {
         positionIndicator(activeLink, false);
         if (now < trackUntil) requestAnimationFrame(frame);

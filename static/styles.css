@@ -1746,7 +1746,8 @@ a { color: inherit; }
 .site-header .nav-links.is-tracking::before { transition: none; }
 .site-header .nav-links > a,
 .site-header .nav-links > .has-dropdown > a {
-  position: relative; z-index: 1; padding: 9px 13px; border-radius: 999px;
+  position: relative; z-index: 1; padding: 9px 22px; border-radius: 999px;
+  white-space: nowrap; flex-shrink: 0;
   transition: color .45s ease, transform .68s cubic-bezier(.16,1,.3,1), opacity .3s ease;
 }
 .site-header .nav-links > a.current,
@@ -2246,37 +2247,35 @@ a { color: inherit; }
   -webkit-backdrop-filter: blur(22px) saturate(160%);
   backdrop-filter: blur(22px) saturate(160%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(128,128,128,.14), 0 6px 20px rgba(0,0,0,.06);
-  transition: background-color .4s ease, box-shadow .4s ease, gap .6s cubic-bezier(.4,0,.2,1);
+  transition: background-color .4s ease, box-shadow .4s ease, gap .75s cubic-bezier(.22,1,.36,1);
 }
 .home-page .site-header.is-over-hero .nav-links {
   background-color: rgba(128,128,128,.14);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 0 0 1px rgba(255,255,255,.22), 0 6px 20px rgba(0,0,0,.14);
 }
 /* Condense to just the current tab while scrolling down; scrolling back up
-   (or being near the top) restores the full bar. Desktop bar only - the
-   mobile menu is opened explicitly, so this doesn't apply there. */
-@media (min-width: 1025px) {
-  .nav { position: relative; }
-  .site-header .nav-links,
-  .home-page .site-header .nav-links {
-    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-  }
-  .site-header .nav-links > a:not(.current),
-  .site-header .nav-links > .has-dropdown:not(:has(> a.current)) {
-    transition: max-width .6s cubic-bezier(.4,0,.2,1), opacity .6s cubic-bezier(.4,0,.2,1), padding .6s cubic-bezier(.4,0,.2,1);
-    max-width: 160px;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .site-header.nav-condensed .nav-links { gap: 0; }
-  .site-header.nav-condensed .nav-links > a:not(.current),
-  .site-header.nav-condensed .nav-links > .has-dropdown:not(:has(> a.current)) {
-    max-width: 0;
-    opacity: 0;
-    padding-left: 0;
-    padding-right: 0;
-    pointer-events: none;
-  }
+   (or being near the top) restores the full bar. Centered in the header on
+   every screen size, phones included. */
+.nav { position: relative; }
+.site-header .nav-links,
+.home-page .site-header .nav-links {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+}
+.site-header .nav-links > a:not(.current),
+.site-header .nav-links > .has-dropdown:not(:has(> a.current)) {
+  transition: max-width .75s cubic-bezier(.22,1,.36,1), opacity .75s cubic-bezier(.22,1,.36,1), padding .75s cubic-bezier(.22,1,.36,1);
+  max-width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.site-header.nav-condensed .nav-links { gap: 0; }
+.site-header.nav-condensed .nav-links > a:not(.current),
+.site-header.nav-condensed .nav-links > .has-dropdown:not(:has(> a.current)) {
+  max-width: 0;
+  opacity: 0;
+  padding-left: 0;
+  padding-right: 0;
+  pointer-events: none;
 }
 .site-header .nav-links > a:not(.nav-cta),
 .site-header .nav-links > .has-dropdown > a {
@@ -2440,4 +2439,56 @@ a { color: inherit; }
   .mobile-gallery-dots .gallery-dot { width: 32px; height: 32px; }
   .mobile-gallery-dots i { width: 8px; height: 8px; border-radius: 50%; background: #ffffff70; }
   .mobile-gallery-dots [aria-pressed="true"] i { background: #fff; box-shadow: 0 0 0 2px #ffffff30; }
+}
+
+/* Phones: the same condensing pill bar as desktop, sized down and centered,
+   instead of a hamburger menu. The logo is dropped here for space - if the
+   full row still doesn't fit a narrow screen, it scrolls sideways rather
+   than wrapping. */
+@media (max-width: 1024px) {
+  .nav-toggle { display: none; }
+  .brand { display: none; }
+  .site-header .nav-links,
+  .home-page .site-header .nav-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    right: auto;
+    max-width: 94vw;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .site-header .nav-links::-webkit-scrollbar { display: none; }
+  .site-header .nav-links > a,
+  .site-header .nav-links > .has-dropdown > a {
+    padding: 7px 12px;
+    font-size: .8rem;
+  }
+  /* "About us" wraps a link plus its dropdown in a span - reset it back to a
+     plain horizontal pill like every other tab (the dropdown itself stays a
+     hover/focus overlay, same as desktop, rather than an always-open list). */
+  .site-header .nav-links .has-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+  }
+  .site-header .nav-links .has-dropdown > a { display: block; }
+  .site-header .nav-links .has-dropdown .dropdown {
+    position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    width: max-content; max-width: 60vw;
+    opacity: 0; visibility: hidden;
+  }
+  .site-header .nav-links .has-dropdown:hover .dropdown,
+  .site-header .nav-links .has-dropdown:focus-within .dropdown {
+    opacity: 1; visibility: visible;
+  }
+  .site-header .nav-links > a:not(.current),
+  .site-header .nav-links > .has-dropdown:not(:has(> a.current)) {
+    max-width: 150px;
+  }
 }
