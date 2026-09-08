@@ -685,14 +685,18 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       if(next<0||next>=items.length)return false;
       event?.preventDefault();return animate(next);
     }
-    story.addEventListener('wheel',event=>{if(Math.abs(event.deltaY)<1)return;move(event.deltaY>0?1:-1,event)},{passive:false});
-    story.addEventListener('touchstart',event=>{touchStart=event.touches[0]?.clientY??null;touchConsumed=false},{passive:true});
-    story.addEventListener('touchmove',event=>{
-      if(touchStart===null)return;const y=event.touches[0]?.clientY??touchStart,delta=touchStart-y;
-      if(touchConsumed||Math.abs(delta)<18){if(touchConsumed)event.preventDefault();return}
-      if(move(delta>0?1:-1,event))touchConsumed=true;
+    addEventListener('wheel',event=>{if(!pinned()||Math.abs(event.deltaY)<1)return;move(event.deltaY>0?1:-1,event)},{passive:false});
+    addEventListener('touchstart',event=>{touchStart=event.touches[0]?.clientY??null;touchConsumed=false},{passive:true});
+    addEventListener('touchmove',event=>{
+      if(touchStart===null||!pinned())return;
+      const y=event.touches[0]?.clientY??touchStart,delta=touchStart-y;
+      if(!delta)return;
+      const direction=delta>0?1:-1,next=index+direction;
+      if(next>=0&&next<items.length)event.preventDefault();
+      if(touchConsumed||Math.abs(delta)<18)return;
+      if(move(direction,event))touchConsumed=true;
     },{passive:false});
-    story.addEventListener('touchend',()=>{touchStart=null;touchConsumed=false},{passive:true});
+    addEventListener('touchend',()=>{touchStart=null;touchConsumed=false},{passive:true});
   }
   const accumulationTiming={pop:1200,total:2400};
   setup('[data-home-products]','[data-product-card]','.home-products-story__count b',accumulationTiming);
