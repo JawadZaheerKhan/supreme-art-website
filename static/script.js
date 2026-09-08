@@ -699,6 +699,21 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       if(move(direction,event))touchConsumed=true;
     },{passive:false});
     addEventListener('touchend',()=>{touchStart=null;touchConsumed=false},{passive:true});
+    // Safety net: a fast flick releases before any touchmove fires again, so momentum can
+    // carry the page through the whole section with nothing popped. Once the scroll settles
+    // somewhere pinned with no active touch, sync the cards to match where it landed.
+    function progress(){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight);return Math.max(0,Math.min(1,-rect.top/travel))}
+    function catchUp(){
+      if(busy||touchStart!==null||!pinned())return;
+      const target=Math.max(-1,Math.min(items.length-1,Math.round(progress()*(items.length+1))-1));
+      if(target===index)return;
+      if(Math.abs(target-index)<=1){move(target>index?1:-1);return}
+      index=target;
+      items.forEach((item,n)=>{item.classList.toggle('is-placed',n<=target);item.classList.remove('is-popping');item.setAttribute('aria-hidden',n<=target?'false':'true')});
+      if(counter&&target>=0)counter.textContent=String(target+1).padStart(2,'0');
+    }
+    let catchUpTimer;
+    addEventListener('scroll',()=>{clearTimeout(catchUpTimer);catchUpTimer=setTimeout(catchUp,140)},{passive:true});
   }
   const accumulationTiming={pop:cardMotion.reveal+cardMotion.hold,total:cardMotion.reveal+cardMotion.hold+cardMotion.slide+cardMotion.gap};
   setup('[data-home-products]','[data-product-card]','.home-products-story__count b',accumulationTiming);
