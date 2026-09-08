@@ -603,3 +603,67 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     gallery.addEventListener('lostpointercapture', () => { pointer = null; gallery.classList.remove('is-dragging'); });
   });
 })();
+/* Mobile galleries retain native swiping, with visible dots and on-screen autoplay. */
+(function () {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('.proc-mob__img').forEach(gallery => {
+    const photos = [...gallery.querySelectorAll(':scope > img')];
+    if (photos.length < 2) return;
+    gallery.querySelector('.proc__pair-dots, .quality-gallery__dots')?.remove();
+    const controls = document.createElement('div');
+    controls.className = 'mobile-gallery-dots';
+    controls.setAttribute('role', 'group');
+    controls.setAttribute('aria-label', 'Choose photo');
+    gallery.after(controls);
+    let current = 0, timer, visible = false, touching = false, frame;
+    const dots = photos.map((photo, i) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'gallery-dot';
+      button.setAttribute('aria-label', 'Show photo ' + (i + 1) + ' of ' + photos.length);
+      button.append(document.createElement('i'));
+      button.addEventListener('click', () => select(i));
+      controls.append(button);
+      return button;
+    });
+    function mark() {
+      dots.forEach((dot, i) => dot.setAttribute('aria-pressed', String(i === current)));
+    }
+    function schedule() {
+      clearTimeout(timer);
+      if (visible && !touching && !document.hidden && !reduced.matches) {
+        timer = setTimeout(() => select((current + 1) % photos.length), 4500);
+      }
+    }
+    function select(next) {
+      current = next;
+      const left = photos[next].getBoundingClientRect().left - gallery.getBoundingClientRect().left + gallery.scrollLeft;
+      gallery.scrollTo({left, behavior: reduced.matches ? 'instant' : 'smooth'});
+      mark();
+      schedule();
+    }
+    gallery.addEventListener('scroll', () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const left = gallery.getBoundingClientRect().left;
+        current = photos.reduce((best, photo, i) =>
+          Math.abs(photo.getBoundingClientRect().left - left) < Math.abs(photos[best].getBoundingClientRect().left - left) ? i : best, 0);
+        mark();
+        schedule();
+      });
+    }, {passive: true});
+    gallery.addEventListener('touchstart', () => { touching = true; clearTimeout(timer); }, {passive: true});
+    const release = () => { touching = false; schedule(); };
+    gallery.addEventListener('touchend', release, {passive: true});
+    gallery.addEventListener('touchcancel', release, {passive: true});
+    const observer = new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting && gallery.getClientRects().length > 0;
+      schedule();
+    }, {threshold: .15});
+    observer.observe(gallery);
+    document.addEventListener('visibilitychange', schedule);
+    reduced.addEventListener('change', schedule);
+    addEventListener('resize', () => { if (visible) select(current); });
+    mark();
+  });
+})();

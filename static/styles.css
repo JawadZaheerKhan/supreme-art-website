@@ -2399,3 +2399,14 @@ a { color: inherit; }
   .site-header .nav-links a { transform: none !important; }
   .site-header .nav-links { overflow-x: hidden; }
 }.proc__stage .proc__shot.is-manual-gallery .gallery-dot i { animation: none; }
+
+.mobile-gallery-dots { display: none; }
+@media (max-width: 860px), (prefers-reduced-motion: reduce) {
+  .mobile-gallery-dots {
+    display: flex; justify-content: center; width: fit-content; gap: 2px;
+    margin: -12px auto 20px; padding: 3px 6px; border-radius: 999px; background: #16364ccf;
+  }
+  .mobile-gallery-dots .gallery-dot { width: 32px; height: 32px; }
+  .mobile-gallery-dots i { width: 8px; height: 8px; border-radius: 50%; background: #ffffff70; }
+  .mobile-gallery-dots [aria-pressed="true"] i { background: #fff; box-shadow: 0 0 0 2px #ffffff30; }
+}
