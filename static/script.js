@@ -694,8 +694,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     },{passive:false});
     story.addEventListener('touchend',()=>{touchStart=null;touchConsumed=false},{passive:true});
   }
-  const productClientTiming={pop:1200,total:2400};
-  setup('[data-home-products]','[data-product-card]','.home-products-story__count b',productClientTiming);
-  setup('[data-home-clients]','[data-client-card]','.home-clients-story__count b',productClientTiming);
-  setup('[data-home-closing]','[data-closing-card]',null);
+  const accumulationTiming={pop:1200,total:2400};
+  setup('[data-home-products]','[data-product-card]','.home-products-story__count b',accumulationTiming);
+  setup('[data-home-clients]','[data-client-card]','.home-clients-story__count b',accumulationTiming);
+  setup('[data-home-closing]','[data-closing-card]',null,accumulationTiming);
 })();
