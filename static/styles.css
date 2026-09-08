@@ -2340,3 +2340,41 @@ a { color: inherit; }
     margin-bottom: 24px;
   }
 }
+/* Homepage cards use the same real-grid automatic sequence as Services. */
+.home-page [data-services-section] { height: auto; padding: 76px 0; }
+.home-page [data-services-section] > div { position: relative; height: auto; min-height: 0; overflow: visible; }
+.home-page [data-services-section] [class$="__inner"] { height: auto; padding-block: 0; display: grid; gap: 32px; }
+.home-page [data-services-section] .grid {
+  position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px; min-height: 0; height: auto; container-type: normal; perspective: none;
+}
+.home-page [data-services-section] .grid > .card {
+  position: relative; inset: auto; width: 100%; height: auto; min-height: 0; max-height: none;
+  opacity: 1; visibility: visible; transform: none; transition: none; margin: 0;
+}
+.home-page [data-services-section] .grid > .service-card-pending { opacity: 0; pointer-events: none; }
+.home-page [data-services-section] .grid > .service-card-moving { z-index: 5; }
+.home-page [data-services-section] .home-product-card { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr; padding: 0; }
+.home-page [data-services-section] .home-product-card__media { height: 220px; min-height: 0; }
+.home-page [data-services-section] .home-product-card__body { padding: 22px; }
+.home-page [data-services-section] .home-product-card__body h3 { font-size: 1.5rem; }
+.home-page [data-services-section] .home-client-card { display: grid; justify-items: center; grid-template-rows: auto auto; gap: 12px; padding: 24px; }
+.home-page [data-services-section] .client__badge { width: 100px; height: 100px; }
+.home-page [data-services-section] .home-news-card { padding: 26px; overflow: visible; }
+.home-page [data-services-section] .home-products-story__count,
+.home-page [data-services-section] .home-clients-story__count,
+.home-page [data-services-section] .home-closing-story__progress { display: none; }
+.home-page [data-services-section] .home-products-story__footer { justify-content: flex-end; }
+@media (max-width: 860px) {
+  .home-page [data-services-section] .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+}
+@media (max-width: 560px) {
+  .home-page [data-services-section] { padding-block: 48px; }
+  .home-page [data-services-section] .grid { grid-template-columns: 1fr; }
+  .home-page [data-home-clients] .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-page [data-services-section] .home-client-card { padding: 16px 8px; }
+}
+.proc__stage .proc__shot:not(.on) { visibility: hidden; }
+.gallery-controls { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 12px; z-index: 5; pointer-events: none; }
+.gallery-controls button { pointer-events: auto; width: 42px; height: 42px; border: 1px solid #ffffff80; border-radius: 50%; background: #071a2bd9; color: white; font: 30px/1 sans-serif; cursor: pointer; }
+.gallery-controls button:focus-visible { outline: 3px solid #63c5ed; outline-offset: 3px; }

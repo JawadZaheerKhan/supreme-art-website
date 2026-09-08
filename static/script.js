@@ -1,11 +1,25 @@
 // Year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// CMYK loader — hide after first paint
-window.addEventListener('load', () => {
-  setTimeout(() => document.getElementById('loader').classList.add('done'), 800);
-});
+// Show the page after the first paint instead of waiting for below-fold images.
+const dismissLoader = () => requestAnimationFrame(() => requestAnimationFrame(() => {
+  document.getElementById('loader')?.classList.add('done');
+}));
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', dismissLoader, {once: true});
+else dismissLoader();
 
+// Prepare galleries before they enter view, including photos hidden in a stage.
+const imagePrep = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.querySelectorAll('img').forEach(img => {
+      img.loading = 'eager';
+      img.decoding = 'async';
+    });
+    imagePrep.unobserve(entry.target);
+  });
+}, {rootMargin: '1400px 0px'});
+document.querySelectorAll('[data-home-products], [data-home-clients], [data-home-process], [data-home-quality], [data-services-section], .proc, .proc-mob__step').forEach(section => imagePrep.observe(section));
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 // Shared by Home and the automatic Services card sequence.
 const cardMotion = Object.freeze({ reveal: 1100, hold: 100, slide: 1100, gap: 100, easing: "cubic-bezier(.16,1,.3,1)" });
@@ -349,12 +363,12 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 /* Homepage continuing scroll chapters */
 (function () {
   const overview = document.querySelector('[data-home-overview]');
-  const products = document.querySelector('[data-home-products]');
-  if (!overview && !products) return;
 
-  const productCards = products ? [...products.querySelectorAll('[data-product-card]')] : [];
-  const productCount = products?.querySelector('.home-products-story__count b');
-  let activeProduct = -1;
+  if (!overview) return;
+
+
+
+
   let ticking = false;
 
   function storyProgress(element) {
@@ -379,35 +393,9 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     overview.style.setProperty('--overview-bar-width', `${(progress * 100).toFixed(2)}%`);
   }
 
-  function showProduct(index, localProgress) {
-    if (!productCards.length) return;
-    activeProduct = index;
-    const currentIsPlaced = localProgress >= 0.52 || (index === productCards.length - 1 && localProgress >= 0.46);
-    productCards.forEach((card, cardIndex) => {
-      const placed = cardIndex < index || (cardIndex === index && currentIsPlaced);
-      const popping = cardIndex === index && !currentIsPlaced;
-      card.classList.toggle('is-placed', placed);
-      card.classList.toggle('is-popping', popping);
-      card.classList.toggle('is-awaiting', cardIndex > index);
-      card.classList.remove('is-before', 'is-active', 'is-after');
-      card.setAttribute('aria-hidden', cardIndex > index ? 'true' : 'false');
-    });
-    if (productCount) productCount.textContent = String(index + 1).padStart(2, '0');
-  }
-
-  function updateProducts() {
-    if (products?.dataset.gestureControlled === 'true') return;
-    if (!products || !productCards.length) return;
-    const progress = storyProgress(products);
-    const sequence = Math.min(productCards.length - 0.0001, progress * productCards.length);
-    const index = Math.min(productCards.length - 1, Math.floor(sequence));
-    const localProgress = sequence - index;
-    showProduct(index, localProgress);
-  }
-
   function update() {
     updateOverview();
-    updateProducts();
+
     ticking = false;
   }
 
@@ -417,8 +405,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     requestAnimationFrame(update);
   }
 
-  products?.style.setProperty('--product-count', productCards.length || 1);
-  showProduct(0, 0);
+
+
   update();
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', requestUpdate);
@@ -533,7 +521,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     }
     scenes.forEach(card => {
       const img = card.querySelector('img');
-      if (img) { img.loading = 'eager'; img.decoding = 'async'; }
+      if (img) img.decoding = 'async';
     });
     resting();
     sync();
@@ -542,91 +530,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     staticLayout.addEventListener('change', reset);
   });
 })();
-/* Homepage clients, news and contact scroll chapters */
-(function(){
-  const clients=document.querySelector('[data-home-clients]');
-  const closing=document.querySelector('[data-home-closing]');
-  const clientCards=clients?[...clients.querySelectorAll('[data-client-card]')]:[];
-  const clientCount=clients?.querySelector('.home-clients-story__count b');
-  const newsCards=closing?[...closing.querySelectorAll('[data-closing-card]')]:[];
-  const closingBar=closing?.querySelector('.home-closing-story__progress span');
-  let ticking=false;
-  const progressOf=el=>{const r=el.getBoundingClientRect(),t=Math.max(1,el.offsetHeight-innerHeight);return Math.max(0,Math.min(1,-r.top/t))};
-  function updateClients(){if(clients?.dataset.gestureControlled==='true')return;if(!clients||!clientCards.length)return;const p=progressOf(clients),s=Math.min(clientCards.length-.0001,p*clientCards.length),i=Math.floor(s),local=s-i,placed=local>=.52;clientCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&placed));card.classList.toggle('is-popping',n===i&&!placed);card.setAttribute('aria-hidden',n>i?'true':'false')});if(clientCount)clientCount.textContent=String(i+1).padStart(2,'0')}
-  function updateClosing(){if(closing?.dataset.gestureControlled==='true')return;if(!closing||!newsCards.length)return;const p=progressOf(closing),s=Math.min(newsCards.length-.0001,p*newsCards.length),i=Math.floor(s),local=s-i;newsCards.forEach((card,n)=>{card.classList.toggle('is-placed',n<i||(n===i&&local>=.52));card.classList.toggle('is-popping',n===i&&local<.52)});if(closingBar)closingBar.style.width=`${(p*100).toFixed(2)}%`}  function update(){updateClients();updateClosing();ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}
-  clients?.style.setProperty('--client-count',clientCards.length||1);closing?.style.setProperty('--closing-count',newsCards.length||1);update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request);
-})();
 /* Standalone contact scroll reveal */
 (function(){const story=document.querySelector('[data-home-contact]');if(!story)return;let ticking=false;function update(){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight),p=Math.max(0,Math.min(1,-rect.top/travel)),e=1-Math.pow(1-p,3);story.style.setProperty('--contact-opacity',e.toFixed(3));story.style.setProperty('--contact-scale',(.78+e*.22).toFixed(3));ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request)})();
-/* One gesture owns one complete Product, Client, or News animation. */
-(function(){
-  if(reducedMotion)return;
-  function setup(selector,itemSelector,countSelector,timing={pop:280,total:820}){
-    const story=document.querySelector(selector);if(!story)return;
-    const items=[...story.querySelectorAll(itemSelector)];if(!items.length)return;
-    story.dataset.gestureControlled='true';
-    let index=-1,busy=false,touchStart=null,touchConsumed=false,finishTimer,releaseTimer;
-    const counter=story.querySelector(countSelector);
-    items.forEach(item=>{item.classList.remove('is-popping','is-placed');item.setAttribute('aria-hidden','true')});
-    const compactLayout=matchMedia("(max-width: 1024px) and (max-height: 600px)");
-    function syncLayout(){clearTimeout(finishTimer);clearTimeout(releaseTimer);busy=false;index=-1;items.forEach(item=>{item.classList.remove("is-placed","is-popping");item.setAttribute("aria-hidden",compactLayout.matches?"false":"true")})}
-    compactLayout.addEventListener("change",syncLayout);syncLayout();
-    function pinned(){if(compactLayout.matches)return false;const rect=story.getBoundingClientRect();return rect.top<=2&&rect.bottom>=innerHeight-2}
-    function finalScrollPosition(next){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight),top=scrollY+rect.top;return top+travel*((next+1)/(items.length+1))}
-    function renderBefore(next){items.forEach((item,n)=>{item.classList.toggle('is-placed',n<next);item.classList.toggle('is-popping',n===next);item.setAttribute('aria-hidden',n<=next?'false':'true')})}
-    function animate(next){
-      if(busy||next<0||next>=items.length)return false;
-      busy=true;index=next;clearTimeout(finishTimer);clearTimeout(releaseTimer);
-      renderBefore(next);
-      if(counter)counter.textContent=String(next+1).padStart(2,'0');
-      finishTimer=setTimeout(()=>{
-        items[next].classList.remove('is-popping');
-        items[next].classList.add('is-placed');
-        scrollTo({top:finalScrollPosition(next),behavior:'smooth'});
-      },timing.pop);
-      releaseTimer=setTimeout(()=>{busy=false},timing.total);
-      return true;
-    }
-    function move(direction,event){
-      if(!pinned())return false;
-      if(busy){event?.preventDefault();return true}
-      const next=index+direction;
-      if(next<0||next>=items.length)return false;
-      event?.preventDefault();return animate(next);
-    }
-    addEventListener('wheel',event=>{if(!pinned()||Math.abs(event.deltaY)<1)return;move(event.deltaY>0?1:-1,event)},{passive:false});
-    addEventListener('touchstart',event=>{touchStart=event.touches[0]?.clientY??null;touchConsumed=false},{passive:true});
-    addEventListener('touchmove',event=>{
-      if(touchStart===null||!pinned())return;
-      const y=event.touches[0]?.clientY??touchStart,delta=touchStart-y;
-      if(!delta)return;
-      const direction=delta>0?1:-1,next=index+direction;
-      if(next>=0&&next<items.length)event.preventDefault();
-      if(touchConsumed||Math.abs(delta)<18)return;
-      if(move(direction,event))touchConsumed=true;
-    },{passive:false});
-    addEventListener('touchend',()=>{touchStart=null;touchConsumed=false},{passive:true});
-    // Safety net: a fast flick releases before any touchmove fires again, so momentum can
-    // carry the page through the whole section with nothing popped. Once the scroll settles
-    // somewhere pinned with no active touch, sync the cards to match where it landed.
-    function progress(){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight);return Math.max(0,Math.min(1,-rect.top/travel))}
-    function catchUp(){
-      if(busy||touchStart!==null||!pinned())return;
-      const target=Math.max(-1,Math.min(items.length-1,Math.round(progress()*(items.length+1))-1));
-      if(target===index)return;
-      if(Math.abs(target-index)<=1){move(target>index?1:-1);return}
-      index=target;
-      items.forEach((item,n)=>{item.classList.toggle('is-placed',n<=target);item.classList.remove('is-popping');item.setAttribute('aria-hidden',n<=target?'false':'true')});
-      if(counter&&target>=0)counter.textContent=String(target+1).padStart(2,'0');
-    }
-    let catchUpTimer;
-    addEventListener('scroll',()=>{clearTimeout(catchUpTimer);catchUpTimer=setTimeout(catchUp,140)},{passive:true});
-  }
-  const accumulationTiming={pop:cardMotion.reveal+cardMotion.hold,total:cardMotion.reveal+cardMotion.hold+cardMotion.slide+cardMotion.gap};
-  setup('[data-home-products]','[data-product-card]','.home-products-story__count b',accumulationTiming);
-  setup('[data-home-clients]','[data-client-card]','.home-clients-story__count b',accumulationTiming);
-  setup('[data-home-closing]','[data-closing-card]',null,accumulationTiming);
-})();
 /* Desktop Process / Quality galleries: horizontal trackpad swipe and mouse drag. */
 (function () {
   document.querySelectorAll('.proc__stage .proc__shot').forEach(gallery => {
@@ -637,6 +542,23 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     let pointer = null;
     photos.forEach(photo => { photo.draggable = false; });
     gallery.classList.add('is-swipeable');
+    gallery.closest('.proc')?.removeAttribute('aria-hidden');
+    const controls = document.createElement('div');
+    controls.className = 'gallery-controls';
+    ['Previous photo', 'Next photo'].forEach((label, i) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = i ? '›' : '‹';
+      button.setAttribute('aria-label', label);
+      button.addEventListener('click', () => move(i ? 1 : -1));
+      controls.append(button);
+    });
+    gallery.append(controls);
+    gallery.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      move(event.key === 'ArrowRight' ? 1 : -1);
+    });
     function current() {
       if (selected !== null) return selected;
       // Start from the photo currently shown by the existing autoplay.
@@ -652,8 +574,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     function move(direction) { show(current() + direction); }
     gallery.addEventListener('wheel', event => {
       if (!gallery.classList.contains('on') || event.ctrlKey) return;
-      const horizontal = event.shiftKey && !event.deltaX ? event.deltaY : event.deltaX;
-      if (Math.abs(horizontal) <= (event.shiftKey ? 0 : Math.abs(event.deltaY))) return;
+      const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (Math.abs(horizontal) < 1 || event.target.closest('button')) return;
       event.preventDefault();
       const now = performance.now();
       if (now - lastWheel > 200) { wheelTotal = 0; wheelUsed = false; }
@@ -665,7 +587,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       }
     }, {passive: false});
     gallery.addEventListener('pointerdown', event => {
-      if (!gallery.classList.contains('on') || event.button !== 0 || !event.isPrimary) return;
+      if (!gallery.classList.contains('on') || event.button !== 0 || !event.isPrimary || event.target.closest('button')) return;
       pointer = {id: event.pointerId, x: event.clientX, y: event.clientY};
       gallery.setPointerCapture(event.pointerId);
       gallery.classList.add('is-dragging');

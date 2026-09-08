@@ -64,7 +64,7 @@
     </section>
 
     <!-- PRODUCTS SCROLL CHAPTER -->
-    <section class="home-products-story" data-home-products aria-label="Our products">
+    <section class="home-products-story" data-home-products data-services-section aria-label="Our products">
       <div class="home-products-story__sticky">
         <div class="container home-products-story__inner">
           <div class="home-products-story__heading">
@@ -74,8 +74,8 @@
             </div>
             <p class="lead">{{ page.products.lead }}</p>
           </div>
-          <div class="home-products-story__stage">
-            {{#each page.products.items}}<article class="home-product-card" data-product-card="{{ @index }}">
+          <div class="home-products-story__stage grid">
+            {{#each page.products.items}}<article class="home-product-card card" data-product-card="{{ @index }}">
               <div class="home-product-card__media">{{> media}}</div>
               <div class="home-product-card__body">
                 <span class="home-product-card__number">{{ @num }}</span>
@@ -138,15 +138,15 @@
       </div>
     </section>
     <!-- CLIENTS SCROLL CHAPTER -->
-    <section id="clients" class="home-clients-story" data-home-clients aria-label="Our clients">
+    <section id="clients" class="home-clients-story" data-home-clients data-services-section aria-label="Our clients">
       <div class="home-clients-story__sticky">
         <div class="container home-clients-story__inner">
           <div class="home-clients-story__heading">
             <div><p class="eyebrow">{{ page.clients.eyebrow }}</p><h2>{{ page.clients.heading }}</h2></div>
             <p class="lead">{{ page.clients.lead }}</p>
           </div>
-          <div class="home-clients-story__stage">
-            {{#each page.clients.items}}<article class="home-client-card" data-client-card="{{ @index }}">
+          <div class="home-clients-story__stage grid">
+            {{#each page.clients.items}}<article class="home-client-card card" data-client-card="{{ @index }}">
               <div class="client__badge">
                 <img class="client__logo" src="{{ logo }}" alt="{{ name }}" onerror="this.style.display='none'">
                 <span class="client__mono" style="color:{{ colour }}">{{ initials }}</span>
@@ -160,12 +160,12 @@
     </section>
 
     <!-- NEWS AND CONTACT SCROLL CHAPTER -->
-    <section id="news" class="home-closing-story" data-home-closing aria-label="News and contact">
+    <section id="news" class="home-closing-story" data-home-closing data-services-section aria-label="News and contact">
       <div class="home-closing-story__sticky">
         <div class="container home-closing-story__inner">
           <div class="home-closing-story__heading"><p class="eyebrow">{{ page.news.eyebrow }}</p><h2>{{ page.news.heading }}</h2></div>
-          <div class="home-closing-story__stage">
-            {{#each page.news.posts}}<article class="home-news-card" data-closing-card="{{ @index }}">
+          <div class="home-closing-story__stage grid">
+            {{#each page.news.posts}}<article class="home-news-card card" data-closing-card="{{ @index }}">
               <span class="post__date">{{ date }}</span><h3>{{ title }}</h3><p>{{ text }}</p><a class="post__link" href="{{ href }}">Read more &rarr;</a>
             </article>{{/each}}</div>
           <div class="home-closing-story__progress" aria-hidden="true"><span></span></div>
@@ -186,5 +186,6 @@
 {{> footer}}
 
   <script src="/script.js"></script>
+  <script src="/services-motion.js"></script>
 </body>
 </html>
