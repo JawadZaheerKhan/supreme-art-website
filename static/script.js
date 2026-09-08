@@ -41,6 +41,28 @@ const cardMotion = Object.freeze({ reveal: 1100, hold: 100, slide: 1100, gap: 10
   });
 })();
 
+// Condense the nav bar to just the current tab while scrolling down;
+// scrolling up (or being near the top) restores the full bar.
+(function () {
+  const header = document.querySelector('.site-header');
+  if (!header || reducedMotion) return;
+  let lastY = window.scrollY, ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+      if (y < 80) header.classList.remove('nav-condensed');
+      else if (delta > 4) header.classList.add('nav-condensed');
+      else if (delta < -4) header.classList.remove('nav-condensed');
+      lastY = y;
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
 /* ============================================================
    Scroll story: paper → print → die-cut → folded carton
    ============================================================ */
