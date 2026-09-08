@@ -93,13 +93,13 @@
       </div>
     </section>
 
-    <!-- PROCESS TUNNEL SCROLL CHAPTER -->
+    <!-- PROCESS HORIZONTAL STAGES -->
     <section class="home-process-story" data-home-process aria-label="Our production process">
       <div class="home-process-story__sticky">
         <div class="home-process-story__scenes">
           {{#each content.process.steps}}<article class="home-process-scene" data-process-card="{{ @index }}">
             <img src="{{ image }}" alt="{{ title }} at Supreme Art" loading="lazy" />
-            <span class="home-process-scene__shade" aria-hidden="true"></span>
+
             <div class="container home-process-scene__copy">
               <span class="home-process-scene__num">{{ num }}</span>
               <p class="eyebrow">Inside the factory</p>
@@ -115,13 +115,13 @@
         <div class="home-process-story__progress" aria-hidden="true"><span></span></div>
       </div>
     </section>
-    <!-- QUALITY TUNNEL SCROLL CHAPTER -->
+    <!-- QUALITY HORIZONTAL STAGES -->
     <section class="home-quality-story" data-home-quality aria-label="Quality assurance">
       <div class="home-quality-story__sticky">
         <div class="home-quality-story__scenes">
           {{#each content.quality.process.steps}}<article class="home-process-scene home-quality-scene" data-quality-card="{{ @index }}">
             <img src="{{ image }}" alt="{{ title }} at Supreme Art" loading="lazy" />
-            <span class="home-process-scene__shade" aria-hidden="true"></span>
+
             <div class="container home-process-scene__copy">
               <span class="home-process-scene__num">{{ @num }}</span>
               <p class="eyebrow">Quality assurance</p>

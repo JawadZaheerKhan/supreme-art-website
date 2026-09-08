@@ -423,161 +423,50 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', requestUpdate);
 })();
-/* Homepage process tunnel scroll chapter */
+/* Homepage stages: slide in from the right, hold centrally, then leave left. */
 (function () {
-  const story = document.querySelector('[data-home-process]');
-  if (!story) return;
-
-  const scenes = [...story.querySelectorAll('[data-process-card]')];
-  const count = story.querySelector('.home-process-story__count b');
-  const bar = story.querySelector('.home-process-story__progress span');
-  let ticking = false;
-  let wheelLocked = false;
-  let wheelLockStarted = 0;
-  let wheelUnlockTimer;
-
-  function updateProcessStory() {
-    const rect = story.getBoundingClientRect();
-    const travel = Math.max(1, story.offsetHeight - window.innerHeight);
-    const progress = Math.max(0, Math.min(1, -rect.top / travel));
-    const sequence = Math.min(scenes.length - 1, progress * (scenes.length - 1));
-    const index = Math.min(scenes.length - 1, Math.floor(sequence));
-    const local = index === scenes.length - 1 ? 0 : sequence - index;
-    const maxScale = window.matchMedia('(max-width: 780px)').matches ? 1.72 : 2.18;
-
-    scenes.forEach((scene, sceneIndex) => {
-      const rendered = sceneIndex === index || sceneIndex === index + 1;
-      scene.classList.toggle('is-rendered', rendered);
-      if (!rendered) {
-        scene.setAttribute('aria-hidden', 'true');
-        return;
-      }
-      let scale = .58;
-      let opacity = 0;
-      let zIndex = 0;
-      let copyOpacity = 0;
-      let copyY = 34;
-
-      if (sceneIndex === index) {
-        scale = 1 + local * (maxScale - 1);
-        opacity = 1 - Math.max(0, (local - .62) / .38);
-        zIndex = 3;
-        copyOpacity = 1 - Math.max(0, (local - .36) / .34);
-        copyY = -local * 42;
-      } else if (sceneIndex === index + 1) {
-        const arrive = 1 - Math.pow(1 - local, 3);
-        scale = .58 + arrive * .42;
-        opacity = Math.min(1, local * 1.7);
-        zIndex = 2;
-        copyOpacity = Math.max(0, (local - .55) / .34);
-        copyY = (1 - local) * 42;
-      }
-
-      scene.style.setProperty('--process-scale', scale.toFixed(4));
-      scene.style.setProperty('--process-opacity', opacity.toFixed(4));
-      scene.style.setProperty('--process-copy-opacity', Math.min(1, copyOpacity).toFixed(4));
-      scene.style.setProperty('--process-copy-y', `${copyY.toFixed(2)}px`);
-      scene.style.zIndex = String(zIndex);
-      scene.setAttribute('aria-hidden', sceneIndex === index || sceneIndex === index + 1 ? 'false' : 'true');
-    });
-
-    if (count) count.textContent = String(index + 1).padStart(2, '0');
-    if (bar) bar.style.width = `${(progress * 100).toFixed(2)}%`;
-    ticking = false;
-  }
-
-  function requestProcessUpdate() {
-    const rect = story.getBoundingClientRect();
-    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(updateProcessStory);
-  }
-
-
-  story.style.setProperty('--process-count', scenes.length || 1);
-  updateProcessStory();
-  window.addEventListener('scroll', requestProcessUpdate, { passive: true });
-  window.addEventListener('resize', requestProcessUpdate);
-})();
-/* Homepage quality tunnel scroll chapter */
-(function () {
-  const story = document.querySelector('[data-home-quality]');
-  if (!story) return;
-
-  const scenes = [...story.querySelectorAll('[data-quality-card]')];
-  const count = story.querySelector('.home-quality-story__count b');
-  const bar = story.querySelector('.home-quality-story__progress span');
-  let ticking = false;
-  let wheelLocked = false;
-  let wheelLockStarted = 0;
-  let wheelUnlockTimer;
-
-  function storyPosition() {
-    const rect = story.getBoundingClientRect();
-    const travel = Math.max(1, story.offsetHeight - window.innerHeight);
-    const progress = Math.max(0, Math.min(1, -rect.top / travel));
-    return { progress, travel };
-  }
-
-  function updateQualityStory() {
-    const { progress } = storyPosition();
-    const sequence = Math.min(scenes.length - 1, progress * (scenes.length - 1));
-    const index = Math.min(scenes.length - 1, Math.floor(sequence));
-    const local = index === scenes.length - 1 ? 0 : sequence - index;
-    const maxScale = window.matchMedia('(max-width: 780px)').matches ? 1.72 : 2.18;
-
-    scenes.forEach((scene, sceneIndex) => {
-      const rendered = sceneIndex === index || sceneIndex === index + 1;
-      scene.classList.toggle('is-rendered', rendered);
-      if (!rendered) {
-        scene.setAttribute('aria-hidden', 'true');
-        return;
-      }
-      let scale = .58;
-      let opacity = 0;
-      let zIndex = 0;
-      let copyOpacity = 0;
-      let copyY = 34;
-      if (sceneIndex === index) {
-        scale = 1 + local * (maxScale - 1);
-        opacity = 1 - Math.max(0, (local - .62) / .38);
-        zIndex = 3;
-        copyOpacity = 1 - Math.max(0, (local - .36) / .34);
-        copyY = -local * 42;
-      } else if (sceneIndex === index + 1) {
-        const arrive = 1 - Math.pow(1 - local, 3);
-        scale = .58 + arrive * .42;
-        opacity = Math.min(1, local * 1.7);
-        zIndex = 2;
-        copyOpacity = Math.max(0, (local - .55) / .34);
-        copyY = (1 - local) * 42;
-      }
-      scene.style.setProperty('--process-scale', scale.toFixed(4));
-      scene.style.setProperty('--process-opacity', opacity.toFixed(4));
-      scene.style.setProperty('--process-copy-opacity', Math.min(1, copyOpacity).toFixed(4));
-      scene.style.setProperty('--process-copy-y', `${copyY.toFixed(2)}px`);
-      scene.style.zIndex = String(zIndex);
-      scene.setAttribute('aria-hidden', sceneIndex === index || sceneIndex === index + 1 ? 'false' : 'true');
-    });
-    if (count) count.textContent = String(index + 1).padStart(2, '0');
-    if (bar) bar.style.width = `${(progress * 100).toFixed(2)}%`;
-    ticking = false;
-  }
-
-  function requestQualityUpdate() {
-    const rect = story.getBoundingClientRect();
-    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(updateQualityStory);
-  }
-
-
-  story.style.setProperty('--quality-count', scenes.length || 1);
-  updateQualityStory();
-  window.addEventListener('scroll', requestQualityUpdate, { passive: true });
-  window.addEventListener('resize', requestQualityUpdate);
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('[data-home-process], [data-home-quality]').forEach(story => {
+    const scenes = [...story.querySelectorAll('.home-process-scene')];
+    if (!scenes.length) return;
+    const quality = story.hasAttribute('data-home-quality');
+    const prefix = quality ? 'home-quality-story' : 'home-process-story';
+    const sticky = story.querySelector('.' + prefix + '__sticky');
+    const count = story.querySelector('.' + prefix + '__count b');
+    const bar = story.querySelector('.' + prefix + '__progress span');
+    story.style.setProperty('--stage-count', scenes.length);
+    let ticking = false;
+    function update() {
+      ticking = false;
+      const staticLayout = motion.matches || window.innerHeight <= 540;
+      const travel = Math.max(1, story.offsetHeight - sticky.offsetHeight);
+      const progress = Math.max(0, Math.min(1, -story.getBoundingClientRect().top / travel));
+      // Each stage gets a central reading interval; transitions occupy the rest.
+      const sequence = progress * scenes.length;
+      const index = Math.min(scenes.length - 1, Math.floor(sequence));
+      const local = sequence - index;
+      const transition = index === scenes.length - 1 ? 0 : Math.max(0, Math.min(1, (local - .55) / .45));
+      const eased = transition * transition * (3 - 2 * transition);
+      const distance = window.innerWidth;
+      scenes.forEach((scene, i) => {
+        const rendered = staticLayout || i === index || (i === index + 1 && transition > 0);
+        scene.classList.toggle('is-rendered', rendered);
+        scene.style.setProperty('--stage-x', ((i - index - eased) * distance).toFixed(2) + 'px');
+        scene.setAttribute('aria-hidden', String(!staticLayout && i !== (eased < .5 ? index : Math.min(index + 1, scenes.length - 1))));
+      });
+      if (count) count.textContent = String(Math.min(scenes.length, index + (eased >= .5 ? 2 : 1))).padStart(2, '0');
+      if (bar) bar.style.width = (progress * 100).toFixed(2) + '%';
+    }
+    function requestUpdate() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+    update();
+    addEventListener('scroll', requestUpdate, { passive: true });
+    addEventListener('resize', requestUpdate);
+    motion.addEventListener('change', requestUpdate);
+  });
 })();
 /* Homepage clients, news and contact scroll chapters */
 (function(){
@@ -595,62 +484,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 })();
 /* Standalone contact scroll reveal */
 (function(){const story=document.querySelector('[data-home-contact]');if(!story)return;let ticking=false;function update(){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight),p=Math.max(0,Math.min(1,-rect.top/travel)),e=1-Math.pow(1-p,3);story.style.setProperty('--contact-opacity',e.toFixed(3));story.style.setProperty('--contact-scale',(.78+e*.22).toFixed(3));ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request)})();
-/* Native touch/wheel scrolling with guaranteed pop-then-settle stages. */
-(function(){
-  if(reducedMotion)return;
-  document.querySelectorAll('[data-home-products] img,[data-home-process] img,[data-home-quality] img,[data-home-clients] img').forEach(img=>{
-    img.loading='eager';
-    img.decoding='async';
-    if(img.decode)img.decode().catch(()=>{});
-  });
-  const stories=[
-    {el:document.querySelector('[data-home-process]'),count:document.querySelectorAll('[data-process-card]').length,type:'tunnel'},
-    {el:document.querySelector('[data-home-quality]'),count:document.querySelectorAll('[data-quality-card]').length,type:'tunnel'},
-  ].filter(item=>item.el&&item.count>1);
-  let settling=false,settleTimer,direction=0,touchY=null,phaseTimer,releaseTimer;
-  const clampIndex=(value,count)=>Math.max(0,Math.min(count-1,value));
-  function settle(){
-    if(settling)return;
-    const story=stories.find(item=>{const r=item.el.getBoundingClientRect();return r.top<=2&&r.bottom>=innerHeight-2});
-    if(!story)return;
-    const rect=story.el.getBoundingClientRect(),travel=Math.max(1,story.el.offsetHeight-innerHeight);
-    const progress=Math.max(0,Math.min(1,-rect.top/travel));
-    const saved=story.el.dataset.settledIndex;
-    let index;
-    if(saved===undefined){
-      index=story.type==='tunnel'?Math.round(progress*(story.count-1)):Math.floor(progress*story.count);
-    }else{
-      const previous=Number(saved),candidate=clampIndex(previous+direction,story.count);
-      if(candidate===previous&&((direction>0&&previous===story.count-1)||(direction<0&&previous===0)))return;
-      index=direction===0?previous:candidate;
-    }
-    index=clampIndex(index,story.count);
-    story.el.dataset.settledIndex=String(index);
-    const sectionTop=scrollY+rect.top;
-    direction=0;
-    clearTimeout(phaseTimer);clearTimeout(releaseTimer);
-    settling=true;
-    if(story.type==='accumulate'){
-      const popTarget=sectionTop+travel*((index+.12)/story.count);
-      const finalTarget=sectionTop+travel*((index+.72)/story.count);
-      scrollTo({top:popTarget,behavior:'auto'});
-      phaseTimer=setTimeout(()=>scrollTo({top:finalTarget,behavior:'smooth'}),220);
-      releaseTimer=setTimeout(()=>{settling=false},680);
-    }else{
-      const target=sectionTop+travel*(index/(story.count-1));
-      if(Math.abs(target-scrollY)<3){settling=false;return}
-      scrollTo({top:target,behavior:'smooth'});
-      releaseTimer=setTimeout(()=>{settling=false},460);
-    }
-  }
-  function queueSettle(){if(settling)return;clearTimeout(settleTimer);settleTimer=setTimeout(settle,55)}
-  addEventListener('wheel',event=>{if(Math.abs(event.deltaY)>1)direction=event.deltaY>0?1:-1},{passive:true});
-  addEventListener('touchstart',event=>{touchY=event.touches[0]?.clientY??null},{passive:true});
-  addEventListener('touchmove',event=>{if(touchY===null)return;const nextY=event.touches[0]?.clientY??touchY;if(Math.abs(nextY-touchY)>2)direction=nextY<touchY?1:-1;touchY=nextY},{passive:true});
-  addEventListener('touchend',()=>{touchY=null;queueSettle()},{passive:true});
-  addEventListener('scroll',queueSettle,{passive:true});
-  if('onscrollend' in window)addEventListener('scrollend',settle,{passive:true});
-})();
 /* One gesture owns one complete Product, Client, or News animation. */
 (function(){
   if(reducedMotion)return;
