@@ -43,6 +43,14 @@
     { "alt": "Folder-gluer", "image": "", "wide": false },
     { "alt": "Finished cartons", "image": "", "wide": true }
   ],
+  "company_message": {
+    "heading": "Our message",
+    "paragraphs": [
+      "At Supreme Art Private Limited, we are driven by a singular vision: to provide innovative, high-quality printing and packaging solutions that exceed our clients' expectations and contribute to the advancement of industries globally. Since our inception in 2016, our journey has been marked by relentless dedication, hard work, and a commitment to excellence, positioning us as one of Pakistan's leading names in the printing and packaging industry.",
+      "Our success is built on a foundation of trust, transparency, and the continuous pursuit of innovation. We understand the critical importance of product integrity. Our state-of-the-art facilities, advanced technologies, and specialized expertise allow us to deliver solutions that meet the highest standards of quality and security. As we continue to expand our reach across global markets, our focus remains on sustainability, customer satisfaction, and operational excellence. We are proud to be the only printing and packaging manufacturer in Khyber Pakhtunkhwa with a significant export presence, a testament to the trust our international clients place in us.",
+      "Our dedicated team, comprising both experienced professionals and talented individuals, is our greatest asset. Together, we remain committed to fostering an environment of collaboration, integrity, and continuous growth. I am confident that with our unwavering focus on quality, innovation, and customer-centricity, Supreme Art Private Limited, will continue to lead the industry, building lasting relationships and achieving greater milestones in the years to come."
+    ]
+  },
   "footer": {
     "blurb": "Pharmaceutical folding cartons — printed, die-cut, folded and glued under one roof in Peshawar.",
     "company_heading": "Company",
