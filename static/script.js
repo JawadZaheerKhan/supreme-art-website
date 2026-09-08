@@ -7,6 +7,8 @@ window.addEventListener('load', () => {
 });
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Shared by Home and the automatic Services card sequence.
+const cardMotion = Object.freeze({ reveal: 1100, hold: 100, slide: 1100, gap: 100, easing: "cubic-bezier(.16,1,.3,1)" });
 
 // Mobile nav — hamburger toggle
 (function () {
@@ -698,7 +700,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     },{passive:false});
     addEventListener('touchend',()=>{touchStart=null;touchConsumed=false},{passive:true});
   }
-  const accumulationTiming={pop:1200,total:2400};
+  const accumulationTiming={pop:cardMotion.reveal+cardMotion.hold,total:cardMotion.reveal+cardMotion.hold+cardMotion.slide+cardMotion.gap};
   setup('[data-home-products]','[data-product-card]','.home-products-story__count b',accumulationTiming);
   setup('[data-home-clients]','[data-client-card]','.home-clients-story__count b',accumulationTiming);
   setup('[data-home-closing]','[data-closing-card]',null,accumulationTiming);

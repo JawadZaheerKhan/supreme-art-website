@@ -3,7 +3,7 @@
 <head>
 {{> head}}
 </head>
-<body class="photo-zoom-page">
+<body class="photo-zoom-page services-page">
 {{> gtm-body}}
 {{> loader}}
 {{> header}}
@@ -11,7 +11,7 @@
   <main>
 {{> banner}}
 
-    <section class="section">
+    <section data-services-section class="section">
       <div class="container">
         <p class="eyebrow reveal">{{ page.range.eyebrow }}</p>
         <h2 class="reveal">{{ page.range.heading }}</h2>
@@ -26,7 +26,7 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="box-types-heading">
+    <section data-services-section class="section" aria-labelledby="box-types-heading">
       <div class="container">
         <p class="eyebrow reveal">{{ page.box_types.eyebrow }}</p>
         <h2 class="reveal" id="box-types-heading">{{ page.box_types.heading }}</h2>
@@ -39,7 +39,7 @@
         </div>
       </div>
     </section>
-    <section class="section" aria-labelledby="finishes-heading">
+    <section data-services-section class="section" aria-labelledby="finishes-heading">
       <div class="container">
         <h2 class="reveal" id="finishes-heading">{{ page.finishes.heading }}</h2>
         <p class="lead reveal">{{ page.finishes.text }}</p>
@@ -50,7 +50,7 @@
       </div>
     </section>
 
-    <section class="section band">
+    <section data-services-section class="section band">
       <div class="container">
         <p class="eyebrow reveal">{{ page.capabilities.eyebrow }}</p>
         <h2 class="reveal">{{ page.capabilities.heading }}</h2>
@@ -64,5 +64,6 @@
 {{> footer}}
 
   <script src="/script.js"></script>
+  <script src="/services-motion.js"></script>
 </body>
 </html>

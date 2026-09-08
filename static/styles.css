@@ -2270,3 +2270,12 @@ a { color: inherit; }
 
 .about-intro-photo { min-height: 0; background: transparent; border: 0; }
 .about-intro-photo img { height: auto; }
+
+/* Services cards keep their responsive grid slots while moving from the centre. */
+.services-motion-grid { position: relative; isolation: isolate; }
+.services-motion-grid > .card { transform-origin: center; }
+.services-motion-grid > .service-card-pending { opacity: 0; pointer-events: none; }
+.services-motion-grid > .service-card-moving { position: relative; z-index: 5; will-change: transform, opacity; transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .services-motion-grid > .card { opacity: 1; transform: none; }
+}
