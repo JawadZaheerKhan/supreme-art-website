@@ -2029,6 +2029,14 @@ a { color: inherit; }
   .home-process-scene__copy > p:last-child { margin-top: 12px; font-size: .9rem; line-height: 1.45; }
   .home-process-story__all, .home-quality-story__all { font-size: .85rem; }
 }
+/* Fill a taller photo frame on laptops without shrinking portrait shots. */
+@media (min-width: 781px) and (min-height: 541px) {
+  .home-process-scene > img {
+    height: min(64svh, 600px, calc(100svh - 200px));
+    object-fit: cover;
+    object-position: center;
+  }
+}
 /* ---------- Homepage clients, news and contact chapters ---------- */
 .home-clients-story { --client-count:9; position:relative; height:calc(110svh + var(--client-count) * 48svh); background:#f3f7fa; }
 .home-clients-story__sticky,.home-closing-story__sticky { position:sticky; top:0; height:100svh; min-height:590px; overflow:hidden; }
