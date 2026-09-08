@@ -1654,7 +1654,7 @@ a { color: inherit; }
 .home-page .site-header .nav-links.nav-flow-ready::before { opacity: 1; }
 .home-page .site-header .nav-links.is-flowing::before { animation: homeNavMorph 1.12s cubic-bezier(.16,1,.3,1); }
 .home-page .site-header .nav-links > a,
-.home-page .site-header .nav-links > .has-dropdown > a { position: relative; z-index: 1; padding: 9px 13px; border-radius: 999px; color: rgba(255,255,255,.86); }
+.home-page .site-header .nav-links > .has-dropdown > a { position: relative; z-index: 1; border-radius: 999px; color: rgba(255,255,255,.86); }
 .home-page .site-header .nav-links a.current { color: #fff; }
 .home-page .site-header:not(.is-over-hero) .nav-links > a,
 .home-page .site-header:not(.is-over-hero) .nav-links > .has-dropdown > a { color: var(--muted); }
@@ -2442,9 +2442,10 @@ a { color: inherit; }
 }
 
 /* Phones: the same condensing pill bar as desktop, sized down and centered,
-   instead of a hamburger menu. The logo is dropped here for space - if the
-   full row still doesn't fit a narrow screen, it scrolls sideways rather
-   than wrapping. */
+   instead of a hamburger menu. The logo is dropped here for space. Type and
+   padding scale with the viewport so all seven tabs fit on screen instead of
+   being pushed into a sideways scroll - and crucially the bar keeps
+   overflow visible, or it would clip the About-us dropdown out of sight. */
 @media (max-width: 1024px) {
   .nav-toggle { display: none; }
   .brand { display: none; }
@@ -2454,17 +2455,15 @@ a { color: inherit; }
     flex-direction: row;
     align-items: center;
     right: auto;
-    max-width: 94vw;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    width: max-content;
+    max-width: none;
+    overflow: visible;
+    gap: clamp(1px, .35vw, 4px);
   }
-  .site-header .nav-links::-webkit-scrollbar { display: none; }
   .site-header .nav-links > a,
   .site-header .nav-links > .has-dropdown > a {
-    padding: 7px 12px;
-    font-size: .8rem;
+    padding: clamp(5px, 1.4vw, 7px) clamp(5px, 1.5vw, 12px);
+    font-size: clamp(8px, 2.2vw, 12.8px);
   }
   /* "About us" wraps a link plus its dropdown in a span - reset it back to a
      plain horizontal pill like every other tab (the dropdown itself stays a
@@ -2479,8 +2478,8 @@ a { color: inherit; }
   }
   .site-header .nav-links .has-dropdown > a { display: block; }
   .site-header .nav-links .has-dropdown .dropdown {
-    position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-    width: max-content; max-width: 60vw;
+    position: absolute; top: 100%; left: 0; right: auto; transform: none;
+    width: max-content; max-width: 70vw;
     opacity: 0; visibility: hidden;
   }
   .site-header .nav-links .has-dropdown:hover .dropdown,
@@ -2507,8 +2506,6 @@ a { color: inherit; }
   }
   .home-page .site-header .nav-links > a,
   .home-page .site-header .nav-links > .has-dropdown > a {
-    padding: 7px 12px;
-    font-size: .8rem;
     border-radius: 999px;
     color: var(--muted);
   }
