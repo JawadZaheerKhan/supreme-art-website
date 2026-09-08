@@ -14,7 +14,7 @@
     { "num": "08", "title": "Breaking", "text": "Waste board is removed from around the die-cut cartons, separating the individual blanks cleanly.", "image": "/images/process/breaking-1.jpg", "image_2": "" },
     { "num": "09", "title": "Sorting", "text": "An automated inspection machine uses 3D cameras to check every unit carton for colour, print and overall quality.", "image": "/images/process/sorting-1.jpg", "image_2": "/images/process/sorting-2.jpg" },
     { "num": "10", "title": "Pasting & folder gluing", "text": "The inspected unit cartons are folded, glued and joined before being packed into bundles or boxes.", "image": "/images/process/pasting-1.jpg", "image_2": "/images/process/pasting-2.jpg" },
-    { "num": "11", "title": "Delivery", "text": "The finished cartons are securely packed and delivered to the client, ready for the filling line.", "image": "/images/process/delivery-1.jpg", "image_2": "" }
+    { "num": "11", "title": "Delivery", "text": "The finished cartons are securely packed and delivered to the client, ready for the filling line.", "image": "/images/process/delivery-loading-1.png", "image_2": "/images/process/delivery-loading-2.png" }
   ],
   "cta": {
     "heading": "Have a carton to make?",
