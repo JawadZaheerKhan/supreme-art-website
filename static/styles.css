@@ -2242,7 +2242,7 @@ a { color: inherit; }
   -webkit-backdrop-filter: blur(22px) saturate(160%);
   backdrop-filter: blur(22px) saturate(160%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(128,128,128,.14), 0 6px 20px rgba(0,0,0,.06);
-  transition: background-color .4s ease, box-shadow .4s ease, gap .5s cubic-bezier(.16,1,.3,1);
+  transition: background-color .4s ease, box-shadow .4s ease, gap .6s cubic-bezier(.4,0,.2,1);
 }
 .home-page .site-header.is-over-hero .nav-links {
   background-color: rgba(128,128,128,.14);
@@ -2252,9 +2252,14 @@ a { color: inherit; }
    (or being near the top) restores the full bar. Desktop bar only - the
    mobile menu is opened explicitly, so this doesn't apply there. */
 @media (min-width: 1025px) {
+  .nav { position: relative; }
+  .site-header .nav-links,
+  .home-page .site-header .nav-links {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  }
   .site-header .nav-links > a:not(.current),
   .site-header .nav-links > .has-dropdown:not(:has(> a.current)) {
-    transition: max-width .55s cubic-bezier(.16,1,.3,1), opacity .35s ease, padding .55s cubic-bezier(.16,1,.3,1);
+    transition: max-width .6s cubic-bezier(.4,0,.2,1), opacity .6s cubic-bezier(.4,0,.2,1), padding .6s cubic-bezier(.4,0,.2,1);
     max-width: 160px;
     overflow: hidden;
     white-space: nowrap;

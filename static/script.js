@@ -41,28 +41,6 @@ const cardMotion = Object.freeze({ reveal: 1100, hold: 100, slide: 1100, gap: 10
   });
 })();
 
-// Condense the nav bar to just the current tab while scrolling down;
-// scrolling up (or being near the top) restores the full bar.
-(function () {
-  const header = document.querySelector('.site-header');
-  if (!header || reducedMotion) return;
-  let lastY = window.scrollY, ticking = false;
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const y = window.scrollY;
-      const delta = y - lastY;
-      if (y < 80) header.classList.remove('nav-condensed');
-      else if (delta > 4) header.classList.add('nav-condensed');
-      else if (delta < -4) header.classList.remove('nav-condensed');
-      lastY = y;
-      ticking = false;
-    });
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-})();
-
 /* ============================================================
    Scroll story: paper → print → die-cut → folded carton
    ============================================================ */
@@ -381,6 +359,35 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   toggle?.addEventListener('click', syncIndicator);
   window.addEventListener('resize', syncIndicator);
   syncIndicator();
+
+  // Condense the bar to just the current tab while scrolling down; scrolling
+  // up (or being near the top) restores the full bar. Reposition the liquid
+  // indicator as the layout settles so it keeps tracking the active tab
+  // instead of being left pointing at where the tab used to be.
+  if (!reducedMotion) {
+    let lastY = window.scrollY, ticking = false, condenseTimer;
+    function reposition() {
+      positionIndicator(activeLink, false);
+      clearTimeout(condenseTimer);
+      condenseTimer = setTimeout(() => positionIndicator(activeLink, false), 650);
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const delta = y - lastY;
+        const wasCondensed = header.classList.contains('nav-condensed');
+        if (y < 80) header.classList.remove('nav-condensed');
+        else if (delta > 4) header.classList.add('nav-condensed');
+        else if (delta < -4) header.classList.remove('nav-condensed');
+        if (header.classList.contains('nav-condensed') !== wasCondensed) reposition();
+        lastY = y;
+        ticking = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
 })();
 /* Homepage continuing scroll chapters */
 (function () {
