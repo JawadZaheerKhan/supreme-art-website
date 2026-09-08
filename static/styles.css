@@ -2242,16 +2242,16 @@ a { color: inherit; }
   gap: 4px;
   padding: 0;
   border-radius: 999px;
-  background-color: rgba(128,128,128,.14);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
-  backdrop-filter: blur(22px) saturate(160%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(128,128,128,.14), 0 6px 20px rgba(0,0,0,.06);
+  background-color: rgba(118,118,126,.34);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  backdrop-filter: blur(20px) saturate(130%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 0 0 1px rgba(255,255,255,.3), inset 0 -10px 16px -12px rgba(0,0,0,.18), 0 10px 26px rgba(0,0,0,.14);
   transition: background-color .4s ease, box-shadow .4s ease, gap .75s cubic-bezier(.22,1,.36,1);
 }
 .home-page .site-header.is-over-hero .nav-links {
-  background-color: rgba(128,128,128,.14);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 0 0 1px rgba(255,255,255,.22), 0 6px 20px rgba(0,0,0,.14);
+  background-color: rgba(118,118,126,.34);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 0 0 1px rgba(255,255,255,.22), inset 0 -10px 16px -12px rgba(0,0,0,.25), 0 10px 26px rgba(0,0,0,.22);
 }
 /* Condense to just the current tab while scrolling down; scrolling back up
    (or being near the top) restores the full bar. Centered in the header on

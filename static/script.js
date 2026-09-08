@@ -251,7 +251,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     return linkPath === pagePath;
   });
   const activeLink = topLevelLink(nav.querySelector('a.current') || matchingLink || topLinks[0]);
-  let navigationTimer;
   let targetTimer;
 
   function topLevelLink(link) {
@@ -339,10 +338,11 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const url = new URL(link.href, window.location.href);
       if (url.origin !== window.location.origin || url.href === window.location.href) return;
-      event.preventDefault();
-      clearTimeout(navigationTimer);
+      // Give the indicator a head start on the flow, but let the browser
+      // navigate immediately - this is a real page load either way, so
+      // delaying it just to watch an animation before the page reloads
+      // anyway reads as the tab switching, then glitching into a refresh.
       positionIndicator(link, true);
-      navigationTimer = setTimeout(() => { window.location.href = url.href; }, reducedMotion ? 0 : 1050);
     });
   });
 
