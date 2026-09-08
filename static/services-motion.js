@@ -1,6 +1,7 @@
 /* Animate real grid cards; their layout slots remain reserved throughout. */
 (() => {
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
+  const speed = 1.2; // Slightly quicker Services playback; retain the shared easing.
   if (preference.matches || !Element.prototype.animate) return;
   const groups = [...document.querySelectorAll('[data-services-section]')].map(section => {
     const grid = section.querySelector('.grid, .finishes-features');
@@ -45,7 +46,7 @@
       run.animation = card.animate([
         { opacity: 0, transform: `translate(${x}px, ${y + 70}px) scale(${scale * .35}) rotateX(7deg)` },
         { opacity: 1, transform: center }
-      ], { duration: cardMotion.reveal, endDelay: cardMotion.hold, easing: cardMotion.easing, fill: 'forwards' });
+      ], { duration: cardMotion.reveal / speed, endDelay: cardMotion.hold / speed, easing: cardMotion.easing, fill: 'forwards' });
       await run.animation.finished;
       if (run.cancelled) return;
       card.dataset.serviceState = 'sliding';
@@ -53,7 +54,7 @@
       run.animation = card.animate([
         { opacity: 1, transform: center },
         { opacity: 1, transform: 'translate(0px, 0px) scale(1)' }
-      ], { duration: cardMotion.slide, endDelay: cardMotion.gap, easing: cardMotion.easing, fill: 'forwards' });
+      ], { duration: cardMotion.slide / speed, endDelay: cardMotion.gap / speed, easing: cardMotion.easing, fill: 'forwards' });
       reveal.cancel();
       await run.animation.finished;
     } catch (error) {
