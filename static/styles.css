@@ -2267,3 +2267,6 @@ a { color: inherit; }
 
 .company-message__body { max-width: 850px; margin-inline: auto; }
 .company-message__body p { line-height: 1.8; margin: 0 0 24px; text-align: left; overflow-wrap: break-word; }
+
+.about-intro-photo { min-height: 0; background: transparent; border: 0; }
+.about-intro-photo img { height: auto; }
