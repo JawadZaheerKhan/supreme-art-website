@@ -2262,3 +2262,5 @@ a { color: inherit; }
 .box-type-picture { height: 190px; display: grid; place-items: center; margin-bottom: 20px; background: #fff; border-radius: 12px; }
 .box-type-picture__frame { position: relative; width: 175px; max-width: 100%; overflow: hidden; }
 .box-type-picture__frame img { position: absolute; width: var(--image-width); max-width: none; height: auto; left: var(--image-left); top: var(--image-top); display: block; }
+.finishes-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; margin: 24px 0 0; padding: 0; list-style: none; }
+.finishes-features .card { margin: 0; padding: 22px; font-weight: 600; }

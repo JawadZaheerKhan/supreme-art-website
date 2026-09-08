@@ -47,6 +47,16 @@
       </div>
     </section>
 
+    <section class="section" aria-labelledby="finishes-heading">
+      <div class="container">
+        <h2 class="reveal" id="finishes-heading">{{ page.finishes.heading }}</h2>
+        <p class="lead reveal">{{ page.finishes.text }}</p>
+        <h3 class="reveal">{{ page.finishes.features_heading }}</h3>
+        <ul class="finishes-features">
+          {{#each page.finishes.features}}<li class="card reveal">{{ title }}</li>{{/each}}
+        </ul>
+      </div>
+    </section>
 {{> cta}}
   </main>
 

@@ -1,7 +1,7 @@
 {
-  "title": "Products — Supreme Art",
+  "title": "Services — Supreme Art",
   "description": "Printed packaging for tablets, capsules, syrups and food products, plus pharmaceutical leaflets and product labels.",
-  "banner": { "crumb": "Products", "heading": "Products" },
+  "banner": { "crumb": "Services", "heading": "Services" },
   "range": {
     "eyebrow": "What we make",
     "heading": "Packaging for pharmaceutical and food products.",
@@ -24,6 +24,20 @@
       { "title": "Lock Bottom Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:157/97;--image-width:489.17197%;--image-left:-143.31210%;--image-top:-288.65979%;", "text": "Also known as a 1-2-3 bottom box, this structure is designed for heavier items. The bottom flaps interlock to form a sturdy base that supports the product inside." },
       { "title": "Four Corner Folding Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:121/138;--image-width:634.71074%;--image-left:-510.74380%;--image-top:-188.40580%;", "text": "A display box designed to showcase products while providing protection. Suitable for electronics, frozen food, household goods and other products." },
       { "title": "Six Corner Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:125/131;--image-width:614.40000%;--image-left:-384.00000%;--image-top:-345.03817%;", "text": "A wide, deep box made from durable material to stay sturdy and rigid. Its spacious design provides room for heavy products or more than one item." }
+    ]
+  },
+  "finishes": {
+    "heading": "Finishes",
+    "text": "A variety of finishing methods can elevate your packaging from good to exceptional. We provide a range of surface treatments and finishes to enhance the appeal of your products.",
+    "features_heading": "Features",
+    "features": [
+      { "title": "Anti-Counterfeit Packaging" },
+      { "title": "Color Shifting Seal" },
+      { "title": "Specialized & Customized Coatings" },
+      { "title": "Food Grade Coatings" },
+      { "title": "Drip-off Coatings" },
+      { "title": "Thermal Foiling" },
+      { "title": "Hot Stamping (Foiling)" }
     ]
   },
   "capabilities": { "eyebrow": "How it's made", "heading": "One factory. The whole carton." },

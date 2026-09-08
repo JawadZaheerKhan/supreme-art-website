@@ -15,7 +15,7 @@
           { "label": "Careers", "href": "careers.html" }
         ]
       },
-      { "label": "Products", "href": "products.html", "slug": "products", "dropdown": [] },
+      { "label": "Services", "href": "products.html", "slug": "products", "dropdown": [] },
       { "label": "Process", "href": "process.html", "slug": "process", "dropdown": [] },
       { "label": "Quality Control", "href": "quality.html", "slug": "quality", "dropdown": [] },
       { "label": "Careers", "href": "careers.html", "slug": "careers", "dropdown": [] }
@@ -48,7 +48,7 @@
     "company_heading": "Company",
     "company_links": [
       { "label": "About us", "href": "about.html" },
-      { "label": "Products", "href": "products.html" },
+      { "label": "Services", "href": "products.html" },
       { "label": "Quality Control", "href": "quality.html" },
       { "label": "Careers", "href": "careers.html" },
       { "label": "Contact", "href": "contact.html" }
