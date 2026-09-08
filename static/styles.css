@@ -2283,7 +2283,7 @@ a { color: inherit; }
 .site-header .nav-links,
 .home-page .site-header .nav-links {
   gap: 4px;
-  padding: 6px;
+  padding: 0;
   border-radius: 999px;
   background: rgba(128,128,128,.14);
   -webkit-backdrop-filter: blur(22px) saturate(160%);
@@ -2318,4 +2318,7 @@ a { color: inherit; }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header .nav-links, .site-header .nav-links > a, .site-header .nav-links > .has-dropdown > a { transition: none; }
+}
+@media (min-width: 1025px) {
+  .site-header .nav-links > a, .site-header .nav-links > .has-dropdown > a { line-height: 20px; }
 }

@@ -248,6 +248,7 @@ for (const file of pages) {
   // Mark the nav entry for the page being rendered, so the header partial can
   // highlight it without the template needing an equality test.
   const nav = site.nav.links.map((link) => ({ ...link, current: link.slug === slug }));
+  nav.push({ ...site.nav.cta, current: site.nav.cta.href === file });
 
   const where = `templates/${file}`;
   const tree = parse(readFileSync(join(TEMPLATES, file), 'utf8'), where);
