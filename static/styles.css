@@ -2257,3 +2257,8 @@ a { color: inherit; }
 @media (prefers-reduced-motion: no-preference) {
   .home-news-card:not(.is-placed) { left: 50%; top: 50%; }
 }
+
+/* Frame the original reference illustrations without displaying its text. */
+.box-type-picture { height: 190px; display: grid; place-items: center; margin-bottom: 20px; background: #fff; border-radius: 12px; }
+.box-type-picture__frame { position: relative; width: 175px; max-width: 100%; overflow: hidden; }
+.box-type-picture__frame img { position: absolute; width: var(--image-width); max-width: none; height: auto; left: var(--image-left); top: var(--image-top); display: block; }

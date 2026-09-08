@@ -32,6 +32,7 @@
         <h2 class="reveal" id="box-types-heading">{{ page.box_types.heading }}</h2>
         <div class="grid">
           {{#each page.box_types.items}}<article class="card reveal">
+            <div class="box-type-picture"><div class="box-type-picture__frame" style="{{ frame }}"><img src="{{ image }}" alt="{{ title }} box structure" loading="lazy" /></div></div>
             <h3>{{ title }}</h3>
             <p>{{ text }}</p>
           </article>{{/each}}
