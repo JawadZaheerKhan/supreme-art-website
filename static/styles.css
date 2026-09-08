@@ -1999,7 +1999,7 @@ a { color: inherit; }
 .home-process-scene {
   grid-area: 1 / 1; width: min(1140px, calc(100% - 96px)); max-height: 100%;
   display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: center;
-  visibility: hidden; transform: translate3d(var(--stage-x, 0px), 0, 0);
+  visibility: hidden; transform: translate3d(var(--stage-x, 0px), var(--stage-lift, 0px), 0) scale(var(--stage-scale, .94)); transform-origin: center;
 }
 .home-process-scene.is-rendered { visibility: visible; will-change: transform; }
 .home-process-scene > img {
