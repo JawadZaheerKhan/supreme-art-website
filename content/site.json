@@ -38,10 +38,10 @@
     { "title": "Prepress & Proofing", "text": "Artwork checks, dielines and physical proofs." }
   ],
   "gallery": [
-    { "alt": "Pressroom", "image": "", "wide": true },
-    { "alt": "Die-cutting", "image": "", "wide": false },
-    { "alt": "Folder-gluer", "image": "", "wide": false },
-    { "alt": "Finished cartons", "image": "", "wide": true }
+    { "alt": "Printing", "image": "/images/process/printing-1.jpg", "wide": true },
+    { "alt": "Die-cutting", "image": "/images/process/die-cutting-1.jpg", "wide": false },
+    { "alt": "Pasting & folder gluing", "image": "/images/process/pasting-1.jpg", "wide": false },
+    { "alt": "Delivery", "image": "/images/process/delivery-1.jpg", "wide": true }
   ],
   "company_message": {
     "heading": "Our message",
