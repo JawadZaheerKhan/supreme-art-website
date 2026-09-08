@@ -627,3 +627,59 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   setup('[data-home-clients]','[data-client-card]','.home-clients-story__count b',accumulationTiming);
   setup('[data-home-closing]','[data-closing-card]',null,accumulationTiming);
 })();
+/* Desktop Process / Quality galleries: horizontal trackpad swipe and mouse drag. */
+(function () {
+  document.querySelectorAll('.proc__stage .proc__shot').forEach(gallery => {
+    const photos = [...gallery.querySelectorAll('img')];
+    if (photos.length < 2) return;
+    const dots = [...gallery.querySelectorAll('.proc__pair-dots i, .quality-gallery__dots i')];
+    let selected = null, lastWheel = -Infinity, wheelTotal = 0, wheelUsed = false;
+    let pointer = null;
+    photos.forEach(photo => { photo.draggable = false; });
+    gallery.classList.add('is-swipeable');
+    function current() {
+      if (selected !== null) return selected;
+      // Start from the photo currently shown by the existing autoplay.
+      return photos.reduce((best, photo, i) =>
+        Number(getComputedStyle(photo).opacity) > Number(getComputedStyle(photos[best]).opacity) ? i : best, 0);
+    }
+    function show(next) {
+      selected = (next + photos.length) % photos.length;
+      gallery.classList.add('is-manual-gallery');
+      photos.forEach((photo, i) => photo.classList.toggle('is-selected', i === selected));
+      dots.forEach((dot, i) => dot.classList.toggle('is-selected', i === selected));
+    }
+    function move(direction) { show(current() + direction); }
+    gallery.addEventListener('wheel', event => {
+      if (!gallery.classList.contains('on') || event.ctrlKey) return;
+      const horizontal = event.shiftKey && !event.deltaX ? event.deltaY : event.deltaX;
+      if (Math.abs(horizontal) <= (event.shiftKey ? 0 : Math.abs(event.deltaY))) return;
+      event.preventDefault();
+      const now = performance.now();
+      if (now - lastWheel > 200) { wheelTotal = 0; wheelUsed = false; }
+      lastWheel = now;
+      wheelTotal += horizontal * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? gallery.clientWidth : 1);
+      if (!wheelUsed && Math.abs(wheelTotal) >= 25) {
+        move(wheelTotal > 0 ? 1 : -1);
+        wheelUsed = true;
+      }
+    }, {passive: false});
+    gallery.addEventListener('pointerdown', event => {
+      if (!gallery.classList.contains('on') || event.button !== 0 || !event.isPrimary) return;
+      pointer = {id: event.pointerId, x: event.clientX, y: event.clientY};
+      gallery.setPointerCapture(event.pointerId);
+      gallery.classList.add('is-dragging');
+    });
+    function release(event) {
+      if (!pointer || pointer.id !== event.pointerId) return;
+      const dx = event.clientX - pointer.x, dy = event.clientY - pointer.y;
+      if (event.type === 'pointerup' && gallery.classList.contains('on') && Math.abs(dx) >= 35 && Math.abs(dx) > Math.abs(dy)) move(dx < 0 ? 1 : -1);
+      pointer = null;
+      gallery.classList.remove('is-dragging');
+      if (gallery.hasPointerCapture(event.pointerId)) gallery.releasePointerCapture(event.pointerId);
+    }
+    gallery.addEventListener('pointerup', release);
+    gallery.addEventListener('pointercancel', release);
+    gallery.addEventListener('lostpointercapture', () => { pointer = null; gallery.classList.remove('is-dragging'); });
+  });
+})();

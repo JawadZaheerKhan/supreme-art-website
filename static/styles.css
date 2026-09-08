@@ -1997,13 +1997,13 @@ a { color: inherit; }
   position: absolute; inset: 100px 0 80px; display: grid; place-items: center;
 }
 .home-process-scene {
-  grid-area: 1 / 1; width: min(1140px, calc(100% - 96px)); max-height: 100%;
-  display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: center;
+  grid-area: 1 / 1; width: min(1220px, calc(100% - 96px)); max-height: 100%;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(24px, 4vw, 60px); align-items: center;
   visibility: hidden; transform: translate3d(var(--stage-x, 0px), var(--stage-lift, 0px), 0) scale(var(--stage-scale, .94)); transform-origin: center;
 }
 .home-process-scene.is-rendered { visibility: visible; will-change: transform; }
 .home-process-scene > img {
-  position: relative; width: 100%; height: min(52svh, 480px); object-fit: cover; display: block; border-radius: 16px;
+  position: relative; width: 100%; height: min(58svh, 540px); object-fit: contain; object-position: center; display: block; border-radius: 16px;
 }
 .home-process-scene__copy { position: relative; width: 100%; padding: 0; margin: 0; min-width: 0; }
 .home-process-scene__num { display: block; color: #85cef6; font: 700 1rem/1.4 var(--display); margin-bottom: 22px; }
@@ -2021,8 +2021,8 @@ a { color: inherit; }
 .home-process-story__progress span, .home-quality-story__progress span { display: block; width: 0; height: 100%; background: linear-gradient(90deg,#1b6fb3,#63c5ed); }
 @media (max-width: 780px) {
   .home-process-story__scenes, .home-quality-story__scenes { inset: 84px 0 66px; }
-  .home-process-scene { width: calc(100% - 40px); grid-template-columns: 1fr; gap: 18px; }
-  .home-process-scene > img { height: min(28svh, 260px); border-radius: 12px; }
+  .home-process-scene { width: calc(100% - 32px); grid-template-columns: 1fr; gap: 18px; }
+  .home-process-scene > img { height: min(35svh, 330px); border-radius: 12px; }
   .home-process-scene__num { margin-bottom: 6px; font-size: .85rem; }
   .home-process-scene__copy .eyebrow { margin-bottom: 8px; font-size: .7rem; }
   .home-process-scene__copy h2 { font-size: clamp(1.6rem, 6vw, 2.5rem); }
@@ -2306,4 +2306,29 @@ a { color: inherit; }
   .home-process-scene__num { display: block; }
   .home-process-story__chrome, .home-quality-story__chrome { position: relative; left: auto; bottom: auto; transform: none; display: flex; padding-bottom: 32px; }
   .home-process-story__count, .home-quality-story__count, .home-process-story__progress, .home-quality-story__progress { display: none; }
+}
+/* Only the active desktop stage receives photo gestures. Mobile keeps native swiping. */
+.proc__stage .proc__shot { pointer-events: none; }
+.proc__stage .proc__shot.on { pointer-events: auto; }
+.proc__stage .is-swipeable { cursor: grab; touch-action: pan-y pinch-zoom; user-select: none; }
+.proc__stage .is-swipeable.is-dragging { cursor: grabbing; }
+.proc__stage .is-swipeable img { -webkit-user-drag: none; }
+.proc__stage .proc__shot.is-manual-gallery img {
+  animation: none; opacity: 0; transition: opacity .35s ease;
+}
+.proc__stage .proc__shot.is-manual-gallery img.is-selected { opacity: 1; }
+.proc__stage .proc__shot.is-manual-gallery i {
+  animation: none; background: rgba(255,255,255,.48); transform: scale(1);
+}
+.proc__stage .proc__shot.is-manual-gallery i.is-selected { background: #fff; transform: scale(1.25); }
+@media (prefers-reduced-motion: reduce) {
+  .proc__stage .proc__shot.is-manual-gallery img { transition: none; }
+}
+/* Give mobile Process and Quality photos more width while keeping copy inset. */
+@media (max-width: 860px) {
+  .proc-mob__step .proc-mob__img {
+    width: calc(100% + 24px);
+    margin-inline: -12px;
+    margin-bottom: 24px;
+  }
 }
