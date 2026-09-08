@@ -26,6 +26,18 @@
       </div>
     </section>
 
+    <section class="section" aria-labelledby="box-types-heading">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.box_types.eyebrow }}</p>
+        <h2 class="reveal" id="box-types-heading">{{ page.box_types.heading }}</h2>
+        <div class="grid">
+          {{#each page.box_types.items}}<article class="card reveal">
+            <h3>{{ title }}</h3>
+            <p>{{ text }}</p>
+          </article>{{/each}}
+        </div>
+      </div>
+    </section>
     <section class="section band">
       <div class="container">
         <p class="eyebrow reveal">{{ page.capabilities.eyebrow }}</p>

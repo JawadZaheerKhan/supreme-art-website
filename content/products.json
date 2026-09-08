@@ -15,6 +15,17 @@
       { "title": "Food packaging", "text": "Printed folding cartons and pouches for food products, including masala packaging produced for Stanley Foods and SwaaD Foods.", "alt": "Supreme Art masala and food packaging", "image": "/images/products/food-packaging.png" }
     ]
   },
+  "box_types": {
+    "eyebrow": "Box types",
+    "heading": "Choose the right box structure.",
+    "items": [
+      { "title": "Straight Tuck Box", "text": "One of the most common box styles, straight tuck boxes are easy to assemble and require little storage space. They are well suited to lightweight products." },
+      { "title": "Reverse Tuck Box", "text": "Similar to a straight tuck box, but with the closing panels folding in opposite directions. This multipurpose design can be customised with cutouts, windows and locks." },
+      { "title": "Lock Bottom Box", "text": "Also known as a 1-2-3 bottom box, this structure is designed for heavier items. The bottom flaps interlock to form a sturdy base that supports the product inside." },
+      { "title": "Four Corner Folding Box", "text": "A display box designed to showcase products while providing protection. Suitable for electronics, frozen food, household goods and other products." },
+      { "title": "Six Corner Box", "text": "A wide, deep box made from durable material to stay sturdy and rigid. Its spacious design provides room for heavy products or more than one item." }
+    ]
+  },
   "capabilities": { "eyebrow": "How it's made", "heading": "One factory. The whole carton." },
   "cta": {
     "heading": "Need a specific carton?",
