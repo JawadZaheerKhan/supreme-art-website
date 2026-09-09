@@ -2628,3 +2628,15 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
 /* Hidden tabs must not leave flex gaps inside the collapsed glass pill. */
 .site-header.nav-condensed .nav-links,
 .home-page .site-header.nav-condensed .nav-links { gap: 0; }
+
+/* Use the supplied full lockup so both scripts keep their original lettering. */
+.home-story__scene[data-home-stage="0"] { mix-blend-mode: screen; }
+.home-story__scene h1.home-story__full-logo {
+  position: relative; width: min(1100px, 88vw); aspect-ratio: 1240 / 400;
+  overflow: hidden; flex-shrink: 0; text-shadow: none;
+}
+.home-story__full-logo img {
+  position: absolute; width: 129.0323%; max-width: none; height: auto;
+  left: -14.5161%; top: -53.75%;
+  filter: grayscale(1) invert(1) contrast(3);
+}
