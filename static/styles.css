@@ -2629,27 +2629,12 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
 .site-header.nav-condensed .nav-links,
 .home-page .site-header.nav-condensed .nav-links { gap: 0; }
 
-/* Use the supplied full lockup so both scripts keep their original lettering. */
-.home-story__scene[data-home-stage="0"] { mix-blend-mode: screen; }
+/* Transparent lettering keeps the glass glow reliable on mobile browsers. */
 .home-story__scene h1.home-story__full-logo {
   position: relative; width: min(1100px, 88vw); aspect-ratio: 1240 / 400;
-  overflow: hidden; flex-shrink: 0; text-shadow: none;
+  overflow: visible; flex-shrink: 0; text-shadow: none;
 }
 .home-story__full-logo img {
-  position: absolute; width: 129.0323%; max-width: none; height: auto;
-  left: -14.5161%; top: -53.75%;
-  filter: grayscale(1) invert(1) contrast(3);
+  display: block; width: 100%; height: auto;
+  filter: drop-shadow(0 0 2px rgba(230,249,255,.65)) drop-shadow(0 0 9px rgba(164,222,255,.5));
 }
-
-/* Screen blending turns the blurred white lettering into a soft ice halo. */
-.home-story__scene h1.home-story__full-logo { overflow: visible; }
-.home-story__full-logo img {
-  clip-path: inset(22.9% 11.25% 34.36% 11.25%);
-}
-.home-story__full-logo::before,
-.home-story__full-logo::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: url('/images/home/supreme-art-full-logo.jpg') 50% 40.04% / 129.0323% auto no-repeat;
-}
-.home-story__full-logo::before { filter: grayscale(1) invert(1) contrast(3) blur(9px); opacity: .55; }
-.home-story__full-logo::after { filter: grayscale(1) invert(1) contrast(3) blur(2px); opacity: .35; }
