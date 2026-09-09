@@ -2624,3 +2624,7 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
   background: linear-gradient(115deg, #a9dcf3 0%, #e3f7ff 42%, #c4eeff 65%, #95d3ed 100%);
   color: #153e58 !important;
 }
+
+/* Hidden tabs must not leave flex gaps inside the collapsed glass pill. */
+.site-header.nav-condensed .nav-links,
+.home-page .site-header.nav-condensed .nav-links { gap: 0; }
