@@ -723,3 +723,13 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     mark();
   });
 })();
+// Keep the inner-page glass navigation readable beyond its blue banner.
+(function () {
+  const banner = document.querySelector('.page-banner');
+  const header = document.querySelector('.site-header');
+  if (!banner || !header) return;
+  const update = () => header.classList.toggle('is-past-banner', banner.getBoundingClientRect().bottom <= header.offsetHeight);
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
