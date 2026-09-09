@@ -2542,3 +2542,24 @@ body:has(.page-banner) .site-header .nav-links a:focus-visible { outline-color: 
 /* Maintain contrast when the floating bar moves over white page content. */
 body:has(.page-banner) .site-header.is-past-banner .nav-links { background-color: rgba(15,53,82,.88); }
 body:has(.page-banner) .site-header.is-past-banner .brand__logo { filter: none; }
+
+/* Ice-blue glass: a luminous selected pill and a restrained frosted rim. */
+.site-header .nav-links::before,
+.home-page .site-header .nav-links::before {
+  background: linear-gradient(115deg, #a9dcf3 0%, #e3f7ff 42%, #c4eeff 65%, #95d3ed 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 0 0 1px rgba(230,250,255,.65), inset 0 -3px 8px rgba(64,151,193,.16), 0 0 15px rgba(177,233,255,.38), 0 4px 12px rgba(8,61,91,.16);
+}
+.site-header .nav-links,
+.home-page .site-header .nav-links,
+body:has(.page-banner) .site-header .nav-links {
+  box-shadow: inset 0 1px 0 rgba(232,250,255,.65), inset 0 0 0 1px rgba(196,236,255,.35), 0 0 18px rgba(163,222,255,.18), 0 8px 24px rgba(5,29,51,.14);
+}
+body .site-header .nav-links > a.nav-flow-target,
+body .site-header .nav-links > .has-dropdown > a.nav-flow-target,
+body.home-page .site-header .nav-links > a.nav-flow-target,
+body.home-page .site-header .nav-links > .has-dropdown > a.nav-flow-target,
+body:has(.page-banner) .site-header .nav-links > a.nav-flow-target,
+body:has(.page-banner) .site-header .nav-links > .has-dropdown > a.nav-flow-target {
+  color: #153e58 !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.35);
+}
