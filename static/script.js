@@ -379,22 +379,32 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   document.fonts?.ready?.then(syncIndicator);
   window.addEventListener('load', syncIndicator);
 
-  // Condense the bar to just the current tab while scrolling down; scrolling
-  // up (or being near the top) restores the full bar. Reposition the liquid
-  // indicator as the layout settles so it keeps tracking the active tab
-  // instead of being left pointing at where the tab used to be.
+  // Match the card reveal and keep the indicator attached throughout resizing.
   if (!reducedMotion) {
-    let lastY = window.scrollY, ticking = false, trackUntil = 0;
-    function reposition() {
-      // Track the tab's live position every frame while it collapses/expands,
-      // with the indicator's own transition off, so it moves in exact lockstep
-      // instead of jumping to a stale target once the layout has already moved.
+    const duration = cardMotion.reveal;
+    header.style.setProperty('--nav-resize-duration', duration + 'ms');
+    let lastY = window.scrollY, travel = 0, direction = 0;
+    let ticking = false, tracking = false, trackUntil = 0;
+    const stagedStories = [...document.querySelectorAll('[data-home-process], [data-home-quality]')];
+    const staticStages = matchMedia('(prefers-reduced-motion: reduce), (max-height: 540px), (max-width: 1024px) and (max-height: 600px)');
+    function isPinned() {
+      return !staticStages.matches && stagedStories.some(story => {
+        const rect = story.getBoundingClientRect();
+        const sticky = story.querySelector('.home-process-story__sticky, .home-quality-story__sticky');
+        return sticky && rect.top <= 2 && rect.bottom >= sticky.offsetHeight - 2;
+      });
+    }
+    function setCondensed(condensed) {
+      if (header.classList.contains('nav-condensed') === condensed) return;
+      header.classList.toggle('nav-condensed', condensed);
       nav.classList.add('is-tracking');
-      trackUntil = performance.now() + 800;
-      const frame = (now) => {
+      trackUntil = performance.now() + duration + 80;
+      if (tracking) return;
+      tracking = true;
+      const frame = now => {
         positionIndicator(activeLink, false);
         if (now < trackUntil) requestAnimationFrame(frame);
-        else nav.classList.remove('is-tracking');
+        else { tracking = false; nav.classList.remove('is-tracking'); }
       };
       requestAnimationFrame(frame);
     }
@@ -402,18 +412,26 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const y = window.scrollY;
-        const delta = y - lastY;
-        const wasCondensed = header.classList.contains('nav-condensed');
-        if (y < 80) header.classList.remove('nav-condensed');
-        else if (delta > 4) header.classList.add('nav-condensed');
-        else if (delta < -4) header.classList.remove('nav-condensed');
-        if (header.classList.contains('nav-condensed') !== wasCondensed) reposition();
-        lastY = y;
         ticking = false;
+        const y = window.scrollY, delta = y - lastY;
+        lastY = y;
+        if (y < 80) { travel = 0; direction = 0; setCondensed(false); return; }
+        // Pinned chapters own their stage changes; ignore their scroll anchors.
+        if (isPinned()) { travel = 0; direction = 0; return; }
+        if (Math.abs(delta) < 1) return;
+        const nextDirection = Math.sign(delta);
+        if (nextDirection !== direction) { travel = 0; direction = nextDirection; }
+        travel += Math.abs(delta);
+        if (travel >= 48) { setCondensed(direction > 0); travel = 0; }
       });
     }
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('site-stage-change', event => {
+      lastY = window.scrollY;
+      travel = 0;
+      direction = 0;
+      setCondensed(event.detail.direction > 0);
+    });
   }
 })();
 /* Homepage continuing scroll chapters */
@@ -508,6 +526,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       index = next;
       busy = true;
       if (anchor) scrollTo({top: position(next), behavior: 'instant'});
+      if (previous >= 0) dispatchEvent(new CustomEvent('site-stage-change', {detail: {direction}}));
       const started = performance.now();
       scenes.forEach((card, i) => card.setAttribute('aria-hidden', String(i !== next)));
       if (counter) counter.textContent = String(next + 1).padStart(2, '0');

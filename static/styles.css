@@ -2563,3 +2563,15 @@ body:has(.page-banner) .site-header .nav-links > .has-dropdown > a.nav-flow-targ
   color: #153e58 !important;
   text-shadow: 0 1px 0 rgba(255,255,255,.35);
 }
+
+/* Keep width, spacing and fade on the same card-reveal timing. */
+@media (prefers-reduced-motion: no-preference) {
+  .site-header .nav-links,
+  .home-page .site-header .nav-links {
+    transition: background-color .4s ease, box-shadow .4s ease, gap var(--nav-resize-duration, 1100ms) cubic-bezier(.16,1,.3,1);
+  }
+  .site-header .nav-links > a:not(.current),
+  .site-header .nav-links > .has-dropdown:not(:has(> a.current)) {
+    transition: max-width var(--nav-resize-duration, 1100ms) cubic-bezier(.16,1,.3,1), opacity var(--nav-resize-duration, 1100ms) ease, padding var(--nav-resize-duration, 1100ms) cubic-bezier(.16,1,.3,1), color .45s ease, transform .55s cubic-bezier(.16,1,.3,1);
+  }
+}
