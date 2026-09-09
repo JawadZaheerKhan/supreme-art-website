@@ -41,26 +41,35 @@ const cardMotion = Object.freeze({ reveal: 1100, hold: 100, slide: 1100, gap: 10
   });
 })();
 
-// "About us" reveals its dropdown on hover on desktop, but phones have no
-// hover - tapping it there toggles the dropdown open instead of navigating
-// straight through (a second tap, or a dropdown link, still navigates).
+// On phones, navigate to About first; tapping About on that page toggles its submenu.
 (function () {
-  const wraps = document.querySelectorAll('.has-dropdown');
-  if (!wraps.length) return;
+  const wraps = [...document.querySelectorAll('.has-dropdown')];
   const desktop = () => window.matchMedia('(min-width: 1025px)').matches;
-  wraps.forEach((wrap) => {
+  const pagePath = url => new URL(url, window.location.href).pathname.replace(/\/$/, '').replace(/\.html$/, '');
+  function close(wrap) {
+    wrap.classList.remove('dropdown-open');
+    wrap.querySelector(':scope > a')?.setAttribute('aria-expanded', 'false');
+  }
+  wraps.forEach(wrap => {
     const trigger = wrap.querySelector(':scope > a');
-    trigger?.addEventListener('click', (event) => {
-      if (desktop() || wrap.classList.contains('dropdown-open')) return;
+    trigger?.setAttribute('aria-haspopup', 'true');
+    trigger?.setAttribute('aria-expanded', 'false');
+    trigger?.addEventListener('click', event => {
+      if (desktop() || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (pagePath(trigger.href) !== pagePath(window.location.href)) return;
       event.preventDefault();
-      wraps.forEach((w) => { if (w !== wrap) w.classList.remove('dropdown-open'); });
-      wrap.classList.add('dropdown-open');
+      const open = !wrap.classList.contains('dropdown-open');
+      wraps.forEach(close);
+      wrap.classList.toggle('dropdown-open', open);
+      trigger.setAttribute('aria-expanded', String(open));
     });
+    wrap.querySelectorAll('.dropdown a').forEach(link => link.addEventListener('click', () => close(wrap)));
   });
-  document.addEventListener('click', (event) => {
-    wraps.forEach((wrap) => {
-      if (!wrap.contains(event.target)) wrap.classList.remove('dropdown-open');
-    });
+  document.addEventListener('click', event => {
+    wraps.forEach(wrap => { if (!wrap.contains(event.target)) close(wrap); });
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') wraps.forEach(close);
   });
 })();
 
@@ -295,6 +304,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 
     nav.style.setProperty('--nav-flow-x', `${linkRect.left - navRect.left}px`);
     nav.style.setProperty('--nav-flow-w', `${linkRect.width}px`);
+    nav.style.setProperty('--nav-flow-h', `${linkRect.height}px`);
 
     nav.classList.add('nav-flow-ready');
     if (animate && !reducedMotion) {

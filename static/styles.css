@@ -2575,3 +2575,33 @@ body:has(.page-banner) .site-header .nav-links > .has-dropdown > a.nav-flow-targ
     transition: max-width var(--nav-resize-duration, 1100ms) cubic-bezier(.16,1,.3,1), opacity var(--nav-resize-duration, 1100ms) ease, padding var(--nav-resize-duration, 1100ms) cubic-bezier(.16,1,.3,1), color .45s ease, transform .55s cubic-bezier(.16,1,.3,1);
   }
 }
+
+/* Mobile pills follow their real link height; only an explicit tap opens About. */
+@media (max-width: 1024px) {
+  .site-header .nav-links::before,
+  .home-page .site-header .nav-links::before { height: var(--nav-flow-h, 24px); }
+  .site-header .nav-links .has-dropdown { overflow: visible; }
+  .site-header .nav-links .has-dropdown:not(.dropdown-open) .dropdown {
+    opacity: 0; visibility: hidden; pointer-events: none;
+  }
+  .site-header .nav-links .has-dropdown.dropdown-open .dropdown {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    width: max-content; min-width: 180px; max-width: 70vw;
+  }
+  .site-header .nav-links .has-dropdown .dropdown a {
+    min-height: 44px; padding: 11px 14px; font-size: 14px;
+  }
+}
+@media (max-width: 1024px) {
+  .site-header .nav-links .has-dropdown .dropdown {
+    background: rgba(235,248,255,.97);
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 14px; padding: 6px; gap: 2px;
+    box-shadow: 0 12px 30px rgba(5,29,51,.24);
+  }
+  .site-header .nav-links .has-dropdown .dropdown a {
+    color: #153e58; border-bottom: 0; border-radius: 9px;
+  }
+  .site-header .nav-links > a,
+  .site-header .nav-links > .has-dropdown > a { border-bottom: 0; }
+}
