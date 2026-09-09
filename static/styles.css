@@ -2605,3 +2605,12 @@ body:has(.page-banner) .site-header .nav-links > .has-dropdown > a.nav-flow-targ
   .site-header .nav-links > a,
   .site-header .nav-links > .has-dropdown > a { border-bottom: 0; }
 }
+
+/* White labels stay readable over the mobile homepage hero. */
+@media (max-width: 1024px) {
+  .home-page .site-header.is-over-hero .nav-links > a:not(.nav-flow-target),
+  .home-page .site-header.is-over-hero .nav-links > .has-dropdown > a:not(.nav-flow-target) {
+    color: rgba(255,255,255,.94) !important;
+  }
+  .home-page .site-header.is-over-hero .nav-links > .has-dropdown > a::after { color: inherit; }
+}
