@@ -483,7 +483,7 @@ a { color: inherit; }
     display: block;
     position: sticky; top: 68px; z-index: 5;
     height: 200px; --box-scale: .42;
-    background: linear-gradient(to bottom, var(--bg) 0%, var(--bg) 76%, rgba(255,255,255,0) 100%);
+    background: transparent;
   }
   .proc-mob__box .proc-box__scene { aspect-ratio: auto; height: 100%; }
   .proc-mob__step { padding: 16px 0 30px; }
