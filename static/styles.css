@@ -2640,3 +2640,16 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
   left: -14.5161%; top: -53.75%;
   filter: grayscale(1) invert(1) contrast(3);
 }
+
+/* Screen blending turns the blurred white lettering into a soft ice halo. */
+.home-story__scene h1.home-story__full-logo { overflow: visible; }
+.home-story__full-logo img {
+  clip-path: inset(22.9% 11.25% 34.36% 11.25%);
+}
+.home-story__full-logo::before,
+.home-story__full-logo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: url('/images/home/supreme-art-full-logo.jpg') 50% 40.04% / 129.0323% auto no-repeat;
+}
+.home-story__full-logo::before { filter: grayscale(1) invert(1) contrast(3) blur(9px); opacity: .55; }
+.home-story__full-logo::after { filter: grayscale(1) invert(1) contrast(3) blur(2px); opacity: .35; }
