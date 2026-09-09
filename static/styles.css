@@ -2614,3 +2614,13 @@ body:has(.page-banner) .site-header .nav-links > .has-dropdown > a.nav-flow-targ
   }
   .home-page .site-header.is-over-hero .nav-links > .has-dropdown > a::after { color: inherit; }
 }
+
+/* Internal tab navigation has no full-screen loader flash or initial pill slide. */
+html.tab-navigation .press-loader { display: none; }
+.site-header .nav-links:not(.nav-flow-initialized)::before,
+.home-page .site-header .nav-links:not(.nav-flow-initialized)::before { transition: none; animation: none; }
+body .site-header .nav-links:not(.nav-flow-ready) > a.current,
+body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
+  background: linear-gradient(115deg, #a9dcf3 0%, #e3f7ff 42%, #c4eeff 65%, #95d3ed 100%);
+  color: #153e58 !important;
+}

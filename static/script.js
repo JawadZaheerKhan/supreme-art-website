@@ -299,6 +299,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     } else {
       link.classList.add('nav-flow-target');
     }
+    const firstPosition = !nav.classList.contains('nav-flow-ready');
     const navRect = nav.getBoundingClientRect();
     const linkRect = link.getBoundingClientRect();
 
@@ -307,6 +308,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     nav.style.setProperty('--nav-flow-h', `${linkRect.height}px`);
 
     nav.classList.add('nav-flow-ready');
+    if (firstPosition) requestAnimationFrame(() => requestAnimationFrame(() => nav.classList.add('nav-flow-initialized')));
     if (animate && !reducedMotion) {
       nav.classList.remove('is-flowing');
       void nav.offsetWidth;
@@ -371,11 +373,9 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const url = new URL(link.href, window.location.href);
       if (url.origin !== window.location.origin || url.href === window.location.href) return;
-      // Give the indicator a head start on the flow, but let the browser
-      // navigate immediately - this is a real page load either way, so
-      // delaying it just to watch an animation before the page reloads
-      // anyway reads as the tab switching, then glitching into a refresh.
-      positionIndicator(link, true);
+      // Skip the destination loader before first paint for this navigation only.
+      try { sessionStorage.setItem('site-tab-navigation', JSON.stringify({path: url.pathname, time: Date.now()})); } catch {}
+      positionIndicator(link, false);
     });
   });
 
