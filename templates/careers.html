@@ -20,7 +20,7 @@
             <h2>{{ page.intro.heading }}</h2>
             {{#each page.intro.paragraphs}}<p>{{ . }}</p>
             {{/each}}
-            <p style="margin-top:20px"><a class="btn btn--accent" href="mailto:{{ site.contact.email }}?subject=Careers%20at%20Supreme%20Art">{{ page.intro.button_label }}</a></p>
+            <p style="margin-top:20px"><a class="btn btn--accent" href="#career-contact">{{ page.intro.button_label }}</a></p>
           </div>
         </div>
       </div>
@@ -41,6 +41,15 @@
 {{> cta}}
   </main>
 
+<dialog id="career-contact" class="career-contact" aria-labelledby="career-contact-title" data-phone="{{ site.contact.phone_link }}">
+    <button type="button" class="career-contact__close" data-close aria-label="Close">×</button>
+    <h2 id="career-contact-title">Send us your CV</h2>
+    <p>Choose how you’d like to apply.</p>
+    <div class="career-contact__choices">
+      <a class="btn btn--accent" data-career-whatsapp href="https://wa.me/923349644597">WhatsApp</a>
+      <a class="btn btn--ghost" href="mailto:{{ site.contact.email }}?subject=Careers%20at%20Supreme%20Art">Email</a>
+    </div>
+  </dialog>
 {{> footer}}
 
   <script src="/script.js"></script>

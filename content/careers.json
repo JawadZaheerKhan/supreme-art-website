@@ -46,7 +46,7 @@
     "heading": "Ready to join us?",
     "text": "Send your CV and a short note about what you'd like to do.",
     "primary_label": "Apply now",
-    "primary_href": "mailto:info@supremeart.pk?subject=Careers%20at%20Supreme%20Art",
+    "primary_href": "#career-contact",
     "secondary_label": "About Supreme Art",
     "secondary_href": "about.html"
   }

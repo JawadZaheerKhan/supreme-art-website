@@ -391,7 +391,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 
   // Match the card reveal and keep the indicator attached throughout resizing.
   if (!reducedMotion) {
-    const duration = cardMotion.reveal;
+    let duration = cardMotion.reveal;
     header.style.setProperty('--nav-resize-duration', duration + 'ms');
     let lastY = window.scrollY, travel = 0, direction = 0;
     let ticking = false, tracking = false, trackUntil = 0;
@@ -406,6 +406,10 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     }
     function setCondensed(condensed) {
       if (header.classList.contains('nav-condensed') === condensed) return;
+      const mobile = matchMedia('(max-width: 1024px)').matches;
+      duration = mobile && !condensed ? 1500 : cardMotion.reveal;
+      header.style.setProperty('--nav-resize-duration', duration + 'ms');
+      header.style.setProperty('--nav-resize-easing', mobile ? 'cubic-bezier(.4,0,.2,1)' : 'cubic-bezier(.16,1,.3,1)');
       header.classList.toggle('nav-condensed', condensed);
       nav.classList.add('is-tracking');
       trackUntil = performance.now() + duration + 80;
@@ -761,4 +765,18 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
   update();
+})();
+
+// Let applicants choose a contact channel without sending anything automatically.
+(function () {
+  const dialog = document.querySelector('#career-contact');
+  if (!dialog) return;
+  const whatsapp = dialog.querySelector('[data-career-whatsapp]');
+  whatsapp.href = 'https://wa.me/' + dialog.dataset.phone.replace(/\D/g, '');
+  document.querySelectorAll('a[href="#career-contact"]').forEach(link => {
+    link.setAttribute('aria-haspopup', 'dialog');
+    link.addEventListener('click', event => { event.preventDefault(); dialog.showModal(); });
+  });
+  dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); } });
 })();

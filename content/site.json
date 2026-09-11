@@ -6,7 +6,7 @@
       { "label": "Home", "href": "index.html", "slug": "index", "dropdown": [] },
       {
         "label": "About us",
-        "href": "about.html",
+        "href": "company-profile.html",
         "slug": "about",
         "dropdown": [
           { "label": "Company profile", "href": "company-profile.html" },
