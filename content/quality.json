@@ -54,7 +54,9 @@
       {
         "title": "Coating inspection",
         "text": "Applied finishes, including UV and spot UV coatings, are checked for coverage, alignment, consistency and the required appearance.",
-        "image": "/images/quality/coating-inspection-1.jpg"
+        "image": "/images/quality/coating-check-1.png",
+        "image_2": "/images/quality/coating-check-2.png",
+        "image_3": "/images/quality/coating-inspection-1.jpg"
       },
       {
         "title": "Digital Product Tracking",
