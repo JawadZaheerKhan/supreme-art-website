@@ -51,7 +51,7 @@
               <label for="message">{{ page.form.message_label }}</label>
               <textarea id="message" name="message" placeholder="{{ page.form.message_placeholder }}"></textarea>
             </div>
-            <button type="submit" class="btn btn--accent">{{ page.form.submit_label }}</button>
+            <button type="submit" class="btn enquiry-button" data-enquiry-button><span>{{ page.form.submit_label }}</span><span class="enquiry-button__arrow" aria-hidden="true">&#8594;</span></button>
             <p id="formNote" style="margin:0;color:var(--muted);font-size:.9rem">{{ page.form.note }}</p>
           </form>
         </div>
@@ -61,7 +61,7 @@
 
 {{> footer}}
 
-  <script src="/script.js"></script>
+  <script src="/script.js"></script><script src="/enquiry-button.js"></script>
   <script>
     // Compose a pre-filled email from the enquiry form (no backend needed)
     var form = document.getElementById('quoteForm');
