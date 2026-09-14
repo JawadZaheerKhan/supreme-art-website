@@ -797,3 +797,43 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); } });
 })();
+
+// Glass expansion for the requested page actions.
+(() => {
+  const page = location.pathname.split('/').pop().replace(/\.html$/, '') || 'index';
+  const selectors = {
+    careers: '.cta-band .btn, a.btn[href="#career-contact"]',
+    about: '.cta-band .btn',
+    products: '.cta-band .btn',
+    index: '.home-contact-story__inner .hero-actions .btn'
+  };
+  if (!selectors[page]) return;
+  document.querySelectorAll(selectors[page]).forEach(button => {
+    button.classList.add('glass-action');
+    let touch = false;
+    let opening = false;
+    let replay = false;
+    button.addEventListener('pointerdown', event => {
+      touch = event.pointerType === 'touch' || event.pointerType === 'pen';
+    });
+    button.addEventListener('click', event => {
+      if (replay) return;
+      const mobile = touch || (event.detail > 0 && matchMedia('(hover: none)').matches);
+      touch = false;
+      if (!mobile && !opening) return;
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if (opening) return;
+      opening = true;
+      button.classList.add('is-expanding');
+      setTimeout(() => {
+        opening = false;
+        replay = true;
+        button.click();
+        replay = false;
+        button.classList.remove('is-expanding');
+      }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1100);
+    }, true);
+  });
+})();
