@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 {{> head}}
+<link rel="stylesheet" href="/careers-slideshow.css" />
 </head>
 <body class="photo-zoom-page">
 {{> gtm-body}}
@@ -14,7 +15,23 @@
     <section class="section">
       <div class="container">
         <div class="split">
-          <div class="split__media reveal"><div class="media media--tall">{{#with page.intro.media}}{{> media}}{{/with}}</div></div>
+          <div class="split__media reveal">
+            <div class="media media--tall careers-slideshow" data-careers-slideshow role="region" aria-roledescription="carousel" aria-label="Our production process">
+              {{#each content.process.steps}}
+              <img class="careers-slideshow__photo{{#if @index}}{{else}} is-active{{/if}}" src="{{ image }}" alt="{{ title }}" {{#if @index}}loading="lazy" aria-hidden="true"{{else}}fetchpriority="high"{{/if}} />
+              {{#if image_2}}<img class="careers-slideshow__photo" src="{{ image_2 }}" alt="{{ title }}" loading="lazy" aria-hidden="true" />{{/if}}
+              {{#if image_3}}<img class="careers-slideshow__photo" src="{{ image_3 }}" alt="{{ title }}" loading="lazy" aria-hidden="true" />{{/if}}
+              {{/each}}
+              <div class="careers-slideshow__bar">
+                <span data-slide-caption>Designing</span>
+                <div class="careers-slideshow__controls" hidden>
+                  <button type="button" data-slide-prev aria-label="Previous process photo">&#8592;</button>
+                  <button type="button" data-slide-pause aria-label="Pause slideshow">Pause</button>
+                  <button type="button" data-slide-next aria-label="Next process photo">&#8594;</button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="split__body reveal">
             <p class="eyebrow">{{ page.intro.eyebrow }}</p>
             <h2>{{ page.intro.heading }}</h2>
@@ -52,6 +69,6 @@
   </dialog>
 {{> footer}}
 
-  <script src="/script.js"></script>
+  <script src="/script.js"></script><script src="/careers-slideshow.js"></script>
 </body>
 </html>
