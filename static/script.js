@@ -506,6 +506,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     const scenes = [...story.querySelectorAll('.home-process-scene')];
     if (!scenes.length) return;
     const prefix = story.hasAttribute('data-home-quality') ? 'home-quality-story' : 'home-process-story';
+    const carousel = story.hasAttribute('data-home-process');
     const sticky = story.querySelector('.' + prefix + '__sticky');
     const counter = story.querySelector('.' + prefix + '__count b');
     const bar = story.querySelector('.' + prefix + '__progress span');
@@ -527,11 +528,26 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       card.style.setProperty('--stage-scale', scale);
       card.style.setProperty('--stage-lift', lift + 'px');
     }
+    function carouselFrame(current) {
+      const width = scenes[0].offsetWidth;
+      const spacing = Math.min(innerWidth * .55, width * .86);
+      scenes.forEach((card, i) => {
+        const offset = i - current;
+        const distance = Math.abs(offset);
+        const prominence = 1 - Math.min(1, distance);
+        paint(card, offset * spacing, .68 + .32 * prominence, -12 * prominence, distance < 2);
+        card.style.opacity = String(distance <= 1 ? .24 + .76 * prominence : .24 * Math.max(0, 2 - distance));
+        card.style.zIndex = String(Math.round(prominence * 10));
+        card.style.pointerEvents = distance < .01 ? 'auto' : 'none';
+      });
+    }
     function resting() {
       scenes.forEach((card, i) => {
         paint(card, 0, 1.045, -8, staticLayout.matches || i === index);
-        card.setAttribute('aria-hidden', String(!staticLayout.matches && i !== index));
+        card.setAttribute('aria-hidden', String(!staticLayout.matches && i !== Math.max(0, index)));
+        if (staticLayout.matches) card.style.pointerEvents = 'auto';
       });
+      if (carousel && !staticLayout.matches) carouselFrame(Math.max(0, index));
       if (counter) counter.textContent = String(Math.max(1, index + 1)).padStart(2, '0');
       if (bar) bar.style.width = ((index + 1) / scenes.length * 100) + '%';
     }
@@ -549,7 +565,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
         const slide = ease(Math.min(1, elapsed / 780));
         const lift = ease(Math.max(0, Math.min(1, (elapsed - 780) / 360)));
         const distance = innerWidth;
-        scenes.forEach((card, i) => {
+        if (carousel) carouselFrame(Math.max(0, previous) + (next - Math.max(0, previous)) * ease(Math.min(1, elapsed / 900)));
+        else scenes.forEach((card, i) => {
           if (i === next) paint(card, direction * distance * (1 - slide), .94 + .105 * lift, -8 * lift, true);
           else if (i === previous) paint(card, -direction * distance * slide, 1.045 - .105 * slide, -8 * (1 - slide), slide < 1);
           else paint(card, 0, .94, 0, false);
