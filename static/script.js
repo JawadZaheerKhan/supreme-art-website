@@ -804,6 +804,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const selectors = {
     careers: '.cta-band .btn, a.btn[href="#career-contact"]',
     about: '.cta-band .btn',
+    'company-profile': '.cta-band .btn',
     products: '.cta-band .btn',
     index: '.home-contact-story__inner .hero-actions .btn'
   };

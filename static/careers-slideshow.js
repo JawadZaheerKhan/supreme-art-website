@@ -23,7 +23,7 @@
     pause.textContent = paused ? 'Play' : 'Pause';
     pause.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
     if (!paused && !document.hidden && !gallery.matches(':hover') && !gallery.contains(document.activeElement)) {
-      timer = setInterval(() => show(index + 1), 4500);
+      timer = setInterval(() => show(index + 1), 2200);
     }
   };
   gallery.querySelector('.careers-slideshow__controls').hidden = photos.length < 2;
