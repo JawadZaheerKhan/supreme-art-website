@@ -2682,3 +2682,28 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
   .home-process-story .home-process-scene > img { height: min(30svh, 280px); }
   .home-process-story .home-process-scene__copy h2 { font-size: clamp(1.5rem, 6vw, 2.3rem); }
 }
+
+/* Glass surfaces on the Services page, with light behind the transparent cards. */
+.services-page [data-services-section] {
+  background-image: radial-gradient(ellipse at 12% 25%, #a7d9ef38, transparent 55%), radial-gradient(ellipse at 90% 75%, #bed9fa40, transparent 55%);
+}
+.services-page [data-services-section] .card {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff70, #e3f4ff24);
+  border: 1px solid #b3d9edb3;
+  box-shadow: inset 0 1px 0 #ffffffed, inset 0 0 18px #ffffff60, 0 8px 28px #376d9212, 0 0 15px #9cdcf526;
+  -webkit-backdrop-filter: blur(8px) saturate(115%);
+  backdrop-filter: blur(8px) saturate(115%);
+}
+.services-page [data-services-section] .card::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  border: 1px solid #ffffff80;
+  box-shadow: inset 1px 1px 0 #ffffffcc, inset -1px -1px 0 #83c9e64d;
+}
+.services-page [data-services-section] .card:hover {
+  border-color: #8dcee8;
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 20px #ffffff70, 0 12px 32px #376d921c, 0 0 22px #8bd8f54d;
+}
+.services-page [data-services-section] .card .media { background-color: transparent; }
+.home-process-story .home-process-scene { will-change: auto; }
+.home-process-story .home-process-scene.is-rendered { will-change: transform, opacity; }
