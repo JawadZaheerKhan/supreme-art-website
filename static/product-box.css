@@ -12,3 +12,19 @@
 .product-box-hint { position:absolute; bottom:10px; left:0; right:0; text-align:center; font-size:11px; color:#37556d; pointer-events:none; }
 .product-box-fallback { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .product-box-view.is-ready .product-box-fallback { display:none; }
+
+/* Keep the carton above its ground shadow and away from the interaction hint. */
+.product-box-stage { bottom:24px; perspective:1000px; }
+.product-box-stage::before {
+  content:""; position:absolute; width:62%; height:16%; left:19%; bottom:5%;
+  border-radius:50%; background:radial-gradient(ellipse,#233d5945, #233d5914 45%,transparent 72%);
+  filter:blur(7px);
+  transform:translateX(var(--shadow-x,5px)) scaleX(var(--shadow-scale,.94));
+  pointer-events:none;
+}
+.product-box-model { will-change:transform; }
+.box-front { filter:brightness(var(--front-light,1)); }
+.box-right { filter:brightness(var(--right-light,.88)); }
+.box-left { filter:brightness(var(--left-light,.98)); }
+.box-top { filter:brightness(1.035); }
+.product-box-hint { bottom:9px; font-size:11px; }
