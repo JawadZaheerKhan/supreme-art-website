@@ -73,6 +73,41 @@
             "box_id": "vazkor",
             "box_name": "Vazkor",
             "box_front": "/images/vazkor-box/front.png"
+          },
+          {
+            "title": "Zeflox carton",
+            "interactive_box": true,
+            "box_id": "zeflox",
+            "box_name": "Zeflox",
+            "box_front": "/images/zeflox-box/front.png"
+          },
+          {
+            "title": "Danidol carton",
+            "interactive_box": true,
+            "box_id": "danidol",
+            "box_name": "Danidol",
+            "box_front": "/images/danidol-box/front.png"
+          },
+          {
+            "title": "Novex carton",
+            "interactive_box": true,
+            "box_id": "novex",
+            "box_name": "Novex",
+            "box_front": "/images/novex-box/front.png"
+          },
+          {
+            "title": "Caber carton",
+            "interactive_box": true,
+            "box_id": "caber",
+            "box_name": "Caber",
+            "box_front": "/images/caber-box/front.png"
+          },
+          {
+            "title": "Icon carton",
+            "interactive_box": true,
+            "box_id": "icon",
+            "box_name": "Icon",
+            "box_front": "/images/icon-box/front.png"
           }
         ]
       },

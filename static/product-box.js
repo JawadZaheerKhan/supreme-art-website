@@ -1,6 +1,499 @@
 (() => {
+  const additionalBoxes ={
+  "zeflox": {
+    "height": 198,
+    "depth": 30,
+    "faces": [
+      [
+        "front",
+        [
+          [
+            289,
+            267
+          ],
+          [
+            936,
+            269
+          ],
+          [
+            930,
+            722
+          ],
+          [
+            297,
+            721
+          ]
+        ],
+        840,
+        600
+      ],
+      [
+        "left",
+        [
+          [
+            397,
+            205
+          ],
+          [
+            462,
+            207
+          ],
+          [
+            472,
+            707
+          ],
+          [
+            406,
+            692
+          ]
+        ],
+        180,
+        600
+      ],
+      [
+        "right",
+        [
+          [
+            855,
+            268
+          ],
+          [
+            910,
+            267
+          ],
+          [
+            898,
+            677
+          ],
+          [
+            849,
+            692
+          ]
+        ],
+        180,
+        600
+      ],
+      [
+        "top",
+        [
+          [
+            290,
+            324
+          ],
+          [
+            949,
+            320
+          ],
+          [
+            966,
+            355
+          ],
+          [
+            279,
+            362
+          ]
+        ],
+        840,
+        180
+      ]
+    ]
+  },
+  "danidol": {
+    "height": 214,
+    "depth": 72,
+    "faces": [
+      [
+        "front",
+        [
+          [
+            344,
+            283
+          ],
+          [
+            912,
+            282
+          ],
+          [
+            909,
+            707
+          ],
+          [
+            351,
+            712
+          ]
+        ],
+        840,
+        600
+      ],
+      [
+        "left",
+        [
+          [
+            490,
+            288
+          ],
+          [
+            622,
+            280
+          ],
+          [
+            645,
+            696
+          ],
+          [
+            509,
+            674
+          ]
+        ],
+        180,
+        600
+      ],
+      [
+        "right",
+        [
+          [
+            754,
+            302
+          ],
+          [
+            874,
+            307
+          ],
+          [
+            866,
+            655
+          ],
+          [
+            744,
+            678
+          ]
+        ],
+        180,
+        600
+      ],
+      [
+        "top",
+        [
+          [
+            353,
+            287
+          ],
+          [
+            866,
+            284
+          ],
+          [
+            889,
+            345
+          ],
+          [
+            330,
+            353
+          ]
+        ],
+        840,
+        180
+      ]
+    ]
+  },
+  "novex": {
+    "height": 184,
+    "depth": 32,
+    "faces": [
+      [
+        "front",
+        [
+          [
+            278,
+            242
+          ],
+          [
+            970,
+            246
+          ],
+          [
+            956,
+            694
+          ],
+          [
+            284,
+            693
+          ]
+        ],
+        840,
+        600
+      ],
+      [
+        "left",
+        [
+          [
+            410,
+            311
+          ],
+          [
+            482,
+            309
+          ],
+          [
+            490,
+            796
+          ],
+          [
+            418,
+            779
+          ]
+        ],
+        180,
+        600
+      ],
+      [
+        "right",
+        [
+          [
+            863,
+            252
+          ],
+          [
+            916,
+            254
+          ],
+          [
+            897,
+            649
+          ],
+          [
+            843,
+            666
+          ]
+        ],
+        180,
+        600
+      ],
+      [
+        "top",
+        [
+          [
+            265,
+            293
+          ],
+          [
+            967,
+            306
+          ],
+          [
+            980,
+            341
+          ],
+          [
+            243,
+            329
+          ]
+        ],
+        840,
+        180
+      ]
+    ]
+  },
+  "caber": {
+    "height": 179,
+    "depth": 37,
+    "faces": [
+      [
+        "front",
+        [
+          [
+            273,
+            291
+          ],
+          [
+            950,
+            291
+          ],
+          [
+            938,
+            720
+          ],
+          [
+            285,
+            721
+          ]
+        ],
+        840,
+        600
+      ],
+      [
+        "left",
+        [
+          [
+            476,
+            316
+          ],
+          [
+            569,
+            321
+          ],
+          [
+            575,
+            767
+          ],
+          [
+            482,
+            750
+          ]
+        ],
+        180,
+        600
+      ],
+      [
+        "right",
+        [
+          [
+            844,
+            285
+          ],
+          [
+            918,
+            281
+          ],
+          [
+            899,
+            669
+          ],
+          [
+            826,
+            684
+          ]
+        ],
+        180,
+        600
+      ],
+      [
+        "top",
+        [
+          [
+            331,
+            298
+          ],
+          [
+            899,
+            294
+          ],
+          [
+            914,
+            337
+          ],
+          [
+            318,
+            339
+          ]
+        ],
+        840,
+        180
+      ]
+    ]
+  },
+  "icon": {
+    "height": 146,
+    "depth": 34,
+    "faces": [
+      [
+        "front",
+        [
+          [
+            343,
+            263
+          ],
+          [
+            957,
+            268
+          ],
+          [
+            947,
+            582
+          ],
+          [
+            348,
+            575
+          ]
+        ],
+        840,
+        600
+      ],
+      [
+        "left",
+        [
+          [
+            513,
+            363
+          ],
+          [
+            585,
+            369
+          ],
+          [
+            592,
+            646
+          ],
+          [
+            520,
+            635
+          ]
+        ],
+        180,
+        600
+      ],
+      [
+        "right",
+        [
+          [
+            862,
+            312
+          ],
+          [
+            924,
+            309
+          ],
+          [
+            909,
+            578
+          ],
+          [
+            851,
+            592
+          ]
+        ],
+        180,
+        600
+      ],
+      [
+        "top",
+        [
+          [
+            324,
+            308
+          ],
+          [
+            881,
+            311
+          ],
+          [
+            891,
+            346
+          ],
+          [
+            312,
+            344
+          ]
+        ],
+        840,
+        180
+      ]
+    ]
+  }
+};
   document.querySelectorAll('.product-box-view').forEach(view => {
   const model = view.querySelector('.product-box-model');
+  const dimensions = additionalBoxes[view.dataset.box] || {height:178,depth:32};
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let x = 0, y = 0, targetX = x, targetY = y, frame = 0, down = null, lastTime = 0;
   let visible = false, hovering = false, manualUntil = 0, autoTime = 0, autoPaused = false;
@@ -27,7 +520,7 @@
     const scale = Math.min(1.18, view.clientWidth / 355);
     x += (targetX - x) * blend;
     y += (targetY - y) * blend;
-    model.style.transform = 'scale(' + scale + ') rotateX(' + x + 'deg) rotateY(' + y + 'deg)';
+    model.style.transform = 'scale(' + scale + ') rotateX(' + x + 'deg) rotateY(' + y + 'deg) scaleY('+(dimensions.height/178)+') scaleZ('+(dimensions.depth/32)+')';
     model.style.setProperty('--front-light', (1.015 - Math.abs(y) * .0013).toFixed(3));
     model.style.setProperty('--right-light', (.91 + y * .0015).toFixed(3));
     model.style.setProperty('--left-light', (.95 - y * .0015).toFixed(3));
@@ -112,10 +605,10 @@
         ctx.putImageData(output,0,0);
         resolve();
       };
-      image.onerror=reject;image.src='/images/'+(view.dataset.box==='vazkor'?'vazkor-box/':'imo-box/')+name+(view.dataset.box==='vazkor'?'.png':'.jpg');
+      image.onerror=reject;image.src='/images/'+view.dataset.box+'-box/'+name+(view.dataset.box==='imo'?'.jpg':'.png');
     });
   }
-  const faces = view.dataset.box === 'vazkor' ? [
+  const faces = additionalBoxes[view.dataset.box]?.faces || (view.dataset.box === 'vazkor' ? [
     ['front',[[259,280],[1014,270],[1009,741],[276,750]],840,534],
     ['right',[[882,282],[941,282],[932,711],[874,731]],96,534],
     ['left',[[283,210],[359,210],[373,773],[288,753]],96,534],
@@ -125,7 +618,7 @@
     ['right',[[923,293],[969,279],[967,585],[924,605]],96,534],
     ['left',[[530,333],[587,342],[595,681],[542,669]],96,534],
     ['top',[[395,339],[960,337],[975,361],[393,364]],840,96]
-  ];
+  ]);
   Promise.all(faces.map(face => texture(...face))).then(()=>view.classList.add('is-ready')).catch(()=>{});
   });
 })();
