@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{{> head}}
+{{> head}}<link rel="stylesheet" href="/product-box.css" />
 </head>
 <body class="photo-zoom-page services-page">
 {{> gtm-body}}
@@ -18,7 +18,7 @@
         <p class="lead reveal">{{ page.range.lead }}</p>
         <div class="grid">
           {{#each page.range.items}}<article class="card reveal" style="padding:0;overflow:hidden">
-            <div class="media service-product-media">{{> media}}</div>
+            {{#if interactive_box}}{{> product-box}}{{else}}<div class="media service-product-media">{{> media}}</div>{{/if}}
             <div style="padding:22px 26px 26px"><h3>{{ title }}</h3><p>{{ text }}</p></div>
           </article>
           {{/each}}
@@ -64,6 +64,6 @@
 {{> footer}}
 
   <script src="/script.js"></script>
-  <script src="/services-motion.js"></script>
+  <script src="/services-motion.js"></script><script src="/product-box.js"></script>
 </body>
 </html>
