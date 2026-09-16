@@ -1,29 +1,148 @@
 {
   "title": "Services — Supreme Art",
   "description": "Printed packaging for tablets, capsules, syrups and food products, plus pharmaceutical leaflets and product labels.",
-  "banner": { "crumb": "Services", "heading": "Services" },
+  "banner": {
+    "crumb": "Services",
+    "heading": "Services"
+  },
   "range": {
     "eyebrow": "What we make",
     "heading": "Packaging for pharmaceutical and food products.",
     "lead": "From medicine cartons to food packs, leaflets and labels, we print and finish every product to your artwork, dimensions and required specification.",
     "items": [
-      { "title": "Tablet packaging", "interactive_box": true, "text": "Printed cartons made to fit tablet blister and strip packs, with accurate dimensions and clear product information.", "alt": "Tablet packaging", "image": "/images/products/tablet-packaging.jpg" },
-      { "title": "Capsule packaging", "text": "Precisely produced cartons for capsule blister, strip and bottle formats in a range of pack sizes.", "alt": "Capsule packaging", "image": "/images/products/capsule-packaging.jpg" },
-      { "title": "Syrup packaging", "text": "Protective bottle cartons for syrups and liquid medicines, with partitions or inserts where required.", "alt": "Syrup packaging", "image": "/images/products/syrup-packaging.jpg" },
-      { "title": "Leaflets & inserts", "text": "Printed and folded information leaflets and package inserts prepared to fit inside the finished pack.", "alt": "Pharmaceutical leaflets and inserts", "image": "/images/products/leaflets-inserts.jpg" },
-      { "title": "Labels", "text": "Clear, colour-accurate printed labels for bottles, products and outer packaging.", "alt": "Printed product labels", "image": "/images/products/labels.jpg" },
-      { "title": "Food packaging", "text": "Printed folding cartons and pouches for food products, including masala packaging produced for Stanley Foods and SwaaD Foods.", "alt": "Supreme Art masala and food packaging", "image": "/images/products/food-packaging.jpg" }
-    ]
+      {
+        "title": "Tablet packaging",
+        "interactive_box": true,
+        "text": "Printed cartons made to fit tablet blister and strip packs, with accurate dimensions and clear product information.",
+        "alt": "Tablet packaging",
+        "image": "/images/products/tablet-packaging.jpg"
+      },
+      {
+        "title": "Capsule packaging",
+        "text": "Precisely produced cartons for capsule blister, strip and bottle formats in a range of pack sizes.",
+        "alt": "Capsule packaging",
+        "image": "/images/products/capsule-packaging.jpg"
+      },
+      {
+        "title": "Syrup packaging",
+        "text": "Protective bottle cartons for syrups and liquid medicines, with partitions or inserts where required.",
+        "alt": "Syrup packaging",
+        "image": "/images/products/syrup-packaging.jpg"
+      },
+      {
+        "title": "Leaflets & inserts",
+        "text": "Printed and folded information leaflets and package inserts prepared to fit inside the finished pack.",
+        "alt": "Pharmaceutical leaflets and inserts",
+        "image": "/images/products/leaflets-inserts.jpg"
+      },
+      {
+        "title": "Labels",
+        "text": "Clear, colour-accurate printed labels for bottles, products and outer packaging.",
+        "alt": "Printed product labels",
+        "image": "/images/products/labels.jpg"
+      },
+      {
+        "title": "Food packaging",
+        "text": "Printed folding cartons and pouches for food products, including masala packaging produced for Stanley Foods and SwaaD Foods.",
+        "alt": "Supreme Art masala and food packaging",
+        "image": "/images/products/food-packaging.jpg"
+      }
+    ],
+    "groups": [
+      {
+        "id": "tablet-capsule",
+        "heading": "Tablet & Capsule Packaging",
+        "text": "Printed cartons for tablet and capsule packs, made to your product dimensions and artwork.",
+        "items": [
+          {
+            "title": "Tablet packaging",
+            "interactive_box": true,
+            "text": "Printed cartons made to fit tablet blister and strip packs, with accurate dimensions and clear product information.",
+            "alt": "Tablet packaging",
+            "image": "/images/products/tablet-packaging.jpg"
+          },
+          {
+            "title": "Capsule packaging",
+            "text": "Precisely produced cartons for capsule blister, strip and bottle formats in a range of pack sizes.",
+            "alt": "Capsule packaging",
+            "image": "/images/products/capsule-packaging.jpg"
+          }
+        ]
+      },
+      {
+        "id": "syrup-suspension",
+        "heading": "Syrup & Suspension Packaging",
+        "text": "Protective cartons for liquid medicine bottles, with partitions and inserts where required.",
+        "items": [
+          {
+            "title": "Syrup & suspension cartons",
+            "text": "Protective bottle cartons for syrups and liquid medicines, with partitions or inserts where required.",
+            "alt": "Syrup packaging",
+            "image": "/images/products/syrup-packaging.jpg"
+          }
+        ]
+      },
+      {
+        "id": "labels-leaflets",
+        "heading": "Labels & Leaflets",
+        "text": "Clear product identification and carefully folded information, designed to complete your packaging.",
+        "items": [
+          {
+            "title": "Labels",
+            "text": "Clear, colour-accurate printed labels for bottles, products and outer packaging.",
+            "alt": "Printed product labels",
+            "image": "/images/products/labels.jpg"
+          },
+          {
+            "title": "Leaflets & inserts",
+            "text": "Printed and folded information leaflets and package inserts prepared to fit inside the finished pack.",
+            "alt": "Pharmaceutical leaflets and inserts",
+            "image": "/images/products/leaflets-inserts.jpg"
+          }
+        ]
+      }
+    ],
+    "food": {
+      "title": "Food packaging",
+      "text": "Printed folding cartons and pouches for food products, including masala packaging produced for Stanley Foods and SwaaD Foods.",
+      "alt": "Supreme Art masala and food packaging",
+      "image": "/images/products/food-packaging.jpg"
+    }
   },
   "box_types": {
     "eyebrow": "Box types",
     "heading": "Choose the right box structure.",
     "items": [
-      { "title": "Straight Tuck Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:158/144;--image-width:486.07595%;--image-left:-140.50633%;--image-top:-17.36111%;", "text": "One of the most common box styles, straight tuck boxes are easy to assemble and require little storage space. They are well suited to lightweight products." },
-      { "title": "Reverse Tuck Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:130/129;--image-width:590.76923%;--image-left:-447.69231%;--image-top:-68.21705%;clip-path:polygon(0 0,72% 0,72% 32%,100% 48%,100% 100%,0 100%);", "text": "Similar to a straight tuck box, but with the closing panels folding in opposite directions. This multipurpose design can be customised with cutouts, windows and locks." },
-      { "title": "Lock Bottom Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:157/97;--image-width:489.17197%;--image-left:-143.31210%;--image-top:-288.65979%;", "text": "Also known as a 1-2-3 bottom box, this structure is designed for heavier items. The bottom flaps interlock to form a sturdy base that supports the product inside." },
-      { "title": "Four Corner Folding Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:121/138;--image-width:634.71074%;--image-left:-510.74380%;--image-top:-188.40580%;", "text": "A display box designed to showcase products while providing protection. Suitable for electronics, frozen food, household goods and other products." },
-      { "title": "Six Corner Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:125/131;--image-width:614.40000%;--image-left:-384.00000%;--image-top:-345.03817%;", "text": "A wide, deep box made from durable material to stay sturdy and rigid. Its spacious design provides room for heavy products or more than one item." }
+      {
+        "title": "Straight Tuck Box",
+        "image": "/images/products/box-types-reference.png",
+        "frame": "aspect-ratio:158/144;--image-width:486.07595%;--image-left:-140.50633%;--image-top:-17.36111%;",
+        "text": "One of the most common box styles, straight tuck boxes are easy to assemble and require little storage space. They are well suited to lightweight products."
+      },
+      {
+        "title": "Reverse Tuck Box",
+        "image": "/images/products/box-types-reference.png",
+        "frame": "aspect-ratio:130/129;--image-width:590.76923%;--image-left:-447.69231%;--image-top:-68.21705%;clip-path:polygon(0 0,72% 0,72% 32%,100% 48%,100% 100%,0 100%);",
+        "text": "Similar to a straight tuck box, but with the closing panels folding in opposite directions. This multipurpose design can be customised with cutouts, windows and locks."
+      },
+      {
+        "title": "Lock Bottom Box",
+        "image": "/images/products/box-types-reference.png",
+        "frame": "aspect-ratio:157/97;--image-width:489.17197%;--image-left:-143.31210%;--image-top:-288.65979%;",
+        "text": "Also known as a 1-2-3 bottom box, this structure is designed for heavier items. The bottom flaps interlock to form a sturdy base that supports the product inside."
+      },
+      {
+        "title": "Four Corner Folding Box",
+        "image": "/images/products/box-types-reference.png",
+        "frame": "aspect-ratio:121/138;--image-width:634.71074%;--image-left:-510.74380%;--image-top:-188.40580%;",
+        "text": "A display box designed to showcase products while providing protection. Suitable for electronics, frozen food, household goods and other products."
+      },
+      {
+        "title": "Six Corner Box",
+        "image": "/images/products/box-types-reference.png",
+        "frame": "aspect-ratio:125/131;--image-width:614.40000%;--image-left:-384.00000%;--image-top:-345.03817%;",
+        "text": "A wide, deep box made from durable material to stay sturdy and rigid. Its spacious design provides room for heavy products or more than one item."
+      }
     ]
   },
   "finishes": {
@@ -31,16 +150,33 @@
     "text": "A variety of finishing methods can elevate your packaging from good to exceptional. We provide a range of surface treatments and finishes to enhance the appeal of your products.",
     "features_heading": "Features",
     "features": [
-      { "title": "Anti-Counterfeit Packaging" },
-      { "title": "Color Shifting Seal" },
-      { "title": "Specialized & Customized Coatings" },
-      { "title": "Food Grade Coatings" },
-      { "title": "Drip-off Coatings" },
-      { "title": "Thermal Foiling" },
-      { "title": "Hot Stamping (Foiling)" }
+      {
+        "title": "Anti-Counterfeit Packaging"
+      },
+      {
+        "title": "Color Shifting Seal"
+      },
+      {
+        "title": "Specialized & Customized Coatings"
+      },
+      {
+        "title": "Food Grade Coatings"
+      },
+      {
+        "title": "Drip-off Coatings"
+      },
+      {
+        "title": "Thermal Foiling"
+      },
+      {
+        "title": "Hot Stamping (Foiling)"
+      }
     ]
   },
-  "capabilities": { "eyebrow": "How it's made", "heading": "One factory. The whole carton." },
+  "capabilities": {
+    "eyebrow": "How it's made",
+    "heading": "One factory. The whole carton."
+  },
   "cta": {
     "heading": "Need a specific carton?",
     "text": "Send us your artwork or dieline and we'll come back with a quote and a timeline.",

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{{> head}}<link rel="stylesheet" href="/product-box.css" />
+{{> head}}<link rel="stylesheet" href="/product-box.css" /><link rel="stylesheet" href="/service-families.css" />
 </head>
 <body class="photo-zoom-page services-page">
 {{> gtm-body}}
@@ -11,18 +11,48 @@
   <main>
 {{> banner}}
 
-    <section data-services-section class="section">
+    <section class="section services-intro">
       <div class="container">
         <p class="eyebrow reveal">{{ page.range.eyebrow }}</p>
         <h2 class="reveal">{{ page.range.heading }}</h2>
         <p class="lead reveal">{{ page.range.lead }}</p>
-        <div class="grid">
-          {{#each page.range.items}}<article class="card reveal" style="padding:0;overflow:hidden">
-            {{#if interactive_box}}{{> product-box}}{{else}}<div class="media service-product-media">{{> media}}</div>{{/if}}
-            <div style="padding:22px 26px 26px"><h3>{{ title }}</h3><p>{{ text }}</p></div>
+      </div>
+    </section>
+
+    {{#each page.range.groups}}
+    <section class="service-family" aria-labelledby="{{ id }}-heading">
+      <div class="container">
+        <header class="service-family__header reveal">
+          <h2 id="{{ id }}-heading">{{ heading }}</h2>
+          <p>{{ text }}</p>
+        </header>
+        <div class="service-family__products">
+          {{#each items}}
+          <article class="service-display">
+            <div class="service-display__visual">
+              {{#if interactive_box}}{{> product-box}}{{else}}
+              <img src="{{ image }}" alt="{{ alt }}" loading="lazy" />
+              {{/if}}
+            </div>
+            <div class="service-display__copy">
+              <h3>{{ title }}</h3>
+              <p>{{ text }}</p>
+            </div>
           </article>
           {{/each}}
         </div>
+      </div>
+    </section>
+    {{/each}}
+
+    <section class="section service-food" aria-labelledby="food-packaging-heading">
+      <div class="container">
+        {{#with page.range.food}}
+        <div class="split">
+          <div class="media service-product-media"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" /></div>
+          <div class="split__body"><h2 id="food-packaging-heading">{{ title }}</h2><p>{{ text }}</p></div>
+        </div>
+        {{/with}}
       </div>
     </section>
 

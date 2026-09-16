@@ -120,3 +120,12 @@
   });
   schedule();
 })();
+// Animate product families only while they are visible.
+(() => {
+  const families = document.querySelectorAll('.service-family');
+  if (!families.length) return;
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => entry.target.classList.toggle('is-visible', entry.isIntersecting));
+  });
+  families.forEach(section => observer.observe(section));
+})();
