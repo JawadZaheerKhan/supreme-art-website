@@ -15,7 +15,10 @@
         "interactive_box": true,
         "text": "Printed cartons made to fit tablet blister and strip packs, with accurate dimensions and clear product information.",
         "alt": "Tablet packaging",
-        "image": "/images/products/tablet-packaging.jpg"
+        "image": "/images/products/tablet-packaging.jpg",
+        "box_id": "imo",
+        "box_name": "IMO",
+        "box_front": "/images/imo-box/front.jpg"
       },
       {
         "title": "Capsule packaging",
@@ -59,13 +62,17 @@
             "interactive_box": true,
             "text": "Printed cartons made to fit tablet blister and strip packs, with accurate dimensions and clear product information.",
             "alt": "Tablet packaging",
-            "image": "/images/products/tablet-packaging.jpg"
+            "image": "/images/products/tablet-packaging.jpg",
+            "box_id": "imo",
+            "box_name": "IMO",
+            "box_front": "/images/imo-box/front.jpg"
           },
           {
-            "title": "Capsule packaging",
-            "text": "Precisely produced cartons for capsule blister, strip and bottle formats in a range of pack sizes.",
-            "alt": "Capsule packaging",
-            "image": "/images/products/capsule-packaging.jpg"
+            "title": "Vazkor tablet carton",
+            "interactive_box": true,
+            "box_id": "vazkor",
+            "box_name": "Vazkor",
+            "box_front": "/images/vazkor-box/front.png"
           }
         ]
       },

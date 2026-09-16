@@ -1,6 +1,5 @@
 (() => {
-  const view = document.querySelector('.product-box-view');
-  if (!view) return;
+  document.querySelectorAll('.product-box-view').forEach(view => {
   const model = view.querySelector('.product-box-model');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let x = 0, y = 0, targetX = x, targetY = y, frame = 0, down = null, lastTime = 0;
@@ -113,13 +112,20 @@
         ctx.putImageData(output,0,0);
         resolve();
       };
-      image.onerror=reject;image.src='/images/imo-box/'+name+'.jpg';
+      image.onerror=reject;image.src='/images/'+(view.dataset.box==='vazkor'?'vazkor-box/':'imo-box/')+name+(view.dataset.box==='vazkor'?'.png':'.jpg');
     });
   }
-  Promise.all([
-    texture('front',[[336,316],[994,319],[979,725],[339,722]],840,534),
-    texture('right',[[923,293],[969,279],[967,585],[924,605]],96,534),
-    texture('left',[[530,333],[587,342],[595,681],[542,669]],96,534),
-    texture('top',[[395,339],[960,337],[975,361],[393,364]],840,96)
-  ]).then(()=>view.classList.add('is-ready')).catch(()=>{});
+  const faces = view.dataset.box === 'vazkor' ? [
+    ['front',[[259,280],[1014,270],[1009,741],[276,750]],840,534],
+    ['right',[[882,282],[941,282],[932,711],[874,731]],96,534],
+    ['left',[[283,210],[359,210],[373,773],[288,753]],96,534],
+    ['top',[[286,307],[987,303],[1005,347],[271,350]],840,96]
+  ] : [
+    ['front',[[336,316],[994,319],[979,725],[339,722]],840,534],
+    ['right',[[923,293],[969,279],[967,585],[924,605]],96,534],
+    ['left',[[530,333],[587,342],[595,681],[542,669]],96,534],
+    ['top',[[395,339],[960,337],[975,361],[393,364]],840,96]
+  ];
+  Promise.all(faces.map(face => texture(...face))).then(()=>view.classList.add('is-ready')).catch(()=>{});
+  });
 })();

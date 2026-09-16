@@ -1,4 +1,4 @@
-<div class="product-box-view" tabindex="0" role="group" aria-label="Interactive IMO carton. Move your mouse, drag horizontally, or use arrow keys to turn the box.">
+<div class="product-box-view" data-box="{{ box_id }}" tabindex="0" role="group" aria-label="Interactive {{ box_name }} carton. Move your mouse, drag horizontally, or use arrow keys to turn the box.">
   <div class="product-box-stage">
     <div class="product-box-model" aria-hidden="true">
       <canvas class="box-face box-front"></canvas>
@@ -8,6 +8,6 @@
       <div class="box-face box-bottom"></div>
     </div>
   </div>
-  <img class="product-box-fallback" src="/images/imo-box/front.jpg" alt="IMO pharmaceutical carton" loading="lazy" />
-  <div class="product-box-hint"><span>Move or drag to rotate</span><button class="product-box-toggle" type="button" aria-label="Pause automatic rotation">Pause</button></div>
+  <img class="product-box-fallback" src="{{ box_front }}" alt="{{ box_name }} pharmaceutical carton" loading="lazy" />
+  <div class="product-box-hint"><button class="product-box-toggle" type="button" aria-label="Pause automatic rotation">Pause</button></div>
 </div>
