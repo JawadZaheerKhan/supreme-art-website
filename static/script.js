@@ -511,7 +511,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     const counter = story.querySelector('.' + prefix + '__count b');
     const bar = story.querySelector('.' + prefix + '__progress span');
     story.style.setProperty('--stage-count', scenes.length);
-    let index = -1, busy = false, frame = 0, lastWheel = -Infinity;
+    let index = -1, busy = false, frame = 0, lastWheel = -Infinity, wheelTravel = 0;
     let touchY = null, touchConsumed = false;
     const ease = t => t * t * (3 - 2 * t);
     function pinned() {
@@ -562,17 +562,17 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       if (counter) counter.textContent = String(next + 1).padStart(2, '0');
       function tick(now) {
         const elapsed = now - started;
-        const slide = ease(Math.min(1, elapsed / 780));
-        const lift = ease(Math.max(0, Math.min(1, (elapsed - 780) / 360)));
+        const slide = ease(Math.min(1, elapsed / 480));
+        const lift = ease(Math.max(0, Math.min(1, (elapsed - 480) / 240)));
         const distance = innerWidth;
-        if (carousel) carouselFrame(Math.max(0, previous) + (next - Math.max(0, previous)) * ease(Math.min(1, elapsed / 900)));
+        if (carousel) carouselFrame(Math.max(0, previous) + (next - Math.max(0, previous)) * ease(Math.min(1, elapsed / 600)));
         else scenes.forEach((card, i) => {
           if (i === next) paint(card, direction * distance * (1 - slide), .94 + .105 * lift, -8 * lift, true);
           else if (i === previous) paint(card, -direction * distance * slide, 1.045 - .105 * slide, -8 * (1 - slide), slide < 1);
           else paint(card, 0, .94, 0, false);
         });
-        if (bar) bar.style.width = ((previous + 1 + (next - previous) * Math.min(1, elapsed / 1140)) / scenes.length * 100) + '%';
-        if (elapsed < 1140) frame = requestAnimationFrame(tick);
+        if (bar) bar.style.width = ((previous + 1 + (next - previous) * Math.min(1, elapsed / 720)) / scenes.length * 100) + '%';
+        if (elapsed < 720) frame = requestAnimationFrame(tick);
         else { busy = false; frame = 0; resting(); }
       }
       frame = requestAnimationFrame(tick);
@@ -588,11 +588,16 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     }
     addEventListener('wheel', event => {
       if (event.ctrlKey || Math.abs(event.deltaY) <= Math.abs(event.deltaX) || Math.abs(event.deltaY) < 1 || !pinned()) return;
-      const now = performance.now(), continuingGesture = now - lastWheel < 200;
+      const now = performance.now();
+      const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1);
+      if (now - lastWheel > 160 || Math.sign(delta) !== Math.sign(wheelTravel)) wheelTravel = 0;
       lastWheel = now;
-      // Consume trackpad momentum until the gesture ends, including on the last stage.
-      if (busy || continuingGesture) { event.preventDefault(); return; }
-      move(event.deltaY > 0 ? 1 : -1, event);
+      // Ignore input during the transition, then accept a light continued scroll.
+      if (busy) { wheelTravel = 0; event.preventDefault(); return; }
+      wheelTravel += delta;
+      if (Math.abs(wheelTravel) < 12) { event.preventDefault(); return; }
+      wheelTravel = 0;
+      move(delta > 0 ? 1 : -1, event);
     }, {passive: false});
     addEventListener('touchstart', event => {
       touchY = event.touches.length === 1 ? event.touches[0].clientY : null;
@@ -602,7 +607,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       if (touchY === null || event.touches.length !== 1 || !pinned()) return;
       if (touchConsumed || busy) { event.preventDefault(); return; }
       const delta = touchY - event.touches[0].clientY;
-      if (Math.abs(delta) >= 18) touchConsumed = move(delta > 0 ? 1 : -1, event);
+      if (Math.abs(delta) >= 10) touchConsumed = move(delta > 0 ? 1 : -1, event);
     }, {passive: false});
     addEventListener('touchend', () => { touchY = null; touchConsumed = false; }, {passive: true});
     addEventListener('keydown', event => {
@@ -621,7 +626,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     function reset() {
       cancelAnimationFrame(frame);
       busy = false;
-      lastWheel = -Infinity;
+      lastWheel = -Infinity; wheelTravel = 0;
       resting();
       sync();
     }
