@@ -3,13 +3,29 @@
   if (!view) return;
   const model = view.querySelector('.product-box-model');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let x = -12, y = -22, targetX = x, targetY = y, frame = 0, down = null, lastTime = 0;
+  let x = 0, y = 0, targetX = x, targetY = y, frame = 0, down = null, lastTime = 0;
+  let visible = false, hovering = false, manualUntil = 0, autoTime = 0, autoPaused = false;
+  const toggle = view.querySelector('.product-box-toggle');
+  function wake() { if (!frame && visible && !document.hidden) frame = requestAnimationFrame(render); }
+  toggle.addEventListener('click', () => {
+    autoPaused = !autoPaused;
+    toggle.textContent = autoPaused ? 'Play' : 'Pause';
+    toggle.setAttribute('aria-label', autoPaused ? 'Play automatic rotation' : 'Pause automatic rotation');
+    wake();
+  });
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
   function render(now) {
     const dt = lastTime ? Math.min(48, now - lastTime) : 16;
     lastTime = now;
     const blend = reduced.matches ? 1 : 1 - Math.exp(-dt / 125);
-    const scale = Math.min(1, view.clientWidth / 440);
+    const automatic = !reduced.matches && !autoPaused && !hovering && !down && now >= manualUntil;
+    if (automatic) {
+      autoTime += dt;
+      const phase = Math.max(0, autoTime - 1200) / 18000 * Math.PI * 2;
+      targetY = Math.sin(phase) * 28;
+      targetX = -3 * (1 - Math.cos(phase));
+    }
+    const scale = Math.min(1.18, view.clientWidth / 355);
     x += (targetX - x) * blend;
     y += (targetY - y) * blend;
     model.style.transform = 'scale(' + scale + ') rotateX(' + x + 'deg) rotateY(' + y + 'deg)';
@@ -18,14 +34,16 @@
     model.style.setProperty('--left-light', (.95 - y * .0015).toFixed(3));
     view.style.setProperty('--shadow-x', (-y * .22) + 'px');
     view.style.setProperty('--shadow-scale', (1 - Math.abs(y) * .003).toFixed(3));
-    if (Math.abs(x-targetX)+Math.abs(y-targetY) > .025) frame = requestAnimationFrame(render);
+    if (visible && !document.hidden && ((!reduced.matches && !autoPaused && !hovering) || Math.abs(x-targetX)+Math.abs(y-targetY) > .025)) frame = requestAnimationFrame(render);
     else { frame = 0; lastTime = 0; }
   }
   function update(rx, ry) {
-    targetX = clamp(rx, -24, -4);
+    manualUntil = performance.now() + 2200;
+    targetX = clamp(rx, -18, 0);
     targetY = clamp(ry, -48, 48);
-    if (!frame) frame = requestAnimationFrame(render);
+    wake();
   }
+  view.addEventListener('pointerenter', e => { if(e.pointerType==='mouse') hovering=true; });
   view.addEventListener('pointerdown', e => {
     if (e.pointerType === 'mouse') return;
     down = {id:e.pointerId,x:e.clientX,y:targetY};
@@ -41,14 +59,20 @@
   });
   view.addEventListener('pointerup', () => {down=null;});
   view.addEventListener('pointercancel', () => {down=null;});
-  view.addEventListener('pointerleave', e => {if(e.pointerType==='mouse')update(-12,-22);});
+  view.addEventListener('pointerleave', e => {if(e.pointerType==='mouse'){ hovering=false; manualUntil=performance.now()+600; wake(); }});
   view.addEventListener('keydown', e => {
     if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home'].includes(e.key))return;
     e.preventDefault();
-    if(e.key==='Home')update(-12,-22);
+    if(e.key==='Home')update(0,0);
     else update(targetX+(e.key==='ArrowUp'?-4:e.key==='ArrowDown'?4:0),targetY+(e.key==='ArrowLeft'?-12:e.key==='ArrowRight'?12:0));
   });
-  new ResizeObserver(() => { if (!frame) frame = requestAnimationFrame(render); }).observe(view);
+    new ResizeObserver(wake).observe(view);
+  new IntersectionObserver(entries => {
+    visible = entries[0].isIntersecting;
+    if (visible) { lastTime=0; wake(); }
+  }).observe(view);
+  document.addEventListener('visibilitychange', () => { lastTime=0; wake(); });
+  reduced.addEventListener('change', () => { targetX=0; targetY=0; autoTime=0; wake(); });
 
   // Sample a projective texture directly: no triangle edges or transparent seams.
   function texture(name, quad, w, h) {

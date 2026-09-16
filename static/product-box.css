@@ -1,8 +1,8 @@
-.product-box-view { position:relative; aspect-ratio:1.5; overflow:hidden; background:radial-gradient(ellipse at 50% 35%,#fff,#e6f2fc); touch-action:pan-y; cursor:grab; }
+.product-box-view { position:relative; aspect-ratio:1.25; overflow:hidden; background:radial-gradient(ellipse at 50% 35%,#fff,#e6f2fc); touch-action:pan-y; cursor:grab; }
 .product-box-view:active { cursor:grabbing; }
 .product-box-view:focus-visible { outline:3px solid #2c70b9; outline-offset:-4px; }
 .product-box-stage { position:absolute; inset:0; perspective:850px; display:grid; place-items:center; }
-.product-box-model { position:relative; width:280px; height:178px; transform-style:preserve-3d; transform:rotateX(-12deg) rotateY(-22deg); }
+.product-box-model { position:relative; width:280px; height:178px; transform-style:preserve-3d; transform:rotateX(0deg) rotateY(0deg); }
 .product-box-model .box-face { position:absolute; display:block; backface-visibility:hidden; background:#e2e5df; }
 .box-front { width:280px; height:178px; transform:translateZ(16px); }
 .box-right { width:32px; height:178px; left:124px; transform:rotateY(90deg) translateZ(140px); filter:brightness(.92); }
@@ -14,7 +14,7 @@
 .product-box-view.is-ready .product-box-fallback { display:none; }
 
 /* Keep the carton above its ground shadow and away from the interaction hint. */
-.product-box-stage { bottom:24px; perspective:1000px; }
+.product-box-stage { bottom:34px; perspective:1000px; }
 .product-box-stage::before {
   content:""; position:absolute; width:62%; height:16%; left:19%; bottom:5%;
   border-radius:50%; background:radial-gradient(ellipse,#233d5945, #233d5914 45%,transparent 72%);
@@ -28,3 +28,8 @@
 .box-left { filter:brightness(var(--left-light,.98)); }
 .box-top { filter:brightness(1.035); }
 .product-box-hint { bottom:9px; font-size:11px; }
+
+.product-box-hint { display:flex; justify-content:center; align-items:center; gap:12px; pointer-events:auto; bottom:4px; }
+.product-box-toggle { font:inherit; color:#294b67; background:#ffffffa6; border:1px solid #afcfe4; border-radius:14px; min-height:28px; padding:3px 10px; cursor:pointer; }
+.product-box-toggle:focus-visible { outline:2px solid #2c70b9; outline-offset:2px; }
+@media (pointer:coarse) { .product-box-toggle { min-height:44px; } .product-box-stage { bottom:46px; } }
