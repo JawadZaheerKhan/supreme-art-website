@@ -53,16 +53,16 @@
       </div>
     </section>
 
-    <section data-services-section class="section" aria-labelledby="box-types-heading">
+    <section class="service-family service-neutra" aria-labelledby="neutra-products-heading">
       <div class="container">
-        <p class="eyebrow reveal">{{ page.box_types.eyebrow }}</p>
-        <h2 class="reveal" id="box-types-heading">{{ page.box_types.heading }}</h2>
-        <div class="grid">
-          {{#each page.box_types.items}}<article class="card reveal">
-            <div class="box-type-picture"><div class="box-type-picture__frame" style="{{ frame }}"><img src="{{ image }}" alt="{{ title }} box structure" loading="lazy" /></div></div>
-            <h3>{{ title }}</h3>
-            </article>{{/each}}
+        {{#with page.neutra}}
+        <header class="service-family__header reveal"><h2 id="neutra-products-heading">{{ heading }}</h2></header>
+        <div class="service-family__products">
+          {{#each items}}
+          <article class="service-display"><div class="service-display__visual">{{> product-box}}</div></article>
+          {{/each}}
         </div>
+        {{/with}}
       </div>
     </section>
     <section data-services-section class="section" aria-labelledby="finishes-heading">
@@ -90,6 +90,6 @@
 {{> footer}}
 
   <script src="/script.js"></script>
-  <script src="/services-motion.js"></script><script src="/product-box-syrups.js"></script><script src="/product-box-food.js"></script><script src="/product-box.js"></script>
+  <script src="/services-motion.js"></script><script src="/product-box-syrups.js"></script><script src="/product-box-food.js"></script><script src="/product-box-neutra.js"></script><script src="/product-box.js"></script>
 </body>
 </html>

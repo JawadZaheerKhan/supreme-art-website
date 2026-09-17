@@ -491,10 +491,16 @@
     ]
   }
 };
-  Object.assign(additionalBoxes, window.productBoxSyrupBoxes || {}, window.productBoxFoodBoxes || {});
+  Object.assign(additionalBoxes, window.productBoxSyrupBoxes || {}, window.productBoxFoodBoxes || {}, window.productBoxNeutraBoxes || {});
   document.querySelectorAll('.product-box-view').forEach(view => {
   const model = view.querySelector('.product-box-model');
   const dimensions = additionalBoxes[view.dataset.box] || {height:178,depth:32};
+  if (dimensions.hanger) {
+    const hanger = document.createElement('div');
+    hanger.className = 'box-hanger';
+    hanger.innerHTML = '<svg viewBox="0 0 280 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="#16a1aa" stroke="#8bd1ca" stroke-width="1" fill-rule="evenodd" d="M10 60V31H101C101 13 118 1 140 1S179 13 179 31H270V60Z M120 17H131Q140 7 149 17H160V23H149Q140 33 131 23H120Z"/></svg>';
+    model.appendChild(hanger);
+  }
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let x = 0, y = 0, targetX = x, targetY = y, frame = 0, down = null, lastTime = 0;
   let visible = false, hovering = false, manualUntil = 0, autoTime = 0, autoPaused = false;
@@ -520,7 +526,7 @@
     }
     const scale = dimensions.width
       ? Math.min(1.18, view.clientWidth / 355,
-          (view.querySelector('.product-box-stage').clientHeight - 36) / (dimensions.height + dimensions.depth * .4))
+          (view.querySelector('.product-box-stage').clientHeight - 36) / (dimensions.height + dimensions.depth * .4 + (dimensions.hanger ? 44 : 0)))
       : Math.min(1.18, view.clientWidth / 355) * (dimensions.scale || 1);
     x += (targetX - x) * blend;
     y += (targetY - y) * blend;

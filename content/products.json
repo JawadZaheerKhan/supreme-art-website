@@ -199,42 +199,6 @@
       ]
     }
   },
-  "box_types": {
-    "eyebrow": "Box types",
-    "heading": "Choose the right box structure.",
-    "items": [
-      {
-        "title": "Straight Tuck Box",
-        "image": "/images/products/box-types-reference.png",
-        "frame": "aspect-ratio:158/144;--image-width:486.07595%;--image-left:-140.50633%;--image-top:-17.36111%;",
-        "text": "One of the most common box styles, straight tuck boxes are easy to assemble and require little storage space. They are well suited to lightweight products."
-      },
-      {
-        "title": "Reverse Tuck Box",
-        "image": "/images/products/box-types-reference.png",
-        "frame": "aspect-ratio:130/129;--image-width:590.76923%;--image-left:-447.69231%;--image-top:-68.21705%;clip-path:polygon(0 0,72% 0,72% 32%,100% 48%,100% 100%,0 100%);",
-        "text": "Similar to a straight tuck box, but with the closing panels folding in opposite directions. This multipurpose design can be customised with cutouts, windows and locks."
-      },
-      {
-        "title": "Lock Bottom Box",
-        "image": "/images/products/box-types-reference.png",
-        "frame": "aspect-ratio:157/97;--image-width:489.17197%;--image-left:-143.31210%;--image-top:-288.65979%;",
-        "text": "Also known as a 1-2-3 bottom box, this structure is designed for heavier items. The bottom flaps interlock to form a sturdy base that supports the product inside."
-      },
-      {
-        "title": "Four Corner Folding Box",
-        "image": "/images/products/box-types-reference.png",
-        "frame": "aspect-ratio:121/138;--image-width:634.71074%;--image-left:-510.74380%;--image-top:-188.40580%;",
-        "text": "A display box designed to showcase products while providing protection. Suitable for electronics, frozen food, household goods and other products."
-      },
-      {
-        "title": "Six Corner Box",
-        "image": "/images/products/box-types-reference.png",
-        "frame": "aspect-ratio:125/131;--image-width:614.40000%;--image-left:-384.00000%;--image-top:-345.03817%;",
-        "text": "A wide, deep box made from durable material to stay sturdy and rigid. Its spacious design provides room for heavy products or more than one item."
-      }
-    ]
-  },
   "finishes": {
     "heading": "Finishes",
     "text": "A variety of finishing methods can elevate your packaging from good to exceptional. We provide a range of surface treatments and finishes to enhance the appeal of your products.",
@@ -274,5 +238,40 @@
     "primary_href": "contact.html",
     "secondary_label": "Our quality process",
     "secondary_href": "quality.html"
+  },
+  "neutra": {
+    "heading": "Neutra Products",
+    "items": [
+      {
+        "interactive_box": true,
+        "box_id": "duet",
+        "box_name": "Duet D3 K2",
+        "box_front": "/images/duet-box/front.png"
+      },
+      {
+        "interactive_box": true,
+        "box_id": "algae-vit",
+        "box_name": "Algae-Vit",
+        "box_front": "/images/algae-vit-box/front.jpg"
+      },
+      {
+        "interactive_box": true,
+        "box_id": "herbion-seaweed",
+        "box_name": "Herbion Seaweed Cream",
+        "box_front": "/images/herbion-seaweed-box/front.png"
+      },
+      {
+        "interactive_box": true,
+        "box_id": "quench",
+        "box_name": "Quench Cream",
+        "box_front": "/images/quench-box/front.jpg"
+      },
+      {
+        "interactive_box": true,
+        "box_id": "nova-plast",
+        "box_name": "Herbion Nova-Plast",
+        "box_front": "/images/nova-plast-box/front.png"
+      }
+    ]
   }
 }
