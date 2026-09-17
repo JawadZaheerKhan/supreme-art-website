@@ -518,10 +518,13 @@
       targetY = Math.sin(phase) * 28;
       targetX = -3 * (1 - Math.cos(phase));
     }
-    const scale = Math.min(1.18, view.clientWidth / 355) * (dimensions.scale || 1);
+    const scale = dimensions.width
+      ? Math.min(1.18, view.clientWidth / 355,
+          (view.querySelector('.product-box-stage').clientHeight - 36) / (dimensions.height + dimensions.depth * .4))
+      : Math.min(1.18, view.clientWidth / 355) * (dimensions.scale || 1);
     x += (targetX - x) * blend;
     y += (targetY - y) * blend;
-    model.style.transform = 'scale(' + scale + ') rotateX(' + x + 'deg) rotateY(' + y + 'deg) scaleY('+(dimensions.height/178)+') scaleZ('+(dimensions.depth/32)+')';
+    model.style.transform = 'scale(' + scale + ') rotateX(' + x + 'deg) rotateY(' + y + 'deg) scaleX('+((dimensions.width || 280)/280)+') scaleY('+(dimensions.height/178)+') scaleZ('+(dimensions.depth/32)+')';
     model.style.setProperty('--front-light', (1.015 - Math.abs(y) * .0013).toFixed(3));
     model.style.setProperty('--right-light', (.91 + y * .0015).toFixed(3));
     model.style.setProperty('--left-light', (.95 - y * .0015).toFixed(3));
