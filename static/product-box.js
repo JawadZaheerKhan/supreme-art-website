@@ -491,7 +491,7 @@
     ]
   }
 };
-  Object.assign(additionalBoxes, window.productBoxSyrupBoxes || {});
+  Object.assign(additionalBoxes, window.productBoxSyrupBoxes || {}, window.productBoxFoodBoxes || {});
   document.querySelectorAll('.product-box-view').forEach(view => {
   const model = view.querySelector('.product-box-model');
   const dimensions = additionalBoxes[view.dataset.box] || {height:178,depth:32};
@@ -609,7 +609,7 @@
         ctx.putImageData(output,0,0);
         resolve();
       };
-      image.onerror=reject;image.src='/images/'+view.dataset.box+'-box/'+name+(dimensions.ext || (view.dataset.box==='imo'?'.jpg':'.png'));
+      image.onerror=reject;image.src='/images/'+view.dataset.box+'-box/'+name+(dimensions.extensions?.[name] || dimensions.ext || (view.dataset.box==='imo'?'.jpg':'.png'));
     });
   }
   const faces = additionalBoxes[view.dataset.box]?.faces || (view.dataset.box === 'vazkor' ? [

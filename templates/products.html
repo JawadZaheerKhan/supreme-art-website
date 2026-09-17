@@ -40,12 +40,14 @@
     </section>
     {{/each}}
 
-    <section class="section service-food" aria-labelledby="food-packaging-heading">
+    <section class="service-family service-food" aria-labelledby="food-packaging-heading">
       <div class="container">
         {{#with page.range.food}}
-        <div class="split">
-          <div class="media service-product-media"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" /></div>
-          <div class="split__body"><h2 id="food-packaging-heading">{{ title }}</h2><p>{{ text }}</p></div>
+        <header class="service-family__header reveal"><h2 id="food-packaging-heading">{{ title }}</h2></header>
+        <div class="service-family__products">
+          {{#each items}}
+          <article class="service-display"><div class="service-display__visual">{{> product-box}}</div></article>
+          {{/each}}
         </div>
         {{/with}}
       </div>
@@ -88,6 +90,6 @@
 {{> footer}}
 
   <script src="/script.js"></script>
-  <script src="/services-motion.js"></script><script src="/product-box-syrups.js"></script><script src="/product-box.js"></script>
+  <script src="/services-motion.js"></script><script src="/product-box-syrups.js"></script><script src="/product-box-food.js"></script><script src="/product-box.js"></script>
 </body>
 </html>

@@ -170,7 +170,33 @@
       "title": "Food packaging",
       "text": "Printed folding cartons and pouches for food products, including masala packaging produced for Stanley Foods and SwaaD Foods.",
       "alt": "Supreme Art masala and food packaging",
-      "image": "/images/products/food-packaging.jpg"
+      "image": "/images/products/food-packaging.jpg",
+      "items": [
+        {
+          "interactive_box": true,
+          "box_id": "swaad-biryani",
+          "box_name": "SwaaD Bombay Biryani",
+          "box_front": "/images/swaad-biryani-box/front.png"
+        },
+        {
+          "interactive_box": true,
+          "box_id": "swaad-chapli",
+          "box_name": "SwaaD Chapli Kabab",
+          "box_front": "/images/swaad-chapli-box/front.jpg"
+        },
+        {
+          "interactive_box": true,
+          "box_id": "swaad-kheer",
+          "box_name": "SwaaD Shahi Kheer",
+          "box_front": "/images/swaad-kheer-box/front.jpg"
+        },
+        {
+          "interactive_box": true,
+          "box_id": "swaad-pepper",
+          "box_name": "SwaaD Black Pepper",
+          "box_front": "/images/swaad-pepper-box/front.jpg"
+        }
+      ]
     }
   },
   "box_types": {

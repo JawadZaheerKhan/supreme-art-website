@@ -41,3 +41,8 @@
  .service-family[aria-labelledby="tablet-capsule-heading"] .service-display,
  .service-family[aria-labelledby="syrup-suspension-heading"] .service-display { flex:0 1 auto; width:100%; max-width:420px; }
 }
+
+.service-food .service-family__products { flex-wrap:wrap; gap:42px 5%; }
+.service-food .service-display { flex:0 1 45%; width:45%; max-width:470px; }
+.service-food .product-box-view { aspect-ratio:1.05; }
+@media(max-width:700px) { .service-food .service-display { flex:0 1 auto; width:100%; max-width:420px; } }
