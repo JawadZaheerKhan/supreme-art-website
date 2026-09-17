@@ -491,6 +491,7 @@
     ]
   }
 };
+  Object.assign(additionalBoxes, window.productBoxSyrupBoxes || {});
   document.querySelectorAll('.product-box-view').forEach(view => {
   const model = view.querySelector('.product-box-model');
   const dimensions = additionalBoxes[view.dataset.box] || {height:178,depth:32};
@@ -517,7 +518,7 @@
       targetY = Math.sin(phase) * 28;
       targetX = -3 * (1 - Math.cos(phase));
     }
-    const scale = Math.min(1.18, view.clientWidth / 355);
+    const scale = Math.min(1.18, view.clientWidth / 355) * (dimensions.scale || 1);
     x += (targetX - x) * blend;
     y += (targetY - y) * blend;
     model.style.transform = 'scale(' + scale + ') rotateX(' + x + 'deg) rotateY(' + y + 'deg) scaleY('+(dimensions.height/178)+') scaleZ('+(dimensions.depth/32)+')';
@@ -605,7 +606,7 @@
         ctx.putImageData(output,0,0);
         resolve();
       };
-      image.onerror=reject;image.src='/images/'+view.dataset.box+'-box/'+name+(view.dataset.box==='imo'?'.jpg':'.png');
+      image.onerror=reject;image.src='/images/'+view.dataset.box+'-box/'+name+(dimensions.ext || (view.dataset.box==='imo'?'.jpg':'.png'));
     });
   }
   const faces = additionalBoxes[view.dataset.box]?.faces || (view.dataset.box === 'vazkor' ? [

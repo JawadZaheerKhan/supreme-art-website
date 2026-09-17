@@ -34,6 +34,10 @@
 .service-family[aria-labelledby="tablet-capsule-heading"] .service-family__products { flex-wrap:wrap; gap:42px 5%; }
 .service-family[aria-labelledby="tablet-capsule-heading"] .service-display { flex:0 1 45%; width:45%; max-width:470px; }
 .service-family[aria-labelledby="tablet-capsule-heading"] .product-box-view { aspect-ratio:1.25; }
+.service-family[aria-labelledby="syrup-suspension-heading"] .service-family__products { flex-wrap:wrap; gap:42px 5%; }
+.service-family[aria-labelledby="syrup-suspension-heading"] .service-display { flex:0 1 45%; width:45%; max-width:470px; }
+.service-family[aria-labelledby="syrup-suspension-heading"] .product-box-view { aspect-ratio:1.05; }
 @media(max-width:700px) {
- .service-family[aria-labelledby="tablet-capsule-heading"] .service-display { flex:0 1 auto; width:100%; max-width:420px; }
+ .service-family[aria-labelledby="tablet-capsule-heading"] .service-display,
+ .service-family[aria-labelledby="syrup-suspension-heading"] .service-display { flex:0 1 auto; width:100%; max-width:420px; }
 }

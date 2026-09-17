@@ -117,10 +117,32 @@
         "text": "Protective cartons for liquid medicine bottles, with partitions and inserts where required.",
         "items": [
           {
-            "title": "Syrup & suspension cartons",
-            "text": "Protective bottle cartons for syrups and liquid medicines, with partitions or inserts where required.",
-            "alt": "Syrup packaging",
-            "image": "/images/products/syrup-packaging.jpg"
+            "title": "Novex Paracetamol carton",
+            "interactive_box": true,
+            "box_id": "novex-paracetamol",
+            "box_name": "Novex Paracetamol",
+            "box_front": "/images/novex-paracetamol-box/front.png"
+          },
+          {
+            "title": "Citolin carton",
+            "interactive_box": true,
+            "box_id": "citolin",
+            "box_name": "Citolin",
+            "box_front": "/images/citolin-box/front.png"
+          },
+          {
+            "title": "Fenbro carton",
+            "interactive_box": true,
+            "box_id": "fenbro",
+            "box_name": "Fenbro",
+            "box_front": "/images/fenbro-box/front.jpg"
+          },
+          {
+            "title": "Pedrol carton",
+            "interactive_box": true,
+            "box_id": "pedrol",
+            "box_name": "Pedrol",
+            "box_front": "/images/pedrol-box/front.jpg"
           }
         ]
       },
