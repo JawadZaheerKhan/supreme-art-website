@@ -13,7 +13,17 @@ window.productBoxLabelBoxes = {
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const cameras=[{name:'left',angle:-.91,cx:509,top:347,bottom:982,r:116},{name:'front',angle:0,cx:447,top:473,bottom:1012,r:97},{name:'right',angle:.91,cx:489,top:404,bottom:915,r:93}];
  const profile=[[0,.42],[.01,.54],[.035,.57],[.135,.58],[.15,.53],[.18,.51],[.21,.56],[.26,.75],[.31,.89],[.36,.97],[.40,1],[.92,.99],[.96,.93],[.983,.74],[1,.12]];
- function radius(v){for(let i=1;i<profile.length;i++){const [b,rb]=profile[i],[a,ra]=profile[i-1];if(v<=b)return ra+(rb-ra)*(v-a)/(b-a);}return .12;}
+ function sourceRadius(v){for(let i=1;i<profile.length;i++){const [b,rb]=profile[i],[a,ra]=profile[i-1];if(v<=b)return ra+(rb-ra)*(v-a)/(b-a);}return .12;}
+ function radius(v){
+  // Smooth lathed silhouette: rounded cap, neck, flowing shoulder and elliptical heel.
+  if(v<.018){const t=(.018-v)/.018;return .565*Math.sqrt(Math.max(0,1-t*t));}
+  if(v<.133)return .565;
+  if(v<.155){const t=(v-.133)/.022;return .52+.045*(1+Math.cos(Math.PI*t))/2;}
+  if(v<.19)return .52;
+  if(v<.41){const t=(v-.19)/.22;return .52+.48*(1-Math.cos(Math.PI*t))/2;}
+  if(v<.955)return 1;
+  const t=(v-.955)/.045;return Math.sqrt(Math.max(0,1-t*t));
+ }
  let maps,angle=0,target=0,paused=false,hover=false,visible=false,drag=null,manualUntil=0,time=0,last=0,frame=0;
  const button=view.querySelector('button');
  const W=canvas.width,H=canvas.height,R=146;
@@ -21,7 +31,7 @@ window.productBoxLabelBoxes = {
  Promise.all(cameras.map(camera=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);resolve({...camera,w:im.width,pixels:g.getImageData(0,0,im.width,im.height).data});};im.onerror=reject;im.src='/images/clarion-box/'+camera.name+'.png';}))).then(images=>{
    const tw=960,th=820,texture=new Uint8ClampedArray(tw*th*4);
    for(let y=0;y<th;y++){
-    const v=y/(th-1),r=radius(v);
+    const v=y/(th-1),r=sourceRadius(v);
     for(let x=0;x<tw;x++){
      const theta=(x/(tw-1)-.5)*Math.PI*2;
      const weights=images.map(im=>Math.pow(Math.max(0,Math.cos(theta-im.angle)),24));
@@ -47,8 +57,11 @@ window.productBoxLabelBoxes = {
     const theta=Math.asin(Math.max(-1,Math.min(1,(x-W/2)/r)))+angle;
     const tx=Math.max(0,Math.min(tw-2,(theta/(2*Math.PI)+.5)*(tw-1))),ix=Math.floor(tx),f=tx-ix;
     const src=(y*tw+ix)*4,dst=(y*W+x)*4;
-    const shade=.88+.12*Math.sqrt(Math.max(0,1-Math.pow((x-W/2)/r,2)));
-    for(let k=0;k<3;k++)out.data[dst+k]=(texture[src+k]*(1-f)+texture[src+4+k]*f)*shade;
+    const nx=(x-W/2)/r;
+    const normal=Math.sqrt(Math.max(0,1-nx*nx));
+    const shade=.57+.43*Math.pow(normal,.55);
+    const highlight=12*Math.exp(-Math.pow((nx+.38)/.16,2))*normal;
+    for(let k=0;k<3;k++)out.data[dst+k]=(texture[src+k]*(1-f)+texture[src+4+k]*f)*shade+highlight;
     out.data[dst+3]=Math.min(1,r-Math.abs(x-W/2))*255;
    }
   }

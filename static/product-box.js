@@ -511,7 +511,7 @@
   }
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let x = 0, y = 0, targetX = x, targetY = y, frame = 0, down = null, lastTime = 0;
-  let leafletTime = 0;
+  let leafletInsertion = 1;
   let visible = false, hovering = false, manualUntil = 0, autoTime = 0, autoPaused = false;
   const toggle = view.querySelector('.product-box-toggle');
   function wake() { if (!frame && visible && !document.hidden) frame = requestAnimationFrame(render); }
@@ -534,12 +534,11 @@
       targetX = -3 * (1 - Math.cos(phase));
     }
     if (dimensions.leaflet) {
-      if (!reduced.matches && !autoPaused) leafletTime += dt;
-      const p = (leafletTime % 9000) / 9000;
-      const smooth = t => t*t*t*(t*(t*6-15)+10);
-      const insertion = reduced.matches ? 0 : p < .18 ? 0 : p < .58 ? smooth((p-.18)/.4) : p < .78 ? 1 : 1-smooth((p-.78)/.22);
-      model.style.setProperty('--paper-travel', (insertion * 104) + 'px');
-      view.dataset.insertion = insertion.toFixed(3);
+      const desired = hovering || down || view.matches(':focus-within') ? 0 : 1;
+      leafletInsertion += (desired - leafletInsertion) * (reduced.matches ? 1 : 1 - Math.exp(-dt / 260));
+      if (Math.abs(desired - leafletInsertion) < .001) leafletInsertion = desired;
+      model.style.setProperty('--paper-travel', (leafletInsertion * 104) + 'px');
+      view.dataset.insertion = leafletInsertion.toFixed(3);
     }
     const scale = dimensions.width
       ? Math.min(1.18, view.clientWidth / 355,
@@ -553,7 +552,7 @@
     model.style.setProperty('--left-light', (.95 - y * .0015).toFixed(3));
     view.style.setProperty('--shadow-x', (-y * .22) + 'px');
     view.style.setProperty('--shadow-scale', (1 - Math.abs(y) * .003).toFixed(3));
-    if (visible && !document.hidden && ((!reduced.matches && !autoPaused && (!hovering || dimensions.leaflet)) || Math.abs(x-targetX)+Math.abs(y-targetY) > .025)) frame = requestAnimationFrame(render);
+    if (visible && !document.hidden && ((!reduced.matches && !autoPaused && (!hovering || dimensions.leaflet)) || Math.abs(x-targetX)+Math.abs(y-targetY) > .025 || (dimensions.leaflet && Math.abs(leafletInsertion - (hovering || down || view.matches(':focus-within') ? 0 : 1)) > .001))) frame = requestAnimationFrame(render);
     else { frame = 0; lastTime = 0; }
   }
   function update(rx, ry) {
@@ -562,7 +561,9 @@
     targetY = clamp(ry, -48, 48);
     wake();
   }
-  view.addEventListener('pointerenter', e => { if(e.pointerType==='mouse') hovering=true; });
+  view.addEventListener('pointerenter', e => { if(e.pointerType==='mouse'){ hovering=true; wake(); } });
+  view.addEventListener('focusin', wake);
+  view.addEventListener('focusout', () => requestAnimationFrame(wake));
   view.addEventListener('pointerdown', e => {
     if (e.pointerType === 'mouse') return;
     down = {id:e.pointerId,x:e.clientX,y:targetY};
