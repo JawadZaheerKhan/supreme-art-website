@@ -51,3 +51,17 @@
 .service-neutra .service-display { flex:0 1 45%; width:45%; max-width:470px; }
 .service-neutra .product-box-view { aspect-ratio:1.05; }
 @media(max-width:700px) { .service-neutra .service-display { flex:0 1 auto; width:100%; max-width:420px; } }
+
+/* Label bottle and open carton share the existing presentation and controls. */
+.service-family[aria-labelledby="labels-leaflets-heading"] .service-display { flex:0 1 45%; width:45%; max-width:470px; }
+.service-family[aria-labelledby="labels-leaflets-heading"] .product-box-view,
+.product-bottle-view { aspect-ratio:1; position:relative; touch-action:pan-y; cursor:grab; }
+.product-bottle-view:focus-visible { outline:3px solid #2c70b9; outline-offset:-4px; }
+.bottle-stage { position:absolute; inset:20px 0 48px; display:flex; align-items:center; justify-content:center; }
+.bottle-stage::before { content:""; position:absolute; width:50%; height:10%; bottom:0; border-radius:50%; background:radial-gradient(ellipse,#233d5940,transparent 70%); filter:blur(8px); }
+.bottle-canvas { position:relative; height:100%; width:auto; max-width:85%; object-fit:contain; }
+.product-bottle-view.is-ready .product-box-fallback { display:none; }
+.has-leaflet .box-top { background:#736f68; filter:none; }
+.has-leaflet .box-paper { width:184px; height:98px; left:48px; top:-98px; transform:translateY(var(--paper-travel,0px)); background:white; box-shadow:2px 0 0 #d2d2d2,4px 0 0 #fafafa; backface-visibility:visible; }
+.has-leaflet .box-flap { width:280px; height:50px; top:-50px; transform:translateZ(16px); border-radius:28px 28px 0 0; backface-visibility:visible; }
+@media(max-width:700px) { .service-family[aria-labelledby="labels-leaflets-heading"] .service-display { width:100%; flex:0 1 auto; max-width:420px; } }

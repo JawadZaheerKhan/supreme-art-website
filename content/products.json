@@ -152,16 +152,15 @@
         "text": "Clear product identification and carefully folded information, designed to complete your packaging.",
         "items": [
           {
-            "title": "Labels",
-            "text": "Clear, colour-accurate printed labels for bottles, products and outer packaging.",
-            "alt": "Printed product labels",
-            "image": "/images/products/labels.jpg"
+            "interactive_bottle": true,
+            "box_name": "Clarion",
+            "box_front": "/images/clarion-box/front.png"
           },
           {
-            "title": "Leaflets & inserts",
-            "text": "Printed and folded information leaflets and package inserts prepared to fit inside the finished pack.",
-            "alt": "Pharmaceutical leaflets and inserts",
-            "image": "/images/products/leaflets-inserts.jpg"
+            "interactive_box": true,
+            "box_id": "caber-leaflet",
+            "box_name": "Caber carton with inserting leaflet",
+            "box_front": "/images/caber-leaflet-box/front.png"
           }
         ]
       }

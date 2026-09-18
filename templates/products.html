@@ -29,9 +29,9 @@
           {{#each items}}
           <article class="service-display">
             <div class="service-display__visual">
-              {{#if interactive_box}}{{> product-box}}{{else}}
+              {{#if interactive_bottle}}{{> product-bottle}}{{else}}{{#if interactive_box}}{{> product-box}}{{else}}
               <img src="{{ image }}" alt="{{ alt }}" loading="lazy" />
-              {{/if}}
+              {{/if}}{{/if}}
             </div>
           </article>
           {{/each}}
@@ -90,6 +90,6 @@
 {{> footer}}
 
   <script src="/script.js"></script>
-  <script src="/services-motion.js"></script><script src="/product-box-syrups.js"></script><script src="/product-box-food.js"></script><script src="/product-box-neutra.js"></script><script src="/product-box.js"></script>
+  <script src="/services-motion.js"></script><script src="/product-box-syrups.js"></script><script src="/product-box-food.js"></script><script src="/product-box-neutra.js"></script><script src="/product-labels.js"></script><script src="/product-box.js"></script>
 </body>
 </html>

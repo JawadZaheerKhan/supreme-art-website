@@ -491,10 +491,18 @@
     ]
   }
 };
-  Object.assign(additionalBoxes, window.productBoxSyrupBoxes || {}, window.productBoxFoodBoxes || {}, window.productBoxNeutraBoxes || {});
+  Object.assign(additionalBoxes, window.productBoxSyrupBoxes || {}, window.productBoxFoodBoxes || {}, window.productBoxNeutraBoxes || {}, window.productBoxLabelBoxes || {});
   document.querySelectorAll('.product-box-view').forEach(view => {
   const model = view.querySelector('.product-box-model');
   const dimensions = additionalBoxes[view.dataset.box] || {height:178,depth:32};
+  if (dimensions.leaflet) {
+    view.classList.add('has-leaflet');
+    for (const name of ['paper','flap']) {
+      const canvas = document.createElement('canvas');
+      canvas.className = 'box-face box-' + name;
+      model.appendChild(canvas);
+    }
+  }
   if (dimensions.hanger) {
     const hanger = document.createElement('div');
     hanger.className = 'box-hanger';
@@ -503,6 +511,7 @@
   }
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let x = 0, y = 0, targetX = x, targetY = y, frame = 0, down = null, lastTime = 0;
+  let leafletTime = 0;
   let visible = false, hovering = false, manualUntil = 0, autoTime = 0, autoPaused = false;
   const toggle = view.querySelector('.product-box-toggle');
   function wake() { if (!frame && visible && !document.hidden) frame = requestAnimationFrame(render); }
@@ -524,19 +533,27 @@
       targetY = Math.sin(phase) * 28;
       targetX = -3 * (1 - Math.cos(phase));
     }
+    if (dimensions.leaflet) {
+      if (!reduced.matches && !autoPaused) leafletTime += dt;
+      const p = (leafletTime % 9000) / 9000;
+      const smooth = t => t*t*t*(t*(t*6-15)+10);
+      const insertion = reduced.matches ? 0 : p < .18 ? 0 : p < .58 ? smooth((p-.18)/.4) : p < .78 ? 1 : 1-smooth((p-.78)/.22);
+      model.style.setProperty('--paper-travel', (insertion * 104) + 'px');
+      view.dataset.insertion = insertion.toFixed(3);
+    }
     const scale = dimensions.width
       ? Math.min(1.18, view.clientWidth / 355,
-          (view.querySelector('.product-box-stage').clientHeight - 36) / (dimensions.height + dimensions.depth * .4 + (dimensions.hanger ? 44 : 0)))
+          (view.querySelector('.product-box-stage').clientHeight - 36) / (dimensions.height + dimensions.depth * .4 + (dimensions.hanger ? 44 : dimensions.leaflet ? 180 : 0)))
       : Math.min(1.18, view.clientWidth / 355) * (dimensions.scale || 1);
     x += (targetX - x) * blend;
     y += (targetY - y) * blend;
-    model.style.transform = 'scale(' + scale + ') rotateX(' + x + 'deg) rotateY(' + y + 'deg) scaleX('+((dimensions.width || 280)/280)+') scaleY('+(dimensions.height/178)+') scaleZ('+(dimensions.depth/32)+')';
+    model.style.transform = (dimensions.leaflet ? 'translateY(48px) ' : '') + 'scale(' + scale + ') rotateX(' + x + 'deg) rotateY(' + y + 'deg) scaleX('+((dimensions.width || 280)/280)+') scaleY('+(dimensions.height/178)+') scaleZ('+(dimensions.depth/32)+')';
     model.style.setProperty('--front-light', (1.015 - Math.abs(y) * .0013).toFixed(3));
     model.style.setProperty('--right-light', (.91 + y * .0015).toFixed(3));
     model.style.setProperty('--left-light', (.95 - y * .0015).toFixed(3));
     view.style.setProperty('--shadow-x', (-y * .22) + 'px');
     view.style.setProperty('--shadow-scale', (1 - Math.abs(y) * .003).toFixed(3));
-    if (visible && !document.hidden && ((!reduced.matches && !autoPaused && !hovering) || Math.abs(x-targetX)+Math.abs(y-targetY) > .025)) frame = requestAnimationFrame(render);
+    if (visible && !document.hidden && ((!reduced.matches && !autoPaused && (!hovering || dimensions.leaflet)) || Math.abs(x-targetX)+Math.abs(y-targetY) > .025)) frame = requestAnimationFrame(render);
     else { frame = 0; lastTime = 0; }
   }
   function update(rx, ry) {
@@ -615,7 +632,7 @@
         ctx.putImageData(output,0,0);
         resolve();
       };
-      image.onerror=reject;image.src='/images/'+view.dataset.box+'-box/'+name+(dimensions.extensions?.[name] || dimensions.ext || (view.dataset.box==='imo'?'.jpg':'.png'));
+      image.onerror=reject;image.src='/images/'+view.dataset.box+'-box/'+(dimensions.sources?.[name] || name)+(dimensions.extensions?.[name] || dimensions.ext || (view.dataset.box==='imo'?'.jpg':'.png'));
     });
   }
   const faces = additionalBoxes[view.dataset.box]?.faces || (view.dataset.box === 'vazkor' ? [
