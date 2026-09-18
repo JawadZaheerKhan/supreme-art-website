@@ -511,7 +511,7 @@
   }
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let x = 0, y = 0, targetX = x, targetY = y, frame = 0, down = null, lastTime = 0;
-  let leafletInsertion = 1;
+  let leafletInsertion = 1, leafletTime = 0, leafletDesired = 1;
   let visible = false, hovering = false, manualUntil = 0, autoTime = 0, autoPaused = false;
   const toggle = view.querySelector('.product-box-toggle');
   function wake() { if (!frame && visible && !document.hidden) frame = requestAnimationFrame(render); }
@@ -534,7 +534,13 @@
       targetX = -3 * (1 - Math.cos(phase));
     }
     if (dimensions.leaflet) {
-      const desired = hovering || down || view.matches(':focus-within') ? 0 : 1;
+      const interacting = hovering || down || document.activeElement === view;
+      if (!reduced.matches && !autoPaused && !interacting) leafletTime += dt;
+      const phase = (leafletTime % 10000) / 10000;
+      const ease = t => t*t*t*(t*(t*6-15)+10);
+      const automaticInsertion = phase < .16 ? 1 : phase < .4 ? 1-ease((phase-.16)/.24) : phase < .56 ? 0 : phase < .84 ? ease((phase-.56)/.28) : 1;
+      const desired = interacting ? 0 : reduced.matches ? 1 : autoPaused ? leafletInsertion : automaticInsertion;
+      leafletDesired = desired;
       leafletInsertion += (desired - leafletInsertion) * (reduced.matches ? 1 : 1 - Math.exp(-dt / 260));
       if (Math.abs(desired - leafletInsertion) < .001) leafletInsertion = desired;
       model.style.setProperty('--paper-travel', (leafletInsertion * 104) + 'px');
@@ -552,7 +558,7 @@
     model.style.setProperty('--left-light', (.95 - y * .0015).toFixed(3));
     view.style.setProperty('--shadow-x', (-y * .22) + 'px');
     view.style.setProperty('--shadow-scale', (1 - Math.abs(y) * .003).toFixed(3));
-    if (visible && !document.hidden && ((!reduced.matches && !autoPaused && (!hovering || dimensions.leaflet)) || Math.abs(x-targetX)+Math.abs(y-targetY) > .025 || (dimensions.leaflet && Math.abs(leafletInsertion - (hovering || down || view.matches(':focus-within') ? 0 : 1)) > .001))) frame = requestAnimationFrame(render);
+    if (visible && !document.hidden && ((!reduced.matches && !autoPaused && (!hovering || dimensions.leaflet)) || Math.abs(x-targetX)+Math.abs(y-targetY) > .025 || (dimensions.leaflet && Math.abs(leafletInsertion - leafletDesired) > .001))) frame = requestAnimationFrame(render);
     else { frame = 0; lastTime = 0; }
   }
   function update(rx, ry) {
