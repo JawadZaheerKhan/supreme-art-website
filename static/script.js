@@ -512,7 +512,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     const bar = story.querySelector('.' + prefix + '__progress span');
     story.style.setProperty('--stage-count', scenes.length);
     let index = -1, busy = false, frame = 0, lastWheel = -Infinity, wheelTravel = 0;
-    let touchY = null, touchConsumed = false;
+    let touchX = null, touchY = null, touchConsumed = false;
     const ease = t => t * t * (3 - 2 * t);
     function pinned() {
       const rect = story.getBoundingClientRect();
@@ -587,9 +587,11 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       return true;
     }
     addEventListener('wheel', event => {
-      if (event.ctrlKey || Math.abs(event.deltaY) <= Math.abs(event.deltaX) || Math.abs(event.deltaY) < 1 || !pinned()) return;
+      if (event.ctrlKey || !pinned()) return;
+      const travel = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (Math.abs(travel) < 1) return;
       const now = performance.now();
-      const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1);
+      const delta = travel * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1);
       if (now - lastWheel > 160 || Math.sign(delta) !== Math.sign(wheelTravel)) wheelTravel = 0;
       lastWheel = now;
       // Ignore input during the transition, then accept a light continued scroll.
@@ -600,20 +602,25 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       move(delta > 0 ? 1 : -1, event);
     }, {passive: false});
     addEventListener('touchstart', event => {
+      touchX = event.touches.length === 1 ? event.touches[0].clientX : null;
       touchY = event.touches.length === 1 ? event.touches[0].clientY : null;
       touchConsumed = false;
     }, {passive: true});
     addEventListener('touchmove', event => {
       if (touchY === null || event.touches.length !== 1 || !pinned()) return;
       if (touchConsumed || busy) { event.preventDefault(); return; }
-      const delta = touchY - event.touches[0].clientY;
+      const dx = touchX - event.touches[0].clientX;
+      const dy = touchY - event.touches[0].clientY;
+      const delta = Math.abs(dx) > Math.abs(dy) ? dx : dy;
       if (Math.abs(delta) >= 10) touchConsumed = move(delta > 0 ? 1 : -1, event);
     }, {passive: false});
-    addEventListener('touchend', () => { touchY = null; touchConsumed = false; }, {passive: true});
+    function clearTouch() { touchX = touchY = null; touchConsumed = false; }
+    addEventListener('touchend', clearTouch, {passive: true});
+    addEventListener('touchcancel', clearTouch, {passive: true});
     addEventListener('keydown', event => {
       if (event.target.closest('input, textarea, select, button, a, [contenteditable="true"]') || event.ctrlKey || event.metaKey || event.altKey) return;
-      const direction = ['ArrowDown', 'PageDown'].includes(event.key) || (event.key === ' ' && !event.shiftKey) ? 1
-        : ['ArrowUp', 'PageUp'].includes(event.key) || (event.key === ' ' && event.shiftKey) ? -1 : 0;
+      const direction = ['ArrowDown', 'ArrowRight', 'PageDown'].includes(event.key) || (event.key === ' ' && !event.shiftKey) ? 1
+        : ['ArrowUp', 'ArrowLeft', 'PageUp'].includes(event.key) || (event.key === ' ' && event.shiftKey) ? -1 : 0;
       if (direction) move(direction, event);
     });
     function sync() {
