@@ -2,177 +2,37 @@
 <html lang="en">
 <head>
 {{> head}}
+  <link rel="stylesheet" href="/process-story.css" />
+  <script src="/process-story.js" defer></script>
 </head>
-<body class="photo-zoom-page">
-{{> gtm-body}}
-{{> loader}}
-{{> header}}
-
+<body class="process-page">
+  <a class="process-skip" href="#prepress">Skip to the process</a>
+  <header class="process-header">
+    <a class="process-brand" href="index.html" aria-label="Supreme Art home"><img src="{{ site.logo }}" alt="Supreme Art" style="height:46px;width:auto" /></a>
+    <nav aria-label="Main navigation"><a href="index.html">Home</a><a href="process.html" aria-current="page">Process</a><a href="mailto:{{ site.contact.email }}">Let’s talk <span aria-hidden="true">↗</span></a></nav>
+  </header>
   <main>
-{{> banner}}
-
-    <section class="section">
-      <div class="container">
-        <p class="eyebrow reveal">Our process</p>
-        <p class="proc-intro reveal">{{ page.intro }}</p>
+    <section class="process-intro">
+      <div class="process-kicker"><span class="process-dot"></span> THE MAKING OF A CARTON</div>
+      <div class="process-intro__line"><h1>One idea.<br /><em>Every detail.</em></h1><div><p>Follow the artwork. Follow the material.<br />See how a carton takes shape, from the first design to the final delivery.</p><a href="#prepress">Explore the process <span aria-hidden="true">↓</span></a></div></div>
+      <nav class="process-chapters" aria-label="Process chapters"><a href="#prepress"><span>01</span>Pre press <b aria-hidden="true">↗</b></a><a href="#press"><span>02</span>Press <b aria-hidden="true">↗</b></a><a href="#offpress"><span>03</span>Offpress <b aria-hidden="true">↗</b></a></nav>
+    </section>
+    <section class="prepress-story" id="prepress" aria-labelledby="prepress-title">
+      <div class="prepress-viewer">
+        <div class="prepress-media"><canvas id="prepress-canvas" aria-hidden="true"></canvas></div>
+        <div class="prepress-shade" aria-hidden="true"></div>
+        <div class="prepress-top"><div><span class="process-kicker">01 / THE PROCESS</span><h2 id="prepress-title">Pre press<span>.</span></h2></div><button type="button" class="story-mode" aria-pressed="false">View all photos <span aria-hidden="true">↗</span></button></div>
+        <div class="prepress-caption" aria-live="polite" aria-atomic="true"><span class="prepress-counter">01 / 08</span><p class="prepress-lead">It starts with an idea.</p><p class="prepress-detail">Our designers bring the artwork and carton layout together on screen, carefully arranging the text, colour and panels before the design moves into production.</p></div>
+        <div class="prepress-bottom"><span class="prepress-scroll">SCROLL TO FOLLOW THE STORY <span aria-hidden="true">↓</span></span><div class="prepress-controls"><button type="button" data-story-prev aria-label="Previous photo">←</button><div class="prepress-dots" aria-label="Pre press views">{{#each page.prepress}}<button type="button" data-story-step="{{ @index }}" aria-label="View {{ @n }}: {{ lead }}" aria-current="{{#if @index}}false{{else}}step{{/if}}"><span></span></button>{{/each}}</div><button type="button" data-story-next aria-label="Next photo">→</button></div></div>
+        <div class="prepress-progress" aria-hidden="true"><span></span></div>
       </div>
-
-      <!-- Desktop: pinned stage, crossfades as you scroll -->
-      <div class="proc" id="proc" aria-hidden="true">
-        <div class="proc__pin">
-          <div class="proc__inner container">
-            <div class="proc__stage">
-              {{#each page.steps}}<div class="proc__shot {{#if image_3}}quality-gallery quality-gallery--three{{else}}proc__pair{{#if image_2}}{{else}} proc__pair--single{{/if}}{{/if}}{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}">
-                {{#if image}}<img src="{{ image }}" alt="" loading="lazy" />{{/if}}
-                {{#if image_2}}<img src="{{ image_2 }}" alt="" loading="lazy" />{{/if}}
-                {{#if image_3}}<img src="{{ image_3 }}" alt="" loading="lazy" />{{/if}}
-                {{#if image_2}}<span class="{{#if image_3}}quality-gallery__dots{{else}}proc__pair-dots{{/if}}"><i></i><i></i>{{#if image_3}}<i></i>{{/if}}</span>{{/if}}
-              </div>
-              {{/each}}
-            </div>
-            <div class="proc__text">
-              {{#each page.steps}}<div class="proc__cap{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}">
-                <span class="proc__ghost" aria-hidden="true">{{ num }}</span>
-                <span class="proc__num">{{ num }}</span>
-                <h2>{{ title }}</h2>
-                <p>{{ text }}</p>
-              </div>
-              {{/each}}
-              <div class="proc__meter">
-                <span class="proc__count"><b class="proc__cur">01</b> / <span class="proc__total">10</span></span>
-                <span class="proc__bar"><span class="proc__bar-fill"></span></span>
-              </div>
-            </div>
-
-            <!-- folding carton, assembles as you scroll (aligned to the steps) -->
-            <div class="proc-box" aria-hidden="true">
-{{> carton-scene}}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile / reduced-motion: simple stacked steps -->
-      <div class="proc-mob container">
-        <!-- same carton, folding as you scroll the steps -->
-        <div class="proc-mob__box proc-box" aria-hidden="true">
-{{> carton-scene}}
-        </div>
-        {{#each page.steps}}<article class="proc-mob__step reveal">
-          {{#if image}}<div class="proc-mob__img proc-mob__img--pair{{#if image_2}}{{else}} proc-mob__img--single{{/if}}">
-            <img src="{{ image }}" alt="{{ title }}" loading="lazy" />
-            {{#if image_2}}<img src="{{ image_2 }}" alt="{{ title }}" loading="lazy" />{{/if}}
-            {{#if image_3}}<img src="{{ image_3 }}" alt="{{ title }}" loading="lazy" />{{/if}}
-            {{#if image_2}}<span class="{{#if image_3}}quality-gallery__dots{{else}}proc__pair-dots{{/if}}"><i></i><i></i>{{#if image_3}}<i></i>{{/if}}</span>{{/if}}
-          </div>{{/if}}
-          <span class="proc__num">{{ num }}</span>
-          <h2>{{ title }}</h2>
-          <p>{{ text }}</p>
-        </article>
-        {{/each}}
+      <div class="prepress-gallery">
+        {{#each page.prepress}}<article class="prepress-photo" data-image="{{ image }}" data-kind="{{ kind }}" data-lead="{{ lead }}" data-detail="{{ detail }}"><img src="{{ image }}" alt="{{ alt }}" width="{{ width }}" height="{{ height }}" loading="{{ loading }}" /><div><span>{{ @num }} / 08</span><p class="prepress-photo__lead">{{ lead }}</p><p>{{ detail }}</p></div></article>{{/each}}
       </div>
     </section>
-
-{{> cta}}
+    <section class="process-chapter process-chapter--press" id="press" aria-labelledby="press-title"><div class="process-chapter__heading"><span class="process-kicker">02 / THE PROCESS</span><h2 id="press-title">Press<span>.</span></h2><p>The prepared plates and precisely cut sheets come together. The artwork becomes print.</p></div><div class="process-later-grid">{{#each page.press}}<figure><img src="{{ image }}" alt="{{ alt }}" loading="lazy" /><figcaption>{{ text }}</figcaption></figure>{{/each}}</div></section>
+    <section class="process-chapter" id="offpress" aria-labelledby="offpress-title"><div class="process-chapter__heading"><span class="process-kicker">03 / THE PROCESS</span><h2 id="offpress-title">Offpress<span>.</span></h2><p>From a printed sheet to a finished carton. Every finishing detail brings the packaging closer to delivery.</p></div><div class="process-later-grid">{{#each page.offpress}}<figure><img src="{{ image }}" alt="{{ alt }}" loading="lazy" /><figcaption>{{ text }}</figcaption></figure>{{/each}}</div></section>
+    <footer class="process-footer"><div><span class="process-kicker">YOUR NEXT CARTON STARTS HERE</span><p>Let’s make it happen.</p><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }} ↗</a></div><a href="index.html">Supreme Art <span>(Pvt.) Ltd.</span></a></footer>
   </main>
-
-{{> footer}}
-
-  <script src="/script.js"></script>
-  <script>
-  (function () {
-    var section = document.getElementById('proc');
-    if (!section) return;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) { document.documentElement.classList.add('proc-static'); return; }
-
-    var shots = [].slice.call(section.querySelectorAll('.proc__shot'));
-    var caps  = [].slice.call(section.querySelectorAll('.proc__cap'));
-    var bar   = section.querySelector('.proc__bar-fill');
-    var curEl = section.querySelector('.proc__cur');
-    var n = caps.length, cur = -1, ticking = false;
-    var pad = function (i) { return (i < 10 ? '0' : '') + i; };
-    var totalEl = section.querySelector('.proc__total');
-    if (totalEl) totalEl.textContent = pad(n);
-
-    // folding carton on the side, driven by the same scroll progress
-    var box = section.querySelector('.proc-box__scene');
-    var norm = function (v, a, b) { return Math.min(1, Math.max(0, (v - a) / (b - a))); };
-    var ease = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
-
-    // The section is tall; the pin stays for its whole height. Scroll
-    // progress through it (0..1) maps to which step is showing.
-    function setHeight() { section.style.height = (n * 40 + 20) + 'vh'; }
-    function activate(i) {
-      if (i === cur) return;
-      cur = i;
-      for (var a = 0; a < shots.length; a++) shots[a].classList.toggle('on', a === i);
-      for (var b = 0; b < caps.length; b++)  caps[b].classList.toggle('on', b === i);
-      if (curEl) curEl.textContent = pad(i + 1);
-    }
-    function update() {
-      ticking = false;
-      var total = section.offsetHeight - window.innerHeight;
-      var p = Math.min(1, Math.max(0, -section.getBoundingClientRect().top / total));
-      activate(Math.min(n - 1, Math.floor(p * n)));
-      if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
-      if (box) {
-        box.style.setProperty('--intro', norm(p, 0, 0.05).toFixed(3));
-        box.style.setProperty('--print', norm(p, 0.36, 0.50).toFixed(3));       // step 05 — artwork prints on
-        box.style.setProperty('--cut',   norm(p, 0.58, 0.70).toFixed(3));       // step 07 — die-cut outline
-        box.style.setProperty('--foldA', ease(norm(p, 0.70, 0.82)).toFixed(3)); // step 08 — sides fold up
-        box.style.setProperty('--foldB', ease(norm(p, 0.78, 0.90)).toFixed(3)); // flaps close
-        box.style.setProperty('--view',  ease(norm(p, 0.70, 1.0)).toFixed(3));  // rotate to 3D after cutting
-      }
-    }
-    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
-
-    setHeight();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', function () { setHeight(); update(); });
-    update();
-  })();
-
-  // phones: the stacked steps get the same carton, pinned at the top and
-  // folding as you scroll down the list
-  (function () {
-    var wrap  = document.querySelector('.proc-mob');
-    var scene = wrap && wrap.querySelector('.proc-mob__box .proc-box__scene');
-    if (!scene) return;
-
-    var set = function (k, v) { scene.style.setProperty(k, v); };
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      // show the finished carton rather than animating it
-      set('--intro', 1); set('--print', 1); set('--cut', 0);
-      set('--foldA', 1); set('--foldB', 1); set('--view', 1);
-      return;
-    }
-
-    var mq = window.matchMedia('(max-width: 860px)');
-    var norm = function (v, a, b) { return Math.min(1, Math.max(0, (v - a) / (b - a))); };
-    var ease = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
-    var ticking = false;
-
-    function update() {
-      ticking = false;
-      if (!mq.matches) return;
-      var r = wrap.getBoundingClientRect();
-      var total = r.height - window.innerHeight;
-      if (total <= 0) return;
-      var p = Math.min(1, Math.max(0, -r.top / total));
-      set('--intro', norm(p, 0, 0.05).toFixed(3));
-      set('--print', norm(p, 0.36, 0.50).toFixed(3));
-      set('--cut',   norm(p, 0.58, 0.70).toFixed(3));
-      set('--foldA', ease(norm(p, 0.70, 0.82)).toFixed(3));
-      set('--foldB', ease(norm(p, 0.78, 0.90)).toFixed(3));
-      set('--view',  ease(norm(p, 0.70, 1.0)).toFixed(3));
-    }
-    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    update();
-  })();
-  </script>
 </body>
 </html>
