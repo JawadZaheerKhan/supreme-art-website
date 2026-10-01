@@ -22,7 +22,7 @@
       <div class="container">
         <div class="prepress-panels">
           {{#each page.prepress_groups}}<article class="prepress-panel" aria-label="Pre press, {{ @n }} of 3">
-            <div class="prepress-panel-heading">{{#if @index}}<p class="prepress-section-name">Pre press</p>{{else}}<h2 id="prepress-title">Pre press</h2>{{/if}}<span>{{ @num }} / 03</span></div>
+            <div class="prepress-panel-heading">{{#if @index}}<p class="prepress-section-name">Pre press</p>{{else}}<h2 id="prepress-title">Pre press</h2>{{/if}}<div class="story-dock" aria-hidden="true"></div><span>{{ @num }} / 03</span></div>
             <div class="prepress-panel-body">
               <div class="prepress-collage prepress-collage--{{ layout }}">
                 {{#each photos}}<figure><div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/each}}
@@ -39,7 +39,7 @@
         <div class="process-photo-list">
           {{#each page.press}}<article class="process-photo-row">
             <div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div>
-            <div class="process-photo-copy"><p>{{ text }}</p></div>
+            <div class="process-photo-copy"><p>{{ text }}</p><div class="story-dock" aria-hidden="true"></div></div>
           </article>{{/each}}
         </div>
       </div>
@@ -50,7 +50,7 @@
         <div class="process-photo-list">
           {{#each page.offpress}}<article class="process-photo-row">
             <div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div>
-            <div class="process-photo-copy"><p>{{ text }}</p></div>
+            <div class="process-photo-copy"><p>{{ text }}</p><div class="story-dock" aria-hidden="true"></div></div>
           </article>{{/each}}
         </div>
       </div>
@@ -58,6 +58,7 @@
 {{> cta}}
   </main>
 {{> footer}}
+  <div class="process-travelling-box proc-box" aria-hidden="true">{{> carton-scene}}</div>
   <script src="/script.js"></script>
   <script src="/process-simple.js"></script>
 </body>
