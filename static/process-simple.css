@@ -13,6 +13,29 @@
 .process-photo-copy p { color: var(--muted); line-height: 1.85; margin: 0; }
 .process-photo-copy .process-photo-lead { color: var(--text); font-size: 1.35rem; font-weight: 600; line-height: 1.4; margin-bottom: 14px; }
 @keyframes processPhotoBreath { from { transform: scale(1); } to { transform: scale(1.055); } }
+.prepress-grouped { padding: 0; }
+.prepress-panel { min-height: calc(100svh - 80px); padding: 32px 0; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid var(--border); }
+.prepress-panel:last-child { border-bottom: 0; }
+.prepress-panel-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.prepress-panel-heading h2, .prepress-section-name { margin: 0; font-family: var(--display); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; line-height: 1.2; }
+.prepress-panel-heading > span { color: var(--accent); font-size: .8rem; letter-spacing: .12em; }
+.prepress-panel-body { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+.prepress-collage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 18px; height: clamp(320px, 61svh, 550px); }
+.prepress-collage figure { margin: 0; min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 7px; }
+.prepress-collage--three figure:first-child { grid-row: span 2; }
+.prepress-collage--three figure:first-child { justify-content: center; }
+.prepress-collage--three figure:first-child .process-photo-frame { flex: 0 0 auto; aspect-ratio: 4 / 3; }
+.prepress-collage .process-photo-frame { flex: 1; min-height: 0; display: grid; place-items: center; background: transparent; border-radius: 8px; }
+.prepress-collage .process-photo-frame img { width: 100%; height: 100%; object-fit: contain; min-height: 0; }
+.prepress-collage figcaption { font-size: .75rem; color: var(--muted); line-height: 1.4; }
+@media (max-width: 900px) {
+  .prepress-panel { padding: 28px 0; }
+  .prepress-panel-body { grid-template-columns: 1fr; gap: 22px; }
+  .prepress-collage { height: clamp(260px, 43svh, 420px); gap: 14px; }
+  .prepress-panel-heading { margin-bottom: 20px; }
+  .prepress-panel .process-photo-copy p { font-size: .92rem; line-height: 1.7; }
+  .prepress-panel .process-photo-copy .process-photo-lead { font-size: 1.25rem; margin-bottom: 10px; }
+}
 @media (max-width: 760px) {
   .process-photo-row { grid-template-columns: 1fr; gap: 20px; }
   .process-photo-list { gap: 38px; }

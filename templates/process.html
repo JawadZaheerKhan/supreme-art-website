@@ -18,13 +18,17 @@
         </nav>
       </div>
     </section>
-    <section class="section process-section" id="prepress" aria-labelledby="prepress-title">
+    <section class="process-section prepress-grouped" id="prepress" aria-labelledby="prepress-title">
       <div class="container">
-        <h2 id="prepress-title">Pre press</h2>
-        <div class="process-photo-list">
-          {{#each page.prepress}}<article class="process-photo-row">
-            <div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" width="{{ width }}" height="{{ height }}" loading="{{ loading }}" decoding="async" /></div>
-            <div class="process-photo-copy"><p class="process-photo-lead">{{ lead }}</p><p>{{ detail }}</p></div>
+        <div class="prepress-panels">
+          {{#each page.prepress_groups}}<article class="prepress-panel" aria-label="Pre press, {{ @n }} of 3">
+            <div class="prepress-panel-heading">{{#if @index}}<p class="prepress-section-name">Pre press</p>{{else}}<h2 id="prepress-title">Pre press</h2>{{/if}}<span>{{ @num }} / 03</span></div>
+            <div class="prepress-panel-body">
+              <div class="prepress-collage prepress-collage--{{ layout }}">
+                {{#each photos}}<figure><div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/each}}
+              </div>
+              <div class="process-photo-copy"><p class="process-photo-lead">{{ lead }}</p><p>{{ detail }}</p></div>
+            </div>
           </article>{{/each}}
         </div>
       </div>
