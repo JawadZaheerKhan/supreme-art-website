@@ -1,0 +1,25 @@
+/* Normal document flow, using the site's original colours and shared chrome. */
+.process-overview { padding-bottom: 24px; }
+.process-section-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.process-section-links a { padding: 10px 22px; border: 1px solid var(--border); border-radius: 6px; color: var(--accent); background: var(--surface); font-weight: 600; text-decoration: none; }
+.process-section-links a:hover { background: var(--accent-soft); border-color: var(--accent); }
+.process-section-links a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.process-section { scroll-margin-top: 100px; padding-top: 40px; }
+.process-section h2 { margin: 0 0 32px; font-size: clamp(1.8rem, 3vw, 2.6rem); }
+.process-photo-list { display: grid; gap: 48px; }
+.process-photo-row { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: center; gap: 40px; }
+.process-photo-frame { overflow: hidden; border-radius: 12px; background: var(--surface-alt); }
+.process-photo-frame img { display: block; width: 100%; height: auto; animation: processPhotoBreath 9s ease-in-out infinite alternate; transform-origin: center; }
+.process-photo-copy p { color: var(--muted); line-height: 1.85; margin: 0; }
+.process-photo-copy .process-photo-lead { color: var(--text); font-size: 1.35rem; font-weight: 600; line-height: 1.4; margin-bottom: 14px; }
+@keyframes processPhotoBreath { from { transform: scale(1); } to { transform: scale(1.055); } }
+@media (max-width: 760px) {
+  .process-photo-row { grid-template-columns: 1fr; gap: 20px; }
+  .process-photo-list { gap: 38px; }
+  .process-section { padding-top: 28px; }
+  .process-section-links { gap: 8px; }
+  .process-section-links a { padding: 9px 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .process-photo-frame img { animation: none; transform: none; }
+}

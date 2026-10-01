@@ -107,16 +107,6 @@
       "loading": "eager"
     },
     {
-      "image": "/images/process/prepress/design.webp",
-      "kind": "artwork",
-      "lead": "The detail becomes the blueprint.",
-      "detail": "We move closer to the artwork—the layout that will guide the printed carton. Once approved, the digital design is prepared for transfer to the printing plate.",
-      "alt": "Close view of the carton artwork shown on the designer’s monitor.",
-      "width": 1280,
-      "height": 960,
-      "loading": "lazy"
-    },
-    {
       "image": "/images/process/prepress/blue-plate.webp",
       "kind": "plate",
       "lead": "From pixels to plate.",
