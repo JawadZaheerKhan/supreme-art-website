@@ -34,7 +34,7 @@
         <div class="scene-photos">
           {{#each photos}}<figure><div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/each}}
         </div>
-        <div class="scene-copy"><span class="scene-num" aria-hidden="true">{{ num }}</span><p class="scene-lead">{{ lead }}</p><p>{{ detail }}</p></div>
+        <div class="scene-copy"><p class="scene-lead">{{ lead }}</p><p>{{ detail }}</p></div>
       </article>{{/each}}
     </section>{{/each}}
     </div>

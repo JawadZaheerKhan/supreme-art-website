@@ -101,7 +101,6 @@
       "title": "Pre press",
       "scenes": [
         {
-          "num": "01",
           "layout": "opening",
           "box": "right",
           "step": "artwork",
@@ -127,7 +126,6 @@
           ]
         },
         {
-          "num": "02",
           "layout": "plate",
           "box": "center",
           "step": "artwork",
@@ -148,7 +146,6 @@
           ]
         },
         {
-          "num": "03",
           "layout": "storage",
           "box": "left",
           "step": "artwork",
@@ -169,7 +166,6 @@
           ]
         },
         {
-          "num": "04",
           "layout": "surround",
           "box": "center",
           "step": "ready",
@@ -202,7 +198,6 @@
       "title": "Press",
       "scenes": [
         {
-          "num": "05",
           "layout": "ink",
           "box": "right",
           "step": "print",
@@ -223,7 +218,6 @@
           ]
         },
         {
-          "num": "06",
           "layout": "run",
           "box": "center",
           "step": "print",
@@ -249,7 +243,6 @@
           ]
         },
         {
-          "num": "07",
           "layout": "triptych",
           "box": "left",
           "step": "print",
@@ -282,7 +275,6 @@
       "title": "Offpress",
       "scenes": [
         {
-          "num": "08",
           "layout": "finish",
           "box": "center",
           "step": "coating",
@@ -308,7 +300,6 @@
           ]
         },
         {
-          "num": "09",
           "layout": "mosaic",
           "box": "right",
           "step": "coating",
@@ -334,7 +325,6 @@
           ]
         },
         {
-          "num": "10",
           "layout": "dies",
           "box": "center",
           "step": "cutting",
@@ -360,7 +350,6 @@
           ]
         },
         {
-          "num": "11",
           "layout": "separate",
           "box": "left",
           "step": "sorting",
@@ -386,7 +375,6 @@
           ]
         },
         {
-          "num": "12",
           "layout": "fold",
           "box": "center",
           "step": "pasting",
@@ -407,7 +395,6 @@
           ]
         },
         {
-          "num": "13",
           "layout": "finale",
           "box": "right",
           "step": "delivery",
