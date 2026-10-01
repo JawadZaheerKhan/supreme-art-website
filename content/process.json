@@ -211,34 +211,106 @@
   ],
   "offpress": [
     {
+      "stage": "coating",
       "image": "/images/quality/coating-check-1.png",
       "alt": "Coating equipment and production.",
       "text": "The printed sheets receive the specified protective or decorative coating for the required finish."
     },
     {
+      "stage": "coating",
+      "image": "/images/process/offpress/coating-feed.webp",
+      "alt": "Printed sheets running flat through the coating line under guide wheels.",
+      "text": "Printed sheets travel flat through the coating line, with guide wheels keeping each sheet square as the finish is applied."
+    },
+    {
+      "stage": "coating",
+      "image": "/images/process/offpress/gloss-coated-sheet.webp",
+      "alt": "Gloss-coated sheet of orange Movonac-D cartons with its colour bar.",
+      "text": "A gloss coating gives the sheet its finish, deepening the colours and protecting the artwork through the steps ahead."
+    },
+    {
+      "stage": "coating",
+      "image": "/images/process/offpress/spot-finish.webp",
+      "alt": "IV SIP carton sheet with a raised, textured spot finish on selected areas.",
+      "text": "Spot finishes pick out chosen details. Selected areas receive a raised, textured coating that adds shine and feel to the carton."
+    },
+    {
+      "stage": "coating",
+      "image": "/images/process/offpress/finish-measure.webp",
+      "alt": "Operator measuring a finished sheet beside Offset Machine 8.",
+      "text": "Finished sheets are measured with a handheld instrument and checked against the targets approved for the job."
+    },
+    {
+      "stage": "coating",
+      "image": "/images/process/offpress/finish-check.webp",
+      "alt": "Operator checking the top sheet of a finished stack.",
+      "text": "Each stack is checked again before it moves on, so the finish stays consistent from the first sheet to the last."
+    },
+    {
+      "stage": "cutting",
+      "image": "/images/process/offpress/die-storage.webp",
+      "alt": "Rows of Supreme Art cutting dies stored upright in racks.",
+      "text": "Every carton design has its own cutting die. Our dies are kept in labelled racks, ready to be set up whenever a job is repeated."
+    },
+    {
+      "stage": "cutting",
       "image": "/images/process/die-cutting-1.jpg",
       "alt": "Die-cutting equipment and production.",
       "text": "The coated sheets are cut and creased into individual unit-carton blanks."
     },
     {
+      "stage": "cutting",
+      "image": "/images/process/offpress/die-cutters.webp",
+      "alt": "Automatic die-cutters, a YH-1060 and an SP 102-E, on the factory floor.",
+      "text": "Automatic die-cutters, including a YH-1060 and an SP 102-E, cut and crease full sheets at production speed."
+    },
+    {
+      "stage": "cutting",
+      "image": "/images/process/offpress/platen-die-cutting.webp",
+      "alt": "Two operators lifting a cut sheet from a platen die-cutter as punched pieces fall clear.",
+      "text": "Some jobs run on a platen die-cutter. The cut sheet is lifted away and the punched-out pieces fall clear."
+    },
+    {
+      "stage": "breaking",
       "image": "/images/process/breaking-1.jpg",
       "alt": "Breaking equipment and production.",
       "text": "Waste board is removed from around the die-cut cartons, separating the individual blanks cleanly."
     },
     {
+      "stage": "sorting",
       "image": "/images/process/sorting-1.jpg",
       "alt": "Sorting equipment and production.",
       "text": "An automated inspection machine uses 3D cameras to check every unit carton for colour, print and overall quality."
     },
     {
+      "stage": "pasting",
       "image": "/images/process/pasting-1.jpg",
       "alt": "Pasting & folder gluing equipment and production.",
       "text": "The inspected unit cartons are folded, glued and joined before being packed into bundles or boxes."
     },
     {
+      "stage": "pasting",
+      "image": "/images/process/offpress/folder-gluer-bobst.webp",
+      "alt": "Bobst Expert 105 A folder-gluer running printed cartons.",
+      "text": "Our Bobst Expert 105 A folder-gluer folds and glues the carton blanks in one continuous run."
+    },
+    {
+      "stage": "delivery",
+      "image": "/images/process/offpress/packed-stock.webp",
+      "alt": "Rows of labelled, sealed shipping boxes in the finished-goods store.",
+      "text": "Finished cartons are packed into labelled shipping boxes and held in store, ready for dispatch."
+    },
+    {
+      "stage": "delivery",
       "image": "/images/process/delivery-pallet.jpg",
       "alt": "Delivery equipment and production.",
       "text": "The finished cartons are securely packed and delivered to the client, ready for the filling line."
+    },
+    {
+      "stage": "delivery",
+      "image": "/images/process/offpress/container-loading.webp",
+      "alt": "Worker loading labelled boxes into a shipping container.",
+      "text": "The labelled boxes are loaded into the container for delivery to the client."
     }
   ],
   "prepress_groups": [

@@ -23,16 +23,23 @@
     { label: 'Sides fold and join', print: 1, cut: 1, sides: 1, flaps: .15, view: 1 },
     { label: 'A complete carton', print: 1, cut: 0, sides: 1, flaps: 1, view: 1 }
   ];
-  // Press can hold any number of photos: they share the printing step so Offpress stays aligned.
-  const pressCount = root.querySelectorAll('#press .process-photo-row').length;
-  let pre = 0, press = 0, post = 4;
-  const stageStates = stages.map(el => {
-    if (el.matches('.prepress-panel')) return states[Math.min(pre++, 2)];
-    if (el.closest('#press')) {
-      const f = ++press / pressCount;
-      return { ...states[3], print: mix(.35, 1, f), view: mix(.15, .25, f) };
-    }
-    return states[Math.min(post++, states.length-1)];
+  const offpressStep = { coating: 4, cutting: 5, breaking: 6, sorting: 7, pasting: 8, delivery: 9 };
+  let pre = 0;
+  const targets = stages.map(el => {
+    if (el.matches('.prepress-panel')) return Math.min(pre++, 2);
+    if (el.closest('#press')) return 3;
+    return offpressStep[el.dataset.stage] ?? states.length-1;
+  });
+  // Rows sharing a step ease toward it together, so any step can hold any number of photos.
+  const stageStates = targets.map((target, i) => {
+    let first = i, end = i;
+    while (first > 0 && targets[first-1] === target) first--;
+    while (end < targets.length-1 && targets[end+1] === target) end++;
+    const from = states[first > 0 ? targets[first-1] : target], to = states[target];
+    const f = (i - first + 1) / (end - first + 1);
+    const state = { label: to.label };
+    for (const key of ['print','cut','sides','flaps','view']) state[key] = mix(from[key], to[key], f);
+    return state;
   });
   let queued = 0;
   function paint() {

@@ -58,7 +58,7 @@
       <div class="container">
         <h2 id="offpress-title">Offpress</h2>
         <div class="process-photo-list">
-          {{#each page.offpress}}<article class="process-photo-row">
+          {{#each page.offpress}}<article class="process-photo-row" data-stage="{{ stage }}">
             <div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div>
             <div class="process-photo-copy"><p>{{ text }}</p></div>
           </article>{{/each}}
