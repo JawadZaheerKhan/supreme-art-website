@@ -18,11 +18,21 @@
         </nav>
       </div>
     </section>
+    <div class="process-assembly">
+      <aside class="assembly-rail" aria-label="Carton assembly progress">
+        <div class="assembly-sticky">
+          <p class="assembly-eyebrow">YOUR CARTON TAKES SHAPE</p>
+          <div class="assembly-stage proc-box" aria-hidden="true">{{> carton-scene}}</div>
+          <p class="assembly-state">A flat sheet of board</p>
+          <div class="assembly-meter" aria-hidden="true"><span></span></div>
+          <p class="assembly-hint">Scroll to build the carton</p>
+        </div>
+      </aside>
     <section class="process-section prepress-grouped" id="prepress" aria-labelledby="prepress-title">
       <div class="container">
         <div class="prepress-panels">
           {{#each page.prepress_groups}}<article class="prepress-panel" aria-label="Pre press, {{ @n }} of 3">
-            <div class="prepress-panel-heading">{{#if @index}}<p class="prepress-section-name">Pre press</p>{{else}}<h2 id="prepress-title">Pre press</h2>{{/if}}<div class="story-dock" aria-hidden="true"></div><span>{{ @num }} / 03</span></div>
+            <div class="prepress-panel-heading">{{#if @index}}<p class="prepress-section-name">Pre press</p>{{else}}<h2 id="prepress-title">Pre press</h2>{{/if}}<span>{{ @num }} / 03</span></div>
             <div class="prepress-panel-body">
               <div class="prepress-collage prepress-collage--{{ layout }}">
                 {{#each photos}}<figure><div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/each}}
@@ -39,7 +49,7 @@
         <div class="process-photo-list">
           {{#each page.press}}<article class="process-photo-row">
             <div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div>
-            <div class="process-photo-copy"><p>{{ text }}</p><div class="story-dock" aria-hidden="true"></div></div>
+            <div class="process-photo-copy"><p>{{ text }}</p></div>
           </article>{{/each}}
         </div>
       </div>
@@ -50,15 +60,15 @@
         <div class="process-photo-list">
           {{#each page.offpress}}<article class="process-photo-row">
             <div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div>
-            <div class="process-photo-copy"><p>{{ text }}</p><div class="story-dock" aria-hidden="true"></div></div>
+            <div class="process-photo-copy"><p>{{ text }}</p></div>
           </article>{{/each}}
         </div>
       </div>
     </section>
+    </div>
 {{> cta}}
   </main>
 {{> footer}}
-  <div class="process-travelling-box proc-box" aria-hidden="true">{{> carton-scene}}</div>
   <script src="/script.js"></script>
   <script src="/process-simple.js"></script>
 </body>
