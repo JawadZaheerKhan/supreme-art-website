@@ -23,6 +23,17 @@
     { label: 'Sides fold and join', print: 1, cut: 1, sides: 1, flaps: .15, view: 1 },
     { label: 'A complete carton', print: 1, cut: 0, sides: 1, flaps: 1, view: 1 }
   ];
+  // Press can hold any number of photos: they share the printing step so Offpress stays aligned.
+  const pressCount = root.querySelectorAll('#press .process-photo-row').length;
+  let pre = 0, press = 0, post = 4;
+  const stageStates = stages.map(el => {
+    if (el.matches('.prepress-panel')) return states[Math.min(pre++, 2)];
+    if (el.closest('#press')) {
+      const f = ++press / pressCount;
+      return { ...states[3], print: mix(.35, 1, f), view: mix(.15, .25, f) };
+    }
+    return states[Math.min(post++, states.length-1)];
+  });
   let queued = 0;
   function paint() {
     queued = 0;
@@ -33,7 +44,8 @@
     let t = index === stops.length-1 ? 0 : clamp((scrollY-stops[index])/Math.max(1,stops[index+1]-stops[index]));
     if (reduced.matches) t = 0;
     const ease = t*t*(3-2*t);
-    const a = states[Math.min(index,states.length-1)], b = states[Math.min(index+1,states.length-1)];
+    const last = stageStates.length-1;
+    const a = stageStates[Math.min(index,last)], b = stageStates[Math.min(index+1,last)];
     const value = key => mix(a[key], b[key], ease);
     scene.style.setProperty('--intro', '1');
     scene.style.setProperty('--print', value('print'));
@@ -45,7 +57,7 @@
     const folded = Math.min((stage.clientWidth-40)/300, (stage.clientHeight-20)/360);
     scene.style.setProperty('--box-scale', mix(flat,folded,value('sides')));
     label.textContent = (t>.6?b:a).label;
-    meter.style.transform = 'scaleX(' + ((index+t)/(states.length-1)) + ')';
+    meter.style.transform = 'scaleX(' + ((index+t)/last) + ')';
     root.dataset.assemblyStage = String(index);
   }
   function schedule() { if (!queued) queued = requestAnimationFrame(paint); }

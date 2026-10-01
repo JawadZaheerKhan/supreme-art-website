@@ -172,6 +172,41 @@
       "image": "/images/process/printing-1.jpg",
       "alt": "Offset printing press.",
       "text": "The prepared plates transfer the approved artwork onto the cut sheets using offset printing. Colour, registration and printed detail are checked against the approved proof as the job progresses."
+    },
+    {
+      "image": "/images/process/press/ink-loading.webp",
+      "alt": "Press operator loading ink tins on top of the printing units.",
+      "text": "Before the run begins, the printer charges each unit with ink, preparing the process and spot colours the job needs."
+    },
+    {
+      "image": "/images/process/press/press-line.webp",
+      "alt": "Multi-colour offset press line with a stack of paperboard at the feeder.",
+      "text": "Each colour has its own printing unit. The sheet travels through them in sequence, taking on one ink after another."
+    },
+    {
+      "image": "/images/process/press/feeding-sheets.webp",
+      "alt": "Operator starting the press beside printed sheets on the delivery table.",
+      "text": "With the cut sheets loaded at the feeder, the operator starts the run, and the first printed sheets arrive at the delivery for review."
+    },
+    {
+      "image": "/images/process/press/speedmaster.webp",
+      "alt": "Heidelberg Speedmaster CD 102 multi-colour printing press.",
+      "text": "Our Heidelberg Speedmaster CD 102 prints multi-colour work at production speed with consistent registration from sheet to sheet."
+    },
+    {
+      "image": "/images/process/press/colour-measurement.webp",
+      "alt": "Operator measuring a printed sheet with a handheld spectrophotometer.",
+      "text": "Colour is measured, not guessed. A handheld spectrophotometer reads the printed sheet and compares it with the approved colour targets."
+    },
+    {
+      "image": "/images/process/press/sheet-inspection.webp",
+      "alt": "Operator comparing a printed sheet with the approved proof at the press console.",
+      "text": "At the console, the printed sheet is checked against the approved proof, and the ink zones are adjusted until every carton on the sheet matches."
+    },
+    {
+      "image": "/images/process/press/sm74-control.webp",
+      "alt": "Operator at the controls of Offset Machine 3, a Heidelberg SM-74.",
+      "text": "Offset Machine 3, a Heidelberg SM-74, handles smaller sheet formats alongside our larger Speedmaster line, so each job runs on the right press."
     }
   ],
   "offpress": [
