@@ -29,12 +29,12 @@
         </div>
       </aside>
     {{#each page.chapters}}<section class="process-chapter" id="{{ id }}" aria-labelledby="{{ id }}-title">
-      {{#each scenes}}<article class="process-scene process-scene--{{ box }} process-scene--photos-{{ count }}" data-box="{{ box }}" data-step="{{ step }}">
-        <div class="scene-head">{{#if @index}}<p class="scene-chapter">{{ title }}</p>{{else}}<h2 class="scene-chapter" id="{{ id }}-title">{{ title }}</h2>{{/if}}<span class="scene-count">{{ @num }} / {{ total }}</span></div>
+      {{#each scenes}}<article class="process-scene process-scene--{{ box }} process-scene--photos-{{ count }} scene--{{ layout }}" data-box="{{ box }}" data-step="{{ step }}">
+        {{#if @index}}{{else}}<div class="scene-head"><p class="scene-eyebrow">{{ label }}</p><h2 class="scene-chapter" id="{{ id }}-title">{{ title }}</h2></div>{{/if}}
         <div class="scene-photos">
           {{#each photos}}<figure><div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/each}}
         </div>
-        <div class="scene-copy"><p class="scene-lead">{{ lead }}</p><p>{{ detail }}</p></div>
+        <div class="scene-copy"><span class="scene-num" aria-hidden="true">{{ num }}</span><p class="scene-lead">{{ lead }}</p><p>{{ detail }}</p></div>
       </article>{{/each}}
     </section>{{/each}}
     </div>

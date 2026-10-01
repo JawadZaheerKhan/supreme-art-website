@@ -101,6 +101,8 @@
       "title": "Pre press",
       "scenes": [
         {
+          "num": "01",
+          "layout": "opening",
           "box": "right",
           "step": "artwork",
           "count": 3,
@@ -125,6 +127,8 @@
           ]
         },
         {
+          "num": "02",
+          "layout": "plate",
           "box": "center",
           "step": "artwork",
           "count": 2,
@@ -144,6 +148,8 @@
           ]
         },
         {
+          "num": "03",
+          "layout": "storage",
           "box": "left",
           "step": "artwork",
           "count": 2,
@@ -163,6 +169,8 @@
           ]
         },
         {
+          "num": "04",
+          "layout": "surround",
           "box": "center",
           "step": "ready",
           "count": 3,
@@ -187,13 +195,15 @@
           ]
         }
       ],
-      "total": "04"
+      "label": "Chapter one"
     },
     {
       "id": "press",
       "title": "Press",
       "scenes": [
         {
+          "num": "05",
+          "layout": "ink",
           "box": "right",
           "step": "print",
           "count": 2,
@@ -213,6 +223,8 @@
           ]
         },
         {
+          "num": "06",
+          "layout": "run",
           "box": "center",
           "step": "print",
           "count": 3,
@@ -237,6 +249,8 @@
           ]
         },
         {
+          "num": "07",
+          "layout": "triptych",
           "box": "left",
           "step": "print",
           "count": 3,
@@ -261,13 +275,15 @@
           ]
         }
       ],
-      "total": "03"
+      "label": "Chapter two"
     },
     {
       "id": "offpress",
       "title": "Offpress",
       "scenes": [
         {
+          "num": "08",
+          "layout": "finish",
           "box": "center",
           "step": "coating",
           "count": 3,
@@ -292,6 +308,8 @@
           ]
         },
         {
+          "num": "09",
+          "layout": "mosaic",
           "box": "right",
           "step": "coating",
           "count": 3,
@@ -316,6 +334,8 @@
           ]
         },
         {
+          "num": "10",
+          "layout": "dies",
           "box": "center",
           "step": "cutting",
           "count": 3,
@@ -340,6 +360,8 @@
           ]
         },
         {
+          "num": "11",
+          "layout": "separate",
           "box": "left",
           "step": "sorting",
           "count": 3,
@@ -364,6 +386,8 @@
           ]
         },
         {
+          "num": "12",
+          "layout": "fold",
           "box": "center",
           "step": "pasting",
           "count": 2,
@@ -383,6 +407,8 @@
           ]
         },
         {
+          "num": "13",
+          "layout": "finale",
           "box": "right",
           "step": "delivery",
           "count": 3,
@@ -407,7 +433,7 @@
           ]
         }
       ],
-      "total": "06"
+      "label": "Chapter three"
     }
   ]
 }
