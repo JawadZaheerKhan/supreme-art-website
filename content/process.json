@@ -95,295 +95,319 @@
     "secondary_label": "See our products",
     "secondary_href": "products.html"
   },
-  "prepress": [
+  "chapters": [
     {
-      "image": "/images/process/prepress/design.webp",
-      "kind": "design",
-      "lead": "It starts with an idea.",
-      "detail": "Our designers bring the artwork and carton layout together on screen, carefully arranging the text, colour and panels before the design moves into production.",
-      "alt": "Designer preparing a carton layout on a computer monitor.",
-      "width": 1280,
-      "height": 960,
-      "loading": "eager"
-    },
-    {
-      "image": "/images/process/prepress/blue-plate.webp",
-      "kind": "plate",
-      "lead": "From pixels to plate.",
-      "detail": "The artwork moves into computer-to-plate preparation. A blue-coated aluminium plate carries the image that the offset press will use to reproduce the design.",
-      "alt": "Blue printing plate loaded into the computer-to-plate equipment.",
-      "width": 1280,
-      "height": 1055,
-      "loading": "lazy"
-    },
-    {
-      "image": "/images/process/prepress/processor.webp",
-      "kind": "processor",
-      "lead": "The image takes shape.",
-      "detail": "The prepared plate travels through the processor. Controlled cleaning removes the unwanted coating and leaves the image areas needed for printing.",
-      "alt": "Blue plate passing through the rollers of the plate processor.",
-      "width": 1280,
-      "height": 960,
-      "loading": "lazy"
-    },
-    {
-      "image": "/images/process/prepress/ready-plate.webp",
-      "kind": "ready",
-      "lead": "Clean. Clear. Ready for print.",
-      "detail": "The plate emerges with the image areas visible on its surface. It is now ready for checking and the next step at the printing press.",
-      "alt": "Processed aluminium plate emerging with blue image areas visible.",
-      "width": 1280,
-      "height": 960,
-      "loading": "lazy"
-    },
-    {
-      "image": "/images/process/prepress/paper-stock.webp",
-      "kind": "stock",
-      "lead": "Now, the material.",
-      "detail": "Alongside plate preparation, the paperboard is readied for production. Wrapped stacks keep the sheets together until they are needed for the job.",
-      "alt": "Wrapped paperboard stacks stored on wooden pallets.",
-      "width": 1448,
-      "height": 1086,
-      "loading": "lazy"
-    },
-    {
-      "image": "/images/process/prepress/paper-lifter.webp",
-      "kind": "lifter",
-      "lead": "On the move.",
-      "detail": "A pallet lifter carries the paperboard from storage to the cutting area. The stack stays supported as it moves to the next part of the process.",
-      "alt": "Operator moving a pallet of paperboard using a yellow pallet lifter.",
-      "width": 1258,
-      "height": 1085,
-      "loading": "lazy"
-    },
-    {
-      "image": "/images/process/prepress/paper-cutting.webp",
-      "kind": "cutting",
-      "lead": "Sized for what comes next.",
-      "detail": "The operator aligns the paperboard at the guillotine, where the stack is cut to the sheet size required for the job. With plates and sheets prepared, everything is ready for Press.",
-      "alt": "Operator aligning a paperboard stack at the guillotine cutting machine.",
-      "width": 1280,
-      "height": 960,
-      "loading": "lazy"
-    }
-  ],
-  "press": [
-    {
-      "image": "/images/process/printing-1.jpg",
-      "alt": "Offset printing press.",
-      "text": "The prepared plates transfer the approved artwork onto the cut sheets using offset printing. Colour, registration and printed detail are checked against the approved proof as the job progresses."
-    },
-    {
-      "image": "/images/process/press/ink-loading.webp",
-      "alt": "Press operator loading ink tins on top of the printing units.",
-      "text": "Before the run begins, the printer charges each unit with ink, preparing the process and spot colours the job needs."
-    },
-    {
-      "image": "/images/process/press/press-line.webp",
-      "alt": "Multi-colour offset press line with a stack of paperboard at the feeder.",
-      "text": "Each colour has its own printing unit. The sheet travels through them in sequence, taking on one ink after another."
-    },
-    {
-      "image": "/images/process/press/feeding-sheets.webp",
-      "alt": "Operator starting the press beside printed sheets on the delivery table.",
-      "text": "With the cut sheets loaded at the feeder, the operator starts the run, and the first printed sheets arrive at the delivery for review."
-    },
-    {
-      "image": "/images/process/press/speedmaster.webp",
-      "alt": "Heidelberg Speedmaster CD 102 multi-colour printing press.",
-      "text": "Our Heidelberg Speedmaster CD 102 prints multi-colour work at production speed with consistent registration from sheet to sheet."
-    },
-    {
-      "image": "/images/process/press/colour-measurement.webp",
-      "alt": "Operator measuring a printed sheet with a handheld spectrophotometer.",
-      "text": "Colour is measured, not guessed. A handheld spectrophotometer reads the printed sheet and compares it with the approved colour targets."
-    },
-    {
-      "image": "/images/process/press/sheet-inspection.webp",
-      "alt": "Operator comparing a printed sheet with the approved proof at the press console.",
-      "text": "At the console, the printed sheet is checked against the approved proof, and the ink zones are adjusted until every carton on the sheet matches."
-    },
-    {
-      "image": "/images/process/press/sm74-control.webp",
-      "alt": "Operator at the controls of Offset Machine 3, a Heidelberg SM-74.",
-      "text": "Offset Machine 3, a Heidelberg SM-74, handles smaller sheet formats alongside our larger Speedmaster line, so each job runs on the right press."
-    }
-  ],
-  "offpress": [
-    {
-      "stage": "coating",
-      "image": "/images/quality/coating-check-1.png",
-      "alt": "Coating equipment and production.",
-      "text": "The printed sheets receive the specified protective or decorative coating for the required finish."
-    },
-    {
-      "stage": "coating",
-      "image": "/images/process/offpress/coating-feed.webp",
-      "alt": "Printed sheets running flat through the coating line under guide wheels.",
-      "text": "Printed sheets travel flat through the coating line, with guide wheels keeping each sheet square as the finish is applied."
-    },
-    {
-      "stage": "coating",
-      "image": "/images/process/offpress/gloss-coated-sheet.webp",
-      "alt": "Gloss-coated sheet of orange Movonac-D cartons with its colour bar.",
-      "text": "A gloss coating gives the sheet its finish, deepening the colours and protecting the artwork through the steps ahead."
-    },
-    {
-      "stage": "coating",
-      "image": "/images/process/offpress/spot-finish.webp",
-      "alt": "IV SIP carton sheet with a raised, textured spot finish on selected areas.",
-      "text": "Spot finishes pick out chosen details. Selected areas receive a raised, textured coating that adds shine and feel to the carton."
-    },
-    {
-      "stage": "coating",
-      "image": "/images/process/offpress/finish-measure.webp",
-      "alt": "Operator measuring a finished sheet beside Offset Machine 8.",
-      "text": "Finished sheets are measured with a handheld instrument and checked against the targets approved for the job."
-    },
-    {
-      "stage": "coating",
-      "image": "/images/process/offpress/finish-check.webp",
-      "alt": "Operator checking the top sheet of a finished stack.",
-      "text": "Each stack is checked again before it moves on, so the finish stays consistent from the first sheet to the last."
-    },
-    {
-      "stage": "cutting",
-      "image": "/images/process/offpress/die-storage.webp",
-      "alt": "Rows of Supreme Art cutting dies stored upright in racks.",
-      "text": "Every carton design has its own cutting die. Our dies are kept in labelled racks, ready to be set up whenever a job is repeated."
-    },
-    {
-      "stage": "cutting",
-      "image": "/images/process/die-cutting-1.jpg",
-      "alt": "Die-cutting equipment and production.",
-      "text": "The coated sheets are cut and creased into individual unit-carton blanks."
-    },
-    {
-      "stage": "cutting",
-      "image": "/images/process/offpress/die-cutters.webp",
-      "alt": "Automatic die-cutters, a YH-1060 and an SP 102-E, on the factory floor.",
-      "text": "Automatic die-cutters, including a YH-1060 and an SP 102-E, cut and crease full sheets at production speed."
-    },
-    {
-      "stage": "cutting",
-      "image": "/images/process/offpress/platen-die-cutting.webp",
-      "alt": "Two operators lifting a cut sheet from a platen die-cutter as punched pieces fall clear.",
-      "text": "Some jobs run on a platen die-cutter. The cut sheet is lifted away and the punched-out pieces fall clear."
-    },
-    {
-      "stage": "breaking",
-      "image": "/images/process/breaking-1.jpg",
-      "alt": "Breaking equipment and production.",
-      "text": "Waste board is removed from around the die-cut cartons, separating the individual blanks cleanly."
-    },
-    {
-      "stage": "sorting",
-      "image": "/images/process/sorting-1.jpg",
-      "alt": "Sorting equipment and production.",
-      "text": "An automated inspection machine uses 3D cameras to check every unit carton for colour, print and overall quality."
-    },
-    {
-      "stage": "pasting",
-      "image": "/images/process/pasting-1.jpg",
-      "alt": "Pasting & folder gluing equipment and production.",
-      "text": "The inspected unit cartons are folded, glued and joined before being packed into bundles or boxes."
-    },
-    {
-      "stage": "pasting",
-      "image": "/images/process/offpress/folder-gluer-bobst.webp",
-      "alt": "Bobst Expert 105 A folder-gluer running printed cartons.",
-      "text": "Our Bobst Expert 105 A folder-gluer folds and glues the carton blanks in one continuous run."
-    },
-    {
-      "stage": "delivery",
-      "image": "/images/process/offpress/packed-stock.webp",
-      "alt": "Rows of labelled, sealed shipping boxes in the finished-goods store.",
-      "text": "Finished cartons are packed into labelled shipping boxes and held in store, ready for dispatch."
-    },
-    {
-      "stage": "delivery",
-      "image": "/images/process/delivery-pallet.jpg",
-      "alt": "Delivery equipment and production.",
-      "text": "The finished cartons are securely packed and delivered to the client, ready for the filling line."
-    },
-    {
-      "stage": "delivery",
-      "image": "/images/process/offpress/container-loading.webp",
-      "alt": "Worker loading labelled boxes into a shipping container.",
-      "text": "The labelled boxes are loaded into the container for delivery to the client."
-    }
-  ],
-  "prepress_groups": [
-    {
-      "layout": "three",
-      "lead": "From the first idea to the approved artwork.",
-      "detail": "Our designers prepare the carton layout, arranging its panels, text and colours on screen. Printed artwork is then reviewed alongside the samples, so the layout and details can be checked before plate preparation.",
-      "photos": [
+      "id": "prepress",
+      "title": "Pre press",
+      "scenes": [
         {
-          "image": "/images/process/prepress/design.webp",
-          "caption": "Preparing the carton layout",
-          "alt": "Designer preparing carton artwork on a computer."
+          "box": "right",
+          "step": "artwork",
+          "count": 3,
+          "lead": "From the first idea to the approved artwork.",
+          "detail": "Our designers prepare the carton layout, arranging its panels, text and colours on screen. Printed artwork is then reviewed alongside the samples, so every detail is checked before plate preparation.",
+          "photos": [
+            {
+              "image": "/images/process/prepress/design.webp",
+              "caption": "Preparing the carton layout",
+              "alt": "Designer preparing carton artwork on a computer."
+            },
+            {
+              "image": "/images/process/prepress/design-studio.webp",
+              "caption": "Refining the artwork",
+              "alt": "Designer working on packaging artwork at an iMac."
+            },
+            {
+              "image": "/images/process/prepress/printed-proof.webp",
+              "caption": "Checking the printed layout",
+              "alt": "Printed carton layouts being reviewed on a worktable."
+            }
+          ]
         },
         {
-          "image": "/images/process/prepress/design-studio.webp",
-          "caption": "Refining the artwork",
-          "alt": "Designer working on packaging artwork at an iMac."
+          "box": "center",
+          "step": "artwork",
+          "count": 2,
+          "lead": "Artwork becomes a printing plate.",
+          "detail": "The approved artwork is transferred to a blue-coated aluminium plate on our computer-to-plate (CTP) system. The plate then passes through the processor, which cleans away the coating and reveals the image areas.",
+          "photos": [
+            {
+              "image": "/images/process/prepress/blue-plate.webp",
+              "caption": "CTP plate preparation",
+              "alt": "Blue printing plate loaded into CTP equipment."
+            },
+            {
+              "image": "/images/process/prepress/processor.webp",
+              "caption": "Processing and cleaning",
+              "alt": "Printing plate passing through processor rollers."
+            }
+          ]
         },
         {
-          "image": "/images/process/prepress/printed-proof.webp",
-          "caption": "Checking the printed layout",
-          "alt": "Printed carton layouts being reviewed on a worktable."
+          "box": "left",
+          "step": "artwork",
+          "count": 2,
+          "lead": "Checked, stored and ready.",
+          "detail": "Each processed plate is checked for a clear, complete image, then kept in labelled storage so the right plate is ready for the right job.",
+          "photos": [
+            {
+              "image": "/images/process/prepress/ready-plate.webp",
+              "caption": "The prepared plate",
+              "alt": "Processed printing plate with visible image areas."
+            },
+            {
+              "image": "/images/process/prepress/plate-storage.webp",
+              "caption": "Organised plate storage",
+              "alt": "Printing plates stored in labelled glass-fronted cabinets."
+            }
+          ]
+        },
+        {
+          "box": "center",
+          "step": "ready",
+          "count": 3,
+          "lead": "The right sheets, ready for the press.",
+          "detail": "Paperboard is kept in wrapped stacks, then moved to the cutting area on a pallet lifter. The operator aligns the stack at the guillotine and cuts it to the sheet size the job needs. Plates and paperboard are now ready for Press.",
+          "photos": [
+            {
+              "image": "/images/process/prepress/paper-stock.webp",
+              "caption": "Paperboard stock",
+              "alt": "Wrapped paperboard on pallets."
+            },
+            {
+              "image": "/images/process/prepress/paper-lifter.webp",
+              "caption": "Moving the material",
+              "alt": "A pallet lifter carrying paperboard to production."
+            },
+            {
+              "image": "/images/process/prepress/paper-cutting.webp",
+              "caption": "Cutting to sheet size",
+              "alt": "Operator aligning paperboard at a guillotine cutter."
+            }
+          ]
         }
-      ]
+      ],
+      "total": "04"
     },
     {
-      "layout": "four",
-      "lead": "Artwork becomes a print-ready plate.",
-      "detail": "The approved artwork is transferred to a blue-coated plate using the CTP system. The plate passes through processing and cleaning, revealing the image areas. Prepared plates are organised in storage, ready for the correct production job.",
-      "photos": [
+      "id": "press",
+      "title": "Press",
+      "scenes": [
         {
-          "image": "/images/process/prepress/blue-plate.webp",
-          "caption": "CTP plate preparation",
-          "alt": "Blue printing plate loaded into CTP equipment."
+          "box": "right",
+          "step": "print",
+          "count": 2,
+          "lead": "Preparing the press.",
+          "detail": "Before the run, each printing unit is charged with the process and spot colours the job needs. The sheet then travels through the units in sequence, taking on one ink after another.",
+          "photos": [
+            {
+              "image": "/images/process/press/ink-loading.webp",
+              "caption": "Charging the ink units",
+              "alt": "Press operator loading ink tins on top of the printing units."
+            },
+            {
+              "image": "/images/process/press/press-line.webp",
+              "caption": "A multi-colour press line",
+              "alt": "Multi-colour offset press line with a stack of paperboard at the feeder."
+            }
+          ]
         },
         {
-          "image": "/images/process/prepress/processor.webp",
-          "caption": "Processing and cleaning",
-          "alt": "Printing plate passing through processor rollers."
+          "box": "center",
+          "step": "print",
+          "count": 3,
+          "lead": "The run begins.",
+          "detail": "With the cut sheets loaded at the feeder, the run starts. Our Heidelberg Speedmaster CD 102 and SM-74 presses print multi-colour work with consistent registration from sheet to sheet.",
+          "photos": [
+            {
+              "image": "/images/process/press/feeding-sheets.webp",
+              "caption": "Starting the run",
+              "alt": "Operator starting the press beside printed sheets on the delivery table."
+            },
+            {
+              "image": "/images/process/press/speedmaster.webp",
+              "caption": "Heidelberg Speedmaster CD 102",
+              "alt": "Heidelberg Speedmaster CD 102 multi-colour printing press."
+            },
+            {
+              "image": "/images/process/press/sm74-control.webp",
+              "caption": "Offset Machine 3, Heidelberg SM-74",
+              "alt": "Operator at the controls of Offset Machine 3, a Heidelberg SM-74."
+            }
+          ]
         },
         {
-          "image": "/images/process/prepress/ready-plate.webp",
-          "caption": "The prepared plate",
-          "alt": "Processed printing plate with visible image areas."
-        },
-        {
-          "image": "/images/process/prepress/plate-storage.webp",
-          "caption": "Organised plate storage",
-          "alt": "Printing plates stored in labelled glass-fronted cabinets."
+          "box": "left",
+          "step": "print",
+          "count": 3,
+          "lead": "Colour is measured, not guessed.",
+          "detail": "A handheld spectrophotometer reads the printed sheet against the approved colour targets. At the console, the sheet is compared with the approved proof and the ink zones are adjusted until every carton matches.",
+          "photos": [
+            {
+              "image": "/images/process/press/colour-measurement.webp",
+              "caption": "Measuring colour",
+              "alt": "Operator measuring a printed sheet with a handheld spectrophotometer."
+            },
+            {
+              "image": "/images/process/press/sheet-inspection.webp",
+              "caption": "Matching the approved proof",
+              "alt": "Operator comparing a printed sheet with the approved proof at the press console."
+            },
+            {
+              "image": "/images/process/printing-1.jpg",
+              "caption": "On press",
+              "alt": "Offset printing press."
+            }
+          ]
         }
-      ]
+      ],
+      "total": "03"
     },
     {
-      "layout": "three",
-      "lead": "The right sheets, ready for the press.",
-      "detail": "Paperboard is kept in wrapped stacks, then moved to the cutting area using a pallet lifter. The operator aligns the stack at the guillotine and cuts it to the sheet size required for the job. Plates and paperboard are now ready for Press.",
-      "photos": [
+      "id": "offpress",
+      "title": "Offpress",
+      "scenes": [
         {
-          "image": "/images/process/prepress/paper-stock.webp",
-          "caption": "Paperboard stock",
-          "alt": "Wrapped paperboard on pallets."
+          "box": "center",
+          "step": "coating",
+          "count": 3,
+          "lead": "A finish that protects and shines.",
+          "detail": "Printed sheets travel flat through the coating line, where a gloss finish deepens the colours and protects the artwork. Spot finishes add raised, textured detail to selected areas.",
+          "photos": [
+            {
+              "image": "/images/process/offpress/coating-feed.webp",
+              "caption": "Through the coating line",
+              "alt": "Printed sheets running flat through the coating line under guide wheels."
+            },
+            {
+              "image": "/images/process/offpress/gloss-coated-sheet.webp",
+              "caption": "A gloss-coated sheet",
+              "alt": "Gloss-coated sheet of orange Movonac-D cartons with its colour bar."
+            },
+            {
+              "image": "/images/process/offpress/spot-finish.webp",
+              "caption": "Spot finish detail",
+              "alt": "IV SIP carton sheet with a raised, textured spot finish on selected areas."
+            }
+          ]
         },
         {
-          "image": "/images/process/prepress/paper-lifter.webp",
-          "caption": "Moving the material",
-          "alt": "A pallet lifter carrying paperboard to production."
+          "box": "right",
+          "step": "coating",
+          "count": 3,
+          "lead": "Checked from the first sheet to the last.",
+          "detail": "Finished sheets are measured with handheld instruments and checked against the targets approved for the job before they move on to cutting.",
+          "photos": [
+            {
+              "image": "/images/quality/coating-check-1.png",
+              "caption": "Checking the finish",
+              "alt": "Operator checking a coated sheet."
+            },
+            {
+              "image": "/images/process/offpress/finish-measure.webp",
+              "caption": "Measuring the sheet",
+              "alt": "Operator measuring a finished sheet beside Offset Machine 8."
+            },
+            {
+              "image": "/images/process/offpress/finish-check.webp",
+              "caption": "Checking the stack",
+              "alt": "Operator checking the top sheet of a finished stack."
+            }
+          ]
         },
         {
-          "image": "/images/process/prepress/paper-cutting.webp",
-          "caption": "Cutting to sheet size",
-          "alt": "Operator aligning paperboard at a guillotine cutter."
+          "box": "center",
+          "step": "cutting",
+          "count": 3,
+          "lead": "Cut and creased to shape.",
+          "detail": "Every carton design has its own cutting die, kept in labelled racks. Our automatic die-cutters, including a YH-1060 and an SP 102-E, cut and crease full sheets at production speed.",
+          "photos": [
+            {
+              "image": "/images/process/offpress/die-storage.webp",
+              "caption": "Cutting dies in storage",
+              "alt": "Rows of Supreme Art cutting dies stored upright in racks."
+            },
+            {
+              "image": "/images/process/offpress/die-cutters.webp",
+              "caption": "Automatic die-cutters",
+              "alt": "Automatic die-cutters, a YH-1060 and an SP 102-E, on the factory floor."
+            },
+            {
+              "image": "/images/process/die-cutting-1.jpg",
+              "caption": "Setting up the die-cutter",
+              "alt": "Operator at the controls of the SP 102-E die-cutter."
+            }
+          ]
+        },
+        {
+          "box": "left",
+          "step": "sorting",
+          "count": 3,
+          "lead": "Separated and checked.",
+          "detail": "Some jobs run on a platen die-cutter. Waste board is then removed from around the cut cartons, and every unit carton is inspected before it moves on to folding.",
+          "photos": [
+            {
+              "image": "/images/process/offpress/platen-die-cutting.webp",
+              "caption": "Platen die-cutting",
+              "alt": "Two operators lifting a cut sheet from a platen die-cutter as punched pieces fall clear."
+            },
+            {
+              "image": "/images/process/breaking-1.jpg",
+              "caption": "Removing waste board",
+              "alt": "Operator removing waste board from a stack of die-cut sheets."
+            },
+            {
+              "image": "/images/process/sorting-1.jpg",
+              "caption": "Inspecting unit cartons",
+              "alt": "Operator inspecting unit cartons by hand."
+            }
+          ]
+        },
+        {
+          "box": "center",
+          "step": "pasting",
+          "count": 2,
+          "lead": "Folded and glued.",
+          "detail": "On our folder-gluers, including a Bobst Expert 105 A, the carton blanks are folded, glued and joined in one continuous run.",
+          "photos": [
+            {
+              "image": "/images/process/pasting-1.jpg",
+              "caption": "Folder gluing",
+              "alt": "Operators running cartons through a folder-gluer."
+            },
+            {
+              "image": "/images/process/offpress/folder-gluer-bobst.webp",
+              "caption": "Bobst Expert 105 A",
+              "alt": "Bobst Expert 105 A folder-gluer running printed cartons."
+            }
+          ]
+        },
+        {
+          "box": "right",
+          "step": "delivery",
+          "count": 3,
+          "lead": "Packed and on its way.",
+          "detail": "Finished cartons are packed into labelled shipping boxes, held in store and loaded for delivery to the client, ready for the filling line.",
+          "photos": [
+            {
+              "image": "/images/process/offpress/packed-stock.webp",
+              "caption": "Ready for dispatch",
+              "alt": "Rows of labelled, sealed shipping boxes in the finished-goods store."
+            },
+            {
+              "image": "/images/process/delivery-pallet.jpg",
+              "caption": "Palletised for delivery",
+              "alt": "Packed cartons stacked on a pallet at the loading bay."
+            },
+            {
+              "image": "/images/process/offpress/container-loading.webp",
+              "caption": "Loading for delivery",
+              "alt": "Worker loading labelled boxes into a shipping container."
+            }
+          ]
         }
-      ]
+      ],
+      "total": "06"
     }
   ]
 }

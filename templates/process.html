@@ -28,43 +28,15 @@
           <p class="assembly-hint">Scroll to build the carton</p>
         </div>
       </aside>
-    <section class="process-section prepress-grouped" id="prepress" aria-labelledby="prepress-title">
-      <div class="container">
-        <div class="prepress-panels">
-          {{#each page.prepress_groups}}<article class="prepress-panel" aria-label="Pre press, {{ @n }} of 3">
-            <div class="prepress-panel-heading">{{#if @index}}<p class="prepress-section-name">Pre press</p>{{else}}<h2 id="prepress-title">Pre press</h2>{{/if}}<span>{{ @num }} / 03</span></div>
-            <div class="prepress-panel-body">
-              <div class="prepress-collage prepress-collage--{{ layout }}">
-                {{#each photos}}<figure><div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/each}}
-              </div>
-              <div class="process-photo-copy"><p class="process-photo-lead">{{ lead }}</p><p>{{ detail }}</p></div>
-            </div>
-          </article>{{/each}}
+    {{#each page.chapters}}<section class="process-chapter" id="{{ id }}" aria-labelledby="{{ id }}-title">
+      {{#each scenes}}<article class="process-scene process-scene--{{ box }} process-scene--photos-{{ count }}" data-box="{{ box }}" data-step="{{ step }}">
+        <div class="scene-head">{{#if @index}}<p class="scene-chapter">{{ title }}</p>{{else}}<h2 class="scene-chapter" id="{{ id }}-title">{{ title }}</h2>{{/if}}<span class="scene-count">{{ @num }} / {{ total }}</span></div>
+        <div class="scene-photos">
+          {{#each photos}}<figure><div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/each}}
         </div>
-      </div>
-    </section>
-    <section class="section process-section" id="press" aria-labelledby="press-title">
-      <div class="container">
-        <h2 id="press-title">Press</h2>
-        <div class="process-photo-list">
-          {{#each page.press}}<article class="process-photo-row">
-            <div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div>
-            <div class="process-photo-copy"><p>{{ text }}</p></div>
-          </article>{{/each}}
-        </div>
-      </div>
-    </section>
-    <section class="section process-section" id="offpress" aria-labelledby="offpress-title">
-      <div class="container">
-        <h2 id="offpress-title">Offpress</h2>
-        <div class="process-photo-list">
-          {{#each page.offpress}}<article class="process-photo-row" data-stage="{{ stage }}">
-            <div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div>
-            <div class="process-photo-copy"><p>{{ text }}</p></div>
-          </article>{{/each}}
-        </div>
-      </div>
-    </section>
+        <div class="scene-copy"><p class="scene-lead">{{ lead }}</p><p>{{ detail }}</p></div>
+      </article>{{/each}}
+    </section>{{/each}}
     </div>
 {{> cta}}
   </main>
