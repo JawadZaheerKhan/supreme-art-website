@@ -200,7 +200,7 @@
         {
           "layout": "ink",
           "box": "right",
-          "step": "print",
+          "step": "sheet",
           "count": 2,
           "lead": "Preparing the press.",
           "detail": "Before the run, each printing unit is charged with the process and spot colours the job needs. The sheet then travels through the units in sequence, taking on one ink after another.",
@@ -220,7 +220,7 @@
         {
           "layout": "run",
           "box": "center",
-          "step": "print",
+          "step": "colour",
           "count": 3,
           "lead": "The run begins.",
           "detail": "With the cut sheets loaded at the feeder, the run starts. Our Heidelberg Speedmaster CD 102 and SM-74 presses print multi-colour work with consistent registration from sheet to sheet.",
@@ -245,7 +245,7 @@
         {
           "layout": "triptych",
           "box": "left",
-          "step": "print",
+          "step": "measure",
           "count": 3,
           "lead": "Colour is measured, not guessed.",
           "detail": "A handheld spectrophotometer reads the printed sheet against the approved colour targets. At the console, the sheet is compared with the approved proof and the ink zones are adjusted until every carton matches.",
