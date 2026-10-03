@@ -24,7 +24,15 @@
 .assembly-stage .panel--bottom { height: 85px; background: color-mix(in srgb, #d99498 var(--red-pct), #bccddb); }
 .assembly-stage .art__band, .assembly-stage .art--side { background: var(--box-accent); }
 /* The blue CTP plate coating covers the whole carton, then clears to reveal the image. */
-.assembly-stage .panel::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(135deg, #3461e3 0%, #2149c4 55%, #1a3a9e 100%); opacity: var(--plate, 0); }
+/* One layer over every panel carries, top to bottom: the UV gloss streaks (--uv), the raised spot-UV dots (--spot)
+   and the blue plate coating (--plate). --uv and --spot stay on once the sheet is finished, so the carton keeps them. */
+.assembly-stage .panel::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    linear-gradient(115deg, rgba(255,255,255,0) 15%, rgba(255,255,255,calc(.55 * var(--uv, 0))) 32%, rgba(255,255,255,0) 46%, rgba(255,255,255,calc(.25 * var(--uv, 0))) 66%, rgba(255,255,255,0) 80%),
+    radial-gradient(circle at 42% 42%, rgba(255,255,255,calc(.45 * var(--spot, 0))) 0 1.3px, transparent 1.8px),
+    radial-gradient(circle at 58% 58%, rgba(0,0,0,calc(.07 * var(--spot, 0))) 0 1.3px, transparent 1.8px),
+    linear-gradient(135deg, rgba(52,97,227,var(--plate, 0)) 0%, rgba(33,73,196,var(--plate, 0)) 55%, rgba(26,58,158,var(--plate, 0)) 100%);
+  background-size: 100% 100%, 8px 8px, 8px 8px, 100% 100%; }
 /* The print-head sweep runs while the red colour prints. */
 .assembly-stage .panel--front::after { top: calc(var(--red, 0) * 100%); opacity: calc(4 * var(--red, 0) * (1 - var(--red, 0))); z-index: 3; }
 .assembly-stage .proc-box__cut { top: 25px; }
