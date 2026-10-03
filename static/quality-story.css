@@ -61,3 +61,9 @@
   .home-about-window h2 { font-size: 1.9rem; max-width: none; }
   .home-about-window .about-points { display: none; }
 }
+
+/* Home: the Process page's scenes as windows, with a quiet chapter marker between Pre press, Press and Offpress. */
+.home-process-windows__chapter { display: flex; align-items: baseline; gap: 18px; padding-top: clamp(48px,7vw,96px); padding-bottom: clamp(20px,3vw,36px); border-top: 1px solid var(--line, #e7e1d6); }
+.home-process-windows__chapter span { color: var(--wood, #a67c52); font-family: var(--display); font-size: clamp(1rem,1.4vw,1.25rem); letter-spacing: .12em; }
+.home-process-windows__chapter h3 { color: var(--text); font-family: var(--display); font-size: clamp(2.4rem,5vw,4.4rem); line-height: 1; margin: 0; }
+.home-process-windows__all { margin: 0; padding-top: clamp(40px,6vw,80px); padding-bottom: clamp(64px,8vw,112px); text-align: center; }

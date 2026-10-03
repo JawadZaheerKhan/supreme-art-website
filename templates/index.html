@@ -60,28 +60,28 @@
       </div>
     </div>
 
-    <!-- PROCESS HORIZONTAL STAGES -->
-    <section class="home-process-story" data-home-process aria-label="Our production process">
-      <div class="home-process-story__sticky">
-        <div class="home-process-story__scenes">
-          {{#each content.process.steps}}<article class="home-process-scene" data-process-card="{{ @index }}">
-            <img src="{{ image }}" alt="{{ title }} at Supreme Art" loading="lazy" />
-
-            <div class="container home-process-scene__copy">
-              <span class="home-process-scene__num">{{ num }}</span>
-              <p class="eyebrow">Inside the factory</p>
-              <h2>{{ title }}</h2>
-              <p>{{ text }}</p>
-            </div>
-          </article>{{/each}}
+    <!-- PROCESS: the Process page's chapters and scenes, shown as Quality-Control style windows -->
+    <section class="qc-story home-process-windows" aria-labelledby="home-process-title">
+      <div class="qc-intro">
+        <div class="container">
+          <p class="eyebrow">{{ page.process.eyebrow }}</p>
+          <h2 id="home-process-title">{{ page.process.heading }}</h2>
+          <p class="qc-intro__text">{{ page.process.lead }}</p>
         </div>
-        <div class="home-process-story__chrome container">
-          <span class="home-process-story__count"><b>01</b> / {{ content.process.steps.length }}</span>
-          <a class="home-process-story__all" href="{{ page.process.button_href }}">{{ page.process.button_label }} &rarr;</a>
-        </div>
-        <div class="home-process-story__progress" aria-hidden="true"><span></span></div>
       </div>
+      {{#each content.process.chapters}}<div class="home-process-windows__chapter container"><span>{{ @num }}</span><h3>{{ title }}</h3></div>
+      {{#each scenes}}<article class="qc-window" aria-label="{{ lead }}">
+        {{#if hero}}<div class="qc-window__media" style="--qc-photo: url('{{ hero.image }}')"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /></div>{{else}}<div class="qc-window__media" style="--qc-photo: url('{{ row.0.image }}')"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /></div>{{/if}}
+        <div class="qc-window__band container">
+          <h3>{{ lead }}</h3>
+          <p>{{ detail }}</p>
+        </div>
+      </article>
+      {{#if hero}}<div class="qc-details"><div class="container qc-details__grid">{{#with row.0}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}{{#with row.1}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}</div></div>{{else}}{{#if row.1}}<div class="qc-details"><div class="container qc-details__grid">{{#with row.1}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}{{#with row.2}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}</div></div>{{/if}}{{/if}}
+      {{/each}}{{/each}}
+      <p class="home-process-windows__all container"><a class="btn btn--accent" href="{{ page.process.button_href }}">{{ page.process.button_label }}</a></p>
     </section>
+
     <!-- QUALITY HORIZONTAL STAGES -->
     <section class="home-quality-story" data-home-quality aria-label="Quality assurance">
       <div class="home-quality-story__sticky">
