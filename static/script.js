@@ -236,8 +236,12 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const dots = [...story.querySelectorAll('.home-story__progress span')];
   const header = document.querySelector('.site-header');
   const sticky = story.querySelector('.home-story__sticky');
+  const facade = story.querySelector('.home-story__facade');
   const building = story.querySelector('.home-story__building');
   const sign = story.querySelector('.home-story__sign');
+  const signCut = sign.querySelector('.home-story__sign-cut');
+  const signCrisp = sign.querySelector('.home-story__sign-crisp');
+  const wall = story.querySelector('.home-story__wall');
   const hall = story.querySelector('.home-story__shot--hall');
   const press = story.querySelector('.home-story__shot--press');
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -262,45 +266,48 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     const s = Math.max(W / nw, H / nh), dw = nw * s, dh = nh * s;
     const ox = (W - dw) * WINDOW.x, oy = (H - dh) * WINDOW.y;
     const left = ox + SIGN.x * dw, top = oy + SIGN.y * dh, width = SIGN.w * dw;
-    sign.style.left = left + 'px';
-    sign.style.top = top + 'px';
-    sign.style.width = width + 'px';
+    [sign, wall].forEach(el => { el.style.left = left + 'px'; el.style.top = top + 'px'; el.style.width = width + 'px'; });
+    sign.style.setProperty('--sign-w', width + 'px');
     // Where the lifted signage settles: centred, a little above the middle of the frame, as wide as the frame allows.
-    const height = width * (sign.naturalHeight || 490) / (sign.naturalWidth || 900);
+    const height = width * 245 / 450;
     const scale = Math.min(W * .86, H * .5 * width / height, width * 2.6) / width;
     signRest = { dx: W / 2 - (left + width / 2), dy: H * .44 - (top + height / 2), scale };
   }
 
-  // Scroll timeline: hold on the building; the signage lifts off the wall (.1–.36) and settles in front of
-  // it; the camera dives through the window under the signage (.42–.66) into the press hall; then it
-  // glides from the front of the hall round to the Speedmaster's side (.74–.96) and holds.
+  // Scroll timeline: hold on the building; the signage lifts off the wall (.06–.3) and settles in front of
+  // it; the camera dives through the window under the signage (.34–.6) into the press hall; then it
+  // glides from the front of the hall round to the Speedmaster's side (.68–.92) and holds.
   // Only transform and opacity change, so the browser never re-rasterises the enlarged photos.
   function paint(p) {
     if (!signRest) placeSign();
-    const lift = ease(span(p, .1, .36));
-    const zoom = span(p, .42, .66);
+    const lift = ease(span(p, .06, .3));
+    const zoom = span(p, .34, .6);
     const past = ease(span(zoom, 0, .4));
     const k = (1 + (signRest.scale - 1) * lift) * (1 + .8 * past);
     sign.style.transform = `translate(${signRest.dx * lift}px, ${signRest.dy * lift}px) scale(${k})`;
     sign.style.opacity = String(1 - past);
+    // The wall shows through as the sign leaves it, and the photo cut-out hands over to the crisp replica on the way out.
+    wall.style.opacity = String(span(lift, 0, .3));
+    signCut.style.opacity = String(1 - span(lift, .12, .5));
+    signCrisp.style.opacity = String(span(lift, .12, .5));
     sign.style.filter = `drop-shadow(0 ${4 + 26 * lift}px ${6 + 30 * lift}px rgba(0,0,0,${.18 + .3 * lift}))`;
 
-    building.style.transform = `scale(${Math.pow(8, ease(zoom))})`;
-    building.style.opacity = String(1 - span(zoom, .72, .98));
+    facade.style.transform = `scale(${Math.pow(8, ease(zoom))})`;
+    facade.style.opacity = String(1 - span(zoom, .72, .98));
 
     const settle = ease(span(zoom, .6, 1));
-    const glide = ease(span(p, .74, .96));
+    const glide = ease(span(p, .68, .92));
     const swap = span(glide, .28, .72);
     hall.style.transform = `translateX(${-16 * glide}%) rotateY(${16 * glide}deg) scale(${1.08 + .22 * (1 - settle) + .3 * glide})`;
     hall.style.opacity = String(1 - swap);
     press.style.transform = `translateX(${16 * (1 - glide)}%) rotateY(${-16 * (1 - glide)}deg) scale(${1.02 + .34 * (1 - glide)})`;
     press.style.opacity = String(swap);
 
-    showStage(p < .5 ? 0 : p < .85 ? 1 : 2);
+    showStage(p < .45 ? 0 : p < .8 ? 1 : 2);
   }
 
   function frame() {
-    current += (target - current) * .2;
+    current += (target - current) * .3;
     if (Math.abs(target - current) < .0005) current = target;
     paint(current);
     ticking = current !== target;
@@ -333,7 +340,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   updateStory();
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', () => { signRest = null; requestUpdate(); });
-  [building, sign].forEach(img => { if (!img.complete) img.addEventListener('load', () => { signRest = null; requestUpdate(); }); });
+  [building, signCut].forEach(img => { if (!img.complete) img.addEventListener('load', () => { signRest = null; requestUpdate(); }); });
 
 })();
 

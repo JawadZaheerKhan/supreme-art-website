@@ -1663,7 +1663,7 @@ a { color: inherit; }
 .home-page .site-header .nav-toggle span { background: #fff; }
 .home-page .site-header:not(.is-over-hero) .nav-toggle span { background: var(--text); }
 .home-page main { margin-top: 0; }
-.home-story { position: relative; height: 560svh; background: #efebe4; }
+.home-story { position: relative; height: 380svh; background: #efebe4; }
 .home-story__sticky { position: sticky; top: 0; height: 100svh; min-height: 540px; overflow: hidden; color: #fff; }
 /* Fly-through: the building zooms into its entrance door, revealing the press hall; the camera then glides from
    the front of the hall round to the Speedmaster's side. script.js drives transform and opacity only, from scroll. */
@@ -1671,9 +1671,18 @@ a { color: inherit; }
 .home-story__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; will-change: transform, opacity; backface-visibility: hidden; }
 .home-story__shot--press { opacity: 0; }
 /* object-position and transform-origin share the window under the signage, so it stays on screen at any viewport shape (script.js SIGN/WINDOW). */
-.home-story__media img.home-story__building { z-index: 1; object-position: 60.3% 43.7%; transform-origin: 60.3% 43.7%; }
-/* The signage layer sits exactly over the signage in the photo (script.js places it); it lifts out as you scroll. */
-.home-story__media img.home-story__sign { position: absolute; inset: auto; width: auto; height: auto; object-fit: unset; z-index: 2; transform-origin: 50% 50%; will-change: transform, opacity; filter: none; }
+.home-story__facade { position: absolute; inset: 0; z-index: 1; transform-origin: 60.3% 43.7%; will-change: transform, opacity; }
+.home-story__media img.home-story__building { object-position: 60.3% 43.7%; }
+/* The signage box sits exactly over the signage in the photo (script.js places it and sets --sign-w); it lifts out as you
+   scroll. Inside, the photo cut-out fades into a crisp replica: the logo mark and live text in the hero font. */
+.home-story__media img.home-story__wall { position: absolute; inset: auto; width: auto; height: auto; object-fit: fill; opacity: 0; }
+.home-story__sign { position: absolute; z-index: 2; aspect-ratio: 450 / 245; transform-origin: 50% 50%; will-change: transform, opacity; }
+.home-story__media .home-story__sign img { position: absolute; width: auto; height: auto; object-fit: contain; filter: none; }
+.home-story__sign-cut { inset: 0; width: 100% !important; height: 100% !important; }
+.home-story__sign-crisp { position: absolute; inset: 0; opacity: 0; color: #1b1b1b; font-family: "Michroma", "Eurostile Extended", sans-serif; text-transform: uppercase; white-space: nowrap; text-align: center; }
+.home-story__media .home-story__sign-crisp img { left: 5%; top: 0; width: 70%; height: 56%; }
+.home-story__sign-name { position: absolute; left: 0; right: 0; top: 57%; font-size: calc(var(--sign-w, 450px) * .098); line-height: 1; letter-spacing: .02em; color: #c0262f; font-weight: 700; }
+.home-story__sign-sub { position: absolute; left: 0; right: 0; top: 79%; font-size: calc(var(--sign-w, 450px) * .064); line-height: 1; letter-spacing: .02em; }
 .home-story__shade { position: absolute; z-index: 2; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0,.48), rgba(0, 0, 0,.12) 38%, rgba(0, 0, 0,.48)), linear-gradient(90deg, rgba(0, 0, 0,.44), transparent 55%, rgba(0, 0, 0,.12)); }
 .home-story__scenes { position: absolute; inset: 0; }
 .home-story__scene {

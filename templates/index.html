@@ -19,9 +19,17 @@
           <img class="home-story__shot home-story__shot--hall" src="/images/home/hero-press-hall.webp" alt="" />
           <img class="home-story__shot home-story__shot--press" src="/images/home/hero-speedmaster.webp" alt="" />
           <!-- The building sits on top; scrolling flies through its entrance door. -->
-          <img class="home-story__building" src="/images/home/hero-building.webp" alt="" fetchpriority="high" />
-          <!-- The signage cut from the same photo, pinned over its spot on the wall; scrolling lifts it out toward you. -->
-          <img class="home-story__sign" src="/images/home/hero-sign.png" alt="" fetchpriority="high" />
+          <!-- The facade takes the dive-through zoom as one piece: the photo, plus the plain wall that shows once the signage has left it. -->
+          <div class="home-story__facade">
+            <img class="home-story__building" src="/images/home/hero-building.webp" alt="" fetchpriority="high" />
+            <img class="home-story__wall" src="/images/home/hero-wall.png" alt="" />
+          </div>
+          <!-- The signage, pinned over its spot on the wall: the cut-out from the photo, which hands over to a crisp
+               replica (logo mark + live text) as it lifts out toward you. -->
+          <div class="home-story__sign" aria-hidden="true">
+            <img class="home-story__sign-cut" src="/images/home/hero-sign.png" alt="" fetchpriority="high" />
+            <div class="home-story__sign-crisp"><img src="/images/home/hero-logo-mark.png" alt="" /><span class="home-story__sign-name">Supreme Art</span><span class="home-story__sign-sub">(Private) Limited</span></div>
+          </div>
           <span class="home-story__shade"></span>
         </div>
         <div class="home-story__scenes" aria-live="polite">
