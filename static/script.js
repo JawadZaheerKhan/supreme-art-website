@@ -257,8 +257,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   // Where things are in the building photo, as fractions of it: the box the signage layer (hero-sign.png) was
   // cut from, and the window under it that the camera dives through. The photo is drawn to cover the frame,
   // anchored on the window (object-position in styles.css), so these map to the screen the same way at any size.
-  const SIGN = { x: 755 / 1600, y: 85 / 900, w: 450 / 1600 };
-  const WINDOW = { x: .603, y: .437 };
+  const SIGN = { x: 752 / 1600, y: 100 / 900, w: 480 / 1600 };
+  const WINDOW = { x: .6, y: .437 };
   let signRest = null;
   function placeSign() {
     const W = sticky.clientWidth, H = sticky.clientHeight;
@@ -269,19 +269,19 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     [sign, wall].forEach(el => { el.style.left = left + 'px'; el.style.top = top + 'px'; el.style.width = width + 'px'; });
     sign.style.setProperty('--sign-w', width + 'px');
     // Where the lifted signage settles: centred, a little above the middle of the frame, as wide as the frame allows.
-    const height = width * 245 / 450;
+    const height = width * 246 / 480;
     const scale = Math.min(W * .86, H * .5 * width / height, width * 2.6) / width;
     signRest = { dx: W / 2 - (left + width / 2), dy: H * .44 - (top + height / 2), scale };
   }
 
   // Scroll timeline: hold on the building; the signage lifts off the wall (.06–.3) and settles in front of
-  // it; the camera dives through the window under the signage (.34–.6) into the press hall; then it
-  // glides from the front of the hall round to the Speedmaster's side (.68–.92) and holds.
+  // it; the camera dives through the window under the signage (.3–.56) straight into the press hall; then it
+  // glides from the front of the hall round to the Speedmaster's side (.6–.9) and holds. Nothing waits.
   // Only transform and opacity change, so the browser never re-rasterises the enlarged photos.
   function paint(p) {
     if (!signRest) placeSign();
     const lift = ease(span(p, .06, .3));
-    const zoom = span(p, .34, .6);
+    const zoom = span(p, .3, .56);
     const past = ease(span(zoom, 0, .4));
     const k = (1 + (signRest.scale - 1) * lift) * (1 + .8 * past);
     sign.style.transform = `translate(${signRest.dx * lift}px, ${signRest.dy * lift}px) scale(${k})`;
@@ -290,20 +290,19 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     wall.style.opacity = String(span(lift, 0, .3));
     signCut.style.opacity = String(1 - span(lift, .12, .5));
     signCrisp.style.opacity = String(span(lift, .12, .5));
-    sign.style.filter = `drop-shadow(0 ${4 + 26 * lift}px ${6 + 30 * lift}px rgba(0,0,0,${.18 + .3 * lift}))`;
 
     facade.style.transform = `scale(${Math.pow(8, ease(zoom))})`;
     facade.style.opacity = String(1 - span(zoom, .72, .98));
 
-    const settle = ease(span(zoom, .6, 1));
-    const glide = ease(span(p, .68, .92));
+    const settle = ease(span(zoom, .5, 1));
+    const glide = ease(span(p, .6, .9));
     const swap = span(glide, .28, .72);
     hall.style.transform = `translateX(${-16 * glide}%) rotateY(${16 * glide}deg) scale(${1.08 + .22 * (1 - settle) + .3 * glide})`;
     hall.style.opacity = String(1 - swap);
     press.style.transform = `translateX(${16 * (1 - glide)}%) rotateY(${-16 * (1 - glide)}deg) scale(${1.02 + .34 * (1 - glide)})`;
     press.style.opacity = String(swap);
 
-    showStage(p < .45 ? 0 : p < .8 ? 1 : 2);
+    showStage(p < .5 ? 0 : p < .76 ? 1 : 2);
   }
 
   function frame() {

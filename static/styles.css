@@ -1671,18 +1671,19 @@ a { color: inherit; }
 .home-story__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; will-change: transform, opacity; backface-visibility: hidden; }
 .home-story__shot--press { opacity: 0; }
 /* object-position and transform-origin share the window under the signage, so it stays on screen at any viewport shape (script.js SIGN/WINDOW). */
-.home-story__facade { position: absolute; inset: 0; z-index: 1; transform-origin: 60.3% 43.7%; will-change: transform, opacity; }
-.home-story__media img.home-story__building { object-position: 60.3% 43.7%; }
+.home-story__facade { position: absolute; inset: 0; z-index: 1; transform-origin: 60% 43.7%; will-change: transform, opacity; }
+.home-story__media img.home-story__building { object-position: 60% 43.7%; }
 /* The signage box sits exactly over the signage in the photo (script.js places it and sets --sign-w); it lifts out as you
    scroll. Inside, the photo cut-out fades into a crisp replica: the logo mark and live text in the hero font. */
 .home-story__media img.home-story__wall { position: absolute; inset: auto; width: auto; height: auto; object-fit: fill; opacity: 0; }
-.home-story__sign { position: absolute; z-index: 2; aspect-ratio: 450 / 245; transform-origin: 50% 50%; will-change: transform, opacity; }
+.home-story__sign { position: absolute; z-index: 2; aspect-ratio: 480 / 246; transform-origin: 50% 50%; will-change: transform, opacity; }
 .home-story__media .home-story__sign img { position: absolute; width: auto; height: auto; object-fit: contain; filter: none; }
 .home-story__sign-cut { inset: 0; width: 100% !important; height: 100% !important; }
-.home-story__sign-crisp { position: absolute; inset: 0; opacity: 0; color: #1b1b1b; font-family: "Michroma", "Eurostile Extended", sans-serif; text-transform: uppercase; white-space: nowrap; text-align: center; }
-.home-story__media .home-story__sign-crisp img { left: 5%; top: 0; width: 70%; height: 56%; }
-.home-story__sign-name { position: absolute; left: 0; right: 0; top: 57%; font-size: calc(var(--sign-w, 450px) * .098); line-height: 1; letter-spacing: .02em; color: #c0262f; font-weight: 700; }
-.home-story__sign-sub { position: absolute; left: 0; right: 0; top: 79%; font-size: calc(var(--sign-w, 450px) * .064); line-height: 1; letter-spacing: .02em; }
+.home-story__sign-crisp { position: absolute; inset: 0; opacity: 0; filter: drop-shadow(0 14px 18px rgba(0,0,0,.35)); color: #1b1b1b; font-family: "Michroma", "Eurostile Extended", sans-serif; text-transform: uppercase; white-space: nowrap; text-align: center; }
+.home-story__media .home-story__sign-crisp img { left: 11.5%; top: 8%; width: 71.5%; height: 54%; }
+/* Sized from the wall: the name spans 90% of the box, the sub-line 75%; the sign's letters stand taller than Michroma's, hence the stretch. */
+.home-story__sign-name { position: absolute; left: 0; right: 0; top: 58.6%; font-size: calc(var(--sign-w, 480px) * .084); line-height: 1; letter-spacing: .02em; color: #c0262f; font-weight: 700; transform: scaleY(1.28); transform-origin: 50% 0; }
+.home-story__sign-sub { position: absolute; left: 0; right: 0; top: 80.5%; font-size: calc(var(--sign-w, 480px) * .059); line-height: 1; letter-spacing: 0; transform: scaleY(1.28); transform-origin: 50% 0; }
 .home-story__shade { position: absolute; z-index: 2; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0,.48), rgba(0, 0, 0,.12) 38%, rgba(0, 0, 0,.48)), linear-gradient(90deg, rgba(0, 0, 0,.44), transparent 55%, rgba(0, 0, 0,.12)); }
 .home-story__scenes { position: absolute; inset: 0; }
 .home-story__scene {
