@@ -3,6 +3,7 @@
 <head>
 {{> head}}
   <link rel="stylesheet" href="/quality-story.css" />
+  <link rel="stylesheet" href="/process-simple.css" />
 </head>
 <body class="home-page">
 {{> gtm-body}}
@@ -69,8 +70,18 @@
           <p class="qc-intro__text">{{ page.process.lead }}</p>
         </div>
       </div>
+      <div class="home-assembly">
+      <!-- The Process page's carton builds in the centre lane as the windows scroll past. -->
+      <aside class="assembly-rail" aria-label="Carton assembly progress">
+        <div class="assembly-sticky">
+          <p class="assembly-eyebrow">YOUR CARTON TAKES SHAPE</p>
+          <div class="assembly-stage proc-box" aria-hidden="true">{{> carton-scene}}</div>
+          <p class="assembly-state">A flat sheet of board</p>
+          <div class="assembly-meter" aria-hidden="true"><span></span></div>
+        </div>
+      </aside>
       {{#each content.process.chapters}}<div class="home-process-windows__chapter container"><span>{{ @num }}</span><h3>{{ title }}</h3></div>
-      {{#each scenes}}<article class="qc-window" aria-label="{{ lead }}">
+      {{#each scenes}}<article class="qc-window" aria-label="{{ lead }}" data-box="{{ box }}" data-step="{{ step }}">
         {{#if hero}}<div class="qc-window__media" style="--qc-photo: url('{{ hero.image }}')"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /></div>{{else}}<div class="qc-window__media" style="--qc-photo: url('{{ row.0.image }}')"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /></div>{{/if}}
         <div class="qc-window__band container">
           <h3>{{ lead }}</h3>
@@ -79,6 +90,7 @@
       </article>
       {{#if hero}}<div class="qc-details"><div class="container qc-details__grid">{{#with row.0}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}{{#with row.1}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}</div></div>{{else}}{{#if row.1}}<div class="qc-details"><div class="container qc-details__grid">{{#with row.1}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}{{#with row.2}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}</div></div>{{/if}}{{/if}}
       {{/each}}{{/each}}
+      </div>
       <p class="home-process-windows__all container"><a class="btn btn--accent" href="{{ page.process.button_href }}">{{ page.process.button_label }}</a></p>
     </section>
 
@@ -153,6 +165,7 @@
 {{> footer}}
 
   <script src="/script.js"></script>
+  <script src="/process-simple.js"></script>
   <script src="/services-motion.js"></script>
 </body>
 </html>
