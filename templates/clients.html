@@ -18,7 +18,7 @@
         <!-- One client per row: its logo floating beside the same turning carton that the Services page shows for it. -->
         <ul class="clients-page__list">
           {{#each page.items}}<li class="client-pair">
-            <div class="client-pair__logo"><img src="{{ logo }}" alt="{{ client }}" loading="lazy" decoding="async" /><span>{{ client }}</span></div>
+            <div class="client-pair__logo"><img src="{{ logo }}" alt="{{ client }}" loading="lazy" decoding="async" /></div>
             <div class="client-pair__box">
               {{> product-box}}
               <p class="client-pair__caption"><strong>{{ product }}</strong><span>{{ note }}</span></p>
