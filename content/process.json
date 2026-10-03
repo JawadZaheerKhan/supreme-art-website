@@ -128,7 +128,7 @@
         {
           "layout": "plate",
           "box": "center",
-          "step": "artwork",
+          "step": "plate",
           "count": 2,
           "lead": "Artwork becomes a printing plate.",
           "detail": "The approved artwork is transferred to a blue-coated aluminium plate on our computer-to-plate (CTP) system. The plate then passes through the processor, which cleans away the coating and reveals the image areas.",
@@ -148,7 +148,7 @@
         {
           "layout": "storage",
           "box": "left",
-          "step": "artwork",
+          "step": "clean",
           "count": 2,
           "lead": "Checked, stored and ready.",
           "detail": "Each processed plate is checked for a clear, complete image, then kept in labelled storage so the right plate is ready for the right job.",
