@@ -41,6 +41,13 @@
         "caption_2": "Weighing a board sample on a precision scale"
       },
       {
+        "title": "Safe material handling",
+        "text": "Paperboard and printed sheets are moved on hand pallet lifters, so every stack travels supported, square and undamaged, and our team never has to lift heavy loads by hand.",
+        "image": "/images/quality/pallet-lifter-board.webp",
+        "image_2": "/images/quality/pallet-lifter-diecut.webp",
+        "caption_2": "Die-cut sheets moved safely on a pallet lifter"
+      },
+      {
         "title": "Shade card approval",
         "text": "A reference shade card is prepared for every product and approved before the final printing run is released.",
         "image": "/images/quality/shade-card-1.jpg",
@@ -48,6 +55,13 @@
         "caption_2": "Reviewing the shade card with the print team",
         "image_3": "/images/quality/shade-card-3.jpg",
         "caption_3": "Recording the approved reference in the shade card file"
+      },
+      {
+        "title": "In-house CTP plate making",
+        "text": "Our own advanced computer-to-plate (CTP) system images the approved artwork directly onto the printing plate. Keeping plate making in-house gives sharp, accurate plates and consistent print quality from the first sheet to the last.",
+        "image": "/images/quality/ctp-plate-loading.webp",
+        "image_2": "/images/quality/ctp-plate-processor.webp",
+        "caption_2": "Each plate is processed and cleaned before it goes to press"
       },
       {
         "title": "Printing quality control",
