@@ -79,3 +79,9 @@
   .home-chapter { padding: 88px 0 72px; }
   .home-chapter__trail { font-size: .82rem; }
 }
+
+/* Home: every chapter after the hero pins once it has been read, and the next slides up over it — the same
+   page turn as the process and quality windows. script.js sets --stack-top (0, or the viewport height minus
+   the chapter's own height for tall chapters, so the whole chapter is read before it pins) and --stack-z. */
+.home-page main > .home-stack { position: sticky; top: var(--stack-top, 0px); z-index: var(--stack-z, 1); }
+.home-page main > .home-stack:not(.qc-window) { background: var(--paper, #faf8f4); }
