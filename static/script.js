@@ -235,10 +235,9 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const scenes = [...story.querySelectorAll('[data-home-stage]')];
   const dots = [...story.querySelectorAll('.home-story__progress span')];
   const header = document.querySelector('.site-header');
-  const media = story.querySelector('.home-story__media');
   const building = story.querySelector('.home-story__building');
-  const cube = story.querySelector('.home-story__cube');
-  const hall = story.querySelector('.home-story__face--hall');
+  const hall = story.querySelector('.home-story__shot--hall');
+  const press = story.querySelector('.home-story__shot--press');
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
   let activeStage = -1;
   let ticking = false;
@@ -250,28 +249,26 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
   // Scroll timeline: hold on the building, fly through its door (.07–.44), hold in the press hall,
-  // then turn the cube a quarter round to the Speedmaster's side (.56–.88) and hold.
+  // then glide the camera from the front of the hall round to the Speedmaster's side (.56–.9) and hold.
+  // Only transform and opacity change, so the browser never re-rasterises the enlarged photos.
   function paint(p) {
     const zoom = span(p, .07, .44);
-    building.style.transform = `scale(${Math.pow(9, ease(zoom))})`;
-    building.style.opacity = String(1 - span(zoom, .7, .97));
-    building.style.filter = `blur(${span(zoom, .78, 1) * 6}px) brightness(${1.03 + span(zoom, .6, .95) * .25})`;
+    building.style.transform = `scale(${Math.pow(7, ease(zoom))})`;
+    building.style.opacity = String(1 - span(zoom, .72, .98));
 
-    const settle = ease(span(zoom, .62, 1));
-    hall.style.filter = `blur(${(1 - settle) * 5}px) brightness(1.03) contrast(1.02) saturate(.96)`;
+    const settle = ease(span(zoom, .6, 1));
+    const glide = ease(span(p, .56, .9));
+    const swap = span(glide, .28, .72);
+    hall.style.transform = `translateX(${-16 * glide}%) rotateY(${16 * glide}deg) scale(${1.08 + .22 * (1 - settle) + .3 * glide})`;
+    hall.style.opacity = String(1 - swap);
+    press.style.transform = `translateX(${16 * (1 - glide)}%) rotateY(${-16 * (1 - glide)}deg) scale(${1.02 + .34 * (1 - glide)})`;
+    press.style.opacity = String(swap);
 
-    const turn = span(p, .56, .88);
-    const angle = 90 * ease(turn);
-    const pullBack = 1 - Math.sin(Math.PI * turn) * .16;
-    const half = media.clientWidth / 2;
-    story.style.setProperty('--home-half', `${half}px`);
-    cube.style.transform = `scale(${(1.22 - .22 * settle) * pullBack}) translateZ(${-half}px) rotateY(${-angle}deg)`;
-
-    showStage(p < .24 ? 0 : p < .72 ? 1 : 2);
+    showStage(p < .24 ? 0 : p < .74 ? 1 : 2);
   }
 
   function frame() {
-    current += (target - current) * .14;
+    current += (target - current) * .2;
     if (Math.abs(target - current) < .0005) current = target;
     paint(current);
     ticking = current !== target;
