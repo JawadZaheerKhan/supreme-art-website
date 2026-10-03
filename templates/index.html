@@ -3,6 +3,7 @@
 <head>
 {{> head}}
   <link rel="stylesheet" href="/quality-story.css" />
+  <link rel="stylesheet" href="/home-clients.css" />
 </head>
 <body class="home-page">
 {{> gtm-body}}
@@ -108,26 +109,24 @@
       <p class="home-chapters__all container"><a class="btn btn--accent" href="{{ page.quality.button_href }}">{{ page.quality.button_label }}</a></p>
     </section>
 
-    <!-- CLIENTS SCROLL CHAPTER -->
-    <section id="clients" class="home-clients-story" data-home-clients data-services-section aria-label="Our clients">
-      <div class="home-clients-story__sticky">
-        <div class="container home-clients-story__inner">
-          <div class="home-clients-story__heading">
-            <div><p class="eyebrow">{{ page.clients.eyebrow }}</p><h2>{{ page.clients.heading }}</h2></div>
-            <p class="lead">{{ page.clients.lead }}</p>
-          </div>
-          <div class="home-clients-story__stage grid">
-            {{#each page.clients.items}}<article class="home-client-card card" data-client-card="{{ @index }}">
-              <div class="client__badge">
-                <img class="client__logo" src="{{ logo }}" alt="{{ name }}" onerror="this.style.display='none'">
-                <span class="client__mono" style="color:{{ colour }}">{{ initials }}</span>
-              </div>
-              <h3>{{ name }}</h3>
-            </article>{{/each}}
-          </div>
-          <span class="home-clients-story__count"><b>01</b> / {{ page.clients.items.length }}</span>
+    <!-- CLIENTS: every client on one wall; the one under your hand comes to the centre (home-clients.js) -->
+    <section id="clients" class="home-clients" aria-labelledby="home-clients-title">
+      <div class="container">
+        <div class="home-clients__heading">
+          <p class="eyebrow">{{ page.clients.eyebrow }}</p>
+          <h2 id="home-clients-title">{{ page.clients.heading }}</h2>
+          <p class="lead">{{ page.clients.lead }}</p>
         </div>
+        {{#each page.clients.groups}}<div class="home-clients__group">
+          <h3 class="home-clients__label">{{ title }}</h3>
+          <ul class="home-clients__wall">
+            {{#each items}}<li><button type="button" class="home-clients__tile" data-client aria-label="{{ name }}"><img src="{{ logo }}" alt="" loading="lazy" decoding="async" /></button></li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/each}}
       </div>
+      <div class="home-clients__spot" hidden><span class="home-clients__veil"></span><figure class="home-clients__focus"><img alt="" /><figcaption aria-live="polite"></figcaption></figure></div>
     </section>
 
     <!-- NEWS AND CONTACT SCROLL CHAPTER -->
@@ -158,5 +157,6 @@
 
   <script src="/script.js"></script>
   <script src="/services-motion.js"></script>
+  <script src="/home-clients.js"></script>
 </body>
 </html>

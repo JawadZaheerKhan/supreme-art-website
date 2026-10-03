@@ -213,18 +213,20 @@ collections:
               - { name: eyebrow, label: Small label above heading, widget: string }
               - { name: heading, label: Heading, widget: string }
               - { name: lead, label: Intro line, widget: text }
-              - name: items
-                label: Clients
+              - name: groups
+                label: Client groups
                 widget: list
-                summary: '{{fields.name}}'
+                summary: '{{fields.title}}'
+                hint: Local and international clients, in the order they appear on the page.
                 fields:
-                  - { name: name, label: Client name, widget: string }
-                  - { name: logo, label: Logo, widget: image, required: false }
-                  - name: initials
-                    label: Initials
-                    widget: string
-                    hint: Shown as a fallback if the logo image fails to load.
-                  - { name: colour, label: Initials colour, widget: color, required: false }
+                  - { name: title, label: Group title, widget: string }
+                  - name: items
+                    label: Clients
+                    widget: list
+                    summary: '{{fields.name}}'
+                    fields:
+                      - { name: name, label: Client name, widget: string }
+                      - { name: logo, label: Logo, widget: image }
           - name: news
             label: 'Section — News & updates'
             widget: object
