@@ -729,8 +729,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     staticLayout.addEventListener('change', reset);
   });
 })();
-/* Standalone contact scroll reveal */
-(function(){const story=document.querySelector('[data-home-contact]');if(!story)return;let ticking=false;function update(){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight),p=Math.max(0,Math.min(1,-rect.top/travel)),e=1-Math.pow(1-p,3);story.style.setProperty('--contact-opacity',e.toFixed(3));story.style.setProperty('--contact-scale',(.78+e*.22).toFixed(3));ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request)})();
 /* Desktop Process / Quality galleries: horizontal trackpad swipe and mouse drag. */
 (function () {
   document.querySelectorAll('.proc__stage .proc__shot').forEach(gallery => {
