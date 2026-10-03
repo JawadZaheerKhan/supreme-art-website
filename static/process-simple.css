@@ -14,16 +14,17 @@
 .assembly-stage .proc-box__scene { width: 100%; height: 100%; aspect-ratio: auto; --intro: 1; --box-scale: .5; }
 .assembly-stage .proc-box__rot { width: 550px; height: 460px; filter: none; opacity: 1; transform-style: preserve-3d; transform: translate(-50%,-50%) scale(var(--box-scale)) rotateX(calc(var(--view) * -18deg)) rotateY(calc(var(--view) * -32deg)); }
 .assembly-stage .carton { left: 85px; top: 85px; transform: translateX(calc(var(--foldA) * 95px)); transform-style: preserve-3d; }
-/* Each panel blends from its blue-grey tint to a red one as --red (the printed theme) goes 0 → 1. */
-.assembly-stage .proc-box__scene { --red-pct: calc(var(--red, 0) * 100%); --box-accent: color-mix(in srgb, #c0262f var(--red-pct), #1b6fb3); }
-.assembly-stage .panel { outline: 1px solid color-mix(in srgb, #b86a70 var(--red-pct), #8fa4b5); background: color-mix(in srgb, #fff7f7 var(--red-pct), #fbfcfe); }
-.assembly-stage .panel--left { background: color-mix(in srgb, #eab7ba var(--red-pct), #d4e1eb); }
-.assembly-stage .panel--right { background: color-mix(in srgb, #dc9a9f var(--red-pct), #bfcedb); }
-.assembly-stage .panel--back { background: color-mix(in srgb, #f3d3d5 var(--red-pct), #e2eaf0); }
-.assembly-stage .panel--top { top: -85px; height: 85px; background: color-mix(in srgb, #f6dfe0 var(--red-pct), #e8eff5); }
-.assembly-stage .panel--bottom { height: 85px; background: color-mix(in srgb, #d99498 var(--red-pct), #bccddb); }
+/* Carton colours, all driven 0 → 1 from the scroll:
+   --red the printed theme, --blank unprinted white board, --mono printed in black only. */
+.assembly-stage .proc-box__scene { --red-pct: calc(var(--red, 0) * 100%); --blank-pct: calc(var(--blank, 0) * 100%); --box-accent: color-mix(in srgb, #c0262f var(--red-pct), #1b6fb3); }
+.assembly-stage .panel { outline: 1px solid color-mix(in srgb, #b86a70 var(--red-pct), #8fa4b5); background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #fff7f7 var(--red-pct), #fbfcfe)); }
+.assembly-stage .panel--left { background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #eab7ba var(--red-pct), #d4e1eb)); }
+.assembly-stage .panel--right { background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #dc9a9f var(--red-pct), #bfcedb)); }
+.assembly-stage .panel--back { background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #f3d3d5 var(--red-pct), #e2eaf0)); }
+.assembly-stage .panel--top { top: -85px; height: 85px; background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #f6dfe0 var(--red-pct), #e8eff5)); }
+.assembly-stage .panel--bottom { height: 85px; background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #d99498 var(--red-pct), #bccddb)); }
 .assembly-stage .art__band, .assembly-stage .art--side { background: var(--box-accent); }
-/* The blue CTP plate coating covers the whole carton, then clears to reveal the image. */
+.assembly-stage .art { opacity: var(--print); filter: grayscale(var(--mono, 0)) contrast(calc(1 + .5 * var(--mono, 0))) saturate(calc(1 + .25 * var(--uv, 0))); }
 /* One layer over every panel carries, top to bottom: the UV gloss streaks (--uv), the raised spot-UV dots (--spot)
    and the blue plate coating (--plate). --uv and --spot stay on once the sheet is finished, so the carton keeps them. */
 .assembly-stage .panel::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
@@ -33,45 +34,33 @@
     radial-gradient(circle at 58% 58%, rgba(0,0,0,calc(.07 * var(--spot, 0))) 0 1.3px, transparent 1.8px),
     linear-gradient(135deg, rgba(52,97,227,var(--plate, 0)) 0%, rgba(33,73,196,var(--plate, 0)) 55%, rgba(26,58,158,var(--plate, 0)) 100%);
   background-size: 100% 100%, 8px 8px, 8px 8px, 100% 100%; }
-/* The print-head sweep runs while the red colour prints. */
-.assembly-stage .panel--front::after { top: calc(var(--red, 0) * 100%); opacity: calc(4 * var(--red, 0) * (1 - var(--red, 0))); z-index: 3; }
-.assembly-stage .proc-box__cut { top: 25px; }
+.assembly-stage .panel--front::after { display: none; }
+/* The die-cut traces the whole carton (550 × 460, like the rotating frame). */
+.assembly-stage .proc-box__cut { left: 0; top: 0; width: 550px; height: 460px; }
 .assembly-stage .proc-box__cut .cutline { stroke: #1b6fb3; stroke-width: 2.5px; }
-.assembly-stage .art { opacity: var(--print); }
-.assembly-stage .proc-box__rot { opacity: var(--carton, 1); }
 
-/* The printed sheet, driven 0 → 1 from the scroll: --sheet (visible), --ink (black prints), --colour, --scan,
-   --uv (full gloss), --spot (raised texture) and --split (die-cut and separated). */
-.sheet-scene { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; z-index: 2; }
-.sheet-flat { --apart: clamp(0, calc((var(--split, 0) - .5) * 2), 1); position: relative; width: 96%; aspect-ratio: 470 / 200; opacity: min(1, calc(var(--sheet, 0) * 2)); transform: perspective(900px) translateY(calc((1 - var(--sheet, 0)) * -40px)) rotateX(calc((1 - var(--sheet, 0)) * 64deg)) scale(calc(.6 + .4 * var(--sheet, 0))); }
-.sheet-layer { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
-.sheet-bg { opacity: calc(1 - var(--apart)); filter: drop-shadow(0 16px 20px rgba(16,24,40,.16)); }
-.sheet-bar-k { opacity: calc(var(--ink, 0) * (1 - var(--colour, 0))); }
-.sheet-bar-c { opacity: var(--colour, 0); }
-.sheet-marks { opacity: var(--ink, 0); }
+/* The printed sheet the carton sits on, one up. It lives in the carton's own frame, so it shares its size and turn.
+   --sheet shows it; --ink, --red, --scan, --uv and --spot drive what happens across it. */
+.sheet-paper, .sheet-fx { position: absolute; left: -56px; top: -34px; width: 662px; height: 528px; pointer-events: none; opacity: var(--sheet, 0); }
+.sheet-paper { background: #fff; border: 1px solid #d6dbe1; box-shadow: 0 30px 50px -22px rgba(16,24,40,.28); transform: translateZ(-2px); }
+.sheet-fx { overflow: hidden; transform: translateZ(3px); }
+.sheet-bar { position: absolute; left: 14px; top: 42px; bottom: 42px; width: 18px; }
+.sheet-bar--k { background: repeating-linear-gradient(180deg, #d0d3d8 0 28px, #9aa0a8 28px 56px, #5f656e 56px 84px, #1c1f24 84px 112px); opacity: calc(var(--ink, 0) * (1 - var(--red, 0))); }
+.sheet-bar--c { background: repeating-linear-gradient(180deg, #1aa3df 0 28px, #e2328c 28px 56px, #f6d31d 56px 84px, #1c1f24 84px 112px); opacity: var(--red, 0); }
+.sheet-mark { position: absolute; left: 50%; width: 22px; height: 22px; margin-left: -11px; fill: none; stroke: #1c1f24; stroke-width: 1.2; opacity: var(--ink, 0); }
+.sheet-mark--top { top: 6px; }
+.sheet-mark--bottom { bottom: 6px; }
 
-/* Each carton sits at its place on the 470 × 200 sheet and drifts apart once it is cut free. */
-.sheet-up { position: absolute; top: 14%; width: 42.553%; height: 72%; transform: translate(calc(var(--dir) * var(--apart) * 7%), calc(var(--apart) * -3%)); filter: drop-shadow(0 calc(var(--apart) * 12px) calc(var(--apart) * 14px) rgba(16,24,40,calc(var(--apart) * .25))); }
-.sheet-up--a { left: 6.383%; --dir: -1; }
-.sheet-up--b { left: 53.191%; --dir: 1; }
-/* Ink and colour print top to bottom in step with their print heads (the carton spans 28 → 172 of the sheet's 200). */
-.sheet-layer--key { clip-path: inset(0 0 clamp(0%, calc((1 - (var(--ink, 0) * 200 - 28) / 144) * 100%), 100%) 0); }
-.sheet-layer--colour { clip-path: inset(0 0 clamp(0%, calc((1 - (var(--colour, 0) * 200 - 28) / 144) * 100%), 100%) 0); filter: saturate(calc(1 + .3 * var(--uv, 0))); }
-.sheet-kfade { opacity: calc(1 - var(--colour, 0)); }
-.sheet-layer--spot { opacity: var(--spot, 0); }
-.sheet-sheen { position: absolute; inset: 0; clip-path: polygon(15% 15.28%, 15% 0, 50% 0, 50% 15.28%, 100% 15.28%, 100% 84.72%, 50% 84.72%, 50% 100%, 15% 100%, 15% 84.72%, 0 84.72%, 0 15.28%); background: linear-gradient(115deg, rgba(255,255,255,0) 16%, rgba(255,255,255,.62) 33%, rgba(255,255,255,0) 47%, rgba(255,255,255,.3) 66%, rgba(255,255,255,0) 80%); mix-blend-mode: screen; opacity: calc(var(--uv, 0) * .85); }
-.sheet-layer--cut path { fill: none; stroke: #1b6fb3; stroke-width: 1.6px; stroke-dasharray: 1; stroke-dashoffset: calc(1 - min(1, var(--split, 0) * 2)); opacity: calc(min(1, var(--split, 0) * 4) * (1 - var(--apart) * .7)); }
-
-.sheet-head { position: absolute; left: -2%; right: -2%; height: 3px; margin-top: -1.5px; border-radius: 3px; }
+.sheet-head { position: absolute; left: 0; right: 0; height: 5px; margin-top: -2.5px; border-radius: 3px; }
 .sheet-head--k { top: calc(var(--ink, 0) * 100%); background: #1c1f24; opacity: calc(4 * var(--ink, 0) * (1 - var(--ink, 0))); }
-.sheet-head--c { top: calc(var(--colour, 0) * 100%); background: linear-gradient(90deg, #1aa3df, #e2328c, #f6d31d, #1c1f24); opacity: calc(4 * var(--colour, 0) * (1 - var(--colour, 0))); }
-.sheet-scan-trail { position: absolute; left: 0; right: 0; top: 0; height: calc(var(--scan, 0) * 100%); background: linear-gradient(180deg, rgba(43,240,160,0), rgba(43,240,160,.2)); opacity: calc(4 * var(--scan, 0) * (1 - var(--scan, 0))); }
-.sheet-scan { position: absolute; left: -3%; right: -3%; top: calc(var(--scan, 0) * 100%); height: 3px; margin-top: -1.5px; border-radius: 3px; background: #2bf0a0; box-shadow: 0 0 14px 4px rgba(43,240,160,.65), 0 0 40px 12px rgba(43,240,160,.25); opacity: min(1, calc(5 * var(--scan, 0) * (1 - var(--scan, 0)))); }
+.sheet-head--c { top: calc(var(--red, 0) * 100%); background: linear-gradient(90deg, #1aa3df, #e2328c, #f6d31d, #1c1f24); opacity: calc(4 * var(--red, 0) * (1 - var(--red, 0))); }
+.sheet-scan-trail { position: absolute; left: 0; right: 0; top: 0; height: calc(var(--scan, 0) * 100%); background: linear-gradient(180deg, rgba(43,240,160,0), rgba(43,240,160,.22)); opacity: calc(4 * var(--scan, 0) * (1 - var(--scan, 0))); }
+.sheet-scan { position: absolute; left: 0; right: 0; top: calc(var(--scan, 0) * 100%); height: 5px; margin-top: -2.5px; background: #2bf0a0; box-shadow: 0 0 20px 6px rgba(43,240,160,.65), 0 0 60px 18px rgba(43,240,160,.25); opacity: min(1, calc(5 * var(--scan, 0) * (1 - var(--scan, 0)))); }
 /* A bright band of light sweeps across as the UV gloss, then the spot texture, goes on. */
-.sheet-glint { position: absolute; top: -12%; bottom: -12%; width: 28%; transform: skewX(-18deg); background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.95) 50%, rgba(255,255,255,0)); mix-blend-mode: screen; }
+.sheet-glint { position: absolute; top: -12%; bottom: -12%; width: 28%; transform: skewX(-18deg); background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.9) 50%, rgba(255,255,255,0)); mix-blend-mode: screen; }
 .sheet-glint--uv { left: calc(var(--uv, 0) * 140% - 40%); opacity: min(1, calc(5 * var(--uv, 0) * (1 - var(--uv, 0)))); }
 .sheet-glint--spot { left: calc(var(--spot, 0) * 140% - 40%); opacity: min(1, calc(5 * var(--spot, 0) * (1 - var(--spot, 0)))); }
-.sheet-ok { position: absolute; right: -10px; top: -10px; width: 26px; height: 26px; --ok: clamp(0, calc((var(--scan, 0) - .85) * 6.67), 1); opacity: calc(var(--ok) * (1 - var(--uv, 0))); transform: scale(calc(.6 + .4 * var(--ok))); }
+.sheet-ok { position: absolute; right: 18px; top: 16px; width: 44px; height: 44px; --ok: clamp(0, calc((var(--scan, 0) - .85) * 6.67), 1); opacity: calc(var(--ok) * (1 - var(--uv, 0))); transform: scale(calc(.6 + .4 * var(--ok))); }
 .sheet-ok svg { display: block; width: 100%; height: 100%; }
 .assembly-state { margin: 0 12px 12px; font-size: 14px; font-weight: 600; text-align: center; color: var(--text); }
 .assembly-meter { width: 100px; height: 3px; background: var(--border); }
@@ -122,13 +111,13 @@
   .scene-copy p { font-size: .92rem; line-height: 1.7; }
 }
 @media(max-width:900px) {
-  .assembly-sticky { top: 66px; width: 100%; transform: none; height: 160px; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1.3fr; grid-template-rows: 1fr 1fr; padding: 10px 0; }
-  .assembly-stage { height: 140px; grid-column: 2; grid-row: 1 / 3; }
-  .assembly-eyebrow { grid-column: 1; align-self: end; text-align: left; font-size: 8px; margin-left: 0; }
-  .assembly-state { grid-column: 1; align-self: start; text-align: left; font-size: 12px; margin: 8px 0 0; }
-  .assembly-meter, .assembly-hint { display: none; }
+  /* Phones and tablets: the carton gets a full-width bar under the header, tall enough for every stage to read. */
+  .assembly-sticky { top: 62px; width: 100%; transform: none; height: calc(30svh + 40px); background: rgba(255,255,255,.97); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 6px 0; }
+  .assembly-stage { width: 100%; height: 30svh; }
+  .assembly-eyebrow, .assembly-meter, .assembly-hint { display: none; }
+  .assembly-state { font-size: 12px; margin: 6px 0 0; text-align: center; }
   .process-chapter { scroll-margin-top: 0; }
-  .process-assembly .process-scene { grid-template-columns: minmax(0,1fr); grid-template-areas: "copy" "hero" "row"; min-height: calc(100svh - 70px); padding: 185px 0 32px; row-gap: 16px; align-content: start; }
+  .process-assembly .process-scene { grid-template-columns: minmax(0,1fr); grid-template-areas: "copy" "hero" "row"; min-height: calc(100svh - 70px); padding: calc(30svh + 124px) 0 32px; row-gap: 16px; align-content: start; }
   .scene-hero { width: 100%; }
   .scene-row { width: 100%; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
   .scene-row figure:last-child:nth-child(odd) { grid-column: 1 / -1; }

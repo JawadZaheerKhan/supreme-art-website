@@ -14,22 +14,24 @@
   const mix = (a,b,t) => a + (b-a)*t;
   const smooth = t => t*t*(3-2*t);
   // Carton: plate is the blue CTP coating, red the printed colour theme.
-  // Sheet (replaces the carton from the paperboard scene to die-cutting): ink prints its black, colour its
-  // colours, scan is the green inspection light, uv the full gloss, spot the raised texture, split the die-cut.
-  const base = { print: 1, plate: 0, red: 1, cut: .25, sides: 0, flaps: 0, view: .3, sheet: 0, ink: 1, colour: 1, scan: 1, uv: 1, spot: 1, split: 1 };
-  const before = { red: 0, ink: 0, colour: 0, scan: 0, uv: 0, spot: 0, split: 0 };
+  // From the paperboard scene to die-cutting the carton sits on a printed sheet (sheet): it starts blank,
+  // ink prints it in black only (mono), red brings the colour, scan is the green inspection light,
+  // uv the full gloss and spot the raised texture; at die-cutting the sheet falls away around the cut.
+  const base = { print: 1, plate: 0, red: 1, cut: .25, sides: 0, flaps: 0, view: .3, sheet: 0, blank: 0, mono: 0, ink: 1, scan: 1, uv: 1, spot: 1 };
+  const before = { red: 0, ink: 0, scan: 0, uv: 0, spot: 0 };
+  const onSheet = { sheet: 1, cut: 0, view: 0 };
   const states = [
     { ...base, ...before, label: 'A flat sheet of board', print: 0, cut: 0, view: 0 },
     { ...base, ...before, label: 'The artwork is prepared', print: .35, view: .1 },
     { ...base, ...before, label: 'Imaged onto a blue plate', print: .35, plate: 1, view: .12 },
     { ...base, ...before, label: 'Cleaned, the image appears', view: .14 },
-    { ...base, ...before, label: 'A clean sheet of board', view: .15, sheet: 1 },
-    { ...base, ...before, label: 'Printed in black, two cartons up', view: .2, sheet: 1, ink: 1 },
-    { ...base, ...before, label: 'Colour comes to life', view: .22, sheet: 1, ink: 1, colour: 1, red: 1 },
-    { ...base, ...before, label: 'Every colour is checked', view: .25, sheet: 1, ink: 1, colour: 1, red: 1, scan: 1 },
-    { ...base, label: 'A full UV gloss', sheet: 1, spot: 0, split: 0 },
-    { ...base, label: 'Spot UV texture and shine', sheet: 1, split: 0 },
-    { ...base, label: 'Die-cut into two cartons', sheet: 1, cut: 1, view: .4 },
+    { ...base, ...before, ...onSheet, label: 'A clean sheet of board', print: 0, blank: 1 },
+    { ...base, ...before, ...onSheet, label: 'Printed in black', blank: 1, mono: 1, ink: 1 },
+    { ...base, ...before, ...onSheet, label: 'Colour comes to life', ink: 1, red: 1 },
+    { ...base, ...before, ...onSheet, label: 'Every colour is checked', ink: 1, red: 1, scan: 1 },
+    { ...base, ...onSheet, label: 'A full UV gloss', spot: 0 },
+    { ...base, ...onSheet, label: 'Spot UV texture and shine' },
+    { ...base, label: 'Die-cut from the sheet', cut: 1, view: .15 },
     { ...base, label: 'The carton blank is separated', cut: 1, view: .5 },
     { ...base, label: 'Checked before folding', cut: 1, view: .6 },
     { ...base, label: 'Sides fold and join', cut: 1, sides: 1, flaps: .15, view: 1 },
@@ -37,7 +39,7 @@
   ];
   const stepIndex = { artwork: 1, plate: 2, clean: 3, ready: 4, sheet: 5, colour: 6, measure: 7, uv: 8, spot: 9, cutting: 10, breaking: 11, sorting: 12, pasting: 13, delivery: 14 };
   const eased = ['print','plate','cut','sides','flaps','view'];
-  const landed = ['red','sheet','ink','colour','scan','uv','spot','split']; // these arrive fully on the first scene of their step
+  const landed = ['red','sheet','blank','mono','ink','scan','uv','spot']; // these arrive fully on the first scene of their step
   const boxPos = { left: 0, center: .5, right: 1 };
   const targets = scenes.map(el => stepIndex[el.dataset.step] ?? states.length-1);
   // Scenes sharing a step ease toward it together, starting from the flat sheet.
@@ -69,15 +71,16 @@
     scene.style.setProperty('--print', value('print'));
     scene.style.setProperty('--plate', value('plate'));
     scene.style.setProperty('--red', value('red'));
-    for (const key of ['sheet','ink','colour','scan','uv','spot','split']) stage.style.setProperty('--' + key, value(key));
-    stage.style.setProperty('--carton', 1 - value('sheet'));
+    for (const key of ['sheet','blank','mono','ink','scan','uv','spot']) stage.style.setProperty('--' + key, value(key));
     scene.style.setProperty('--cut', value('cut'));
     scene.style.setProperty('--foldA', value('sides'));
     scene.style.setProperty('--foldB', value('flaps'));
     scene.style.setProperty('--view', value('view'));
     // The carton travels in the middle of the hand-over, so it settles before the next scene lands.
     rail.style.setProperty('--box-pos', mix(a.box, b.box, smooth(clamp((t-.12)/.76))));
-    const flat = Math.min((stage.clientWidth-28)/550, (stage.clientHeight-16)/460);
+    let flat = Math.min((stage.clientWidth-28)/550, (stage.clientHeight-16)/460);
+    // In the phone and tablet bar there is no gutter to spill into, so the sheet (662 × 528) must fit inside it.
+    if (innerWidth <= 900) flat = mix(flat, Math.min(flat, (stage.clientWidth-6)/662, (stage.clientHeight-6)/528), value('sheet'));
     const folded = Math.min((stage.clientWidth-40)/300, (stage.clientHeight-20)/360);
     scene.style.setProperty('--box-scale', mix(flat,folded,value('sides')));
     label.textContent = (t>.6?b:a).label;
