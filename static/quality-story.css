@@ -1,0 +1,44 @@
+/* Quality checks as windows: each article clips a full-screen photo that stays fixed while the page scrolls,
+   so the next photo is uncovered as the previous section slides away. */
+.qc-story { --qc-ink: #070a0f; background: var(--qc-ink); color: #fff; }
+
+.qc-intro { padding: clamp(72px,10vw,128px) 0 clamp(56px,8vw,96px); }
+.qc-intro .eyebrow { color: #8fb8e0; }
+.qc-intro h2 { color: #fff; font-family: var(--display); font-size: clamp(2rem,4vw,3.2rem); line-height: 1.1; margin: 8px 0 18px; max-width: 20ch; text-wrap: balance; }
+.qc-intro__text { color: rgba(255,255,255,.72); max-width: 60ch; font-size: 1.05rem; line-height: 1.8; margin: 0; }
+
+.qc-window { position: relative; height: 115svh; clip-path: inset(0); }
+.qc-window__media { position: fixed; inset: 0; z-index: 0; }
+.qc-window__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.qc-window__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,7,11,.8) 0%, rgba(4,7,11,.5) 42%, rgba(4,7,11,.08) 78%), linear-gradient(0deg, rgba(4,7,11,.4), transparent 45%); }
+.qc-window:nth-of-type(even) .qc-window__media::after { background: linear-gradient(270deg, rgba(4,7,11,.8) 0%, rgba(4,7,11,.5) 42%, rgba(4,7,11,.08) 78%), linear-gradient(0deg, rgba(4,7,11,.4), transparent 45%); }
+
+.qc-window__band { position: relative; z-index: 1; padding-top: 30svh; display: flex; flex-direction: column; align-items: flex-start; }
+.qc-window:nth-of-type(even) .qc-window__band { align-items: flex-end; text-align: right; }
+.qc-window__band h3 { color: #fff; font-family: var(--display); font-size: clamp(2rem,4.2vw,3.4rem); line-height: 1.08; margin: 0 0 18px; max-width: 16ch; text-wrap: balance; }
+.qc-window__band p { color: rgba(255,255,255,.86); font-size: 1.08rem; line-height: 1.8; margin: 0; max-width: 46ch; }
+
+.qc-details { position: relative; z-index: 1; background: var(--qc-ink); padding: clamp(56px,7vw,104px) 0; }
+.qc-details__grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: clamp(16px,2.4vw,32px); }
+.qc-details figure { margin: 0; }
+.qc-details__frame { aspect-ratio: 5 / 4; overflow: hidden; border-radius: 6px; background: #11161d; }
+.qc-details__frame img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; transition: transform .9s cubic-bezier(.22,1,.36,1); }
+.qc-details figure:hover img { transform: scale(1.04); }
+.qc-details figcaption { color: #fff; font-size: 1.05rem; font-weight: 600; line-height: 1.4; margin-top: 16px; }
+/* A single detail photo sits beside its caption instead of leaving half the band empty. */
+.qc-details figure:only-child { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: clamp(16px,2.4vw,32px); align-items: end; }
+.qc-details figure:only-child figcaption { font-family: var(--display); font-size: clamp(1.4rem,2.4vw,2rem); line-height: 1.25; margin: 0; max-width: 18ch; text-wrap: balance; }
+
+@media (max-width: 900px) {
+  .qc-window { height: 100svh; }
+  .qc-window__band { padding-top: 20svh; }
+  .qc-window:nth-of-type(even) .qc-window__band { align-items: flex-start; text-align: left; }
+  .qc-window__media::after, .qc-window:nth-of-type(even) .qc-window__media::after { background: linear-gradient(180deg, rgba(4,7,11,.25) 0%, rgba(4,7,11,.78) 32%, rgba(4,7,11,.55) 62%, rgba(4,7,11,.2) 100%); }
+  .qc-window__band h3 { font-size: 2rem; }
+  .qc-window__band p { font-size: .98rem; line-height: 1.7; }
+  .qc-details__grid { gap: 12px; }
+  .qc-details figcaption { font-size: .85rem; margin-top: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .qc-details__frame img { transition: none; }
+}

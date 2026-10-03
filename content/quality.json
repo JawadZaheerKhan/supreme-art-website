@@ -37,31 +37,41 @@
         "title": "Incoming board inspection",
         "text": "Before printing begins, every paperboard batch is checked for grammage, thickness, surface condition and overall quality.",
         "image": "/images/quality/incoming-board-inspection-1.png",
-        "image_2": "/images/quality/incoming-board-inspection-2.png"
+        "focus": "50% 45%",
+        "image_2": "/images/quality/incoming-board-inspection-2.png",
+        "caption_2": "Weighing a board sample on a precision scale"
       },
       {
         "title": "Shade card approval",
         "text": "A reference shade card is prepared for every product and approved before the final printing run is released.",
         "image": "/images/quality/shade-card-1.jpg",
+        "focus": "50% 40%",
         "image_2": "/images/quality/shade-card-2.jpg",
-        "image_3": "/images/quality/shade-card-3.jpg"
+        "caption_2": "Reviewing the shade card with the print team",
+        "image_3": "/images/quality/shade-card-3.jpg",
+        "caption_3": "Recording the approved reference in the shade card file"
       },
       {
         "title": "Printing quality control",
         "text": "During printing, our QC team uses a colour spectrophotometer to verify colour shades while also checking registration and text content against the approved proof.",
-        "image": "/images/process/proofing-qc-1.jpg"
+        "image": "/images/process/proofing-qc-1.jpg",
+        "focus": "50% 55%"
       },
       {
         "title": "Coating inspection",
         "text": "Applied finishes, including UV and spot UV coatings, are checked for coverage, alignment, consistency and the required appearance.",
         "image": "/images/quality/coating-check-1.png",
+        "focus": "40% 30%",
         "image_2": "/images/quality/coating-check-2.png",
-        "image_3": "/images/quality/coating-inspection-1.jpg"
+        "caption_2": "Checking coated sheets at the coating line",
+        "image_3": "/images/quality/coating-inspection-1.jpg",
+        "caption_3": "Measuring the finish across a coated sheet"
       },
       {
         "title": "Digital Product Tracking",
         "text": "Tablets installed at every production stage allow operators to record each product job card as work progresses. Clients also receive access to this digital tracking system so they can follow the status of their products with us.",
-        "image": "/images/quality/digital-job-card-tracking.jpg"
+        "image": "/images/quality/digital-job-card-tracking.jpg",
+        "focus": "50% 35%"
       }
     ]
   },
