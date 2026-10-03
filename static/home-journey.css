@@ -1,18 +1,17 @@
-/* Home process journey: one carton travels through the factory photos, driven by the scroll (home-journey.js).
-   Every photo is shown whole at its own shape over a pale blur of itself; the camera only zooms where the story asks. */
+/* Home process journey: one carton travels through the factory, full-frame, like a single camera move.
+   home-journey.js drives everything from the scroll; at each change of photo the camera is locked on the carton
+   (or plate), so it holds its place and size while the factory changes around it. */
 .home-journey { background: var(--paper, #faf8f4); color: var(--text); }
 .home-journey__intro { padding: clamp(72px, 10vw, 128px) 0 clamp(28px, 4vw, 52px); }
 .home-journey__intro .eyebrow { color: var(--accent); }
 .home-journey__intro h2 { color: var(--text); font-family: var(--display); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; margin: 8px 0 16px; max-width: 20ch; text-wrap: balance; }
 .home-journey__intro p:not(.eyebrow) { color: var(--muted); max-width: 60ch; font-size: 1.05rem; line-height: 1.8; margin: 0; }
 
-.home-journey__track { position: relative; height: calc(var(--journey-steps, 23) * 42svh + 100svh); }
-.home-journey__sticky { position: sticky; top: 0; height: 100svh; min-height: 520px; overflow: hidden; background: #f3efe7; }
+.home-journey__track { position: relative; height: calc(var(--journey-steps, 43) * 28svh + 100svh); }
+.home-journey__sticky { position: sticky; top: 0; height: 100svh; min-height: 520px; overflow: hidden; background: #efebe4; }
 
 .home-journey__shot { position: absolute; inset: 0; margin: 0; opacity: 0; visibility: hidden; }
-.home-journey__fill { position: absolute; inset: -60px; background: var(--img) center / cover no-repeat; filter: blur(40px) saturate(.6); }
-.home-journey__fill::after { content: ""; position: absolute; inset: 0; background: rgba(250, 248, 244, .78); }
-.home-journey__shot img { position: absolute; left: 0; top: 0; display: block; max-width: none; transform-origin: 0 0; border-radius: 6px; box-shadow: 0 30px 70px -30px rgba(60, 45, 30, .35); will-change: transform; }
+.home-journey__shot img { position: absolute; left: 0; top: 0; display: block; max-width: none; transform-origin: 0 0; will-change: transform; }
 
 /* The carton reuses the Process page's carton (process-simple.css), at its natural 550 × 460 frame. */
 .home-journey__carton { position: absolute; left: 0; top: 0; z-index: 3; width: 550px; height: 460px; pointer-events: none; opacity: 0; visibility: hidden; will-change: transform, opacity; }
@@ -31,30 +30,23 @@
 .home-journey__plate path { fill: none; stroke: rgba(29, 63, 174, var(--image, 0)); stroke-width: 7; stroke-linejoin: round; }
 .home-journey__plate rect { fill: rgba(29, 63, 174, var(--image, 0)); }
 
-/* Caption card: on wide screens it sits in its own column on the left, on phones under the photo. */
-.home-journey__card {
-  position: absolute; z-index: 4; left: max(20px, 3vw); top: 50%; transform: translateY(-50%);
-  width: min(340px, 26vw); display: grid; padding: 24px 24px 20px; border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, .8); background: rgba(250, 248, 244, .88);
-  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
-  box-shadow: 0 0 24px rgba(255, 255, 255, .4), 0 18px 40px -22px rgba(60, 45, 30, .4);
-}
-.home-journey__step { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .35s ease, transform .5s cubic-bezier(.22, 1, .36, 1), visibility 0s linear .5s; }
+/* Quiet caption over a soft paper fade at the foot of the frame. */
+.home-journey__sticky::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 38%; z-index: 4; pointer-events: none; background: linear-gradient(180deg, rgba(250,248,244,0), rgba(250,248,244,.72) 62%, rgba(250,248,244,.9)); }
+.home-journey__caption { position: absolute; z-index: 5; left: max(24px, 5vw); bottom: max(22px, 5svh); width: min(460px, calc(100vw - 48px)); display: grid; }
+.home-journey__step { grid-area: 1 / 1; align-self: end; opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .45s ease, transform .7s cubic-bezier(.22, 1, .36, 1), visibility 0s linear .7s; }
 .home-journey__step.is-on { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
-.home-journey__num { color: var(--accent); font-family: var(--display); font-size: .85rem; letter-spacing: .14em; }
-.home-journey__step h3 { color: var(--text); font-family: var(--display); font-size: clamp(1.35rem, 2vw, 1.9rem); line-height: 1.12; margin: 6px 0 10px; }
-.home-journey__step p { color: var(--muted); font-size: .98rem; line-height: 1.7; margin: 0; }
-.home-journey__meter { height: 2px; margin-top: 18px; background: var(--line, #e7e1d6); overflow: hidden; }
+.home-journey__num { color: var(--accent); font-family: var(--display); font-size: .82rem; letter-spacing: .16em; }
+.home-journey__step h3 { color: var(--text); font-family: var(--display); font-size: clamp(1.6rem, 2.6vw, 2.4rem); line-height: 1.08; margin: 6px 0 8px; }
+.home-journey__step p { color: var(--text); opacity: .78; font-size: 1rem; line-height: 1.65; margin: 0; max-width: 40ch; }
+.home-journey__meter { height: 2px; margin-top: 18px; background: rgba(60, 45, 30, .14); overflow: hidden; }
 .home-journey__meter span { display: block; height: 100%; background: var(--wood, #a67c52); transform: scaleX(0); transform-origin: left; }
-.home-journey__all { justify-self: start; margin-top: 14px; color: var(--accent); font-size: .9rem; font-weight: 600; text-decoration: none; }
+.home-journey__all { justify-self: start; margin-top: 12px; color: var(--accent); font-size: .88rem; font-weight: 600; text-decoration: none; }
 .home-journey__all:hover { text-decoration: underline; }
 
-@media (max-width: 999px) {
-  .home-journey__card { left: 12px; right: 12px; top: auto; bottom: 12px; transform: none; width: auto; padding: 16px 18px 14px; }
-  .home-journey__step h3 { font-size: 1.25rem; margin: 4px 0 6px; }
-  .home-journey__step p { font-size: .9rem; line-height: 1.55; }
-  .home-journey__meter { margin-top: 12px; }
-  .home-journey__all { margin-top: 10px; }
+@media (max-width: 700px) {
+  .home-journey__caption { left: 18px; bottom: 18px; width: calc(100vw - 36px); }
+  .home-journey__step h3 { font-size: 1.45rem; }
+  .home-journey__step p { font-size: .92rem; line-height: 1.55; }
 }
 @media (prefers-reduced-motion: reduce) {
   .home-journey__step { transition: none; }
