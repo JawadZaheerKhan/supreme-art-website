@@ -238,10 +238,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const sticky = story.querySelector('.home-story__sticky');
   const facade = story.querySelector('.home-story__facade');
   const building = story.querySelector('.home-story__building');
-  const sign = story.querySelector('.home-story__sign');
-  const signCut = sign.querySelector('.home-story__sign-cut');
-  const signCrisp = sign.querySelector('.home-story__sign-crisp');
-  const wall = story.querySelector('.home-story__wall');
   const hall = story.querySelector('.home-story__shot--hall');
   const press = story.querySelector('.home-story__shot--press');
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -252,63 +248,43 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const span = (value, from, to) => clamp01((value - from) / (to - from));
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-  // Where things are in the building photo, as fractions of it: the box the signage layer (hero-sign.png) was
-  // cut from, and the window under it that the camera dives through. The photo is drawn to cover the frame,
-  // anchored on the window (object-position in styles.css), so these map to the screen the same way at any size.
-  const SIGN = { x: 752 / 1600, y: 100 / 900, w: 480 / 1600 };
-  const WINDOW = { x: .6, y: .437 };
+  // Where the entrance doors are in the building photo, as fractions of it: the camera dives through them.
+  const DOOR = { x: .6, y: .69 };
   const BUILDING_TOP = 103 / 900; // the facade's first horizontal joint line in the photo: it sits right under the menu bar
   const navBottom = () => { const nav = document.querySelector('.site-header .nav-links'); return nav ? nav.getBoundingClientRect().bottom : 72; };
-  let signRest = null;
-  function placeSign() {
+  let placed = false;
+  function placeFacade() {
     const W = sticky.clientWidth, H = sticky.clientHeight;
     const nw = building.naturalWidth || 1600, nh = building.naturalHeight || 900;
     const s = Math.max(W / nw, H / nh), dw = nw * s, dh = nh * s;
-    // Anchor the photo on the window, but never let the facade's top edge slip under the menu bar: on wide,
-    // short screens the photo is shifted down so that edge meets the bar, and the dive's origin follows the window.
-    const ox = (W - dw) * WINDOW.x;
-    let oy = (H - dh) * WINDOW.y;
+    // Anchor the photo on the doors, but never let the facade's joint line slip under the menu bar: on wide,
+    // short screens the photo is shifted down so the line meets the bar, and the dive's origin follows the doors.
+    const ox = (W - dw) * DOOR.x;
+    let oy = (H - dh) * DOOR.y;
     oy = Math.max(H - dh, Math.min(0, Math.max(oy, navBottom() - BUILDING_TOP * dh)));
-    building.style.objectPosition = (WINDOW.x * 100) + '% ' + ((H - dh) ? (oy / (H - dh)) * 100 : 50) + '%';
-    facade.style.transformOrigin = (ox + WINDOW.x * dw) + 'px ' + (oy + WINDOW.y * dh) + 'px';
-    const left = ox + SIGN.x * dw, top = oy + SIGN.y * dh, width = SIGN.w * dw;
-    [sign, wall].forEach(el => { el.style.left = left + 'px'; el.style.top = top + 'px'; el.style.width = width + 'px'; });
-    sign.style.setProperty('--sign-w', width + 'px');
-    // Where the lifted signage settles: centred, a little above the middle of the frame, as wide as the frame allows.
-    const height = width * 246 / 480;
-    const scale = Math.min(W * .86, H * .5 * width / height, width * 2.6) / width;
-    signRest = { dx: W / 2 - (left + width / 2), dy: H * .44 - (top + height / 2), scale };
+    building.style.objectPosition = (DOOR.x * 100) + '% ' + ((H - dh) ? (oy / (H - dh)) * 100 : 50) + '%';
+    facade.style.transformOrigin = (ox + DOOR.x * dw) + 'px ' + (oy + DOOR.y * dh) + 'px';
+    placed = true;
   }
 
-  // Scroll timeline: hold on the building; the signage lifts off the wall (.06–.3) and settles in front of
-  // it; the camera dives through the window under the signage (.3–.56) straight into the press hall; then it
-  // glides from the front of the hall round to the Speedmaster's side (.6–.9) and holds. Nothing waits.
+  // Scroll timeline: hold on the building; the camera dives through the entrance doors (.04–.5) straight into
+  // the press hall; then it glides from the front of the hall round to the Speedmaster's side (.58–.9) and holds.
   // Only transform and opacity change, so the browser never re-rasterises the enlarged photos.
   function paint(p) {
-    if (!signRest) placeSign();
-    const lift = ease(span(p, .06, .3));
-    const zoom = span(p, .3, .56);
-    const past = ease(span(zoom, 0, .4));
-    const k = (1 + (signRest.scale - 1) * lift) * (1 + .8 * past);
-    sign.style.transform = `translate(${signRest.dx * lift}px, ${signRest.dy * lift}px) scale(${k})`;
-    sign.style.opacity = String(1 - past);
-    // The wall shows through as the sign leaves it, and the photo cut-out hands over to the crisp replica on the way out.
-    wall.style.opacity = String(span(lift, 0, .3));
-    signCut.style.opacity = String(1 - span(lift, .12, .5));
-    signCrisp.style.opacity = String(span(lift, .12, .5));
-
-    facade.style.transform = `scale(${Math.pow(8, ease(zoom))})`;
+    if (!placed) placeFacade();
+    const zoom = span(p, .04, .5);
+    facade.style.transform = `scale(${Math.pow(9, ease(zoom))})`;
     facade.style.opacity = String(1 - span(zoom, .72, .98));
 
     const settle = ease(span(zoom, .5, 1));
-    const glide = ease(span(p, .6, .9));
+    const glide = ease(span(p, .58, .9));
     const swap = span(glide, .28, .72);
     hall.style.transform = `translateX(${-16 * glide}%) rotateY(${16 * glide}deg) scale(${1.08 + .22 * (1 - settle) + .3 * glide})`;
     hall.style.opacity = String(1 - swap);
     press.style.transform = `translateX(${16 * (1 - glide)}%) rotateY(${-16 * (1 - glide)}deg) scale(${1.02 + .34 * (1 - glide)})`;
     press.style.opacity = String(swap);
 
-    showStage(p < .5 ? 0 : p < .76 ? 1 : 2);
+    showStage(p < .3 ? 0 : p < .74 ? 1 : 2);
   }
 
   function showStage(index) {
@@ -321,9 +297,9 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   }
 
   // The hero is a stepper, not a scrubber: one gesture moves one stage along the timeline, and the move
-  // itself is animated. The stops are the building, the lifted sign, the press hall and the Speedmaster.
-  const STOPS = [0, .3, .56, .9];
-  const SCENE_FOR_STOP = [0, 0, 1, 2];
+  // itself is animated. The stops are the building, the press hall and the Speedmaster.
+  const STOPS = [0, .5, .9];
+  const SCENE_FOR_STOP = [0, 1, 2];
   let stage = 0, busy = false, cooldownUntil = 0, tween = 0, moveEnds = 0;
 
   function goTo(next) {
@@ -405,8 +381,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   paint(0);
   overHero();
   window.addEventListener('scroll', overHero, { passive: true });
-  window.addEventListener('resize', () => { signRest = null; paint(current); });
-  [building, signCut].forEach(img => { if (!img.complete) img.addEventListener('load', () => { signRest = null; paint(current); }); });
+  window.addEventListener('resize', () => { placed = false; paint(current); });
+  if (!building.complete) building.addEventListener('load', () => { placed = false; paint(current); });
 })();
 
 /* Liquid navigation indicator — shared by every page and mobile menu. */
