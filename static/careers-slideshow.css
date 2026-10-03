@@ -8,14 +8,14 @@
   position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
   padding: 40px 16px 16px; color: white;
-  background: linear-gradient(transparent, rgba(31, 8, 11,.8));
+  background: linear-gradient(transparent, rgba(19, 19, 20,.8));
   font-size: .85rem; font-weight: 600;
 }
 .careers-slideshow__controls { display: flex; gap: 6px; flex-shrink: 0; }
 .careers-slideshow__controls[hidden] { display: none; }
 .careers-slideshow__controls button {
   min-width: 44px; min-height: 44px; padding: 6px 10px; border-radius: 22px;
-  border: 1px solid rgba(255,255,255,.5); background: rgba(36, 9, 13,.7);
+  border: 1px solid rgba(255,255,255,.5); background: rgba(21, 22, 24,.7);
   color: white; font: inherit; cursor: pointer;
 }
 .careers-slideshow__controls button:hover { background: #a02830; }

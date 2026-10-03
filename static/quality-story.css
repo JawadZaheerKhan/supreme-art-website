@@ -1,9 +1,9 @@
 /* Quality checks as windows: each article clips a full-screen photo that stays fixed while the page scrolls,
    so the next photo is uncovered as the previous section slides away. */
-.qc-story { --qc-ink: #170608; background: var(--qc-ink); color: #fff; }
+.qc-story { --qc-ink: #0f1012; background: var(--qc-ink); color: #fff; }
 
 .qc-intro { padding: clamp(72px,10vw,128px) 0 clamp(56px,8vw,96px); }
-.qc-intro .eyebrow { color: #e0a0a3; }
+.qc-intro .eyebrow { color: #c6dbf1; }
 .qc-intro h2 { color: #fff; font-family: var(--display); font-size: clamp(2rem,4vw,3.2rem); line-height: 1.1; margin: 8px 0 18px; max-width: 20ch; text-wrap: balance; }
 .qc-intro__text { color: rgba(255,255,255,.72); max-width: 60ch; font-size: 1.05rem; line-height: 1.8; margin: 0; }
 
@@ -22,7 +22,7 @@
 .qc-details { position: relative; z-index: 1; background: var(--qc-ink); padding: clamp(56px,7vw,104px) 0; }
 .qc-details__grid { display: flex; justify-content: center; align-items: flex-end; gap: clamp(16px,2.4vw,32px); }
 .qc-details figure { flex: 0 1 auto; min-width: 0; margin: 0; }
-.qc-details__frame { overflow: hidden; border-radius: 6px; background: #1f0c0f; }
+.qc-details__frame { overflow: hidden; border-radius: 6px; background: #141517; }
 .qc-details__frame img { display: block; width: auto; height: auto; max-width: 100%; max-height: min(62vh, 600px); transition: transform .9s cubic-bezier(.22,1,.36,1); }
 .qc-details figure:hover img { transform: scale(1.03); }
 .qc-details figcaption { color: #fff; font-size: 1.05rem; font-weight: 600; line-height: 1.4; margin-top: 16px; max-width: 36ch; }
