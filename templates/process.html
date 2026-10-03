@@ -29,12 +29,16 @@
         </div>
       </aside>
     {{#each page.chapters}}<section class="process-chapter" id="{{ id }}" aria-labelledby="{{ id }}-title">
-      {{#each scenes}}<article class="process-scene process-scene--{{ box }} process-scene--photos-{{ count }} scene--{{ layout }}" data-box="{{ box }}" data-step="{{ step }}">
-        {{#if @index}}{{else}}<div class="scene-head"><p class="scene-eyebrow">{{ label }}</p><h2 class="scene-chapter" id="{{ id }}-title">{{ title }}</h2></div>{{/if}}
-        <div class="scene-photos">
-          {{#each photos}}<figure><div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/each}}
+      {{#each scenes}}<article class="process-scene process-scene--{{ box }}{{#if hero_side}} process-scene--hero-{{ hero_side }}{{/if}}" data-box="{{ box }}" data-step="{{ step }}">
+        <div class="scene-copy">
+          {{#if @index}}{{else}}<div class="scene-head"><p class="scene-eyebrow">{{ label }}</p><h2 class="scene-chapter" id="{{ id }}-title">{{ title }}</h2></div>{{/if}}
+          <p class="scene-lead">{{ lead }}</p>
+          <p>{{ detail }}</p>
         </div>
-        <div class="scene-copy"><p class="scene-lead">{{ lead }}</p><p>{{ detail }}</p></div>
+        {{#if hero}}<figure class="scene-hero" style="--r: {{ hero.ratio }}"><div class="process-photo-frame"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ hero.caption }}</figcaption></figure>{{/if}}
+        <div class="scene-row" style="--sum: {{ row_sum }}">
+          {{#each row}}<figure style="--r: {{ ratio }}"><div class="process-photo-frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/each}}
+        </div>
       </article>{{/each}}
     </section>{{/each}}
     </div>
