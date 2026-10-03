@@ -13,29 +13,31 @@
   const clamp = value => Math.max(0, Math.min(1, value));
   const mix = (a,b,t) => a + (b-a)*t;
   const smooth = t => t*t*(3-2*t);
-  // plate: blue CTP coating over the carton; red: printed colour theme.
-  // pallet / sheet: the carton gives way to a pallet of board, then a full 4-up sheet;
-  // colour: the sheet's colour prints over its black; scan: the green inspection light.
-  const base = { print: 1, plate: 0, red: 1, cut: .25, sides: 0, flaps: 0, view: .3, pallet: 0, sheet: 0, colour: 1, scan: 1 };
+  // Carton: plate is the blue CTP coating, red the printed colour theme.
+  // Sheet (replaces the carton from the paperboard scene to die-cutting): ink prints its black, colour its
+  // colours, scan is the green inspection light, uv the full gloss, spot the raised texture, split the die-cut.
+  const base = { print: 1, plate: 0, red: 1, cut: .25, sides: 0, flaps: 0, view: .3, sheet: 0, ink: 1, colour: 1, scan: 1, uv: 1, spot: 1, split: 1 };
+  const before = { red: 0, ink: 0, colour: 0, scan: 0, uv: 0, spot: 0, split: 0 };
   const states = [
-    { ...base, label: 'A flat sheet of board', print: 0, red: 0, cut: 0, view: 0, colour: 0, scan: 0 },
-    { ...base, label: 'The artwork is prepared', print: .35, red: 0, view: .1, colour: 0, scan: 0 },
-    { ...base, label: 'Imaged onto a blue plate', print: .35, plate: 1, red: 0, view: .12, colour: 0, scan: 0 },
-    { ...base, label: 'Cleaned, the image appears', red: 0, view: .14, colour: 0, scan: 0 },
-    { ...base, label: 'Paperboard stacked and ready', red: 0, view: .15, pallet: 1, colour: 0, scan: 0 },
-    { ...base, label: 'A full sheet, four cartons up', red: 0, view: .2, sheet: 1, colour: 0, scan: 0 },
-    { ...base, label: 'Colour comes to life', view: .22, sheet: 1, scan: 0 },
-    { ...base, label: 'Every colour is checked', view: .25, sheet: 1 },
-    { ...base, label: 'The printed sheet is coated' },
-    { ...base, label: 'Cut and creased to shape', cut: 1, view: .4 },
+    { ...base, ...before, label: 'A flat sheet of board', print: 0, cut: 0, view: 0 },
+    { ...base, ...before, label: 'The artwork is prepared', print: .35, view: .1 },
+    { ...base, ...before, label: 'Imaged onto a blue plate', print: .35, plate: 1, view: .12 },
+    { ...base, ...before, label: 'Cleaned, the image appears', view: .14 },
+    { ...base, ...before, label: 'A clean sheet of board', view: .15, sheet: 1 },
+    { ...base, ...before, label: 'Printed in black, two cartons up', view: .2, sheet: 1, ink: 1 },
+    { ...base, ...before, label: 'Colour comes to life', view: .22, sheet: 1, ink: 1, colour: 1, red: 1 },
+    { ...base, ...before, label: 'Every colour is checked', view: .25, sheet: 1, ink: 1, colour: 1, red: 1, scan: 1 },
+    { ...base, label: 'A full UV gloss', sheet: 1, spot: 0, split: 0 },
+    { ...base, label: 'Spot UV texture and shine', sheet: 1, split: 0 },
+    { ...base, label: 'Die-cut into two cartons', sheet: 1, cut: 1, view: .4 },
     { ...base, label: 'The carton blank is separated', cut: 1, view: .5 },
     { ...base, label: 'Checked before folding', cut: 1, view: .6 },
     { ...base, label: 'Sides fold and join', cut: 1, sides: 1, flaps: .15, view: 1 },
     { ...base, label: 'A complete carton', cut: 0, sides: 1, flaps: 1, view: 1 }
   ];
-  const stepIndex = { artwork: 1, plate: 2, clean: 3, ready: 4, sheet: 5, colour: 6, measure: 7, coating: 8, cutting: 9, breaking: 10, sorting: 11, pasting: 12, delivery: 13 };
+  const stepIndex = { artwork: 1, plate: 2, clean: 3, ready: 4, sheet: 5, colour: 6, measure: 7, uv: 8, spot: 9, cutting: 10, breaking: 11, sorting: 12, pasting: 13, delivery: 14 };
   const eased = ['print','plate','cut','sides','flaps','view'];
-  const landed = ['red','pallet','sheet','colour','scan']; // these arrive fully on the first scene of their step
+  const landed = ['red','sheet','ink','colour','scan','uv','spot','split']; // these arrive fully on the first scene of their step
   const boxPos = { left: 0, center: .5, right: 1 };
   const targets = scenes.map(el => stepIndex[el.dataset.step] ?? states.length-1);
   // Scenes sharing a step ease toward it together, starting from the flat sheet.
@@ -67,12 +69,8 @@
     scene.style.setProperty('--print', value('print'));
     scene.style.setProperty('--plate', value('plate'));
     scene.style.setProperty('--red', value('red'));
-    const pallet = value('pallet'), sheet = value('sheet');
-    stage.style.setProperty('--pallet', pallet);
-    stage.style.setProperty('--sheet', sheet);
-    stage.style.setProperty('--colour', value('colour'));
-    stage.style.setProperty('--scan', value('scan'));
-    stage.style.setProperty('--carton', 1 - Math.min(1, pallet + sheet));
+    for (const key of ['sheet','ink','colour','scan','uv','spot','split']) stage.style.setProperty('--' + key, value(key));
+    stage.style.setProperty('--carton', 1 - value('sheet'));
     scene.style.setProperty('--cut', value('cut'));
     scene.style.setProperty('--foldA', value('sides'));
     scene.style.setProperty('--foldB', value('flaps'));
