@@ -2434,7 +2434,7 @@ a { color: inherit; }
 @media (max-width: 860px), (prefers-reduced-motion: reduce) {
   .mobile-gallery-dots {
     display: flex; justify-content: center; width: fit-content; gap: 2px;
-    margin: -12px auto 20px; padding: 3px 6px; border-radius: 999px; background: #16364ccf;
+    margin: -12px auto 20px; padding: 3px 6px; border-radius: 999px; background: #3c2d1ecf;
   }
   .mobile-gallery-dots .gallery-dot { width: 32px; height: 32px; }
   .mobile-gallery-dots i { width: 8px; height: 8px; border-radius: 50%; background: #ffffff70; }
@@ -2639,8 +2639,8 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
   filter: drop-shadow(0 0 2px rgba(255, 255, 255,.65)) drop-shadow(0 0 9px rgba(255, 255, 255,.5));
 }
 
-.career-contact { width: min(420px, calc(100% - 40px)); padding: 28px; border: 1px solid #d9e8f6; border-radius: 22px; background: #fef9f9; color: #2b2c2f; box-shadow: 0 20px 70px #071d3540; }
-.career-contact::backdrop { background: #071d3580; backdrop-filter: blur(5px); }
+.career-contact { width: min(420px, calc(100% - 40px)); padding: 28px; border: 1px solid #d9e8f6; border-radius: 22px; background: #fef9f9; color: #2b2c2f; box-shadow: 0 20px 70px #3c2d1e40; }
+.career-contact::backdrop { background: #3c2d1e80; backdrop-filter: blur(5px); }
 .career-contact h2 { margin: 0 30px 12px 0; font-size: 1.5rem; }
 .career-contact p { margin: 0 0 20px; }
 .career-contact__choices { display: grid; gap: 12px; }
@@ -2685,24 +2685,24 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
 
 /* Glass surfaces on the Services page, with light behind the transparent cards. */
 .services-page [data-services-section] {
-  background-image: radial-gradient(ellipse at 12% 25%, #a7d9ef38, transparent 55%), radial-gradient(ellipse at 90% 75%, #bed9fa40, transparent 55%);
+  background-image: radial-gradient(ellipse at 12% 25%, #f2f8ff38, transparent 55%), radial-gradient(ellipse at 90% 75%, #f2f8ff40, transparent 55%);
 }
 .services-page [data-services-section] .card {
   position: relative;
-  background: linear-gradient(135deg, #ffffff70, #e3f4ff24);
-  border: 1px solid #b3d9edb3;
-  box-shadow: inset 0 1px 0 #ffffffed, inset 0 0 18px #ffffff60, 0 8px 28px #376d9212, 0 0 15px #9cdcf526;
+  background: linear-gradient(135deg, #ffffff70, #f2f8ff24);
+  border: 1px solid #f2f8ffb3;
+  box-shadow: inset 0 1px 0 #ffffffed, inset 0 0 18px #ffffff60, 0 8px 28px #3c2d1e12, 0 0 15px #f2f8ff26;
   -webkit-backdrop-filter: blur(8px) saturate(115%);
   backdrop-filter: blur(8px) saturate(115%);
 }
 .services-page [data-services-section] .card::after {
   content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
   border: 1px solid #ffffff80;
-  box-shadow: inset 1px 1px 0 #ffffffcc, inset -1px -1px 0 #83c9e64d;
+  box-shadow: inset 1px 1px 0 #ffffffcc, inset -1px -1px 0 #f2f8ff4d;
 }
 .services-page [data-services-section] .card:hover {
   border-color: #e9e7e2;
-  box-shadow: inset 0 1px 0 #fff, inset 0 0 20px #ffffff70, 0 12px 32px #376d921c, 0 0 22px #8bd8f54d;
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 20px #ffffff70, 0 12px 32px #3c2d1e1c, 0 0 22px #f2f8ff4d;
 }
 .services-page [data-services-section] .card .service-product-media {
   min-height: 0;
@@ -2730,10 +2730,10 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
   border: 1px solid rgba(198, 219, 241,.8);
   border-radius: 999px;
   color: #2b2c2f;
-  background: linear-gradient(115deg, #ffffff70, #dff4ff38);
+  background: linear-gradient(115deg, #ffffff70, #f2f8ff38);
   -webkit-backdrop-filter: blur(8px) saturate(115%);
   backdrop-filter: blur(8px) saturate(115%);
-  box-shadow: inset 0 1px 0 #ffffffed, inset 0 0 0 1px #e6faffaa, 0 0 16px #a3deff60, 0 5px 15px #376d921a;
+  box-shadow: inset 0 1px 0 #ffffffed, inset 0 0 0 1px #f2f8ffaa, 0 0 16px #f2f8ff60, 0 5px 15px #3c2d1e1a;
   white-space: nowrap;
   transform: none;
   transition: width 1100ms cubic-bezier(.16,1,.3,1), box-shadow .4s ease, background .4s ease;
@@ -2754,16 +2754,16 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
 }
 #quoteForm .enquiry-button:is(.is-expanded, :focus-visible) {
   width: 280px;
-  background: linear-gradient(115deg, #a9dcf370, #e3f7ff70, #95d3ed45);
-  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px #e6faffaa, 0 0 22px #a3deff80, 0 6px 18px #376d9226;
+  background: linear-gradient(115deg, #f2f8ff70, #f2f8ff70, #f2f8ff45);
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px #f2f8ffaa, 0 0 22px #f2f8ff80, 0 6px 18px #3c2d1e26;
 }
 .enquiry-button:is(.is-expanded, :focus-visible) .enquiry-button__arrow { width: 24px; opacity: 1; }
 #quoteForm .enquiry-button:focus-visible { outline: 2px solid #a02830; outline-offset: 4px; }
 @media (hover: hover) and (pointer: fine) {
   #quoteForm .enquiry-button:hover {
     width: 280px;
-    background: linear-gradient(115deg, #a9dcf370, #e3f7ff70, #95d3ed45);
-    box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px #e6faffaa, 0 0 22px #a3deff80, 0 6px 18px #376d9226;
+    background: linear-gradient(115deg, #f2f8ff70, #f2f8ff70, #f2f8ff45);
+    box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px #f2f8ffaa, 0 0 22px #f2f8ff80, 0 6px 18px #3c2d1e26;
   }
   .enquiry-button:hover .enquiry-button__arrow { width: 24px; opacity: 1; }
 }
@@ -2790,12 +2790,12 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
   border-color: rgba(198, 220, 241,.75);
   -webkit-backdrop-filter: blur(8px) saturate(115%);
   backdrop-filter: blur(8px) saturate(115%);
-  box-shadow: inset 0 1px 0 #ffffffa6, inset 0 0 0 1px #e6faff40, 0 0 16px #a3deff40, 0 5px 15px #163e5824;
+  box-shadow: inset 0 1px 0 #ffffffa6, inset 0 0 0 1px #f2f8ff40, 0 0 16px #f2f8ff40, 0 5px 15px #3c2d1e24;
   transform: none;
   transition: padding 1100ms cubic-bezier(.16,1,.3,1), box-shadow .4s ease, background .4s ease;
 }
 .btn.glass-action.btn--accent { background: linear-gradient(115deg, rgba(173, 54, 62,.93), rgba(134, 31, 39,.88)); color: #fff; }
-.btn.glass-action.btn--ghost { background: linear-gradient(115deg, #ffffff1f, #b3e3ff12); }
+.btn.glass-action.btn--ghost { background: linear-gradient(115deg, #ffffff1f, #f2f8ff12); }
 .btn.glass-action::after {
   content: ''; position: absolute; inset: 2px; border-radius: inherit;
   border: 1px solid #ffffff55; pointer-events: none;
@@ -2803,13 +2803,13 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
 .btn.glass-action:is(.is-expanding, :focus-visible) {
   padding-inline: 44px;
   transform: none;
-  box-shadow: inset 0 1px 0 #ffffffcc, inset 0 0 0 1px #e6faff66, 0 0 24px #a3deff80, 0 6px 18px #163e5830;
+  box-shadow: inset 0 1px 0 #ffffffcc, inset 0 0 0 1px #f2f8ff66, 0 0 24px #f2f8ff80, 0 6px 18px #3c2d1e30;
 }
 .btn.glass-action:focus-visible { outline: 2px solid #c6dbf1; outline-offset: 4px; }
 @media (hover: hover) and (pointer: fine) {
   .btn.glass-action:hover {
     padding-inline: 44px; transform: none;
-    box-shadow: inset 0 1px 0 #ffffffcc, inset 0 0 0 1px #e6faff66, 0 0 24px #a3deff80, 0 6px 18px #163e5830;
+    box-shadow: inset 0 1px 0 #ffffffcc, inset 0 0 0 1px #f2f8ff66, 0 0 24px #f2f8ff80, 0 6px 18px #3c2d1e30;
   }
 }
 @media (prefers-reduced-motion: reduce) {

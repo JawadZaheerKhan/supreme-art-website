@@ -17,7 +17,7 @@
 .product-box-stage { bottom:34px; perspective:1000px; }
 .product-box-stage::before {
   content:""; position:absolute; width:62%; height:16%; left:19%; bottom:5%;
-  border-radius:50%; background:radial-gradient(ellipse,#233d5945, #233d5914 45%,transparent 72%);
+  border-radius:50%; background:radial-gradient(ellipse,#3c2d1e45, #3c2d1e14 45%,transparent 72%);
   filter:blur(7px);
   transform:translateX(var(--shadow-x,5px)) scaleX(var(--shadow-scale,.94));
   pointer-events:none;

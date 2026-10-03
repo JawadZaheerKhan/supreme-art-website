@@ -813,15 +813,13 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 // Glass expansion for the requested page actions.
 (() => {
   const page = location.pathname.split('/').pop().replace(/\.html$/, '') || 'index';
-  const selectors = {
-    careers: '.cta-band .btn, a.btn[href="#career-contact"]',
-    about: '.cta-band .btn',
-    'company-profile': '.cta-band .btn',
-    products: '.cta-band .btn',
+  // Every page's call-to-action band gets the glass expansion; some pages add their own actions.
+  const extra = {
+    careers: 'a.btn[href="#career-contact"]',
     index: '.home-contact-story__inner .hero-actions .btn'
   };
-  if (!selectors[page]) return;
-  document.querySelectorAll(selectors[page]).forEach(button => {
+  const selector = ['.cta-band .btn', extra[page]].filter(Boolean).join(', ');
+  document.querySelectorAll(selector).forEach(button => {
     button.classList.add('glass-action');
     let touch = false;
     let opening = false;
