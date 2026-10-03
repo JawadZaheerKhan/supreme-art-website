@@ -483,57 +483,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     });
   }
 })();
-/* Homepage continuing scroll chapters */
-(function () {
-  const overview = document.querySelector('[data-home-overview]');
-
-  if (!overview) return;
-
-
-
-
-  let ticking = false;
-
-  function storyProgress(element) {
-    const rect = element.getBoundingClientRect();
-    const travel = Math.max(1, element.offsetHeight - window.innerHeight);
-    return Math.max(0, Math.min(1, -rect.top / travel));
-  }
-
-  function updateOverview() {
-    if (!overview) return;
-    const progress = storyProgress(overview);
-    const revealProgress = Math.min(1, progress / 0.38);
-    const eased = 1 - Math.pow(1 - revealProgress, 3);
-    overview.style.setProperty('--overview-progress', eased.toFixed(4));
-    overview.style.setProperty('--overview-opacity', (0.18 + eased * 0.82).toFixed(4));
-    overview.style.setProperty('--overview-y', `${((1 - eased) * 105).toFixed(2)}px`);
-    overview.style.setProperty('--overview-copy-y', `${((1 - eased) * 120).toFixed(2)}px`);
-    overview.style.setProperty('--overview-scale', (0.72 + eased * 0.28).toFixed(4));
-    overview.style.setProperty('--overview-clip-y', `${((1 - eased) * 36).toFixed(2)}%`);
-    overview.style.setProperty('--overview-clip-x', `${((1 - eased) * 13).toFixed(2)}%`);
-    overview.style.setProperty('--overview-image-scale', (1.13 - eased * 0.13).toFixed(4));
-    overview.style.setProperty('--overview-bar-width', `${(progress * 100).toFixed(2)}%`);
-  }
-
-  function update() {
-    updateOverview();
-
-    ticking = false;
-  }
-
-  function requestUpdate() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  }
-
-
-
-  update();
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate);
-})();
 /* Homepage story stages: one gesture slides, then lifts the stage at center. */
 (function () {
   const staticLayout = matchMedia('(prefers-reduced-motion: reduce), (max-height: 540px), (max-width: 1024px) and (max-height: 600px)');

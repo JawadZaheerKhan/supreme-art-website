@@ -46,3 +46,18 @@
 @media (prefers-reduced-motion: reduce) {
   .qc-details__frame img { transition: none; }
 }
+
+/* Home: "Who we are" uses the same window — the hero slides up and uncovers its fixed photo. */
+.home-about-window { --qc-ink: #faf8f4; height: 135svh; color: var(--text); }
+.home-about-window .qc-window__band { padding-top: 24svh; }
+.home-about-window .eyebrow { color: var(--accent); }
+.home-about-window h2 { color: var(--text); font-family: var(--display); font-size: clamp(2rem,3.8vw,3.2rem); line-height: 1.08; margin: 6px 0 18px; max-width: min(18ch, 44vw); text-wrap: balance; }
+.home-about-window .about-points { max-width: min(46ch, 44vw); margin: 22px 0 0; }
+.home-about-window .about-points li { color: var(--text); }
+.home-about-window__action { margin-top: 26px; }
+@media (max-width: 900px) {
+  .home-about-window { height: 150svh; }
+  .home-about-window .qc-window__band { padding-top: 96px; }
+  .home-about-window h2 { font-size: 1.9rem; max-width: none; }
+  .home-about-window .about-points { display: none; }
+}
