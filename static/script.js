@@ -246,8 +246,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const press = story.querySelector('.home-story__shot--press');
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
   let activeStage = -1;
-  let ticking = false;
-  let target = 0;
   let current = 0;
 
   const clamp01 = value => Math.max(0, Math.min(1, value));
@@ -305,14 +303,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     showStage(p < .5 ? 0 : p < .76 ? 1 : 2);
   }
 
-  function frame() {
-    current += (target - current) * .3;
-    if (Math.abs(target - current) < .0005) current = target;
-    paint(current);
-    ticking = current !== target;
-    if (ticking) requestAnimationFrame(frame);
-  }
-
   function showStage(index) {
     index = Math.max(0, Math.min(scenes.length - 1, index));
     if (index === activeStage) return;
@@ -322,25 +312,93 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
   }
 
-  function updateStory() {
+  // The hero is a stepper, not a scrubber: one gesture moves one stage along the timeline, and the move
+  // itself is animated. The stops are the building, the lifted sign, the press hall and the Speedmaster.
+  const STOPS = [0, .3, .56, .9];
+  const SCENE_FOR_STOP = [0, 0, 1, 2];
+  let stage = 0, busy = false, cooldownUntil = 0, tween = 0, moveEnds = 0;
+
+  function goTo(next) {
+    stage = Math.max(0, Math.min(STOPS.length - 1, next));
+    showStage(SCENE_FOR_STOP[stage]);
+    cancelAnimationFrame(tween);
+    const from = current, to = STOPS[stage];
+    if (still.matches) { current = to; paint(current); return; }
+    busy = true;
+    const started = performance.now(), duration = 1100;
+    moveEnds = started + duration;
+    const run = now => {
+      const t = Math.min(1, (now - started) / duration);
+      current = from + (to - from) * ease(t);
+      paint(current);
+      if (t < 1) tween = requestAnimationFrame(run);
+      else { busy = false; cooldownUntil = performance.now() + 350; }
+    };
+    tween = requestAnimationFrame(run);
+  }
+
+  // While the page sits at the top the hero owns the gestures. A downward gesture past the last stage, or an
+  // upward one at the first, is left alone so the page scrolls normally.
+  const pinned = () => window.scrollY <= 2;
+  const free = direction => (stage === STOPS.length - 1 && direction > 0) || (stage === 0 && direction < 0);
+  // If frames stopped mid-move (a throttled tab), land the move rather than swallow every gesture after it.
+  function settle() {
+    if (busy && performance.now() > moveEnds + 400) { cancelAnimationFrame(tween); current = STOPS[stage]; paint(current); busy = false; }
+  }
+  function step(direction, event) {
+    if (!pinned()) return false;
+    settle();
+    if (busy || performance.now() < cooldownUntil) { event.preventDefault(); return true; }
+    if (free(direction)) return false;
+    event.preventDefault();
+    goTo(stage + direction);
+    return true;
+  }
+  let lastWheel = -Infinity, wheelTravel = 0;
+  window.addEventListener('wheel', event => {
+    if (event.ctrlKey || !pinned()) return;
+    const now = performance.now();
+    const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
+    if (Math.abs(delta) < 1) return;
+    settle();
+    if (busy || now < cooldownUntil) { wheelTravel = 0; event.preventDefault(); return; }
+    if (free(delta > 0 ? 1 : -1)) return;
+    if (now - lastWheel > 160 || Math.sign(delta) !== Math.sign(wheelTravel)) wheelTravel = 0;
+    lastWheel = now;
+    wheelTravel += delta;
+    if (Math.abs(wheelTravel) < 12) { event.preventDefault(); return; }
+    wheelTravel = 0;
+    step(delta > 0 ? 1 : -1, event);
+  }, { passive: false });
+  let touchY = null, touchDone = false;
+  window.addEventListener('touchstart', event => { touchY = event.touches.length === 1 ? event.touches[0].clientY : null; touchDone = false; }, { passive: true });
+  window.addEventListener('touchmove', event => {
+    if (touchY === null || event.touches.length !== 1 || !pinned()) return;
+    const dy = touchY - event.touches[0].clientY, direction = dy > 0 ? 1 : -1;
+    settle();
+    if (busy) { event.preventDefault(); return; }
+    if (free(direction)) return;
+    if (touchDone) { event.preventDefault(); return; }
+    if (Math.abs(dy) >= 10) touchDone = step(direction, event);
+  }, { passive: false });
+  window.addEventListener('touchend', () => { touchY = null; touchDone = false; }, { passive: true });
+  window.addEventListener('keydown', event => {
+    if (event.target.closest('input, textarea, select, button, a, [contenteditable="true"]') || event.ctrlKey || event.metaKey || event.altKey) return;
+    const direction = ['ArrowDown', 'PageDown'].includes(event.key) || (event.key === ' ' && !event.shiftKey) ? 1
+      : ['ArrowUp', 'PageUp'].includes(event.key) || (event.key === ' ' && event.shiftKey) ? -1 : 0;
+    if (direction) step(direction, event);
+  });
+
+  function overHero() {
     const rect = story.getBoundingClientRect();
-    const travel = Math.max(1, story.offsetHeight - window.innerHeight);
     header?.classList.toggle('is-over-hero', rect.bottom > 68 && rect.top < 68);
-    target = still.matches ? 0 : clamp01(-rect.top / travel);
-    // Ease toward the scroll position so wheel steps glide instead of jumping.
-    if (!ticking) { ticking = true; requestAnimationFrame(frame); }
   }
-
-  function requestUpdate() {
-    requestAnimationFrame(updateStory);
-  }
-
   showStage(0);
-  updateStory();
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', () => { signRest = null; requestUpdate(); });
-  [building, signCut].forEach(img => { if (!img.complete) img.addEventListener('load', () => { signRest = null; requestUpdate(); }); });
-
+  paint(0);
+  overHero();
+  window.addEventListener('scroll', overHero, { passive: true });
+  window.addEventListener('resize', () => { signRest = null; paint(current); });
+  [building, signCut].forEach(img => { if (!img.complete) img.addEventListener('load', () => { signRest = null; paint(current); }); });
 })();
 
 /* Liquid navigation indicator — shared by every page and mobile menu. */

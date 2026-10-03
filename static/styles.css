@@ -1663,7 +1663,7 @@ a { color: inherit; }
 .home-page .site-header .nav-toggle span { background: #fff; }
 .home-page .site-header:not(.is-over-hero) .nav-toggle span { background: var(--text); }
 .home-page main { margin-top: 0; }
-.home-story { position: relative; height: 380svh; background: #efebe4; }
+.home-story { position: relative; height: 100svh; min-height: 540px; background: #efebe4; }
 .home-story__sticky { position: sticky; top: 0; height: 100svh; min-height: 540px; overflow: hidden; color: #fff; }
 /* Fly-through: the building zooms into its entrance door, revealing the press hall; the camera then glides from
    the front of the hall round to the Speedmaster's side. script.js drives transform and opacity only, from scroll. */
