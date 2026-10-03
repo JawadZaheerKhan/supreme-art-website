@@ -426,7 +426,6 @@ collections:
                   - { name: title, label: Title, widget: string }
                   - { name: text, label: Description, widget: text }
                   - { name: image, label: First photo, widget: image, required: false, hint: Shown full-screen behind this check's text. }
-                  - { name: focus, label: First photo focus, widget: string, required: false, hint: "Which part of the photo stays in frame, as horizontal and vertical percentages — e.g. 50% 40% keeps the upper middle. Leave empty for the centre." }
                   - { name: image_2, label: Second photo, widget: image, required: false, hint: Optional. Shown in the detail band below. }
                   - { name: caption_2, label: Second photo caption, widget: string, required: false }
                   - { name: image_3, label: Third photo, widget: image, required: false, hint: Optional. Shown in the detail band below. }
