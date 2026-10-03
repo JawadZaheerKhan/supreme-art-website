@@ -4,6 +4,7 @@
 {{> head}}
   <link rel="stylesheet" href="/quality-story.css" />
   <link rel="stylesheet" href="/process-simple.css" />
+  <link rel="stylesheet" href="/home-journey.css" />
 </head>
 <body class="home-page">
 {{> gtm-body}}
@@ -61,37 +62,37 @@
       </div>
     </div>
 
-    <!-- PROCESS: the Process page's chapters and scenes, shown as Quality-Control style windows -->
-    <section class="qc-story home-process-windows" aria-labelledby="home-process-title">
-      <div class="qc-intro">
-        <div class="container">
-          <p class="eyebrow">{{ page.process.eyebrow }}</p>
-          <h2 id="home-process-title">{{ page.process.heading }}</h2>
-          <p class="qc-intro__text">{{ page.process.lead }}</p>
+    <!-- PROCESS JOURNEY: one carton travels through the factory photos as the page scrolls (home-journey.js) -->
+    <section class="home-journey" aria-labelledby="home-journey-title">
+      <div class="home-journey__intro container">
+        <p class="eyebrow">{{ page.process.eyebrow }}</p>
+        <h2 id="home-journey-title">{{ page.process.heading }}</h2>
+        <p>{{ page.process.lead }}</p>
+      </div>
+      <div class="home-journey__track">
+        <div class="home-journey__sticky">
+          <figure class="home-journey__shot" data-shot="0"><span class="home-journey__fill" style="--img: url('/images/home/journey/01-design.webp')"></span><img src="/images/home/journey/01-design.webp" alt="" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="1"><span class="home-journey__fill" style="--img: url('/images/home/journey/02-ctp.webp')"></span><img src="/images/home/journey/02-ctp.webp" alt="" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="2"><span class="home-journey__fill" style="--img: url('/images/home/journey/03-processor.webp')"></span><img src="/images/home/journey/03-processor.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="3"><span class="home-journey__fill" style="--img: url('/images/home/journey/04-plate-out.webp')"></span><img src="/images/home/journey/04-plate-out.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="4"><span class="home-journey__fill" style="--img: url('/images/home/journey/05-press-units.webp')"></span><img src="/images/home/journey/05-press-units.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="5"><span class="home-journey__fill" style="--img: url('/images/home/journey/06-press-feeder.webp')"></span><img src="/images/home/journey/06-press-feeder.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="6"><span class="home-journey__fill" style="--img: url('/images/home/journey/07-uv-coater.webp')"></span><img src="/images/home/journey/07-uv-coater.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="7"><span class="home-journey__fill" style="--img: url('/images/home/journey/08-die-cutter.webp')"></span><img src="/images/home/journey/08-die-cutter.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="8"><span class="home-journey__fill" style="--img: url('/images/home/journey/09-breaking.webp')"></span><img src="/images/home/journey/09-breaking.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="9"><span class="home-journey__fill" style="--img: url('/images/home/journey/10-sorting.webp')"></span><img src="/images/home/journey/10-sorting.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="10"><span class="home-journey__fill" style="--img: url('/images/home/journey/11-folder-gluer.webp')"></span><img src="/images/home/journey/11-folder-gluer.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="11"><span class="home-journey__fill" style="--img: url('/images/home/journey/12-packed.webp')"></span><img src="/images/home/journey/12-packed.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="home-journey__shot" data-shot="12"><span class="home-journey__fill" style="--img: url('/images/home/journey/13-delivery.webp')"></span><img src="/images/home/journey/13-delivery.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <div class="home-journey__plate" aria-hidden="true"><svg viewBox="0 0 550 460"><path d="M85,1 H275 V85 H549 V375 H275 V459 H85 V375 H1 V85 H85 Z M85,85 V375 M275,85 V375 M360,85 V375 M85,85 H275 M85,375 H275" /><rect x="120" y="150" width="120" height="16" /><rect x="120" y="180" width="90" height="10" /><rect x="120" y="290" width="120" height="30" /></svg></div>
+          <div class="home-journey__carton assembly-stage proc-box" aria-hidden="true">{{> carton-scene}}</div>
+          <div class="home-journey__card" aria-live="polite">
+            {{#each page.process.steps}}<div class="home-journey__step" data-journey-step="{{ @index }}"><span class="home-journey__num">{{ @num }}</span><h3>{{ title }}</h3><p>{{ text }}</p></div>
+            {{/each}}<div class="home-journey__meter" aria-hidden="true"><span></span></div>
+            <a class="home-journey__all" href="{{ page.process.button_href }}">{{ page.process.button_label }} &rarr;</a>
+          </div>
         </div>
       </div>
-      <div class="home-assembly">
-      <!-- The Process page's carton builds in the centre lane as the windows scroll past. -->
-      <aside class="assembly-rail" aria-label="Carton assembly progress">
-        <div class="assembly-sticky">
-          <p class="assembly-eyebrow">YOUR CARTON TAKES SHAPE</p>
-          <div class="assembly-stage proc-box" aria-hidden="true">{{> carton-scene}}</div>
-          <p class="assembly-state">A flat sheet of board</p>
-          <div class="assembly-meter" aria-hidden="true"><span></span></div>
-        </div>
-      </aside>
-      {{#each content.process.chapters}}<div class="home-process-windows__chapter container"><span>{{ @num }}</span><h3>{{ title }}</h3></div>
-      {{#each scenes}}<article class="qc-window" aria-label="{{ lead }}" data-box="{{ box }}" data-step="{{ step }}">
-        {{#if hero}}<div class="qc-window__media" style="--qc-photo: url('{{ hero.image }}')"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /></div>{{else}}<div class="qc-window__media" style="--qc-photo: url('{{ row.0.image }}')"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /></div>{{/if}}
-        <div class="qc-window__band container">
-          <h3>{{ lead }}</h3>
-          <p>{{ detail }}</p>
-        </div>
-      </article>
-      {{#if hero}}<div class="qc-details"><div class="container qc-details__grid">{{#with row.0}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}{{#with row.1}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}</div></div>{{else}}{{#if row.1}}<div class="qc-details"><div class="container qc-details__grid">{{#with row.1}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}{{#with row.2}}<figure><div class="qc-details__frame"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/with}}</div></div>{{/if}}{{/if}}
-      {{/each}}{{/each}}
-      </div>
-      <p class="home-process-windows__all container"><a class="btn btn--accent" href="{{ page.process.button_href }}">{{ page.process.button_label }}</a></p>
     </section>
 
     <!-- QUALITY HORIZONTAL STAGES -->
@@ -165,7 +166,7 @@
 {{> footer}}
 
   <script src="/script.js"></script>
-  <script src="/process-simple.js"></script>
+  <script src="/home-journey.js"></script>
   <script src="/services-motion.js"></script>
 </body>
 </html>

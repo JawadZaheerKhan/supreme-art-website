@@ -189,6 +189,24 @@ collections:
                 fields:
                   - { name: image, label: Photo, widget: image, required: false }
                   - { name: alt, label: Caption if no photo is set, widget: string }
+          - name: process
+            label: 'Section — Process journey'
+            widget: object
+            hint: The photos and the carton's path through them are fixed; only the words are edited here.
+            fields:
+              - { name: eyebrow, label: Small label above heading, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: lead, label: Intro line, widget: text }
+              - name: steps
+                label: Steps
+                widget: list
+                summary: '{{fields.title}}'
+                hint: Keep all 13 steps in this order — each one belongs to a photo.
+                fields:
+                  - { name: title, label: Title, widget: string }
+                  - { name: text, label: Description, widget: text }
+              - { name: button_label, label: Link text, widget: string }
+              - { name: button_href, label: Link goes to, widget: string }
           - name: gallery
             label: 'Section — Factory gallery (headings only)'
             widget: object

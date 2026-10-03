@@ -133,28 +133,3 @@
   .process-photo-frame img { animation: none; transform: none; }
   .story-motion-ready .process-scene :is(.scene-copy, figure) { opacity: 1; transform: none; transition: none; }
 }
-
-/* Home: the same carton builds in a centre lane between the Quality-Control style process windows. */
-.home-assembly { position: relative; }
-.home-assembly > .assembly-rail { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
-.home-assembly .assembly-sticky { top: 0; width: 24vw; height: 100svh; margin: 0 auto; padding-top: 64px; transform: none; }
-.home-assembly .assembly-stage { height: min(46svh, 400px); }
-@media (min-width: 901px) {
-  .home-assembly .qc-window__media img { max-width: 34vw; }
-  /* Text and detail photos run edge to edge and stop short of the carton's 26vw centre lane. */
-  .home-assembly { --lane: 26vw; --side: max(24px, 4vw); }
-  .home-assembly .qc-window__band.container, .home-assembly .qc-details .container { width: 100%; max-width: none; padding-inline: var(--side); }
-  .home-assembly .qc-details figure { max-width: calc((100vw - var(--lane)) / 2 - var(--side) - 8px); }
-  .home-assembly .qc-window__band h3 { max-width: min(16ch, calc(50vw - 13vw - var(--side) - 16px)); }
-  .home-assembly .qc-window__band p { max-width: min(46ch, calc(50vw - 13vw - var(--side) - 16px)); }
-  .home-assembly .qc-details__grid { justify-content: space-between; }
-  .home-assembly .qc-details figure:only-child { flex-direction: column; align-items: flex-start; gap: 0; }
-  .home-assembly .qc-details figure:only-child figcaption { font-family: inherit; font-size: 1.05rem; margin-top: 16px; max-width: 36ch; }
-}
-/* Phones and tablets: the carton rides in a small glass card under the header, beside the scrolling text. */
-@media (max-width: 900px) {
-  .home-assembly .assembly-sticky { top: 74px; width: min(40vw, 170px); height: min(40vw, 170px); margin: 0 12px 0 auto; padding: 6px; border: 1px solid rgba(255,255,255,.75); border-radius: 16px; background: rgba(250,248,244,.9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 14px 36px -18px rgba(60,45,30,.45); }
-  .home-assembly .assembly-stage { height: 100%; }
-  .home-assembly .assembly-state { display: none; }
-  .home-assembly .qc-window__band { padding-top: calc(86px + min(40vw, 170px)); }
-}

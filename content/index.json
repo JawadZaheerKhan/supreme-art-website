@@ -50,9 +50,63 @@
   "process": {
     "eyebrow": "How it's made",
     "heading": "From artwork to flat-packed carton.",
-    "lead": "Pre press, press and offpress — every stage under one roof in Peshawar.",
+    "lead": "Follow one carton through our factory — from the designer’s screen to the delivery bay.",
     "button_label": "See the full process",
-    "button_href": "process.html"
+    "button_href": "process.html",
+    "steps": [
+      {
+        "title": "Design",
+        "text": "Our designers lay out every panel, colour and line of the carton on screen."
+      },
+      {
+        "title": "CTP plate",
+        "text": "The approved artwork is imaged straight onto a blue-coated printing plate."
+      },
+      {
+        "title": "Plate processing",
+        "text": "The plate runs through the processor, which washes the unexposed coating away."
+      },
+      {
+        "title": "Plate ready",
+        "text": "The carton’s artwork now sits on an aluminium plate, exactly as it was approved on screen."
+      },
+      {
+        "title": "On the press",
+        "text": "The plate is mounted on the rollers of our Heidelberg presses."
+      },
+      {
+        "title": "Sheets ready",
+        "text": "Paperboard sheets are stacked at the feeder and fed into the press."
+      },
+      {
+        "title": "UV coating",
+        "text": "A UV coat protects the print and gives the sheet its shine."
+      },
+      {
+        "title": "Die-cutting",
+        "text": "Each sheet is cut and creased to the shape of the carton."
+      },
+      {
+        "title": "Breaking out",
+        "text": "The cut cartons are separated from the waste board around them."
+      },
+      {
+        "title": "Inspection",
+        "text": "Every carton is checked by hand before it is folded."
+      },
+      {
+        "title": "Folding & gluing",
+        "text": "Our Bobst folder-gluers fold each carton and glue its side seam."
+      },
+      {
+        "title": "Packing",
+        "text": "Finished cartons are counted and packed into labelled shipping boxes."
+      },
+      {
+        "title": "Delivery",
+        "text": "Palletised and on its way to the client’s filling line."
+      }
+    ]
   },
   "capabilities": {
     "eyebrow": "Our capabilities",

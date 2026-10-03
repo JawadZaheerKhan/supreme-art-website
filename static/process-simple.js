@@ -1,8 +1,7 @@
 // Scroll-linked carton that travels between scenes. Scroll position is the playhead:
 // scrolling back reverses every fold and every move.
 (() => {
-  // The Process page and the home page's process windows share this carton.
-  const root = document.querySelector('.process-assembly, .home-assembly');
+  const root = document.querySelector('.process-assembly');
   const stage = root?.querySelector('.assembly-stage');
   const scene = stage?.querySelector('.proc-box__scene');
   if (!scene) return;
