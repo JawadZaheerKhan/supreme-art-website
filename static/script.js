@@ -257,7 +257,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   // anchored on the window (object-position in styles.css), so these map to the screen the same way at any size.
   const SIGN = { x: 752 / 1600, y: 100 / 900, w: 480 / 1600 };
   const WINDOW = { x: .6, y: .437 };
-  const BUILDING_TOP = 84 / 900; // top edge of the facade in the photo: it sits right under the menu bar
+  const BUILDING_TOP = 103 / 900; // the facade's first horizontal joint line in the photo: it sits right under the menu bar
   const navBottom = () => { const nav = document.querySelector('.site-header .nav-links'); return nav ? nav.getBoundingClientRect().bottom : 72; };
   let signRest = null;
   function placeSign() {
