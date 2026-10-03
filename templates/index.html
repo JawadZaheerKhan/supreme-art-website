@@ -71,7 +71,6 @@
       </div>
       {{#each content.process.chapters}}<div class="home-chapter" data-chapter="{{ @index }}">
         <div class="container">
-          <p class="home-chapter__label">{{ label }}</p>
           <h3 class="home-chapter__title">{{ title }}</h3>
           <p class="home-chapter__story">{{ story }}</p>
           <ol class="home-chapter__trail" aria-label="Process chapters">{{#each content.process.chapters}}<li>{{ title }}</li>{{/each}}</ol>
@@ -80,7 +79,7 @@
       {{#each scenes}}<article class="qc-window" aria-label="{{ lead }}">
         {{#if hero}}<div class="qc-window__media" style="--qc-photo: url('{{ hero.image }}')"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /></div>{{else}}<div class="qc-window__media" style="--qc-photo: url('{{ row.0.image }}')"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /></div>{{/if}}
         <div class="qc-window__band container">
-          <p class="home-chapters__count"><span>{{ @num }}</span> / {{ scenes.length }} · {{ title }}</p>
+          <p class="home-chapters__count">{{ title }}</p>
           <h3>{{ lead }}</h3>
           <p>{{ detail }}</p>
         </div>
@@ -89,28 +88,26 @@
       <p class="home-chapters__all container"><a class="btn btn--accent" href="{{ page.process.button_href }}">{{ page.process.button_label }}</a></p>
     </section>
 
-    <!-- QUALITY HORIZONTAL STAGES -->
-    <section class="home-quality-story" data-home-quality aria-label="Quality assurance">
-      <div class="home-quality-story__sticky">
-        <div class="home-quality-story__scenes">
-          {{#each content.quality.process.steps}}<article class="home-process-scene home-quality-scene" data-quality-card="{{ @index }}">
-            <img src="{{ image }}" alt="{{ title }} at Supreme Art" loading="lazy" />
-
-            <div class="container home-process-scene__copy">
-              <span class="home-process-scene__num">{{ @num }}</span>
-              <p class="eyebrow">Quality assurance</p>
-              <h2>{{ title }}</h2>
-              <p>{{ text }}</p>
-            </div>
-          </article>{{/each}}
+    <!-- QUALITY: told like the process — an opening page, then each check in a Quality-Control window -->
+    <section class="qc-story home-chapters home-quality-chapter" aria-labelledby="home-quality-title">
+      <div class="home-chapter">
+        <div class="container">
+          <h2 class="home-chapter__title" id="home-quality-title">{{ page.quality.eyebrow }}</h2>
+          <p class="home-chapter__story">{{ page.quality.text }}</p>
         </div>
-        <div class="home-quality-story__chrome container">
-          <span class="home-quality-story__count"><b>01</b> / {{ content.quality.process.steps.length }}</span>
-          <a class="home-quality-story__all" href="quality.html">Explore quality &rarr;</a>
-        </div>
-        <div class="home-quality-story__progress" aria-hidden="true"><span></span></div>
       </div>
+      {{#each content.quality.process.steps}}<article class="qc-window" aria-label="{{ title }}">
+        <div class="qc-window__media" style="--qc-photo: url('{{ image }}')"><img src="{{ image }}" alt="{{ title }} at Supreme Art" loading="lazy" decoding="async" /></div>
+        <div class="qc-window__band container">
+          <p class="home-chapters__count">{{ page.quality.eyebrow }}</p>
+          <h3>{{ title }}</h3>
+          <p>{{ text }}</p>
+        </div>
+      </article>
+      {{/each}}
+      <p class="home-chapters__all container"><a class="btn btn--accent" href="{{ page.quality.button_href }}">{{ page.quality.button_label }}</a></p>
     </section>
+
     <!-- CLIENTS SCROLL CHAPTER -->
     <section id="clients" class="home-clients-story" data-home-clients data-services-section aria-label="Our clients">
       <div class="home-clients-story__sticky">
