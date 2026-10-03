@@ -235,7 +235,9 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const scenes = [...story.querySelectorAll('[data-home-stage]')];
   const dots = [...story.querySelectorAll('.home-story__progress span')];
   const header = document.querySelector('.site-header');
+  const sticky = story.querySelector('.home-story__sticky');
   const building = story.querySelector('.home-story__building');
+  const logo = story.querySelector('.home-story__full-logo');
   const hall = story.querySelector('.home-story__shot--hall');
   const press = story.querySelector('.home-story__shot--press');
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -248,23 +250,48 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const span = (value, from, to) => clamp01((value - from) / (to - from));
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-  // Scroll timeline: hold on the building, fly through its door (.07–.44), hold in the press hall,
-  // then glide the camera from the front of the hall round to the Speedmaster's side (.56–.9) and hold.
+  // Where things are in the building photo, as fractions of it: the signage on the facade (and its width),
+  // and the window under it that the camera dives through. The photo is drawn to cover the frame, anchored
+  // on the window (object-position in styles.css), so these map to the screen the same way at any size.
+  const SIGN = { x: .6, y: .225, w: .27 };
+  const WINDOW = { x: .603, y: .437 };
+  let signStart = null;
+  function measureSign() {
+    const W = sticky.clientWidth, H = sticky.clientHeight;
+    const nw = building.naturalWidth || 1600, nh = building.naturalHeight || 900;
+    const s = Math.max(W / nw, H / nh), dw = nw * s, dh = nh * s;
+    const ox = (W - dw) * WINDOW.x, oy = (H - dh) * WINDOW.y;
+    logo.style.transform = 'none';
+    const r = logo.getBoundingClientRect(), b = sticky.getBoundingClientRect();
+    const cx = r.left - b.left + r.width / 2, cy = r.top - b.top + r.height / 2;
+    signStart = { dx: ox + SIGN.x * dw - cx, dy: oy + SIGN.y * dh - cy, k: (SIGN.w * dw) / r.width };
+  }
+
+  // Scroll timeline: hold on the building; the name and logo lift off the facade (.1–.34) and settle in
+  // front of it; the camera dives through the window under the signage (.4–.66) into the press hall; then it
+  // glides from the front of the hall round to the Speedmaster's side (.74–.96) and holds.
   // Only transform and opacity change, so the browser never re-rasterises the enlarged photos.
   function paint(p) {
-    const zoom = span(p, .07, .44);
-    building.style.transform = `scale(${Math.pow(7, ease(zoom))})`;
+    if (!signStart) measureSign();
+    const lift = ease(span(p, .1, .34));
+    const zoom = span(p, .4, .66);
+    const past = ease(span(zoom, 0, .4));
+    const k = (signStart.k + (1 - signStart.k) * lift) * (1 + .7 * past);
+    logo.style.transform = `translate(${signStart.dx * (1 - lift)}px, ${signStart.dy * (1 - lift)}px) scale(${k})`;
+    logo.style.opacity = String(Math.min(span(lift, 0, .25), 1 - past));
+
+    building.style.transform = `scale(${Math.pow(8, ease(zoom))})`;
     building.style.opacity = String(1 - span(zoom, .72, .98));
 
     const settle = ease(span(zoom, .6, 1));
-    const glide = ease(span(p, .56, .9));
+    const glide = ease(span(p, .74, .96));
     const swap = span(glide, .28, .72);
     hall.style.transform = `translateX(${-16 * glide}%) rotateY(${16 * glide}deg) scale(${1.08 + .22 * (1 - settle) + .3 * glide})`;
     hall.style.opacity = String(1 - swap);
     press.style.transform = `translateX(${16 * (1 - glide)}%) rotateY(${-16 * (1 - glide)}deg) scale(${1.02 + .34 * (1 - glide)})`;
     press.style.opacity = String(swap);
 
-    showStage(p < .24 ? 0 : p < .74 ? 1 : 2);
+    showStage(p < .5 ? 0 : p < .85 ? 1 : 2);
   }
 
   function frame() {
@@ -300,7 +327,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   showStage(0);
   updateStory();
   window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate);
+  window.addEventListener('resize', () => { signStart = null; requestUpdate(); });
+  if (!building.complete) building.addEventListener('load', () => { signStart = null; requestUpdate(); });
 
 })();
 
