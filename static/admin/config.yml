@@ -458,8 +458,10 @@ collections:
               - { name: client, label: Client name, widget: string }
               - { name: logo, label: Client logo, widget: image }
               - { name: product, label: Product name, widget: string }
-              - { name: image, label: Carton photo, widget: image }
               - { name: note, label: One-line note about the carton, widget: string }
+              - { name: box_id, label: Carton box id, widget: string, hint: "Must match a box on the Services page, e.g. zeflox, duet, quench, nova-plast, swaad-biryani, pedrol." }
+              - { name: box_name, label: Carton name (for screen readers), widget: string }
+              - { name: box_front, label: Carton front photo, widget: image }
           - name: cta
             label: Closing call to action
             widget: object

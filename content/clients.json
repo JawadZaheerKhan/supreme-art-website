@@ -4,12 +4,12 @@
   "banner": { "crumb": "Our clients", "heading": "Trusted by the brands you know." },
   "intro": "Every carton we make carries someone else's name. Here are some of the companies that trust us with theirs, and one of the packs we print for each.",
   "items": [
-    { "client": "Ferozsons Laboratories", "logo": "/images/clients/ferozsons.png", "product": "Quench Cream 50g", "image": "/images/quench-box/front.jpg", "note": "Tube carton with Urdu and English panels" },
-    { "client": "Evolution", "logo": "/images/clients/evolution.png", "product": "Duet D3 / K2", "image": "/images/duet-box/front.png", "note": "Softgel capsule carton" },
-    { "client": "Shaigan Pharmaceuticals", "logo": "/images/clients/shaigan.png", "product": "Zeflox 250 mg", "image": "/images/zeflox-box/front.png", "note": "Tablet carton, 1 × 10 blister" },
-    { "client": "Herbion Pharma", "logo": "/images/clients/herbion.png", "product": "Nova-Plast fabric bandage", "image": "/images/nova-plast-box/front.png", "note": "Hanging carton with euro slot" },
-    { "client": "Stanley Foods — SwaaD", "logo": "/images/clients/swaad.png", "product": "SwaaD Bombay Biryani masala", "image": "/images/swaad-biryani-box/front.png", "note": "Food carton with full-colour print" },
-    { "client": "Stanley Pharmaceuticals", "logo": "/images/clients/stanley.png", "product": "Pedrol oral suspension 60 ml", "image": "/images/pedrol-box/front.jpg", "note": "Syrup bottle carton" }
+    { "client": "Ferozsons Laboratories", "logo": "/images/clients/ferozsons.png", "product": "Quench Cream 50g", "note": "Tube carton with Urdu and English panels", "box_id": "quench", "box_name": "Quench Cream", "box_front": "/images/quench-box/front.jpg" },
+    { "client": "Evolution", "logo": "/images/clients/evolution.png", "product": "Duet D3 / K2", "note": "Softgel capsule carton", "box_id": "duet", "box_name": "Duet D3 K2", "box_front": "/images/duet-box/front.png" },
+    { "client": "Shaigan Pharmaceuticals", "logo": "/images/clients/shaigan.png", "product": "Zeflox 250 mg", "note": "Tablet carton, 1 × 10 blister", "box_id": "zeflox", "box_name": "Zeflox", "box_front": "/images/zeflox-box/front.png" },
+    { "client": "Herbion Pharma", "logo": "/images/clients/herbion.png", "product": "Nova-Plast fabric bandage", "note": "Hanging carton with euro slot", "box_id": "nova-plast", "box_name": "Herbion Nova-Plast", "box_front": "/images/nova-plast-box/front.png" },
+    { "client": "Stanley Foods — SwaaD", "logo": "/images/clients/swaad.png", "product": "SwaaD Bombay Biryani masala", "note": "Food carton with full-colour print", "box_id": "swaad-biryani", "box_name": "SwaaD Bombay Biryani", "box_front": "/images/swaad-biryani-box/front.png" },
+    { "client": "Stanley Pharmaceuticals", "logo": "/images/clients/stanley.png", "product": "Pedrol oral suspension 60 ml", "note": "Syrup bottle carton", "box_id": "pedrol", "box_name": "Pedrol", "box_front": "/images/pedrol-box/front.jpg" }
   ],
   "cta": { "heading": "Have a carton to make?", "text": "Send us your artwork or a sample and we will quote the job.", "label": "Get a quote", "href": "contact.html" }
 }
