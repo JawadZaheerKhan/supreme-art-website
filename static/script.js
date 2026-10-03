@@ -237,7 +237,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const header = document.querySelector('.site-header');
   const sticky = story.querySelector('.home-story__sticky');
   const building = story.querySelector('.home-story__building');
-  const logo = story.querySelector('.home-story__full-logo');
+  const sign = story.querySelector('.home-story__sign');
   const hall = story.querySelector('.home-story__shot--hall');
   const press = story.querySelector('.home-story__shot--press');
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -250,35 +250,40 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const span = (value, from, to) => clamp01((value - from) / (to - from));
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-  // Where things are in the building photo, as fractions of it: the signage on the facade (and its width),
-  // and the window under it that the camera dives through. The photo is drawn to cover the frame, anchored
-  // on the window (object-position in styles.css), so these map to the screen the same way at any size.
-  const SIGN = { x: .6, y: .225, w: .27 };
+  // Where things are in the building photo, as fractions of it: the box the signage layer (hero-sign.png) was
+  // cut from, and the window under it that the camera dives through. The photo is drawn to cover the frame,
+  // anchored on the window (object-position in styles.css), so these map to the screen the same way at any size.
+  const SIGN = { x: 755 / 1600, y: 85 / 900, w: 450 / 1600 };
   const WINDOW = { x: .603, y: .437 };
-  let signStart = null;
-  function measureSign() {
+  let signRest = null;
+  function placeSign() {
     const W = sticky.clientWidth, H = sticky.clientHeight;
     const nw = building.naturalWidth || 1600, nh = building.naturalHeight || 900;
     const s = Math.max(W / nw, H / nh), dw = nw * s, dh = nh * s;
     const ox = (W - dw) * WINDOW.x, oy = (H - dh) * WINDOW.y;
-    logo.style.transform = 'none';
-    const r = logo.getBoundingClientRect(), b = sticky.getBoundingClientRect();
-    const cx = r.left - b.left + r.width / 2, cy = r.top - b.top + r.height / 2;
-    signStart = { dx: ox + SIGN.x * dw - cx, dy: oy + SIGN.y * dh - cy, k: (SIGN.w * dw) / r.width };
+    const left = ox + SIGN.x * dw, top = oy + SIGN.y * dh, width = SIGN.w * dw;
+    sign.style.left = left + 'px';
+    sign.style.top = top + 'px';
+    sign.style.width = width + 'px';
+    // Where the lifted signage settles: centred, a little above the middle of the frame, as wide as the frame allows.
+    const height = width * (sign.naturalHeight || 490) / (sign.naturalWidth || 900);
+    const scale = Math.min(W * .86, H * .5 * width / height, width * 2.6) / width;
+    signRest = { dx: W / 2 - (left + width / 2), dy: H * .44 - (top + height / 2), scale };
   }
 
-  // Scroll timeline: hold on the building; the name and logo lift off the facade (.1–.34) and settle in
-  // front of it; the camera dives through the window under the signage (.4–.66) into the press hall; then it
+  // Scroll timeline: hold on the building; the signage lifts off the wall (.1–.36) and settles in front of
+  // it; the camera dives through the window under the signage (.42–.66) into the press hall; then it
   // glides from the front of the hall round to the Speedmaster's side (.74–.96) and holds.
   // Only transform and opacity change, so the browser never re-rasterises the enlarged photos.
   function paint(p) {
-    if (!signStart) measureSign();
-    const lift = ease(span(p, .1, .34));
-    const zoom = span(p, .4, .66);
+    if (!signRest) placeSign();
+    const lift = ease(span(p, .1, .36));
+    const zoom = span(p, .42, .66);
     const past = ease(span(zoom, 0, .4));
-    const k = (signStart.k + (1 - signStart.k) * lift) * (1 + .7 * past);
-    logo.style.transform = `translate(${signStart.dx * (1 - lift)}px, ${signStart.dy * (1 - lift)}px) scale(${k})`;
-    logo.style.opacity = String(Math.min(span(lift, 0, .25), 1 - past));
+    const k = (1 + (signRest.scale - 1) * lift) * (1 + .8 * past);
+    sign.style.transform = `translate(${signRest.dx * lift}px, ${signRest.dy * lift}px) scale(${k})`;
+    sign.style.opacity = String(1 - past);
+    sign.style.filter = `drop-shadow(0 ${4 + 26 * lift}px ${6 + 30 * lift}px rgba(0,0,0,${.18 + .3 * lift}))`;
 
     building.style.transform = `scale(${Math.pow(8, ease(zoom))})`;
     building.style.opacity = String(1 - span(zoom, .72, .98));
@@ -327,8 +332,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   showStage(0);
   updateStory();
   window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', () => { signStart = null; requestUpdate(); });
-  if (!building.complete) building.addEventListener('load', () => { signStart = null; requestUpdate(); });
+  window.addEventListener('resize', () => { signRest = null; requestUpdate(); });
+  [building, sign].forEach(img => { if (!img.complete) img.addEventListener('load', () => { signRest = null; requestUpdate(); }); });
 
 })();
 

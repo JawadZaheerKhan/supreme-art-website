@@ -1671,7 +1671,9 @@ a { color: inherit; }
 .home-story__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; will-change: transform, opacity; backface-visibility: hidden; }
 .home-story__shot--press { opacity: 0; }
 /* object-position and transform-origin share the window under the signage, so it stays on screen at any viewport shape (script.js SIGN/WINDOW). */
-.home-story__building { z-index: 1; object-position: 60.3% 43.7%; transform-origin: 60.3% 43.7%; }
+.home-story__media img.home-story__building { z-index: 1; object-position: 60.3% 43.7%; transform-origin: 60.3% 43.7%; }
+/* The signage layer sits exactly over the signage in the photo (script.js places it); it lifts out as you scroll. */
+.home-story__media img.home-story__sign { position: absolute; inset: auto; width: auto; height: auto; object-fit: unset; z-index: 2; transform-origin: 50% 50%; will-change: transform, opacity; filter: none; }
 .home-story__shade { position: absolute; z-index: 2; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0,.48), rgba(0, 0, 0,.12) 38%, rgba(0, 0, 0,.48)), linear-gradient(90deg, rgba(0, 0, 0,.44), transparent 55%, rgba(0, 0, 0,.12)); }
 .home-story__scenes { position: absolute; inset: 0; }
 .home-story__scene {
