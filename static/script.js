@@ -257,18 +257,18 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   // anchored on the window (object-position in styles.css), so these map to the screen the same way at any size.
   const SIGN = { x: 752 / 1600, y: 100 / 900, w: 480 / 1600 };
   const WINDOW = { x: .6, y: .437 };
-  const SIGN_TOP = 121 / 900;   // top of the calligraphy in the photo
-  const HEADER_CLEAR = 96;      // px from the top that the menu bar needs
+  const BUILDING_TOP = 84 / 900; // top edge of the facade in the photo: it sits right under the menu bar
+  const navBottom = () => { const nav = document.querySelector('.site-header .nav-links'); return nav ? nav.getBoundingClientRect().bottom : 72; };
   let signRest = null;
   function placeSign() {
     const W = sticky.clientWidth, H = sticky.clientHeight;
     const nw = building.naturalWidth || 1600, nh = building.naturalHeight || 900;
     const s = Math.max(W / nw, H / nh), dw = nw * s, dh = nh * s;
-    // Anchor the photo on the window, but never let the top of the signage slip under the menu bar: on wide,
-    // short screens the photo is shifted down just enough, and the dive's origin follows the window.
+    // Anchor the photo on the window, but never let the facade's top edge slip under the menu bar: on wide,
+    // short screens the photo is shifted down so that edge meets the bar, and the dive's origin follows the window.
     const ox = (W - dw) * WINDOW.x;
     let oy = (H - dh) * WINDOW.y;
-    oy = Math.max(H - dh, Math.min(0, Math.max(oy, HEADER_CLEAR - SIGN_TOP * dh)));
+    oy = Math.max(H - dh, Math.min(0, Math.max(oy, navBottom() - BUILDING_TOP * dh)));
     building.style.objectPosition = (WINDOW.x * 100) + '% ' + ((H - dh) ? (oy / (H - dh)) * 100 : 50) + '%';
     facade.style.transformOrigin = (ox + WINDOW.x * dw) + 'px ' + (oy + WINDOW.y * dh) + 'px';
     const left = ox + SIGN.x * dw, top = oy + SIGN.y * dh, width = SIGN.w * dw;
