@@ -16,13 +16,13 @@
 .assembly-stage .carton { left: 85px; top: 85px; transform: translateX(calc(var(--foldA) * 95px)); transform-style: preserve-3d; }
 /* Carton colours, all driven 0 → 1 from the scroll:
    --red the printed theme, --blank unprinted white board, --mono printed in black only. */
-.assembly-stage .proc-box__scene { --red-pct: calc(var(--red, 0) * 100%); --blank-pct: calc(var(--blank, 0) * 100%); --box-accent: color-mix(in srgb, #c0262f var(--red-pct), #1b6fb3); }
-.assembly-stage .panel { outline: 1px solid color-mix(in srgb, #b86a70 var(--red-pct), #8fa4b5); background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #fff7f7 var(--red-pct), #fbfcfe)); }
-.assembly-stage .panel--left { background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #eab7ba var(--red-pct), #d4e1eb)); }
-.assembly-stage .panel--right { background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #dc9a9f var(--red-pct), #bfcedb)); }
-.assembly-stage .panel--back { background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #f3d3d5 var(--red-pct), #e2eaf0)); }
-.assembly-stage .panel--top { top: -85px; height: 85px; background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #f6dfe0 var(--red-pct), #e8eff5)); }
-.assembly-stage .panel--bottom { height: 85px; background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #d99498 var(--red-pct), #bccddb)); }
+.assembly-stage .proc-box__scene { --red-pct: calc(var(--red, 0) * 100%); --blank-pct: calc(var(--blank, 0) * 100%); --box-accent: color-mix(in srgb, #c0262f var(--red-pct), #5b5f66); }
+.assembly-stage .panel { outline: 1px solid color-mix(in srgb, #b86a70 var(--red-pct), #a4a6ab); background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #fff7f7 var(--red-pct), #fcfcfc)); }
+.assembly-stage .panel--left { background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #eab7ba var(--red-pct), #e2e2e4)); }
+.assembly-stage .panel--right { background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #dc9a9f var(--red-pct), #cfd0d3)); }
+.assembly-stage .panel--back { background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #f3d3d5 var(--red-pct), #ececed)); }
+.assembly-stage .panel--top { top: -85px; height: 85px; background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #f6dfe0 var(--red-pct), #f0f0f1)); }
+.assembly-stage .panel--bottom { height: 85px; background: color-mix(in srgb, #fff var(--blank-pct), color-mix(in srgb, #d99498 var(--red-pct), #cbcccf)); }
 .assembly-stage .art__band, .assembly-stage .art--side { background: var(--box-accent); }
 .assembly-stage .art { opacity: var(--print); filter: grayscale(var(--mono, 0)) contrast(calc(1 + .5 * var(--mono, 0))) saturate(calc(1 + .25 * var(--uv, 0))); }
 /* One layer over every panel carries, top to bottom: the UV gloss streaks (--uv), the raised spot-UV dots (--spot)
@@ -37,7 +37,7 @@
 .assembly-stage .panel--front::after { display: none; }
 /* The die-cut traces the whole carton (550 × 460, like the rotating frame). */
 .assembly-stage .proc-box__cut { left: 0; top: 0; width: 550px; height: 460px; }
-.assembly-stage .proc-box__cut .cutline { stroke: #1b6fb3; stroke-width: 2.5px; }
+.assembly-stage .proc-box__cut .cutline { stroke: #1c1f24; stroke-width: 2.5px; }
 
 /* The printed sheet the carton sits on, one up. It lives in the carton's own frame, so it shares its size and turn.
    --sheet shows it; --ink, --red, --scan, --uv and --spot drive what happens across it. */
