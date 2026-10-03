@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{> head}}
+  <link rel="stylesheet" href="/clients-page.css" />
+</head>
+<body>
+{{> gtm-body}}
+{{> loader}}
+{{> header}}
+
+  <main>
+{{> banner}}
+    <section class="section clients-page">
+      <div class="container">
+        <p class="clients-page__intro">{{ page.intro }}</p>
+        <!-- One client per row: its logo beside one of the cartons we print for it, the carton shown whole. -->
+        <ul class="clients-page__list">
+          {{#each page.items}}<li class="client-pair">
+            <div class="client-pair__logo"><img src="{{ logo }}" alt="{{ client }}" loading="lazy" decoding="async" /><span>{{ client }}</span></div>
+            <figure class="client-pair__product">
+              <img src="{{ image }}" alt="{{ product }} carton printed by Supreme Art for {{ client }}" loading="lazy" decoding="async" />
+              <figcaption><strong>{{ product }}</strong><span>{{ note }}</span></figcaption>
+            </figure>
+          </li>
+          {{/each}}
+        </ul>
+        <div class="clients-page__cta">
+          <h2>{{ page.cta.heading }}</h2>
+          <p>{{ page.cta.text }}</p>
+          <a class="btn btn--accent" href="{{ page.cta.href }}">{{ page.cta.label }}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+{{> footer}}
+
+  <script src="/script.js"></script>
+</body>
+</html>

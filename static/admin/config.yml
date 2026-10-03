@@ -436,6 +436,38 @@ collections:
               - { name: secondary_href, label: Second button links to, widget: string }
 
       # --------------------------------------------------------- careers page
+      # --------------------------------------------------------- clients page
+      - name: clients
+        label: Clients page
+        file: content/clients.json
+        fields:
+          - { name: title, label: Browser tab / search result title, widget: string }
+          - { name: description, label: Search engine description, widget: text }
+          - name: banner
+            label: Page banner
+            widget: object
+            fields:
+              - { name: crumb, label: Small label, widget: string }
+              - { name: heading, label: Main heading, widget: string }
+          - { name: intro, label: Introduction, widget: text }
+          - name: items
+            label: Clients and their cartons
+            widget: list
+            summary: '{{fields.client}} — {{fields.product}}'
+            fields:
+              - { name: client, label: Client name, widget: string }
+              - { name: logo, label: Client logo, widget: image }
+              - { name: product, label: Product name, widget: string }
+              - { name: image, label: Carton photo, widget: image }
+              - { name: note, label: One-line note about the carton, widget: string }
+          - name: cta
+            label: Closing call to action
+            widget: object
+            fields:
+              - { name: heading, label: Heading, widget: string }
+              - { name: text, label: Paragraph, widget: text }
+              - { name: label, label: Button text, widget: string }
+              - { name: href, label: Button links to, widget: string }
       - name: careers
         label: Careers page
         file: content/careers.json
