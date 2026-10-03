@@ -70,7 +70,7 @@
 /* Scenes: text and photos share a grid with the 28% carton column, wherever the carton stops.
    No photo is cropped: each frame takes its photo's own ratio (--r), and the photos in a row share one height. */
 .process-chapter { scroll-margin-top: 80px; }
-.process-scene { --gap: 16px; --row-h: 46svh; min-height: calc(100svh - 80px); padding: 64px 0; display: grid; column-gap: 48px; row-gap: 30px; align-content: center; }
+.process-scene { --gap: 16px; --row-h: 56svh; min-height: calc(100svh - 80px); padding: 56px 0; display: grid; column-gap: 48px; row-gap: 28px; align-content: center; }
 .process-scene--right { grid-template-columns: minmax(0,1fr) 28%; grid-template-areas: "copy ." "row ."; }
 .process-scene--left { grid-template-columns: 28% minmax(0,1fr); grid-template-areas: ". copy" ". row"; }
 .process-scene--center { --row-h: 26svh; grid-template-columns: minmax(0,1fr) 28% minmax(0,1fr); }

@@ -181,9 +181,9 @@
           "detail": "Paperboard is kept in wrapped stacks, then moved to the cutting area on a pallet lifter. The operator aligns the stack at the guillotine and cuts it to the sheet size the job needs. Plates and paperboard are now ready for Press.",
           "hero_side": "right",
           "hero": {
-            "image": "/images/process/prepress/paper-stock.webp",
-            "caption": "Paperboard stock",
-            "alt": "Wrapped paperboard on pallets.",
+            "image": "/images/process/prepress/paper-cutting.webp",
+            "caption": "Cutting to sheet size",
+            "alt": "Operator aligning paperboard at a guillotine cutter.",
             "ratio": 1.333
           },
           "row": [
@@ -192,15 +192,9 @@
               "caption": "Moving the material",
               "alt": "A pallet lifter carrying paperboard to production.",
               "ratio": 1.159
-            },
-            {
-              "image": "/images/process/prepress/paper-cutting.webp",
-              "caption": "Cutting to sheet size",
-              "alt": "Operator aligning paperboard at a guillotine cutter.",
-              "ratio": 1.333
             }
           ],
-          "row_sum": 2.492
+          "row_sum": 1.159
         }
       ],
       "label": "Chapter one"
@@ -342,16 +336,16 @@
           "detail": "Every carton design has its own cutting die, kept in labelled racks. Our automatic die-cutters, including a YH-1060 and an SP 102-E, cut and crease full sheets at production speed.",
           "hero_side": "left",
           "hero": {
-            "image": "/images/process/offpress/die-storage.webp",
-            "caption": "Cutting dies in storage",
-            "alt": "Rows of Supreme Art cutting dies stored upright in racks.",
+            "image": "/images/process/offpress/die-cutters.webp",
+            "caption": "Automatic die-cutters",
+            "alt": "Automatic die-cutters, a YH-1060 and an SP 102-E, on the factory floor.",
             "ratio": 1.333
           },
           "row": [
             {
-              "image": "/images/process/offpress/die-cutters.webp",
-              "caption": "Automatic die-cutters",
-              "alt": "Automatic die-cutters, a YH-1060 and an SP 102-E, on the factory floor.",
+              "image": "/images/process/offpress/die-storage.webp",
+              "caption": "Cutting dies in storage",
+              "alt": "Rows of Supreme Art cutting dies stored upright in racks.",
               "ratio": 1.333
             },
             {
@@ -393,20 +387,20 @@
           "detail": "On our folder-gluers, including a Bobst Expert 105 A, the carton blanks are folded, glued and joined in one continuous run.",
           "hero_side": "right",
           "hero": {
-            "image": "/images/process/pasting-1.jpg",
-            "caption": "Folder gluing",
-            "alt": "Operators running cartons through a folder-gluer.",
-            "ratio": 0.75
+            "image": "/images/process/offpress/folder-gluer-bobst.webp",
+            "caption": "Bobst Expert 105 A",
+            "alt": "Bobst Expert 105 A folder-gluer running printed cartons.",
+            "ratio": 1.333
           },
           "row": [
             {
-              "image": "/images/process/offpress/folder-gluer-bobst.webp",
-              "caption": "Bobst Expert 105 A",
-              "alt": "Bobst Expert 105 A folder-gluer running printed cartons.",
-              "ratio": 1.333
+              "image": "/images/process/pasting-1.jpg",
+              "caption": "Folder gluing",
+              "alt": "Operators running cartons through a folder-gluer.",
+              "ratio": 0.75
             }
           ],
-          "row_sum": 1.333
+          "row_sum": 0.75
         },
         {
           "layout": "finale",
