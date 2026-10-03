@@ -124,22 +124,21 @@
 .scene--ink figure:last-child { padding-top: 9%; }
 /* 06 — two landscapes stacked, a tall portrait across the carton. */
 .scene--run { grid-template-areas: "p1 p1 p1 . p3 p3 p3" "p2 p2 p2 . p3 p3 p3" "copy copy copy . p3 p3 p3"; grid-template-rows: 22svh 22svh auto; }
-/* 07 — the story set as one line across the top, three portraits stepping down. */
-.scene--triptych { grid-template-areas: ". copy copy copy copy copy copy" ". p1 p1 p2 p2 p3 p3"; grid-template-rows: auto 44svh; }
+/* 07 — the story set as one line across the top, two portraits stepping down. */
+.scene--triptych { grid-template-areas: ". copy copy copy copy copy copy" ". p1 p1 p1 p2 p2 p2"; grid-template-rows: auto 44svh; }
 .scene--triptych .scene-copy { max-width: none; display: grid; grid-template-columns: 1fr 1.3fr; column-gap: 28px; align-items: end; }
 .scene--triptych .scene-lead { margin: 0; }
-.scene--triptych figure:nth-child(2) { padding-top: 6%; }
-.scene--triptych figure:nth-child(3) { padding-top: 12%; }
-/* 08 — the last chapter opens: the title tucked above a large photo, the story between two photos. */
-.scene--finish { grid-template-areas: "head head head . p2 p2 p2" "p1 p1 p1 . copy copy copy" "p1 p1 p1 . p3 p3 p3"; grid-template-rows: 20svh auto 20svh; }
-/* 09 — a mosaic: a tall photo, the story over two smaller photos. */
-.scene--mosaic { grid-template-areas: "p1 p1 copy copy copy copy ." "p1 p1 p2 p2 p3 p3 ."; grid-template-rows: auto 32svh; }
+.scene--triptych figure:nth-child(2) { padding-top: 8%; }
+/* 08 — the last chapter opens: the title above a large photo, the story above a second photo. */
+.scene--finish { grid-template-areas: "head head head . copy copy copy" "p1 p1 p1 . copy copy copy" "p1 p1 p1 . p2 p2 p2"; grid-template-rows: auto minmax(14svh,auto) 28svh; }
+/* 09 — a tall photo, the story over a wide one. */
+.scene--mosaic { grid-template-areas: "p1 p1 copy copy copy copy ." "p1 p1 p2 p2 p2 p2 ."; grid-template-rows: auto 32svh; }
 .scene--mosaic .scene-copy { max-width: 40rem; align-self: end; }
 /* 10 — the story high on the left, photos stacked on the right of the carton. */
 .scene--dies { grid-template-areas: "copy copy copy . p2 p2 p2" "p1 p1 p1 . p3 p3 p3"; grid-template-rows: minmax(26svh,auto) 28svh; }
 .scene--dies .scene-copy { align-self: end; text-align: right; justify-self: end; }
-/* 11 — a wide photo above, the story beside a small detail. */
-.scene--separate { grid-template-areas: ". p1 p1 p1 p1 p2 p2" ". copy copy copy copy p3 p3"; grid-template-rows: 32svh minmax(24svh,auto); }
+/* 11 — the story above one photo, a tall photo beside both. */
+.scene--separate { grid-template-areas: ". copy copy copy p2 p2 p2" ". p1 p1 p1 p2 p2 p2"; grid-template-rows: auto 30svh; }
 .scene--separate .scene-copy { align-self: start; padding-top: 8px; max-width: 40rem; }
 /* 12 — the story above one photo, a large photo across the carton. */
 .scene--fold { grid-template-areas: "copy copy copy . p2 p2 p2" "p1 p1 p1 . p2 p2 p2"; grid-template-rows: auto 30svh; }

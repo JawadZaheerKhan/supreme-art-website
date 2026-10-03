@@ -246,7 +246,7 @@
           "layout": "triptych",
           "box": "left",
           "step": "measure",
-          "count": 3,
+          "count": 2,
           "lead": "Colour is measured, not guessed.",
           "detail": "A handheld spectrophotometer reads the printed sheet against the approved colour targets. At the console, the sheet is compared with the approved proof and the ink zones are adjusted until every carton matches.",
           "photos": [
@@ -259,11 +259,6 @@
               "image": "/images/process/press/sheet-inspection.webp",
               "caption": "Matching the approved proof",
               "alt": "Operator comparing a printed sheet with the approved proof at the press console."
-            },
-            {
-              "image": "/images/process/printing-1.jpg",
-              "caption": "On press",
-              "alt": "Offset printing press."
             }
           ]
         }
@@ -278,15 +273,10 @@
           "layout": "finish",
           "box": "center",
           "step": "uv",
-          "count": 3,
+          "count": 2,
           "lead": "A finish that protects and shines.",
           "detail": "Printed sheets travel flat through the coating line, where a gloss finish deepens the colours and protects the artwork. Spot finishes add raised, textured detail to selected areas.",
           "photos": [
-            {
-              "image": "/images/process/offpress/coating-feed.webp",
-              "caption": "Through the coating line",
-              "alt": "Printed sheets running flat through the coating line under guide wheels."
-            },
             {
               "image": "/images/process/offpress/gloss-coated-sheet.webp",
               "caption": "A gloss-coated sheet",
@@ -303,7 +293,7 @@
           "layout": "mosaic",
           "box": "right",
           "step": "spot",
-          "count": 3,
+          "count": 2,
           "lead": "Checked from the first sheet to the last.",
           "detail": "Finished sheets are measured with handheld instruments and checked against the targets approved for the job before they move on to cutting.",
           "photos": [
@@ -311,11 +301,6 @@
               "image": "/images/quality/coating-check-1.png",
               "caption": "Checking the finish",
               "alt": "Operator checking a coated sheet."
-            },
-            {
-              "image": "/images/process/offpress/finish-measure.webp",
-              "caption": "Measuring the sheet",
-              "alt": "Operator measuring a finished sheet beside Offset Machine 8."
             },
             {
               "image": "/images/process/offpress/finish-check.webp",
@@ -353,15 +338,10 @@
           "layout": "separate",
           "box": "left",
           "step": "sorting",
-          "count": 3,
+          "count": 2,
           "lead": "Separated and checked.",
-          "detail": "Some jobs run on a platen die-cutter. Waste board is then removed from around the cut cartons, and every unit carton is inspected before it moves on to folding.",
+          "detail": "Waste board is removed from around the cut cartons, separating each blank cleanly, and every unit carton is inspected before it moves on to folding.",
           "photos": [
-            {
-              "image": "/images/process/offpress/platen-die-cutting.webp",
-              "caption": "Platen die-cutting",
-              "alt": "Two operators lifting a cut sheet from a platen die-cutter as punched pieces fall clear."
-            },
             {
               "image": "/images/process/breaking-1.jpg",
               "caption": "Removing waste board",
