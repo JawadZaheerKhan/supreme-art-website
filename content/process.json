@@ -99,6 +99,8 @@
     {
       "id": "prepress",
       "title": "Pre press",
+      "label": "Chapter one",
+      "story": "Every carton begins as an idea on a screen. Before a single sheet is printed, the artwork is designed, approved and carried onto a printing plate.",
       "scenes": [
         {
           "layout": "opening",
@@ -196,12 +198,13 @@
           ],
           "row_sum": 1.159
         }
-      ],
-      "label": "Chapter one"
+      ]
     },
     {
       "id": "press",
       "title": "Press",
+      "label": "Chapter two",
+      "story": "On our Heidelberg presses the plate meets the board. Ink, colour and registration are set, then checked sheet after sheet.",
       "scenes": [
         {
           "layout": "ink",
@@ -276,12 +279,13 @@
           ],
           "row_sum": 1.5
         }
-      ],
-      "label": "Chapter two"
+      ]
     },
     {
       "id": "offpress",
       "title": "Offpress",
+      "label": "Chapter three",
+      "story": "Printed sheets become cartons: coated, cut, separated, folded, glued and packed for the client’s filling line.",
       "scenes": [
         {
           "layout": "finish",
@@ -430,8 +434,7 @@
           ],
           "row_sum": 3.416
         }
-      ],
-      "label": "Chapter three"
+      ]
     }
   ]
 }
