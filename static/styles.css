@@ -1663,19 +1663,19 @@ a { color: inherit; }
 .home-page .site-header .nav-toggle span { background: #fff; }
 .home-page .site-header:not(.is-over-hero) .nav-toggle span { background: var(--text); }
 .home-page main { margin-top: 0; }
-.home-story { position: relative; height: 300svh; background: #131314; }
+.home-story { position: relative; height: 460svh; background: #efebe4; }
 .home-story__sticky { position: sticky; top: 0; height: 100svh; min-height: 540px; overflow: hidden; color: #fff; }
-.home-story__media { position: absolute; inset: 0; overflow: hidden; background: transparent; }
-.home-story__media img {
-  width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%;
-  filter: brightness(1.04) contrast(1.02) saturate(.96);
-  transform: scale(1); transform-origin: 50% 58%;
-  transition: transform .82s cubic-bezier(.16,1,.3,1), object-position .82s cubic-bezier(.16,1,.3,1), filter .82s ease;
-  will-change: transform;
-}
-.home-story[data-active-stage="1"] .home-story__media img { transform: scale(1.32); transform-origin: 50% 68%; }
-.home-story[data-active-stage="2"] .home-story__media img { transform: scale(1.48); transform-origin: 50% 72%; }
-.home-story__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0,.48), rgba(0, 0, 0,.12) 38%, rgba(0, 0, 0,.48)), linear-gradient(90deg, rgba(0, 0, 0,.44), transparent 55%, rgba(0, 0, 0,.12)); }
+/* Fly-through: the building zooms into its entrance door, revealing the press hall; the hall then turns like
+   a cube face to the Speedmaster seen from its side. script.js drives every transform from the scroll position. */
+.home-story__media { position: absolute; inset: 0; overflow: hidden; background: #efebe4; perspective: 1600px; perspective-origin: 50% 50%; }
+.home-story__cube { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; }
+.home-story__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(1.03) contrast(1.02) saturate(.96); }
+.home-story__face { backface-visibility: hidden; -webkit-backface-visibility: hidden; object-position: 50% 50%; }
+.home-story__face--hall { transform: translateZ(var(--home-half, 50vw)); }
+.home-story__face--press { transform: rotateY(90deg) translateZ(var(--home-half, 50vw)); }
+/* object-position and transform-origin share the door's spot in the photo, so the door stays on screen at any viewport shape. */
+.home-story__building { z-index: 1; object-position: 66.7% 68.5%; transform-origin: 66.7% 68.5%; will-change: transform, opacity; }
+.home-story__shade { position: absolute; z-index: 2; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0,.48), rgba(0, 0, 0,.12) 38%, rgba(0, 0, 0,.48)), linear-gradient(90deg, rgba(0, 0, 0,.44), transparent 55%, rgba(0, 0, 0,.12)); }
 .home-story__scenes { position: absolute; inset: 0; }
 .home-story__scene {
   position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -1709,16 +1709,13 @@ a { color: inherit; }
   .home-story__scene h1 { font-size: clamp(2.2rem, 10.5vw, 3.25rem); line-height: .98; }
   .home-story__scene[data-home-stage="1"] h2 { font-size: clamp(2.3rem, 12vw, 4rem); line-height: .98; }
   .home-story__scene[data-home-stage="2"] h2 { font-size: clamp(2.1rem, 10vw, 3.8rem); line-height: .98; }
-  .home-story__media img { object-fit: cover; object-position: 50% 50%; }
-  .home-story[data-active-stage="1"] .home-story__media img { transform: scale(1.32); transform-origin: 50% 68%; }
-  .home-story[data-active-stage="2"] .home-story__media img { transform: scale(1.48); transform-origin: 50% 72%; }
   .home-story__scene[data-home-stage="0"] { padding-top: clamp(118px, 18vh, 165px); }
   .home-story__progress { right: 14px; }
   .home-story__hint { white-space: nowrap; }
 }
 @media (prefers-reduced-motion: reduce) {
   .home-story { height: 100svh; }
-  .home-story__media img, .home-story__scene, .home-story__progress span { transition: none; }
+  .home-story__scene, .home-story__progress span { transition: none; }
   .home-story__hint span, .home-page .site-header .nav-links.is-flowing::before { animation: none; }
 }
 /* ---------- Site-wide liquid navigation ---------- */
@@ -2631,8 +2628,12 @@ body .site-header .nav-links:not(.nav-flow-ready) > .has-dropdown > a.current {
 
 /* Transparent lettering keeps the glass glow reliable on mobile browsers. */
 .home-story__scene h1.home-story__full-logo {
-  position: relative; width: min(1100px, 88vw); aspect-ratio: 1240 / 400;
-  overflow: visible; flex-shrink: 0; text-shadow: none;
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: clamp(10px, 1.6vw, 22px);
+  width: min(1000px, 86vw); overflow: visible; flex-shrink: 0; white-space: normal;
+}
+.home-story__full-logo span {
+  font-size: clamp(.95rem, 2.2vw, 1.9rem); letter-spacing: .14em; line-height: 1.3; text-transform: uppercase;
+  text-shadow: 0 0 2px rgba(255,255,255,.55), 0 2px 18px rgba(0,0,0,.55);
 }
 .home-story__full-logo img {
   display: block; width: 100%; height: auto;

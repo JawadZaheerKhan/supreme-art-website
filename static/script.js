@@ -235,8 +235,48 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const scenes = [...story.querySelectorAll('[data-home-stage]')];
   const dots = [...story.querySelectorAll('.home-story__progress span')];
   const header = document.querySelector('.site-header');
+  const media = story.querySelector('.home-story__media');
+  const building = story.querySelector('.home-story__building');
+  const cube = story.querySelector('.home-story__cube');
+  const hall = story.querySelector('.home-story__face--hall');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
   let activeStage = -1;
   let ticking = false;
+  let target = 0;
+  let current = 0;
+
+  const clamp01 = value => Math.max(0, Math.min(1, value));
+  const span = (value, from, to) => clamp01((value - from) / (to - from));
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+  // Scroll timeline: hold on the building, fly through its door (.07–.44), hold in the press hall,
+  // then turn the cube a quarter round to the Speedmaster's side (.56–.88) and hold.
+  function paint(p) {
+    const zoom = span(p, .07, .44);
+    building.style.transform = `scale(${Math.pow(9, ease(zoom))})`;
+    building.style.opacity = String(1 - span(zoom, .7, .97));
+    building.style.filter = `blur(${span(zoom, .78, 1) * 6}px) brightness(${1.03 + span(zoom, .6, .95) * .25})`;
+
+    const settle = ease(span(zoom, .62, 1));
+    hall.style.filter = `blur(${(1 - settle) * 5}px) brightness(1.03) contrast(1.02) saturate(.96)`;
+
+    const turn = span(p, .56, .88);
+    const angle = 90 * ease(turn);
+    const pullBack = 1 - Math.sin(Math.PI * turn) * .16;
+    const half = media.clientWidth / 2;
+    story.style.setProperty('--home-half', `${half}px`);
+    cube.style.transform = `scale(${(1.22 - .22 * settle) * pullBack}) translateZ(${-half}px) rotateY(${-angle}deg)`;
+
+    showStage(p < .24 ? 0 : p < .72 ? 1 : 2);
+  }
+
+  function frame() {
+    current += (target - current) * .14;
+    if (Math.abs(target - current) < .0005) current = target;
+    paint(current);
+    ticking = current !== target;
+    if (ticking) requestAnimationFrame(frame);
+  }
 
   function showStage(index) {
     index = Math.max(0, Math.min(scenes.length - 1, index));
@@ -250,15 +290,13 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   function updateStory() {
     const rect = story.getBoundingClientRect();
     const travel = Math.max(1, story.offsetHeight - window.innerHeight);
-    const progress = Math.max(0, Math.min(1, -rect.top / travel));
-    showStage(Math.round(progress * (scenes.length - 1)));
     header?.classList.toggle('is-over-hero', rect.bottom > 68 && rect.top < 68);
-    ticking = false;
+    target = still.matches ? 0 : clamp01(-rect.top / travel);
+    // Ease toward the scroll position so wheel steps glide instead of jumping.
+    if (!ticking) { ticking = true; requestAnimationFrame(frame); }
   }
 
   function requestUpdate() {
-    if (ticking) return;
-    ticking = true;
     requestAnimationFrame(updateStory);
   }
 
