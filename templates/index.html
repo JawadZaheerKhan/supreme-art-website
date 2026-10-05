@@ -3,6 +3,7 @@
 <head>
 {{> head}}
   <link rel="stylesheet" href="/quality-story.css" />
+  <link rel="stylesheet" href="/home-process.css" />
   <link rel="stylesheet" href="/home-clients.css" />
 </head>
 <body class="home-page">
@@ -63,33 +64,24 @@
       </div>
     </div>
 
-    <!-- PROCESS: the three chapters of the Process page told as a story, one photo per scene, in Quality-Control windows -->
-    <section class="qc-story home-chapters" aria-labelledby="home-process-title">
-      <div class="qc-intro">
-        <div class="container">
+    <!-- PROCESS: three pages, one per chapter (Pre press, Press, Post press). Each composes one photo from every
+         stage of that chapter; the pages turn like the quality windows (each pins, the next slides over). -->
+    {{#each content.process.chapters}}<section class="home-process" data-chapter="{{ @index }}" aria-labelledby="home-process-{{ id }}">
+      <div class="container home-process__inner">
+        <div class="home-process__copy">
           <p class="eyebrow">{{ page.process.eyebrow }}</p>
-          <h2 id="home-process-title">{{ page.process.heading }}</h2>
-          <p class="qc-intro__text">{{ page.process.lead }}</p>
+          <h2 class="home-process__title" id="home-process-{{ id }}">{{ title }}</h2>
+          <p class="home-process__story">{{ story }}</p>
+          <ol class="home-process__trail" aria-label="Process chapters">{{#each content.process.chapters}}<li>{{ title }}</li>{{/each}}</ol>
+        </div>
+        <div class="home-process__collage">
+          {{#each scenes}}{{#if hero}}<figure class="home-process__shot" style="--r: {{ hero.ratio }}"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /><figcaption>{{ lead }}</figcaption></figure>{{else}}<figure class="home-process__shot" style="--r: {{ row.0.ratio }}"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /><figcaption>{{ lead }}</figcaption></figure>{{/if}}
+          {{/each}}
         </div>
       </div>
-      {{#each content.process.chapters}}<div class="home-chapter" data-chapter="{{ @index }}">
-        <div class="container">
-          <h3 class="home-chapter__title">{{ title }}</h3>
-          <p class="home-chapter__story">{{ story }}</p>
-          <ol class="home-chapter__trail" aria-label="Process chapters">{{#each content.process.chapters}}<li>{{ title }}</li>{{/each}}</ol>
-        </div>
-      </div>
-      {{#each scenes}}<article class="qc-window" aria-label="{{ lead }}">
-        {{#if hero}}<div class="qc-window__media" style="--qc-photo: url('{{ hero.image }}')"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /></div>{{else}}<div class="qc-window__media" style="--qc-photo: url('{{ row.0.image }}')"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /></div>{{/if}}
-        <div class="qc-window__band container">
-          <p class="home-chapters__count">{{ title }}</p>
-          <h3>{{ lead }}</h3>
-          <p>{{ detail }}</p>
-        </div>
-      </article>
-      {{/each}}{{/each}}
-      <p class="home-chapters__all container"><a class="btn btn--accent" href="{{ page.process.button_href }}">{{ page.process.button_label }}</a></p>
     </section>
+    {{/each}}
+    <div class="home-process__all"><a class="btn btn--accent" href="{{ page.process.button_href }}">{{ page.process.button_label }}</a></div>
 
     <!-- QUALITY: told like the process — an opening page, then each check in a Quality-Control window -->
     <section class="qc-story home-chapters home-quality-chapter" aria-labelledby="home-quality-title">

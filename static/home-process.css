@@ -1,0 +1,31 @@
+/* Home process: three pages, one per chapter. Left, the chapter and its story; right, a composition of one
+   photo from every stage, each shown whole at its own proportions (rows share a height, widths follow ratio). */
+.home-process { background: var(--paper, #faf8f4); color: var(--text); border-top: 1px solid var(--line, #e7e1d6); }
+.home-process__inner { display: grid; grid-template-columns: minmax(260px, 2fr) minmax(0, 3fr); gap: clamp(28px, 5vw, 80px); align-items: center; min-height: 100svh; padding-top: clamp(96px, 12vw, 140px); padding-bottom: clamp(48px, 6vw, 80px); box-sizing: border-box; }
+.home-process__copy .eyebrow { color: var(--accent); }
+.home-process__title { margin: 12px 0 20px; color: var(--text); font-family: var(--display); font-size: clamp(3rem, 7vw, 6.5rem); line-height: .95; letter-spacing: -.01em; }
+.home-process__story { margin: 0; max-width: 42ch; color: var(--muted); font-size: clamp(1.02rem, 1.4vw, 1.2rem); line-height: 1.75; }
+.home-process__trail { display: flex; flex-wrap: wrap; gap: 10px 0; margin: clamp(26px, 3vw, 40px) 0 0; padding: 0; list-style: none; color: var(--muted); font-size: .88rem; }
+.home-process__trail li { display: flex; align-items: center; }
+.home-process__trail li + li::before { content: ""; width: clamp(22px, 3vw, 44px); height: 1px; margin: 0 12px; background: var(--line, #e7e1d6); }
+.home-process[data-chapter="0"] .home-process__trail li:nth-child(1),
+.home-process[data-chapter="1"] .home-process__trail li:nth-child(2),
+.home-process[data-chapter="2"] .home-process__trail li:nth-child(3) { color: var(--text); font-weight: 600; text-decoration: underline 2px var(--wood, #a67c52); text-underline-offset: 6px; }
+
+/* The collage: a justified wall. Each photo grows in proportion to its width-to-height ratio, so every row
+   lines up at one height and nothing is cropped. */
+.home-process__collage { display: flex; flex-wrap: wrap; gap: 14px; align-content: center; }
+.home-process__shot { flex: calc(var(--r, 1.333) * 100) 1 0%; min-width: 36%; max-width: 62%; margin: 0; display: grid; gap: 8px; }
+/* Press (three upright photos) and Post press (six) sit three to a row; Pre press keeps two and two. */
+.home-process[data-chapter="1"] .home-process__shot, .home-process[data-chapter="2"] .home-process__shot { min-width: 28%; }
+.home-process__shot img { display: block; width: 100%; height: auto; aspect-ratio: var(--r, 1.333); object-fit: contain; border-radius: 6px; background: var(--paper-deep, #f3efe7); box-shadow: 0 22px 50px -26px rgba(60, 45, 30, .4); }
+.home-process__shot figcaption { color: var(--muted); font-size: .8rem; line-height: 1.4; }
+.home-process__all { padding: clamp(32px, 5vw, 64px) 0 clamp(64px, 8vw, 112px); text-align: center; background: var(--paper, #faf8f4); }
+
+@media (max-width: 900px) {
+  .home-process__inner { grid-template-columns: 1fr; gap: 24px; min-height: 0; padding-top: 88px; padding-bottom: 56px; }
+  .home-process__title { font-size: clamp(2.4rem, 11vw, 3.6rem); }
+  .home-process__collage { gap: 10px; }
+  .home-process__shot, .home-process[data-chapter="1"] .home-process__shot, .home-process[data-chapter="2"] .home-process__shot { min-width: 44%; max-width: none; }
+  .home-process__shot figcaption { font-size: .72rem; }
+}

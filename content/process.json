@@ -1,6 +1,6 @@
 {
   "title": "Our process — Supreme Art",
-  "description": "Follow every carton through Pre press, Press and Offpress at Supreme Art, from artwork and plate preparation to finishing and delivery.",
+  "description": "Follow every carton through Pre press, Press and Post press at Supreme Art, from artwork and plate preparation to finishing and delivery.",
   "banner": {
     "crumb": "Our process",
     "heading": "How your cartons are made"
@@ -282,8 +282,8 @@
       ]
     },
     {
-      "id": "offpress",
-      "title": "Offpress",
+      "id": "postpress",
+      "title": "Post press",
       "label": "Chapter three",
       "story": "Printed sheets become cartons: coated, cut, separated, folded, glued and packed for the client’s filling line.",
       "scenes": [
