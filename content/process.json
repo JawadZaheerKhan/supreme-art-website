@@ -100,11 +100,24 @@
       "id": "prepress",
       "title": "Pre press",
       "label": "Our process",
-      "story": "Every carton begins as an idea on a screen. Before a single sheet is printed, the artwork is designed, approved and carried onto a printing plate.",
+      "story": "Every carton begins as an idea on a screen. Before a single sheet is printed, the artwork is designed, engineered, colour-matched and approved, then carried onto a printing plate in our own pre-press room.",
       "facts": [
-        "Computer-to-plate (CTP): the approved artwork is imaged straight onto the aluminium plate, with no film in between, so every colour registers precisely on press.",
-        "Plates are processed, checked and stored in-house, ready for the press the same day.",
-        "Board is cut to the exact sheet size for each job before it reaches the feeder."
+        "Art and design in-house: our designers create artwork, revise existing designs and engineer the carton structure up to the first proof.",
+        "Colour is managed against Pantone formula guides, with every shade matched by a specialised colour team before anything goes to plate.",
+        "Amsky computer-to-plate: the approved artwork is imaged straight onto the aluminium plate at 2,400 dpi, with no film in between, so every colour registers precisely on press.",
+        "Plates are processed, checked and stored in-house, and board is cut to the exact sheet size before it reaches the feeder."
+      ],
+      "details": [
+        {
+          "title": "In the pre-press room",
+          "items": [
+            "Artwork creation and carton design",
+            "Revisions and enhancements to existing designs",
+            "Product engineering and dielines up to the first proof",
+            "Colour management with Pantone formula guides",
+            "Amsky computer-to-plate imaging and plate processing"
+          ]
+        }
       ],
       "scenes": [
         {
@@ -209,11 +222,32 @@
       "id": "press",
       "title": "Press",
       "label": "Our process",
-      "story": "On our Heidelberg presses the plate meets the board. Ink, colour and registration are set, then checked sheet after sheet.",
+      "story": "On our Heidelberg presses the plate meets the board. Up to six colours go down in one pass; ink, colour and registration are set, then measured sheet after sheet against the approved proof.",
       "facts": [
         "Heidelberg Speedmaster CD 102: a 70 × 100 cm multi-colour press rated at up to 15,000 sheets an hour.",
         "Heidelberg Speedmaster SM 74 with CP2000 control: 53 × 74 cm format, up to 15,000 sheets an hour, with touchscreen inking control.",
-        "Colour is measured against the approved proof on every run, not judged by eye."
+        "Up to six colours in one pass, with precise matching to specified brand colours and a choice of ink systems.",
+        "Colour is measured with a spectrophotometer against the approved proof on every run, not judged by eye."
+      ],
+      "details": [
+        {
+          "title": "Materials we print on",
+          "items": [
+            "Paper",
+            "Duplex board",
+            "Bleach board (SBS)",
+            "Film-laminated board"
+          ]
+        },
+        {
+          "title": "On the press",
+          "items": [
+            "Up to six colours in one pass",
+            "Precise matching to specified brand colours",
+            "Choice of ink systems and colour management",
+            "Specialist skills with a vigilant eye across the whole run"
+          ]
+        }
       ],
       "scenes": [
         {
@@ -296,11 +330,37 @@
       "show_process_link": true,
       "title": "Post press",
       "label": "Our process",
-      "story": "Printed sheets become cartons: coated, cut, separated, folded, glued and packed for the client’s filling line.",
+      "story": "Printed sheets become cartons: coated, foiled where the design asks for it, cut, separated, inspected, folded, glued and packed for the client’s filling line.",
       "facts": [
-        "UV and spot-UV coating lines add a gloss that protects the print and a raised, textured finish where the design asks for it.",
-        "Die-cutting and creasing happen in one pass, so each carton folds exactly on its lines.",
-        "A Swiss-built Bobst folder-gluer folds every carton and glues its side seam, then cartons are counted and packed for delivery."
+        "Bobst SP 102-E automatic die-cutter: 72 × 102 cm sheets at up to 7,500 an hour, cut and creased in one pass so each carton folds on its lines.",
+        "A cylinder automatic die-cutter and a manual die-cutter take short and special runs; a hot-stamping machine applies foils.",
+        "UV, spot-UV, drip-off, food-grade and custom coatings, foils and colour-shifting security seals, all applied in-house.",
+        "A Swiss-built Bobst folder-gluer folds and glues tuck, lock-bottom and four- and six-corner cartons, counted and packed for delivery."
+      ],
+      "details": [
+        {
+          "title": "Finishes",
+          "items": [
+            "UV and spot-UV coating",
+            "Specialised and custom coatings",
+            "Food-grade coatings",
+            "Drip-off coatings",
+            "Hot stamping (foiling)",
+            "Thermal foiling",
+            "Colour-shifting security seals",
+            "Anti-counterfeit packaging features"
+          ]
+        },
+        {
+          "title": "Carton styles",
+          "items": [
+            "Straight tuck",
+            "Reverse tuck",
+            "Lock bottom",
+            "Four-corner folding",
+            "Six-corner"
+          ]
+        }
       ],
       "scenes": [
         {
@@ -452,5 +512,28 @@
         }
       ]
     }
-  ]
+  ],
+  "overview": {
+    "eyebrow": "The floor",
+    "heading": "A state-of-the-art facility in Peshawar.",
+    "text": "Good printing needs modern machines, and ours are among the best: German-built Heidelberg Speedmaster presses, Swiss Bobst die-cutting and folder-gluing, and Amsky computer-to-plate imaging. Since 2016 that floor has grown into the only printing and packaging manufacturer in Khyber Pakhtunkhwa with a significant export presence, serving pharmaceutical companies at home and abroad.",
+    "glance": [
+      {
+        "value": "1.5 million",
+        "label": "boxes a day at full capacity"
+      },
+      {
+        "value": "6 colours",
+        "label": "in one pass on Heidelberg presses"
+      },
+      {
+        "value": "100",
+        "label": "skilled people on the floor"
+      },
+      {
+        "value": "2016",
+        "label": "incorporated in Peshawar"
+      }
+    ]
+  }
 }

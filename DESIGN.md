@@ -407,6 +407,12 @@ Buttons never bounce, never darken to black and never lose their rim.
 
 **`qc-window`** - 115svh clipped window over a fixed photo with a copy band on alternate sides.
 
+**`process-glance`** - On the process page, under the intro: a facility paragraph beside four numbers from the company profile (boxes a day, colours, people, year), each number in Space Grotesk maroon over a muted label with a 2px wood-brown rule on its left.
+
+**`process-intro`** - The first page of each process chapter: eyebrow, chapter title, story, an "On the floor" list of equipment facts with wood-brown dashes, and one or two hairline lists of what the chapter handles (materials, finishes, carton styles). It shares the first scene's carton position so the travelling carton sits beside it.
+
+**`quality-pillars`** - Four `card`s on an off-white band: colour standards, security built in, full traceability, registered and compliant. The same four appear as a hairline list on the home Quality chapter page.
+
 **`cta-band`** - Kraft paper with a 2px wood line along the top. Ink headline, muted lead, ghost and accent buttons.
 
 **`page-banner`** - Inner pages open with a paper gradient banner, 196px top padding under the frosted nav, ink h1, muted breadcrumbs.

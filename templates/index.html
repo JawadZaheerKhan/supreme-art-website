@@ -93,6 +93,7 @@
         <div class="container">
           <h2 class="home-chapter__title" id="home-quality-title">{{ page.quality.eyebrow }}</h2>
           <p class="home-chapter__story">{{ page.quality.text }}</p>
+          <dl class="home-chapter__points">{{#each content.quality.pillars.items}}<div><dt>{{ title }}</dt><dd>{{ text }}</dd></div>{{/each}}</dl>
         </div>
       </div>
       {{#each content.quality.process.steps}}<article class="qc-window" aria-label="{{ title }}">

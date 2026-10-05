@@ -29,6 +29,17 @@
       </div>
     </section>
 
+    <!-- What quality rests on: four cards from the company profile (colour, security, traceability, registrations). -->
+    <section class="section section-alt quality-pillars" aria-labelledby="quality-pillars-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">{{ page.pillars.eyebrow }}</p>
+          <h2 id="quality-pillars-title">{{ page.pillars.heading }}</h2>
+        </div>
+        <div class="grid quality-pillars__grid">{{#each page.pillars.items}}<article class="card"><h3>{{ title }}</h3><p>{{ text }}</p></article>{{/each}}</div>
+      </div>
+    </section>
+
     <!-- Quality checks: each check is a window onto a full-screen photo that holds still as the page scrolls -->
     <section class="qc-story" aria-labelledby="qc-title">
       <div class="qc-intro">

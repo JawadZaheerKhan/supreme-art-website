@@ -67,3 +67,15 @@
    the chapter's own height for tall chapters, so the whole chapter is read before it pins) and --stack-z. */
 .home-page main > .home-stack { position: sticky; top: var(--stack-top, 0px); z-index: var(--stack-z, 1); }
 .home-page main > .home-stack:not(.qc-window) { background: var(--paper, #faf8f4); }
+
+/* Home quality chapter: an opening page (title, story, the four things quality rests on), then the windows. */
+.home-quality-chapter .home-chapter { display: grid; align-content: center; min-height: 100svh; padding: clamp(88px, 10vw, 120px) 0 clamp(40px, 5vw, 64px); background: var(--paper, #faf8f4); border-top: 1px solid var(--line, #e7e1d6); }
+.home-quality-chapter .home-chapter__title { margin: 0 0 16px; color: var(--text); font-family: var(--display); font-size: clamp(2.6rem, 5.6vw, 5rem); line-height: .95; letter-spacing: -.01em; }
+.home-quality-chapter .home-chapter__story { margin: 0; max-width: 62ch; color: var(--muted); font-size: clamp(1rem, 1.25vw, 1.12rem); line-height: 1.7; }
+.home-chapter__points { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px 32px; margin: clamp(26px, 3vw, 40px) 0 0; }
+.home-chapter__points div { padding-top: 12px; border-top: 1px solid var(--line, #e7e1d6); }
+.home-chapter__points dt { margin: 0 0 6px; color: var(--text); font-family: var(--display); font-size: 1.05rem; font-weight: 600; }
+.home-chapter__points dd { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+.home-quality-chapter .home-chapters__count { margin: 0 0 10px; color: var(--accent); font-size: .72rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+.home-quality-chapter .home-chapters__all { padding: clamp(32px, 5vw, 56px) 24px; margin: 0 auto; text-align: center; background: var(--paper, #faf8f4); }
+@media (max-width: 780px) { .home-quality-chapter .home-chapter { min-height: 0; padding-top: 84px; } .home-quality-chapter .home-chapter__title { font-size: clamp(2.2rem, 10vw, 3.2rem); } }

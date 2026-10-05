@@ -2,13 +2,13 @@
    composition of one photo from every stage: one hero shot leads, the others support it (visual hierarchy), on
    a quiet grid with a little offset. Every photo is shown whole: each sits inside its cell at its own proportions. */
 .home-process { background: var(--paper, #faf8f4); color: var(--text); border-top: 1px solid var(--line, #e7e1d6); }
-.home-process__inner { display: grid; grid-template-columns: minmax(280px, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); align-items: center; min-height: 100svh; padding-top: clamp(88px, 10vw, 120px); padding-bottom: clamp(40px, 5vw, 64px); box-sizing: border-box; }
+.home-process__inner { display: grid; grid-template-columns: minmax(280px, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); align-items: center; min-height: 100svh; padding-top: clamp(80px, 9vw, 104px); padding-bottom: clamp(36px, 4.5vw, 56px); box-sizing: border-box; }
 .home-process__copy .eyebrow { color: var(--accent); }
 .home-process__title { margin: 10px 0 16px; color: var(--text); font-family: var(--display); font-size: clamp(2.6rem, 5.6vw, 5rem); line-height: .95; letter-spacing: -.01em; }
 .home-process__story { margin: 0; max-width: 46ch; color: var(--muted); font-size: clamp(1rem, 1.25vw, 1.12rem); line-height: 1.7; }
 .home-process__facts-title { margin: clamp(20px, 2.5vw, 30px) 0 10px; color: var(--accent); font-size: .74rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
-.home-process__facts { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; max-width: 48ch; }
-.home-process__facts li { position: relative; padding-left: 18px; color: var(--text); font-size: .93rem; line-height: 1.55; }
+.home-process__facts { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; max-width: 50ch; }
+.home-process__facts li { position: relative; padding-left: 18px; color: var(--text); font-size: .91rem; line-height: 1.5; }
 .home-process__facts li::before { content: ""; position: absolute; left: 0; top: .6em; width: 8px; height: 2px; background: var(--wood, #a67c52); }
 .home-process__trail { display: flex; flex-wrap: wrap; gap: 8px 0; margin: clamp(20px, 2.5vw, 32px) 0 0; padding: 0; list-style: none; color: var(--muted); font-size: .85rem; }
 .home-process__trail li { display: flex; align-items: center; }

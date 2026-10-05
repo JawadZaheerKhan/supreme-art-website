@@ -8,7 +8,7 @@
   "commitment": {
     "eyebrow": "Our commitment",
     "heading": "Built for pharma standards.",
-    "text": "Medicine packaging doesn't get second chances. We run documented quality assurance across every stage of production, with full batch traceability — so what leaves our floor is exactly what you approved.",
+    "text": "Medicine packaging doesn’t get second chances. We run documented quality assurance across every stage of production, with full batch traceability, so what leaves our floor is exactly what you approved. Colour is matched by a specialised team against Pantone standards and verified on press with a spectrophotometer; every unit carton passes an automated camera inspection; and a digital job card follows each order from board to delivery.",
     "stats": [
       {
         "number": 25,
@@ -35,7 +35,7 @@
     "steps": [
       {
         "title": "Incoming board inspection",
-        "text": "Before printing begins, every paperboard batch is checked for grammage, thickness, surface condition and overall quality.",
+        "text": "Before printing begins, every batch of paper, duplex board, bleach board or film-laminated board is checked for grammage, thickness, surface condition and overall quality, and only released to cutting once it matches the specification for the job.",
         "image": "/images/quality/incoming-board-inspection-1.png",
         "image_2": "/images/quality/incoming-board-inspection-2.png",
         "caption_2": "Weighing a board sample on a precision scale"
@@ -49,7 +49,7 @@
       },
       {
         "title": "Shade card approval",
-        "text": "A reference shade card is prepared for every product and approved before the final printing run is released.",
+        "text": "A reference shade card is prepared for every product, matched against Pantone formula guides by our colour team and approved by the client before the final printing run is released. The approved card then travels with the job.",
         "image": "/images/quality/shade-card-1.jpg",
         "image_2": "/images/quality/shade-card-2.jpg",
         "caption_2": "Reviewing the shade card with the print team",
@@ -65,12 +65,12 @@
       },
       {
         "title": "Printing quality control",
-        "text": "During printing, our QC team uses a colour spectrophotometer to verify colour shades while also checking registration and text content against the approved proof.",
+        "text": "During printing, our QC team uses a colour spectrophotometer to verify every shade against the approved targets, while checking registration, text content and barcodes against the approved proof. Up to six colours are controlled at the press console throughout the run.",
         "image": "/images/process/proofing-qc-1.jpg"
       },
       {
         "title": "Coating inspection",
-        "text": "Applied finishes, including UV and spot UV coatings, are checked for coverage, alignment, consistency and the required appearance.",
+        "text": "Applied finishes, including UV and spot-UV, drip-off, food-grade and custom coatings, are checked for coverage, alignment, consistency and the required appearance before the sheets move on to die-cutting.",
         "image": "/images/quality/coating-check-1.png",
         "image_2": "/images/quality/coating-check-2.png",
         "caption_2": "Checking coated sheets at the coating line",
@@ -78,8 +78,20 @@
         "caption_3": "Measuring the finish across a coated sheet"
       },
       {
+        "title": "Automated carton inspection",
+        "text": "After die-cutting, an automated inspection machine with 3D cameras examines every unit carton for colour, print defects, registration and missing elements, rejecting any that fall outside the approved reference before folding and gluing.",
+        "image": "/images/process/sorting-1.jpg",
+        "image_2": "/images/process/sorting-2.jpg",
+        "caption_2": "Inspected unit cartons leaving the sorting machine"
+      },
+      {
+        "title": "Security features checked",
+        "text": "Where a carton carries anti-counterfeit features such as colour-shifting seals, hot-stamped or thermal foils and raised spot coatings, each is checked for position, coverage and effect. Because these features are built into the carton, they cannot be reproduced by relabelling.",
+        "image": "/images/process/offpress/spot-finish.webp"
+      },
+      {
         "title": "Digital Product Tracking",
-        "text": "Tablets installed at every production stage allow operators to record each product job card as work progresses. Clients also receive access to this digital tracking system so they can follow the status of their products with us.",
+        "text": "Tablets installed at every production stage let operators record each job card as work progresses, so every order carries its board lot, plates, press, operators and checks. Clients also receive access to this digital tracking system to follow the status of their products with us.",
         "image": "/images/quality/digital-job-card-tracking.jpg"
       }
     ]
@@ -91,5 +103,27 @@
     "primary_href": "contact.html",
     "secondary_label": "About Supreme Art",
     "secondary_href": "about.html"
+  },
+  "pillars": {
+    "eyebrow": "What quality rests on",
+    "heading": "Standards, security and traceability.",
+    "items": [
+      {
+        "title": "Colour standards",
+        "text": "Shades are matched by a specialised colour team against Pantone formula guides, then verified on press with a spectrophotometer rather than by eye."
+      },
+      {
+        "title": "Security built in",
+        "text": "Colour-shifting seals, hot-stamped and thermal foils and custom coatings are printed and finished as part of the carton, so they cannot be peeled off and reapplied to a counterfeit."
+      },
+      {
+        "title": "Full traceability",
+        "text": "Tablets at every production stage record each job card as work progresses. Clients get access to the same tracking, so they can follow their own products through our floor."
+      },
+      {
+        "title": "Registered and compliant",
+        "text": "Incorporated with the Securities and Exchange Commission of Pakistan in 2016, registered with the Khyber Pakhtunkhwa Directorate of Labour under the Factories Act, registered with the Federal Board of Revenue, and a corporate member of the Sarhad Chamber of Commerce and Industry."
+      }
+    ]
   }
 }

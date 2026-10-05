@@ -19,6 +19,17 @@
         </nav>
       </div>
     </section>
+    <!-- The floor at a glance: the facility and four numbers from the company profile. -->
+    <section class="process-glance" aria-labelledby="process-glance-title">
+      <div class="container process-glance__inner">
+        <div class="process-glance__copy">
+          <p class="eyebrow">{{ page.overview.eyebrow }}</p>
+          <h2 id="process-glance-title">{{ page.overview.heading }}</h2>
+          <p>{{ page.overview.text }}</p>
+        </div>
+        <dl class="process-glance__facts">{{#each page.overview.glance}}<div><dt>{{ value }}</dt><dd>{{ label }}</dd></div>{{/each}}</dl>
+      </div>
+    </section>
     <div class="process-assembly">
       <aside class="assembly-rail" aria-label="Carton assembly progress">
         <div class="assembly-sticky">
@@ -30,9 +41,19 @@
         </div>
       </aside>
     {{#each page.chapters}}<section class="process-chapter" id="{{ id }}" aria-labelledby="{{ id }}-title">
+      <!-- Chapter page: the story, the equipment behind it and what the chapter handles. It shares the first scene's
+           carton position so the travelling carton sits beside it. -->
+      <article class="process-scene process-scene--{{ scenes.0.box }} process-intro" data-box="{{ scenes.0.box }}" data-step="{{ scenes.0.step }}">
+        <div class="scene-copy process-intro__copy">
+          <div class="scene-head"><p class="scene-eyebrow">{{ label }}</p><h2 class="scene-chapter" id="{{ id }}-title">{{ title }}</h2></div>
+          <p class="scene-lead">{{ story }}</p>
+          <h3 class="process-intro__facts-title">On the floor</h3>
+          <ul class="process-intro__facts">{{#each facts}}<li>{{ . }}</li>{{/each}}</ul>
+        </div>
+        <div class="process-intro__details">{{#each details}}<div class="process-intro__list"><h3>{{ title }}</h3><ul>{{#each items}}<li>{{ . }}</li>{{/each}}</ul></div>{{/each}}</div>
+      </article>
       {{#each scenes}}<article class="process-scene process-scene--{{ box }}{{#if hero_side}} process-scene--hero-{{ hero_side }}{{/if}}" data-box="{{ box }}" data-step="{{ step }}">
         <div class="scene-copy">
-          {{#if @index}}{{else}}<div class="scene-head"><p class="scene-eyebrow">{{ label }}</p><h2 class="scene-chapter" id="{{ id }}-title">{{ title }}</h2></div>{{/if}}
           <p class="scene-lead">{{ lead }}</p>
           <p>{{ detail }}</p>
         </div>
