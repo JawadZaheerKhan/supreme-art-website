@@ -293,6 +293,7 @@
     },
     {
       "id": "postpress",
+      "show_process_link": true,
       "title": "Post press",
       "label": "Our process",
       "story": "Printed sheets become cartons: coated, cut, separated, folded, glued and packed for the client’s filling line.",
