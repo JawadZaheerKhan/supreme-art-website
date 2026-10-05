@@ -1,0 +1,14 @@
+/* Glass hover for photos: the photo eases a little larger and a pane of glass settles over it — a soft specular
+   highlight that follows the cursor, a hairline rim and a brighter top edge, like a phone screen catching the light.
+   glass-photos.js tracks the cursor; for [data-glass="fit"] it also sizes the frame to the photo. */
+.glass-photo { position: relative; display: block; overflow: hidden; border-radius: 10px; isolation: isolate; --mx: 50%; --my: 40%; }
+.glass-photo > img { display: block; transform-origin: 50% 60%; transition: transform .7s cubic-bezier(.22, 1, .36, 1); will-change: transform; }
+.glass-photo::before, .glass-photo::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .4s ease; }
+/* the glass rim */
+.glass-photo::before { z-index: 2; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), inset 0 1.5px 0 rgba(255, 255, 255, .75), inset 0 -18px 28px -24px rgba(255, 255, 255, .5); }
+/* the highlight that tracks the cursor, plus a quiet diagonal sheen */
+.glass-photo::after { z-index: 1; background: radial-gradient(260px circle at var(--mx) var(--my), rgba(255, 255, 255, .42), rgba(255, 255, 255, .12) 38%, rgba(255, 255, 255, 0) 70%), linear-gradient(118deg, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, .16) 50%, rgba(255, 255, 255, 0) 62%); mix-blend-mode: screen; }
+.glass-photo:hover > img, .glass-photo:focus-within > img { transform: scale(1.035); }
+.glass-photo:hover::before, .glass-photo:hover::after, .glass-photo:focus-within::before, .glass-photo:focus-within::after { opacity: 1; }
+@media (hover: none) { .glass-photo::before, .glass-photo::after { display: none; } .glass-photo > img { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .glass-photo > img { transition: none; } .glass-photo:hover > img { transform: none; } }

@@ -4,6 +4,7 @@
 {{> head}}
   <link rel="stylesheet" href="/quality-story.css" />
   <link rel="stylesheet" href="/home-process.css" />
+  <link rel="stylesheet" href="/glass-photos.css" />
   <link rel="stylesheet" href="/home-clients.css" />
 </head>
 <body class="home-page">
@@ -78,7 +79,7 @@
           <ol class="home-process__trail" aria-label="Process chapters">{{#each content.process.chapters}}<li>{{ title }}</li>{{/each}}</ol>
         </div>
         <div class="home-process__collage" aria-label="{{ title }} in pictures">
-          {{#each scenes}}{{#if hero}}<figure class="home-process__shot"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /><figcaption>{{ lead }}</figcaption></figure>{{else}}<figure class="home-process__shot"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /><figcaption>{{ lead }}</figcaption></figure>{{/if}}
+          {{#each scenes}}{{#if hero}}<figure class="home-process__shot"><span class="glass-photo" data-glass="fit"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /></span><figcaption>{{ lead }}</figcaption></figure>{{else}}<figure class="home-process__shot"><span class="glass-photo" data-glass="fit"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /></span><figcaption>{{ lead }}</figcaption></figure>{{/if}}
           {{/each}}
         </div>
       </div>
@@ -152,5 +153,6 @@
 {{> footer}}
 
   <script src="/script.js"></script>
+  <script src="/glass-photos.js"></script>
 </body>
 </html>

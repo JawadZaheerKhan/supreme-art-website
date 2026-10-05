@@ -17,7 +17,10 @@
 /* The carton: the Services box, but with no backdrop so it floats on the paper; its own ground shadow stays. */
 .client-pair__box { display: grid; gap: 14px; justify-items: center; }
 .clients-page .product-box-view { width: min(560px, 100%); background: transparent; overflow: visible; }
-.clients-page .product-box-fallback { object-fit: contain; background: transparent; }
+/* No flat photo before the model is ready: the carton fades in once its faces are drawn. */
+.clients-page .product-box-fallback { display: none; }
+.clients-page .product-box-stage { opacity: 0; transition: opacity .6s ease; }
+.clients-page .product-box-view.is-ready .product-box-stage { opacity: 1; }
 .client-pair__caption { display: grid; gap: 4px; justify-items: center; margin: 0; text-align: center; }
 .client-pair__caption strong { color: var(--text); font-family: var(--display); font-size: 1.15rem; line-height: 1.3; }
 .client-pair__caption span { color: var(--muted); font-size: .92rem; line-height: 1.5; }

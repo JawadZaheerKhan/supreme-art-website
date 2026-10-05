@@ -19,13 +19,11 @@
 
 /* The collage grid: six columns, a fixed height so every chapter fits its page; cells share rows evenly. */
 .home-process__collage { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: 14px; height: min(66svh, 640px); }
-/* A faint chapter number behind the photos, the one artistic liberty. */
-.home-process__collage::before { position: absolute; right: -.04em; top: -.42em; z-index: 0; color: rgba(60, 45, 30, .06); font-family: var(--display); font-size: clamp(6rem, 13vw, 11rem); font-weight: 700; line-height: 1; letter-spacing: -.04em; pointer-events: none; }
-.home-process[data-chapter="0"] .home-process__collage::before { content: "01"; }
-.home-process[data-chapter="1"] .home-process__collage::before { content: "02"; }
-.home-process[data-chapter="2"] .home-process__collage::before { content: "03"; }
 .home-process__shot { position: relative; z-index: 1; min-height: 0; margin: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 6px; }
-.home-process__shot img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 18px 22px rgba(60, 45, 30, .22)); }
+/* The photo hugs its own shape inside the cell (glass-photos.js sizes the frame), so the glass sheen fits the photo. */
+.home-process__shot .glass-photo { align-self: end; justify-self: center; max-width: 100%; max-height: 100%; }
+.home-process__shot img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; object-position: center bottom; }
+.home-process__shot .glass-photo { filter: drop-shadow(0 18px 22px rgba(60, 45, 30, .22)); }
 .home-process__shot figcaption { color: var(--muted); font-size: .76rem; line-height: 1.35; }
 /* Pre press (4): the designer leads; two shots stacked beside it, one below with air to its left. */
 .home-process[data-chapter="0"] .home-process__shot:nth-child(1) { grid-column: 1 / 5; grid-row: 1 / 3; }
@@ -50,9 +48,9 @@
   .home-process__title { font-size: clamp(2.2rem, 10vw, 3.2rem); }
   .home-process__facts { max-width: none; }
   .home-process__collage { height: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; gap: 10px; }
-  .home-process__collage::before { display: none; }
   .home-process[data-chapter] .home-process__shot { grid-column: auto; grid-row: auto; padding-top: 0; }
   .home-process[data-chapter] .home-process__shot:nth-child(1) { grid-column: 1 / -1; }
+  .home-process__shot .glass-photo { width: 100% !important; height: auto !important; }
   .home-process__shot img { height: auto; max-height: 46svh; }
   .home-process__shot figcaption { font-size: .7rem; }
 }
