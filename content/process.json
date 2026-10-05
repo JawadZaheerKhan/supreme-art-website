@@ -101,6 +101,11 @@
       "title": "Pre press",
       "label": "Chapter one",
       "story": "Every carton begins as an idea on a screen. Before a single sheet is printed, the artwork is designed, approved and carried onto a printing plate.",
+      "facts": [
+        "Computer-to-plate (CTP): the approved artwork is imaged straight onto the aluminium plate, with no film in between, so every colour registers precisely on press.",
+        "Plates are processed, checked and stored in-house, ready for the press the same day.",
+        "Board is cut to the exact sheet size for each job before it reaches the feeder."
+      ],
       "scenes": [
         {
           "layout": "opening",
@@ -205,6 +210,11 @@
       "title": "Press",
       "label": "Chapter two",
       "story": "On our Heidelberg presses the plate meets the board. Ink, colour and registration are set, then checked sheet after sheet.",
+      "facts": [
+        "Heidelberg Speedmaster CD 102: a 70 × 100 cm multi-colour press rated at up to 15,000 sheets an hour.",
+        "Heidelberg Speedmaster SM 74 with CP2000 control: 53 × 74 cm format, up to 15,000 sheets an hour, with touchscreen inking control.",
+        "Colour is measured against the approved proof on every run, not judged by eye."
+      ],
       "scenes": [
         {
           "layout": "ink",
@@ -286,6 +296,11 @@
       "title": "Post press",
       "label": "Chapter three",
       "story": "Printed sheets become cartons: coated, cut, separated, folded, glued and packed for the client’s filling line.",
+      "facts": [
+        "UV and spot-UV coating lines add a gloss that protects the print and a raised, textured finish where the design asks for it.",
+        "Die-cutting and creasing happen in one pass, so each carton folds exactly on its lines.",
+        "A Swiss-built Bobst folder-gluer folds every carton and glues its side seam, then cartons are counted and packed for delivery."
+      ],
       "scenes": [
         {
           "layout": "finish",

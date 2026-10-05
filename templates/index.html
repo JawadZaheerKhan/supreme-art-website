@@ -65,23 +65,26 @@
     </div>
 
     <!-- PROCESS: three pages, one per chapter (Pre press, Press, Post press). Each composes one photo from every
-         stage of that chapter; the pages turn like the quality windows (each pins, the next slides over). -->
+         stage of that chapter — a hero shot with supporting shots around it — beside the chapter's story and the
+         equipment behind it. The pages turn like the quality windows (each pins, the next slides over). -->
     {{#each content.process.chapters}}<section class="home-process" data-chapter="{{ @index }}" aria-labelledby="home-process-{{ id }}">
       <div class="container home-process__inner">
         <div class="home-process__copy">
           <p class="eyebrow">{{ page.process.eyebrow }}</p>
           <h2 class="home-process__title" id="home-process-{{ id }}">{{ title }}</h2>
           <p class="home-process__story">{{ story }}</p>
+          <h3 class="home-process__facts-title">On the floor</h3>
+          <ul class="home-process__facts">{{#each facts}}<li>{{ . }}</li>{{/each}}</ul>
           <ol class="home-process__trail" aria-label="Process chapters">{{#each content.process.chapters}}<li>{{ title }}</li>{{/each}}</ol>
         </div>
-        <div class="home-process__collage">
-          {{#each scenes}}{{#if hero}}<figure class="home-process__shot" style="--r: {{ hero.ratio }}"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /><figcaption>{{ lead }}</figcaption></figure>{{else}}<figure class="home-process__shot" style="--r: {{ row.0.ratio }}"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /><figcaption>{{ lead }}</figcaption></figure>{{/if}}
+        <div class="home-process__collage" aria-label="{{ title }} in pictures">
+          {{#each scenes}}{{#if hero}}<figure class="home-process__shot"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /><figcaption>{{ lead }}</figcaption></figure>{{else}}<figure class="home-process__shot"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /><figcaption>{{ lead }}</figcaption></figure>{{/if}}
           {{/each}}
         </div>
       </div>
     </section>
     {{/each}}
-    <div class="home-process__all"><a class="btn btn--accent" href="{{ page.process.button_href }}">{{ page.process.button_label }}</a></div>
+    <div class="home-process__all" data-stack-skip><a class="btn btn--accent" href="{{ page.process.button_href }}">{{ page.process.button_label }}</a></div>
 
     <!-- QUALITY: told like the process — an opening page, then each check in a Quality-Control window -->
     <section class="qc-story home-chapters home-quality-chapter" aria-labelledby="home-quality-title">

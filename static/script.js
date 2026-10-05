@@ -916,7 +916,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 (function () {
   const main = document.querySelector('.home-page main');
   if (!main) return;
-  const chapters = [...main.children].filter(el => !el.classList.contains('home-story') && el.tagName !== 'SCRIPT' && getComputedStyle(el).display !== 'none');
+  // Short in-between blocks (data-stack-skip) just scroll; only real chapters pin.
+  const chapters = [...main.children].filter(el => !el.classList.contains('home-story') && !el.hasAttribute('data-stack-skip') && el.tagName !== 'SCRIPT' && getComputedStyle(el).display !== 'none');
   chapters.forEach((el, i) => { el.classList.add('home-stack'); el.style.setProperty('--stack-z', String(i + 1)); });
   function fit() {
     chapters.forEach(el => el.style.setProperty('--stack-top', Math.min(0, window.innerHeight - el.offsetHeight) + 'px'));
