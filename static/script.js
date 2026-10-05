@@ -876,12 +876,12 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 // Glass expansion for the requested page actions.
 (() => {
   const page = location.pathname.split('/').pop().replace(/\.html$/, '') || 'index';
-  // Every page's call-to-action band gets the glass expansion; some pages add their own actions.
   const extra = {
     careers: 'a.btn[href="#career-contact"]',
     index: '.home-contact-story__inner .hero-actions .btn'
   };
-  const selector = ['.cta-band .btn', extra[page]].filter(Boolean).join(', ');
+  // Every button on every page gets the glass expansion.
+  const selector = '.btn';
   document.querySelectorAll(selector).forEach(button => {
     button.classList.add('glass-action');
     let touch = false;
