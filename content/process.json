@@ -99,7 +99,7 @@
     {
       "id": "prepress",
       "title": "Pre press",
-      "label": "Chapter one",
+      "label": "Our process",
       "story": "Every carton begins as an idea on a screen. Before a single sheet is printed, the artwork is designed, approved and carried onto a printing plate.",
       "facts": [
         "Computer-to-plate (CTP): the approved artwork is imaged straight onto the aluminium plate, with no film in between, so every colour registers precisely on press.",
@@ -208,7 +208,7 @@
     {
       "id": "press",
       "title": "Press",
-      "label": "Chapter two",
+      "label": "Our process",
       "story": "On our Heidelberg presses the plate meets the board. Ink, colour and registration are set, then checked sheet after sheet.",
       "facts": [
         "Heidelberg Speedmaster CD 102: a 70 × 100 cm multi-colour press rated at up to 15,000 sheets an hour.",
@@ -294,7 +294,7 @@
     {
       "id": "postpress",
       "title": "Post press",
-      "label": "Chapter three",
+      "label": "Our process",
       "story": "Printed sheets become cartons: coated, cut, separated, folded, glued and packed for the client’s filling line.",
       "facts": [
         "UV and spot-UV coating lines add a gloss that protects the print and a raised, textured finish where the design asks for it.",

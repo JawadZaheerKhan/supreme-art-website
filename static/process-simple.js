@@ -92,17 +92,5 @@
   addEventListener('resize', schedule, { passive: true });
   reduced.addEventListener('change', schedule);
   new ResizeObserver(schedule).observe(root);
-  if ('IntersectionObserver' in window) {
-    const reveal = new IntersectionObserver(entries => entries.forEach(({ target, isIntersecting, intersectionRatio }) => {
-      if (intersectionRatio >= .3) target.classList.add('is-visible');
-      else if (!isIntersecting) target.classList.remove('is-visible');
-    }), { threshold: [0, .3] });
-    scenes.forEach(el => reveal.observe(el));
-    const zoom = new IntersectionObserver(entries => entries.forEach(({ target, isIntersecting }) => {
-      target.style.animationPlayState = isIntersecting ? 'running' : 'paused';
-    }));
-    root.querySelectorAll('.process-photo-frame img').forEach(img => zoom.observe(img));
-    document.body.classList.add('story-motion-ready');
-  }
   schedule();
 })();
