@@ -1,14 +1,19 @@
-/* Glass hover for photos: the photo eases a little larger and a pane of glass settles over it — a soft specular
-   highlight that follows the cursor, a hairline rim and a brighter top edge, like a phone screen catching the light.
-   glass-photos.js tracks the cursor; for [data-glass="fit"] it also sizes the frame to the photo. */
-.glass-photo { position: relative; display: block; overflow: hidden; border-radius: 10px; isolation: isolate; --mx: 50%; --my: 40%; }
-.glass-photo > img { display: block; transform-origin: 50% 60%; transition: transform .7s cubic-bezier(.22, 1, .36, 1); will-change: transform; }
-.glass-photo::before, .glass-photo::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .4s ease; }
-/* the glass rim */
-.glass-photo::before { z-index: 2; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), inset 0 1.5px 0 rgba(255, 255, 255, .75), inset 0 -18px 28px -24px rgba(255, 255, 255, .5); }
-/* the highlight that tracks the cursor, plus a quiet diagonal sheen */
-.glass-photo::after { z-index: 1; background: radial-gradient(260px circle at var(--mx) var(--my), rgba(255, 255, 255, .42), rgba(255, 255, 255, .12) 38%, rgba(255, 255, 255, 0) 70%), linear-gradient(118deg, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, .16) 50%, rgba(255, 255, 255, 0) 62%); mix-blend-mode: screen; }
-.glass-photo:hover > img, .glass-photo:focus-within > img { transform: scale(1.035); }
-.glass-photo:hover::before, .glass-photo:hover::after, .glass-photo:focus-within::before, .glass-photo:focus-within::after { opacity: 1; }
-@media (hover: none) { .glass-photo::before, .glass-photo::after { display: none; } .glass-photo > img { transition: none; } }
-@media (prefers-reduced-motion: reduce) { .glass-photo > img { transition: none; } .glass-photo:hover > img { transform: none; } }
+/* Photo loupe: a round glass lens follows the cursor over a photo and shows that spot enlarged — like a phone's
+   zoom lens. The photo itself stays still. glass-photos.js positions the lens and sets its magnified background;
+   for [data-glass="fit"] it also sizes the frame to the photo it holds. */
+.glass-photo { position: relative; display: block; border-radius: 10px; cursor: zoom-in; --lx: -999px; --ly: -999px; --lsize: 170px; --zoom: 2.2; }
+.glass-photo > img { display: block; border-radius: inherit; }
+/* The Process page clips its frames; the lens must be free to cross the photo's edge. */
+.process-photo-frame.glass-photo { overflow: visible; }
+.glass-photo .loupe {
+  position: absolute; z-index: 3; left: var(--lx); top: var(--ly); width: var(--lsize); height: var(--lsize);
+  transform: translate(-50%, -50%) scale(.6); border-radius: 50%; pointer-events: none; opacity: 0;
+  background: var(--lens-img) no-repeat; background-size: var(--bgw) var(--bgh); background-position: var(--bgx) var(--bgy);
+  border: 2px solid rgba(255, 255, 255, .85);
+  box-shadow: 0 0 0 1px rgba(60, 45, 30, .18), 0 18px 40px -14px rgba(60, 45, 30, .55), inset 0 0 0 1px rgba(255, 255, 255, .35), inset 0 -14px 24px -16px rgba(0, 0, 0, .25), inset 0 12px 18px -12px rgba(255, 255, 255, .55);
+  transition: opacity .25s ease, transform .35s cubic-bezier(.22, 1, .36, 1);
+}
+.glass-photo .loupe::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(circle at 32% 26%, rgba(255, 255, 255, .32), rgba(255, 255, 255, 0) 42%); pointer-events: none; }
+.glass-photo.is-lensing .loupe { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+@media (hover: none) { .glass-photo { cursor: default; } .glass-photo .loupe { display: none; } }
+@media (prefers-reduced-motion: reduce) { .glass-photo .loupe { transition: opacity .2s ease; } }

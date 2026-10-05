@@ -10,7 +10,8 @@
 
 /* The logo floats: a slow bob, and a shadow on the paper beneath it. */
 .client-pair__logo { display: grid; justify-items: center; gap: 22px; text-align: center; }
-.client-pair__logo img { display: block; width: min(300px, 78%); height: auto; max-height: 150px; object-fit: contain; animation: clientFloat 5.5s ease-in-out infinite; filter: drop-shadow(0 22px 26px rgba(60, 45, 30, .22)); }
+/* Big and crisp: a tight ground shadow well below the logo, not a blur behind the lettering. */
+.client-pair__logo img { display: block; width: min(380px, 86%); height: auto; max-height: 190px; object-fit: contain; animation: clientFloat 5.5s ease-in-out infinite; filter: drop-shadow(0 26px 14px rgba(60, 45, 30, .14)); }
 .client-pair:nth-child(even) .client-pair__logo img { animation-delay: -2.75s; }
 @keyframes clientFloat { 50% { transform: translateY(-10px); } }
 

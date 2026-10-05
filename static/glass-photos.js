@@ -1,15 +1,32 @@
-// Glass photos: the highlight follows the cursor; frames marked data-glass="fit" are sized to the photo they hold,
-// so the glass covers the picture and not the empty part of its cell.
+// Photo loupe: a round lens that magnifies the spot under the cursor. Frames marked data-glass="fit" are first
+// sized to the photo they hold, so the lens maps exactly onto the picture.
 (() => {
   const frames = [...document.querySelectorAll(".glass-photo")];
-  if (!frames.length) return;
+  if (!frames.length || matchMedia("(hover: none)").matches) return;
   frames.forEach(frame => {
-    frame.addEventListener("pointermove", event => {
+    const img = frame.querySelector("img");
+    if (!img) return;
+    const lens = document.createElement("span");
+    lens.className = "loupe";
+    lens.setAttribute("aria-hidden", "true");
+    frame.appendChild(lens);
+    const zoom = parseFloat(getComputedStyle(frame).getPropertyValue("--zoom")) || 2.2;
+    function move(event) {
       const r = frame.getBoundingClientRect();
       if (!r.width || !r.height) return;
-      frame.style.setProperty("--mx", ((event.clientX - r.left) / r.width * 100).toFixed(1) + "%");
-      frame.style.setProperty("--my", ((event.clientY - r.top) / r.height * 100).toFixed(1) + "%");
-    });
+      const x = event.clientX - r.left, y = event.clientY - r.top;
+      const size = lens.offsetWidth || 170;
+      frame.style.setProperty("--lens-img", `url("${img.currentSrc || img.src}")`);
+      frame.style.setProperty("--bgw", (r.width * zoom) + "px");
+      frame.style.setProperty("--bgh", (r.height * zoom) + "px");
+      frame.style.setProperty("--bgx", (size / 2 - x * zoom) + "px");
+      frame.style.setProperty("--bgy", (size / 2 - y * zoom) + "px");
+      frame.style.setProperty("--lx", x + "px");
+      frame.style.setProperty("--ly", y + "px");
+    }
+    frame.addEventListener("pointerenter", event => { move(event); frame.classList.add("is-lensing"); });
+    frame.addEventListener("pointermove", move);
+    frame.addEventListener("pointerleave", () => frame.classList.remove("is-lensing"));
   });
   const fits = frames.filter(f => f.dataset.glass === "fit");
   if (!fits.length) return;
@@ -18,10 +35,8 @@
     const img = frame.querySelector("img"), cell = frame.parentElement;
     if (!img || !img.naturalWidth) return;
     if (!wide.matches) { frame.style.width = ""; frame.style.height = ""; return; }
-    const cs = getComputedStyle(cell);
-    // the room the cell gives the photo: its grid row minus the caption
     const cap = cell.querySelector("figcaption");
-    const gap = parseFloat(cs.rowGap) || 0;
+    const gap = parseFloat(getComputedStyle(cell).rowGap) || 0;
     const availW = cell.clientWidth, availH = cell.clientHeight - (cap ? cap.offsetHeight + gap : 0);
     const s = Math.min(availW / img.naturalWidth, availH / img.naturalHeight);
     frame.style.width = Math.floor(img.naturalWidth * s) + "px";
