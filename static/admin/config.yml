@@ -192,22 +192,39 @@ collections:
           - name: services
             label: 'Section — Our services'
             widget: object
+            hint: Two pages of product families, then the finishes that have photos on the Services page.
             fields:
-              - { name: eyebrow, label: Small label above heading, widget: string }
-              - { name: heading, label: Heading, widget: string }
-              - { name: lead, label: Intro line, widget: text }
-              - name: items
-                label: Product families
-                widget: list
-                summary: '{{fields.title}}'
-                fields:
-                  - { name: title, label: Title, widget: string }
-                  - { name: text, label: Description, widget: text }
-                  - { name: image, label: Photo, widget: image }
-                  - { name: alt, label: Photo description (for screen readers), widget: string }
-                  - { name: href, label: Links to, widget: string, hint: "e.g. products.html#tablet-capsule-heading" }
               - { name: button_label, label: Button text, widget: string }
               - { name: button_href, label: Button links to, widget: string }
+              - name: pages
+                label: Pages
+                widget: list
+                summary: '{{fields.heading}}'
+                fields:
+                  - { name: eyebrow, label: Small label above heading, widget: string }
+                  - { name: heading, label: Heading, widget: string }
+                  - { name: lead, label: Intro line, widget: text }
+                  - { name: show_all, label: Show the button on this page, widget: boolean, required: false }
+                  - name: items
+                    label: Product families
+                    widget: list
+                    summary: '{{fields.title}}'
+                    fields:
+                      - { name: title, label: Title, widget: string }
+                      - { name: text, label: Description, widget: text }
+                      - { name: image, label: Photo, widget: image }
+                      - { name: alt, label: Photo description (for screen readers), widget: string }
+                      - { name: href, label: Links to, widget: string }
+              - name: finishes
+                label: Finishes page
+                widget: object
+                hint: The finishes themselves, with their photos, come from the Services page.
+                fields:
+                  - { name: eyebrow, label: Small label above heading, widget: string }
+                  - { name: heading, label: Heading, widget: string }
+                  - { name: lead, label: Intro line, widget: text }
+                  - { name: button_label, label: Button text, widget: string }
+                  - { name: button_href, label: Button links to, widget: string }
           - name: process
             label: 'Section — Our process'
             widget: object

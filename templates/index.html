@@ -66,24 +66,45 @@
       </div>
     </div>
 
-    <!-- SERVICES: one chapter, the four product families as photographs shown whole, each linking to its row on
-         the Services page. -->
-    <section class="home-services" aria-labelledby="home-services-title">
+    <!-- SERVICES: two chapter pages of two product families each, then the photographed finishes. Each page fits
+         one screen and stacks like the process chapters; photographs are shown whole. -->
+    {{#each page.services.pages}}<section class="home-services" aria-labelledby="home-services-{{ @index }}">
       <div class="container">
         <div class="home-services__top">
-        <header class="home-services__head">
-          <p class="eyebrow">{{ page.services.eyebrow }}</p>
-          <h2 id="home-services-title">{{ page.services.heading }}</h2>
-          <p class="home-services__lead">{{ page.services.lead }}</p>
-        </header>
-        <p class="home-services__all"><a class="btn btn--accent" href="{{ page.services.button_href }}">{{ page.services.button_label }}</a></p>
+          <header class="home-services__head">
+            <p class="eyebrow">{{ eyebrow }}</p>
+            <h2 id="home-services-{{ @index }}">{{ heading }}</h2>
+            <p class="home-services__lead">{{ lead }}</p>
+          </header>
+          {{#if show_all}}<p class="home-services__all"><a class="btn btn--accent" href="{{ page.services.button_href }}">{{ page.services.button_label }}</a></p>{{/if}}
         </div>
         <ul class="home-services__grid">
-          {{#each page.services.items}}<li><a class="home-services__card card" href="{{ href }}">
+          {{#each items}}<li><a class="home-services__card card" href="{{ href }}">
             <span class="home-services__photo"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></span>
             <span class="home-services__copy"><span class="home-services__title">{{ title }}</span><span class="home-services__text">{{ text }}</span><span class="home-services__more" aria-hidden="true">View cartons →</span></span>
           </a></li>
           {{/each}}
+        </ul>
+      </div>
+    </section>
+    {{/each}}
+
+    <!-- FINISHES: the finishes that have photographs on the Services page, four across. -->
+    <section class="home-services home-finishes" aria-labelledby="home-finishes-title">
+      <div class="container">
+        <div class="home-services__top">
+          <header class="home-services__head">
+            <p class="eyebrow">{{ page.services.finishes.eyebrow }}</p>
+            <h2 id="home-finishes-title">{{ page.services.finishes.heading }}</h2>
+            <p class="home-services__lead">{{ page.services.finishes.lead }}</p>
+          </header>
+          <p class="home-services__all"><a class="btn btn--accent" href="{{ page.services.finishes.button_href }}">{{ page.services.finishes.button_label }}</a></p>
+        </div>
+        <ul class="home-finishes__grid">
+          {{#each content.products.finishes.features}}{{#if photos}}<li class="home-finishes__item card">
+            <span class="home-finishes__photo glass-photo"><img src="{{ photos.0.image }}" alt="{{ photos.0.alt }}" loading="lazy" decoding="async" /></span>
+            <span class="home-services__title">{{ title }}</span><span class="home-services__text">{{ text }}</span>
+          </li>{{/if}}{{/each}}
         </ul>
       </div>
     </section>
