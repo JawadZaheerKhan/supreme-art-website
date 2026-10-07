@@ -68,19 +68,19 @@
 
     <!-- SERVICES: two chapter pages of two product families each, then the photographed finishes. Each page fits
          one screen and stacks like the process chapters; photographs are shown whole. -->
-    {{#each page.services.pages}}<section class="home-services" aria-labelledby="home-services-{{ @index }}">
+    {{#each page.services.pages}}<section class="home-services" aria-label="{{ eyebrow }}">
       <div class="container">
         <div class="home-services__top">
           <header class="home-services__head">
             <p class="eyebrow">{{ eyebrow }}</p>
-            <h2 id="home-services-{{ @index }}">{{ heading }}</h2>
-            <p class="home-services__lead">{{ lead }}</p>
+            {{#if heading}}<h2 id="home-services-{{ @index }}">{{ heading }}</h2>{{/if}}
+            {{#if lead}}<p class="home-services__lead">{{ lead }}</p>{{/if}}
           </header>
           {{#if show_all}}<p class="home-services__all"><a class="btn btn--accent" href="{{ page.services.button_href }}">{{ page.services.button_label }}</a></p>{{/if}}
         </div>
         <ul class="home-services__grid">
           {{#each items}}<li><a class="home-services__card card" href="{{ href }}">
-            <span class="home-services__photo"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></span>
+            <span class="home-services__photo" data-matte><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></span>
             <span class="home-services__copy"><span class="home-services__title">{{ title }}</span><span class="home-services__text">{{ text }}</span><span class="home-services__more" aria-hidden="true">View cartons →</span></span>
           </a></li>
           {{/each}}
@@ -102,7 +102,7 @@
         </div>
         <ul class="home-finishes__grid">
           {{#each content.products.finishes.features}}{{#if photos}}<li class="home-finishes__item card">
-            <span class="home-finishes__photo glass-photo"><img src="{{ photos.0.image }}" alt="{{ photos.0.alt }}" loading="lazy" decoding="async" /></span>
+            <span class="home-finishes__photo glass-photo" data-matte><img src="{{ photos.0.image }}" alt="{{ photos.0.alt }}" loading="lazy" decoding="async" /></span>
             <span class="home-services__title">{{ title }}</span><span class="home-services__text">{{ text }}</span>
           </li>{{/if}}{{/each}}
         </ul>
@@ -199,5 +199,6 @@
 
   <script src="/script.js"></script>
   <script src="/glass-photos.js"></script>
+  <script src="/photo-matte.js"></script>
 </body>
 </html>

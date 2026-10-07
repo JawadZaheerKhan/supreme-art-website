@@ -11,7 +11,7 @@
 /* two families side by side, photo above its words */
 .home-services__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 26px); }
 .home-services__card { display: flex; flex-direction: column; gap: 14px; height: 100%; padding: 12px 12px 18px; color: inherit; text-decoration: none; background: #fff; border-color: var(--line, #e7e1d6); box-sizing: border-box; }
-.home-services__photo { display: block; width: 100%; aspect-ratio: 4 / 3; max-height: calc(100svh - 450px); min-height: 180px; border-radius: 10px; overflow: hidden; background: #efedea; }
+.home-services__photo { display: block; width: 100%; aspect-ratio: 4 / 3; max-height: calc(100svh - 450px); min-height: 180px; border-radius: 10px; overflow: hidden; background: transparent; }
 .home-services__photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .home-services__copy { display: grid; gap: 6px; padding: 0 8px; }
 .home-services__title { font-family: var(--display); font-size: clamp(1.15rem, 1.5vw, 1.4rem); font-weight: 600; line-height: 1.2; }
@@ -26,7 +26,7 @@
 .home-finishes__item > .home-services__title, .home-finishes__item > .home-services__text { padding: 0 6px; }
 .home-finishes__item > .home-services__title { margin-top: 6px; font-size: clamp(1.02rem, 1.25vw, 1.18rem); }
 .home-finishes__item > .home-services__text { font-size: .86rem; }
-.home-finishes__photo { display: block; width: 100%; aspect-ratio: 3 / 4; max-height: calc(100svh - 470px); min-height: 200px; border-radius: 10px; background: #efedea; }
+.home-finishes__photo { display: block; width: 100%; aspect-ratio: 3 / 4; max-height: calc(100svh - 470px); min-height: 200px; border-radius: 10px; background: transparent; }
 .home-finishes__photo img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: inherit; }
 
 @media (max-width: 1024px) {
