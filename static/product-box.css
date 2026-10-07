@@ -19,12 +19,12 @@
 /* Keep the carton above its ground shadow and away from the interaction hint. */
 .product-box-stage { bottom:34px; perspective:1000px; }
 /* The ground shadow follows its box: product-box.js sets --box-bottom (the box's lower edge in the stage) and
-   --box-width, so every carton, tall or short, sits on the same soft shadow. */
+   --box-width. It sits a little below the box with a visible gap, so every carton seems to float above it. */
 .product-box-stage::before {
-  content:""; position:absolute; left:50%; top:calc(var(--box-bottom, 88%) - 16px); bottom:auto;
-  width:calc(var(--box-width, 160px) * 1.25); height:32px; margin-left:calc(var(--box-width, 160px) * -.625);
-  border-radius:50%; background:radial-gradient(ellipse,#3c2d1e45, #3c2d1e14 45%,transparent 72%);
-  filter:blur(7px);
+  content:""; position:absolute; left:50%; top:calc(var(--box-bottom, 88%) + 6px); bottom:auto;
+  width:calc(var(--box-width, 160px) * 1.1); height:30px; margin-left:calc(var(--box-width, 160px) * -.55);
+  border-radius:50%; background:radial-gradient(ellipse,#3c2d1e4d, #3c2d1e1c 42%,transparent 70%);
+  filter:blur(6px);
   transform:translateX(var(--shadow-x,5px)) scaleX(var(--shadow-scale,.94));
   pointer-events:none;
 }
