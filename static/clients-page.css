@@ -1,69 +1,29 @@
-/* Clients page: each client's logo floating beside the turning carton we print for it (the Services page's
-   product box, product-box.css). No panels: logo and carton sit straight on the paper with a soft ground shadow. */
-.clients-page { padding: clamp(40px, 6vw, 72px) 0 clamp(64px, 8vw, 112px); background: var(--paper, #faf8f4); color: var(--text); overflow: hidden; }
-.clients-page__intro { max-width: 62ch; margin: 0 0 clamp(24px, 4vw, 48px); color: var(--muted); font-size: 1.1rem; line-height: 1.8; }
-.clients-page__list { list-style: none; margin: 0; padding: 0; }
-.client-pair { display: grid; grid-template-columns: minmax(240px, 2fr) minmax(0, 3fr); align-items: center; gap: clamp(24px, 4vw, 64px); padding: clamp(28px, 4vw, 56px) 0; }
-.client-pair + .client-pair { border-top: 1px solid var(--line, #e7e1d6); }
-.client-pair:nth-child(even) { grid-template-columns: minmax(0, 3fr) minmax(240px, 2fr); }
-.client-pair:nth-child(even) .client-pair__logo { order: 2; }
-
-/* The logo floats: a slow bob, and a shadow on the paper beneath it. */
-.client-pair__logo { display: grid; justify-items: center; gap: 22px; text-align: center; }
-/* Big and crisp: a tight ground shadow well below the logo, not a blur behind the lettering. */
-.client-pair__logo img { display: block; width: min(380px, 86%); height: auto; max-height: 190px; object-fit: contain; animation: clientFloat 5.5s ease-in-out infinite; filter: drop-shadow(0 26px 14px rgba(60, 45, 30, .14)); }
-.client-pair:nth-child(even) .client-pair__logo img { animation-delay: -2.75s; }
-@keyframes clientFloat { 50% { transform: translateY(-10px); } }
-
-/* The carton: the Services box, but with no backdrop so it floats on the paper; its own ground shadow stays. */
-.client-pair__box { display: grid; gap: 14px; justify-items: center; }
-.clients-page .product-box-view { width: min(560px, 100%); background: transparent; overflow: visible; }
-/* No flat photo before the model is ready: the carton fades in once its faces are drawn. */
-.clients-page .product-box-fallback { display: none; }
-.clients-page .product-box-stage { opacity: 0; transition: opacity .6s ease; }
-.clients-page .product-box-view.is-ready .product-box-stage { opacity: 1; }
-.client-pair__caption { display: grid; gap: 4px; justify-items: center; margin: 0; text-align: center; }
-.client-pair__caption strong { color: var(--text); font-family: var(--display); font-size: 1.15rem; line-height: 1.3; }
-.client-pair__caption span { color: var(--muted); font-size: .92rem; line-height: 1.5; }
-.client-pair__caption::after { content: ""; width: 32px; height: 2px; margin-top: 6px; background: var(--accent); border-radius: 2px; }
-
-.clients-page__cta { margin-top: clamp(48px, 7vw, 88px); padding: clamp(32px, 5vw, 56px); border-radius: 18px; border: 1px solid var(--line, #e7e1d6); background: var(--kraft, #f1e9dd); box-shadow: inset 0 2px 0 var(--wood, #a67c52); text-align: center; }
-.clients-page__cta h2 { margin: 0 0 10px; color: var(--text); font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.4rem); }
-.clients-page__cta p { margin: 0 0 22px; color: var(--muted); }
-
-@media (max-width: 760px) {
-  .client-pair, .client-pair:nth-child(even) { grid-template-columns: 1fr; gap: 20px; }
-  .client-pair:nth-child(even) .client-pair__logo { order: 0; }
-  .client-pair__logo img { max-height: 110px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .client-pair__logo img { animation: none; }
-}
-
-/* A full-width, native horizontal gallery. The page still scrolls vertically. */
-.clients-page { padding-top:32px; }
-.clients-page__intro { margin-bottom:20px; }
+.clients-page { padding:32px 0 80px; background:var(--paper,#faf8f4); color:var(--text); overflow:hidden; }
+.clients-page__intro { max-width:62ch; margin:0 0 48px; color:var(--muted); font-size:1.1rem; line-height:1.8; }
+.client-group { padding:24px 0 40px; }
+.client-group + .client-group { border-top:1px solid var(--line); padding-top:48px; }
+.client-group h2 { margin:0 0 12px; font-size:clamp(1.7rem,3vw,2.7rem); }
 .client-gallery-tools { display:flex; align-items:center; justify-content:space-between; gap:20px; color:var(--muted); font-size:.85rem; }
 .client-gallery-tools > div { display:flex; align-items:center; gap:18px; white-space:nowrap; }
 .client-gallery-tools button { width:48px; height:48px; border:1px solid var(--line); border-radius:50%; background:var(--paper); color:var(--ink); font-size:1.4rem; cursor:pointer; }
 .client-gallery-tools button:disabled { opacity:.35; cursor:default; }
 .client-gallery-tools button:focus-visible,.client-gallery:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
-.client-gallery { --tile-width:clamp(280px,34vw,490px); overflow-x:auto; overflow-y:hidden; scrollbar-width:thin; scrollbar-color:var(--accent) var(--line); overscroll-behavior-x:contain; padding:22px 0 36px; }
-.clients-page__list { display:flex; align-items:center; gap:clamp(24px,4vw,72px); width:max-content; padding:20px max(24px,calc((100vw - var(--tile-width))/2)); }
-.client-pair,.client-pair:nth-child(even) { display:flex; flex-direction:column; gap:12px; width:var(--tile-width); flex:0 0 var(--tile-width); padding:0; border:0; }
-.clients-page__list .client-pair + .client-pair { border:0; }
-.client-pair__box { width:100%; transform:none; }
-.clients-page .product-box-view { width:100%; height:clamp(300px,36vw,440px); aspect-ratio:auto; }
-.client-pair .client-pair__logo { order:0; height:100px; width:100%; }
-.client-pair .client-pair__logo img { width:68%; max-height:80px; animation:none; filter:drop-shadow(0 18px 14px rgba(60,45,30,.12)); }
-.clients-page__cta { margin-top:56px; }
+.client-gallery { --tile-width:clamp(260px,29vw,420px); overflow-x:auto; overflow-y:hidden; scrollbar-width:thin; scrollbar-color:var(--accent) var(--line); overscroll-behavior-x:contain; touch-action:pan-x pan-y; }
+.clients-page__list { list-style:none; margin:0; display:flex; align-items:center; gap:clamp(30px,5vw,80px); width:max-content; padding:36px max(24px,calc((100vw - var(--tile-width))/2)) 50px; }
+.client-pair { width:var(--tile-width); flex:0 0 var(--tile-width); padding:0; }
+.client-pair__logo { height:220px; display:grid; place-items:center; }
+.client-pair__logo img { width:82%; max-height:155px; object-fit:contain; filter:drop-shadow(0 26px 16px rgba(60,45,30,.17)); animation:clientFloat 6s ease-in-out infinite; }
+.client-pair:nth-child(even) img { animation-delay:-3s; }
+@keyframes clientFloat { 50% { transform:translateY(-10px); } }
+.clients-page__cta { margin-top:48px; padding:36px; border-radius:18px; border:1px solid var(--line); background:var(--kraft); box-shadow:inset 0 2px 0 var(--wood); text-align:center; }
+.clients-page__cta h2 { margin:0 0 10px; }
+.clients-page__cta p { color:var(--muted); }
 @media(max-width:700px) {
- .client-gallery { --tile-width:78vw; padding-top:6px; }
+ .client-gallery { --tile-width:72vw; }
  .client-gallery-tools { align-items:flex-start; }
  .client-gallery-tools p { max-width:170px; font-size:.75rem; }
  .client-gallery-tools > div { gap:10px; }
- .clients-page .product-box-view { height:320px; }
- .client-pair .client-pair__logo { height:85px; }
- .client-pair .client-pair__logo img { max-height:65px; }
+ .client-pair__logo { height:180px; }
+ .client-pair__logo img { max-height:125px; }
 }
-@media(prefers-reduced-motion:reduce) { .client-pair__box { transform:none; will-change:auto; } }
+@media(prefers-reduced-motion:reduce) { .client-pair__logo img { animation:none; } }

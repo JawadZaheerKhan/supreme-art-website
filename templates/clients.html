@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 {{> head}}
-  <link rel="stylesheet" href="/product-box.css?v=20261007-2" />
-  <link rel="stylesheet" href="/clients-page.css?v=20261007-straight" />
+  <link rel="stylesheet" href="/clients-page.css?v=20261007-logos" />
 </head>
 <body>
 {{> gtm-body}}
@@ -15,22 +14,26 @@
     <section class="section clients-page">
       <div class="container">
         <p class="clients-page__intro">{{ page.intro }}</p>
+      </div>
+      {{#each content.index.clients.groups}}
+      <section class="client-group" aria-label="{{ title }}">
+        <div class="container">
+        <h2>{{ title }}</h2>
         <div class="client-gallery-tools">
-          <p id="client-gallery-help">Explore the collection · Swipe left/right or use the arrows</p>
-          <div><button type="button" class="client-gallery-prev" aria-label="Previous client">←</button><span class="client-gallery-count" aria-live="polite">1 / {{ page.items.length }}</span><button type="button" class="client-gallery-next" aria-label="Next client">→</button></div>
+          <p>Explore both ways · Swipe left/right or use the arrows</p>
+          <div><button type="button" class="client-gallery-prev" aria-label="Previous client">←</button><span class="client-gallery-count" aria-live="polite"></span><button type="button" class="client-gallery-next" aria-label="Next client">→</button></div>
         </div>
       </div>
-      <div class="client-gallery" tabindex="0" role="region" aria-label="Client and product gallery" aria-describedby="client-gallery-help">
+      <div class="client-gallery" tabindex="0" role="region" aria-label="{{ title }} logo gallery">
         <ul class="clients-page__list">
-          {{#each page.items}}<li class="client-pair">
-            <div class="client-pair__box">
-              {{> product-box}}
-            </div>
-            <div class="client-pair__logo"><img src="{{ logo }}" alt="{{ client }}" loading="lazy" decoding="async" /></div>
+          {{#each items}}<li class="client-pair">
+            <div class="client-pair__logo"><img src="{{ logo }}" alt="{{ name }}" loading="lazy" decoding="async" draggable="false" /></div>
           </li>
           {{/each}}
         </ul>
       </div>
+      </section>
+      {{/each}}
       <div class="container">
         <div class="clients-page__cta">
           <h2>{{ page.cta.heading }}</h2>
@@ -44,7 +47,6 @@
 {{> footer}}
 
   <script src="/script.js"></script>
-  <script src="/product-box-syrups.js"></script><script src="/product-box-food.js"></script><script src="/product-box-neutra.js"></script><script src="/product-box-injections.js?v=20261007-2"></script><script src="/product-box.js?v=20261007-2"></script>
-  <script src="/clients-gallery.js?v=20261007-straight"></script>
+  <script src="/clients-gallery.js?v=20261007-logos"></script>
 </body>
 </html>
