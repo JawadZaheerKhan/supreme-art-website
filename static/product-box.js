@@ -491,7 +491,7 @@
     ]
   }
 };
-  Object.assign(additionalBoxes, window.productBoxSyrupBoxes || {}, window.productBoxFoodBoxes || {}, window.productBoxNeutraBoxes || {}, window.productBoxLabelBoxes || {});
+  Object.assign(additionalBoxes, window.productBoxSyrupBoxes || {}, window.productBoxFoodBoxes || {}, window.productBoxNeutraBoxes || {}, window.productBoxLabelBoxes || {}, window.productBoxInjectionBoxes || {});
   document.querySelectorAll('.product-box-view').forEach(view => {
   const model = view.querySelector('.product-box-model');
   const dimensions = additionalBoxes[view.dataset.box] || {height:178,depth:32};

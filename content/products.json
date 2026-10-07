@@ -147,6 +147,15 @@
         ]
       },
       {
+        "id": "injection-packaging",
+        "heading": "Injection Packaging",
+        "text": "Printed cartons for injection packs, made to the required dimensions and artwork.",
+        "items": [
+          { "interactive_box": true, "box_id": "tuff", "box_name": "TUFF injection", "box_front": "/images/tuff-box/front.jpg" },
+          { "interactive_box": true, "box_id": "norbac", "box_name": "Norbac injection", "box_front": "/images/norbac-box/front.jpg" }
+        ]
+      },
+      {
         "id": "labels-leaflets",
         "heading": "Labels & Leaflets",
         "text": "Clear product identification and carefully folded information, designed to complete your packaging.",
