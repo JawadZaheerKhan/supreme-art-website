@@ -47,6 +47,43 @@
       "image": "/images/home/who-we-are-press-hall.webp"
     }
   },
+  "services": {
+    "eyebrow": "Our services",
+    "heading": "Cartons for every kind of product.",
+    "lead": "From blister-pack tablets to syrups, supplements and spices, every carton is printed and finished under one roof in Peshawar.",
+    "items": [
+      {
+        "title": "Tablets & capsules",
+        "text": "Unit cartons for blister packs, from ten-tablet strips to thirty-tablet packs, with drip-off, foil and security finishes.",
+        "image": "/images/home/services/tablets-capsules.webp",
+        "alt": "Tablet and capsule cartons: Bexus, Novex, Zolt, Duet, Carveda, Vazkor and Imo",
+        "href": "products.html#tablet-capsule-heading"
+      },
+      {
+        "title": "Syrups & suspensions",
+        "text": "Bottle cartons for 60 to 120 ml syrups and suspensions, sized to the bottle with room for the leaflet.",
+        "image": "/images/home/services/syrups-suspensions.webp",
+        "alt": "Syrup cartons: Bronochol, Citolin, Fenbro 8, Fedralka, Pedrol and Novex Paracetamol",
+        "href": "products.html#syrup-suspension-heading"
+      },
+      {
+        "title": "Nutraceuticals",
+        "text": "Cartons for softgels, creams, supplements and ampoules, and hanging packs with a euro slot for the pharmacy shelf.",
+        "image": "/images/home/services/nutraceuticals.webp",
+        "alt": "Nutraceutical cartons: Vosun-D, Herbion Seaweed cream, Quench, Algae-Vit, Nova-Plast and Calciferol",
+        "href": "products.html#neutra-products-heading"
+      },
+      {
+        "title": "Food",
+        "text": "Full-colour spice and dessert-mix cartons, finished with food-grade coatings.",
+        "image": "/images/home/services/food.webp",
+        "alt": "SwaaD food cartons: Chapli Kabab, Kali Mirch, Shahi Kheer and Bombay Biryani",
+        "href": "products.html#food-packaging-heading"
+      }
+    ],
+    "button_label": "See all services",
+    "button_href": "products.html"
+  },
   "process": {
     "eyebrow": "How it's made",
     "heading": "From artwork to flat-packed carton.",
