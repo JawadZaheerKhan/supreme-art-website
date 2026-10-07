@@ -91,7 +91,7 @@
         <p class="lead reveal">{{ page.finishes.text }}</p>
         <h3 class="reveal">{{ page.finishes.features_heading }}</h3>
         <ul class="finishes-features">
-          {{#each page.finishes.features}}<li class="card reveal">{{ title }}</li>{{/each}}
+          {{#each page.finishes.features}}<li class="card reveal"><h4>{{ title }}</h4><p>{{ text }}</p></li>{{/each}}
         </ul>
       </div>
     </section>

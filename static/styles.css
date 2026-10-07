@@ -2216,7 +2216,9 @@ a { color: inherit; }
 .box-type-picture__frame { position: relative; width: 175px; max-width: 100%; overflow: hidden; }
 .box-type-picture__frame img { position: absolute; width: var(--image-width); max-width: none; height: auto; left: var(--image-left); top: var(--image-top); display: block; }
 .finishes-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; margin: 24px 0 0; padding: 0; list-style: none; }
-.finishes-features .card { margin: 0; padding: 22px; font-weight: 600; }
+.finishes-features .card { margin: 0; padding: 22px 24px; }
+.finishes-features .card h4 { margin: 0 0 8px; font-family: var(--display); font-size: 1.05rem; font-weight: 600; color: var(--text); }
+.finishes-features .card p { margin: 0; color: var(--muted); font-size: .93rem; line-height: 1.55; }
 
 .company-message__body { max-width: 850px; margin-inline: auto; }
 .company-message__body p { line-height: 1.8; margin: 0 0 24px; text-align: left; overflow-wrap: break-word; }
