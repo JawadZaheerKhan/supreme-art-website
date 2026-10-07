@@ -2219,6 +2219,16 @@ a { color: inherit; }
 .finishes-features .card { margin: 0; padding: 22px 24px; }
 .finishes-features .card h4 { margin: 0 0 8px; font-family: var(--display); font-size: 1.05rem; font-weight: 600; color: var(--text); }
 .finishes-features .card p { margin: 0; color: var(--muted); font-size: .93rem; line-height: 1.55; }
+/* A finish with photographs: the carton shown whole on paper above its name, with the glass loupe; thumbnails swap it. */
+.finishes-features { align-items: start; }
+.finish__photos { margin: -22px -24px 16px; padding: 14px 14px 0; }
+.finish__main { display: block; width: 100%; aspect-ratio: 4 / 5; background: var(--paper, #faf8f4); border-radius: 10px; }
+.finish__main img { width: 100%; height: 100%; object-fit: contain; border-radius: inherit; }
+.finish__thumbs { display: flex; gap: 8px; margin: 10px 0 0; }
+.finish__thumb { width: 54px; height: 54px; padding: 3px; border: 1px solid var(--border); border-radius: 8px; background: var(--paper, #faf8f4); cursor: pointer; opacity: .7; transition: opacity .25s ease, border-color .25s ease; }
+.finish__thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.finish__thumb:hover, .finish__thumb.is-current { opacity: 1; border-color: var(--accent); }
+.finish__thumb:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .company-message__body { max-width: 850px; margin-inline: auto; }
 .company-message__body p { line-height: 1.8; margin: 0 0 24px; text-align: left; overflow-wrap: break-word; }

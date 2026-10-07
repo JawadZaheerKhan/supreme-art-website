@@ -224,11 +224,25 @@
     "features": [
       {
         "title": "Anti-counterfeit packaging",
-        "text": "Security features printed and finished into the carton itself, so they cannot be peeled off and moved to a fake."
+        "text": "Security features printed and finished into the carton itself, so they cannot be peeled off and moved to a fake.",
+        "photos": [
+          {
+            "image": "/images/finishes/anti-counterfeit-proflox.webp",
+            "alt": "Proflox carton with a repeating Ferozsons security pattern embossed over the whole face"
+          }
+        ],
+        "more": false
       },
       {
         "title": "Colour-shifting seal",
-        "text": "An ink that changes colour as the carton is tilted: a quick check of authenticity that an ordinary printer cannot reproduce."
+        "text": "An ink that changes colour as the carton is tilted: a quick check of authenticity that an ordinary printer cannot reproduce.",
+        "photos": [
+          {
+            "image": "/images/finishes/colour-shift-icon.webp",
+            "alt": "Icon carton with a colour-shifting Ferozsons seal on a metallised face"
+          }
+        ],
+        "more": false
       },
       {
         "title": "Specialised and customised coatings",
@@ -240,7 +254,22 @@
       },
       {
         "title": "Drip-off coatings",
-        "text": "Matte and gloss on one sheet: the gloss stands out in relief against a matte ground, without a second pass."
+        "text": "Matte and gloss on one sheet: the gloss stands out in relief against a matte ground, without a second pass.",
+        "photos": [
+          {
+            "image": "/images/finishes/drip-off-imo-1.webp",
+            "alt": "Imo carton standing on end, its gloss swirls raised against a matte ground"
+          },
+          {
+            "image": "/images/finishes/drip-off-imo-2.webp",
+            "alt": "Imo carton lying flat, showing the drip-off gloss pattern"
+          },
+          {
+            "image": "/images/finishes/drip-off-vazkor-imo.webp",
+            "alt": "Vazkor and Imo cartons side by side with drip-off gloss highlights"
+          }
+        ],
+        "more": true
       },
       {
         "title": "Thermal foiling",
@@ -248,7 +277,18 @@
       },
       {
         "title": "Hot stamping (foiling)",
-        "text": "A heated die presses metallic or holographic foil into the board for a crisp, raised finish that doubles as a security layer."
+        "text": "A heated die presses metallic or holographic foil into the board for a crisp, raised finish that doubles as a security layer.",
+        "photos": [
+          {
+            "image": "/images/finishes/hot-stamping-duet.webp",
+            "alt": "Duet carton with hot-stamped metallic blue lettering"
+          },
+          {
+            "image": "/images/finishes/hot-stamping-vosun-duet.webp",
+            "alt": "Vosun-D and Duet cartons with gold and blue hot-stamped foil"
+          }
+        ],
+        "more": true
       },
       {
         "title": "UV and spot UV",
