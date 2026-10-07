@@ -375,7 +375,7 @@ Depth is shallow and warm.
 
 ### Photography Geometry
 
-Photos keep their own aspect ratio. Frames are sized to the photo by script where the layout would otherwise stretch them. Corners are 10px. There is no circle crop, no tall crop, no "cover" fill on a factory photo. The only time a photo fills the viewport is the hero, where the camera moves through the real building: facade, entrance doors, lobby doors, the open showroom doors, press hall, Speedmaster, a continuous walk driven by scroll. Shut doors swing open on their hinges as the camera passes; the leaves are cut from the photo itself, never drawn.
+Photos keep their own aspect ratio. Frames are sized to the photo by script where the layout would otherwise stretch them. Corners are 10px. There is no circle crop, no tall crop, no "cover" fill on a factory photo. The only time a photo fills the viewport is the hero, a walk into the building built in 3D (three.js, `static/hero-walk.js`): the facade, lobby, showroom and press-hall photographs stand on the walls of modelled rooms, unlit and untoned, with modelled floors, ceilings, door frames and doors. The camera walks facade, entrance doors, lobby, showroom doors, press hall, Speedmaster; shut doors swing open on their hinges as it passes.
 
 ## Components
 
@@ -468,7 +468,7 @@ Buttons never bounce, never darken to black and never lose their rim.
 
 ### Motion
 - Hero: the page's own scroll is the playhead, 70svh of scrolling per stop. The camera glides towards the scroll position with a damped lag (1 - e^(-2.4 dt)) and slows into each stop without halting, the same model as the portfolio site's gallery tour. Scrolling back walks back out.
-- Hero stages: building, entrance, lobby, showroom, press hall, Speedmaster. Each move dives through the doors of the front layer around its door point while the layer behind settles from 1.18x to 1x.
+- Hero stops: outside, entrance doors, lobby, showroom doors, press hall, Speedmaster. The camera follows a centripetal Catmull-Rom route through the rooms; it never cuts.
 - Chapter stack: native scroll, sticky sections, no JavaScript tween.
 - Everything else: 150 to 400ms eases on hover only.
 

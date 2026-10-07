@@ -227,148 +227,17 @@ const countIO = new IntersectionObserver((entries) => {
 }, { threshold: 0.6 });
 document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 
-/* Homepage three-stage scroll story */
+/* Homepage hero: the 3D walk lives in hero-walk.js. Here only the menu learns whether it is over the hero. */
 (function () {
   const story = document.querySelector('.home-story');
-  if (!story) return;
-
-  const scenes = [...story.querySelectorAll('[data-home-stage]')];
-  const dots = [...story.querySelectorAll('.home-story__progress span')];
   const header = document.querySelector('.site-header');
-  const sticky = story.querySelector('.home-story__sticky');
-  const hall = story.querySelector('.home-story__shot--hall');
-  const press = story.querySelector('.home-story__shot--press');
-  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let activeStage = -1;
-  let current = 0;
-
-  const clamp01 = value => Math.max(0, Math.min(1, value));
-  const span = (value, from, to) => clamp01((value - from) / (to - from));
-  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-  // The way in, front to back. Each layer is anchored on its doors (fractions of the photo): the camera dives
-  // through that point. Shut doors list their doorway (l, r, t, b, split) so the two leaves can swing open.
-  const BUILDING_TOP = 103 / 900; // the facade's first horizontal joint line: it sits right under the menu bar
-  const navBottom = () => { const nav = document.querySelector('.site-header .nav-links'); return nav ? nav.getBoundingClientRect().bottom : 72; };
-  const LAYERS = [
-    { name: 'facade', anchor: { x: .6, y: .69 }, nw: 1600, nh: 900, zoom: 9, navClamp: true },
-    { name: 'entrance', anchor: { x: .503, y: .66 }, nw: 1600, nh: 1200, zoom: 6, door: { l: .31, r: .695, t: .37, b: .93, split: .514 } },
-    { name: 'lobby', anchor: { x: .508, y: .63 }, nw: 1600, nh: 1200, zoom: 6, door: { l: .357, r: .662, t: .372, b: .885, split: .51 } },
-    { name: 'showroom', anchor: { x: .51, y: .56 }, nw: 1600, nh: 1200, zoom: 6 }
-  ].map(L => {
-    L.el = story.querySelector(`[data-layer="${L.name}"]`);
-    L.img = L.el.querySelector('img');
-    L.leaves = [...L.el.querySelectorAll('.home-story__leaf')];
-    return L;
-  });
-  const building = LAYERS[0].img;
-  let placed = false;
-  function placeLayer(L) {
-    const W = sticky.clientWidth, H = sticky.clientHeight;
-    const nw = L.img.naturalWidth || L.nw, nh = L.img.naturalHeight || L.nh;
-    const sc = Math.max(W / nw, H / nh), dw = nw * sc, dh = nh * sc;
-    const ox = (W - dw) * L.anchor.x;
-    let oy = (H - dh) * L.anchor.y;
-    // The building never lets its joint line slip under the menu bar: on wide, short screens the photo is
-    // shifted down so the line meets the bar, and the dive's origin follows the doors.
-    if (L.navClamp) oy = Math.max(H - dh, Math.min(0, Math.max(oy, navBottom() - BUILDING_TOP * dh)));
-    Object.assign(L.el.style, { left: ox + 'px', top: oy + 'px', width: dw + 'px', height: dh + 'px', transformOrigin: (L.anchor.x * dw) + 'px ' + (L.anchor.y * dh) + 'px' });
-    if (!L.door) return;
-    const d = L.door, l = d.l * dw, r = d.r * dw, t = d.t * dh, b = d.b * dh, m = d.split * dw;
-    const pct = v => (v * 100).toFixed(3) + '%';
-    // the doorway is cut out of the photo; the leaves carry those pixels and hinge on the frame
-    L.img.style.clipPath = `polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0, ${pct(d.l)} ${pct(d.t)}, ${pct(d.r)} ${pct(d.t)}, ${pct(d.r)} ${pct(d.b)}, ${pct(d.l)} ${pct(d.b)}, ${pct(d.l)} ${pct(d.t)})`;
-    const src = L.img.currentSrc || L.img.src;
-    [[l, m - l + 1], [m, r - m]].forEach(([x, w], i) => Object.assign(L.leaves[i].style, {
-      left: x + 'px', top: t + 'px', width: w + 'px', height: (b - t) + 'px',
-      backgroundImage: `url("${src}")`, backgroundSize: dw + 'px ' + dh + 'px', backgroundPosition: (-x) + 'px ' + (-t) + 'px'
-    }));
-  }
-  function placeAll() { LAYERS.forEach(placeLayer); placed = true; }
-
-  // Timeline in stages: 0 building, 1 entrance, 2 lobby, 3 showroom, 4 press hall, 5 Speedmaster. Between two
-  // stages the front layer scales up around its doors and fades out as the camera passes, its leaves swinging
-  // open on the way, while the layer behind settles from slightly enlarged to its resting size. The last move
-  // glides from the front of the hall round to the Speedmaster. Only transform and opacity change.
-  function dive(L, settleT, diveT) {
-    const settle = 1 + .18 * (1 - ease(settleT));
-    const zoom = Math.pow(L.zoom, ease(diveT));
-    L.el.style.transform = `scale(${settle * zoom})`;
-    L.el.style.opacity = String(1 - span(diveT, .72, .98));
-    if (L.leaves.length) {
-      const open = ease(span(diveT, 0, .62)) * 104;
-      L.leaves[0].style.transform = `rotateY(${open}deg)`;
-      L.leaves[1].style.transform = `rotateY(${-open}deg)`;
-    }
-  }
-  function paint(p) {
-    if (!placed) placeAll();
-    const seg = k => clamp01(p - k);
-    LAYERS.forEach((L, i) => dive(L, i ? seg(i - 1) : 1, seg(i)));
-
-    const settle = ease(span(seg(3), .5, 1));
-    const glide = ease(seg(4));
-    const swap = span(glide, .28, .72);
-    hall.style.transform = `translateX(${-16 * glide}%) rotateY(${16 * glide}deg) scale(${1.08 + .22 * (1 - settle) + .3 * glide})`;
-    hall.style.opacity = String(1 - swap);
-    press.style.transform = `translateX(${16 * (1 - glide)}%) rotateY(${-16 * (1 - glide)}deg) scale(${1.02 + .34 * (1 - glide)})`;
-    press.style.opacity = String(swap);
-
-    showStage(Math.floor(p + .4));
-  }
-
-  function showStage(index) {
-    index = Math.max(0, Math.min(scenes.length - 1, index));
-    if (index === activeStage) return;
-    activeStage = index;
-    story.dataset.activeStage = String(index);
-    scenes.forEach((sceneEl, sceneIndex) => sceneEl.classList.toggle('is-active', sceneIndex === index));
-    dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
-  }
-
-  // The hero is a walk, not a stepper: the page's own scroll is the playhead, as in the portfolio site's gallery
-  // tour. The section is 70svh of scrolling per stop (styles.css); the camera glides towards the scroll position
-  // with a damped lag, and slows into each stop without ever halting (a dwell), so scrolling back walks back out.
-  const STOPS = 6;
-  const smootherstep = t => t * t * t * (t * (t * 6 - 15) + 10);
-  const dwell = t => .3 * t + .7 * smootherstep(t);
-  const shaped = v => { const i = Math.min(Math.floor(v), STOPS - 2); return i + dwell(Math.min(1, v - i)); };
-  const repaint = () => paint(shaped(current));
-  let target = 0, frame = 0, last = 0, running = false;
-  function tick(now) {
-    const dt = Math.min((now - last) / 1000, .05);
-    last = now;
-    readScroll();
-    if (still.matches) current = target;
-    else {
-      current += (target - current) * (1 - Math.exp(-dt * 2.4));
-      if (Math.abs(target - current) < .002) current = target; // settle fully: no long, barely-moving tail
-    }
-    repaint();
-    if (current !== target) frame = requestAnimationFrame(tick); else running = false;
-  }
-  // The section holds the last stop for 60svh past its final stop, so the Speedmaster is in full view before
-  // the next chapter slides over it.
-  const HOLD = .6;
-  function readScroll() {
-    const travel = story.offsetHeight - sticky.clientHeight * (1 + HOLD);
-    const p = travel > 0 ? clamp01(-story.getBoundingClientRect().top / travel) : 0;
-    target = p * (STOPS - 1);
-    if (!running && current !== target) { running = true; last = performance.now(); frame = requestAnimationFrame(tick); }
-  }
-
+  if (!story || !header) return;
   function overHero() {
     const rect = story.getBoundingClientRect();
-    header?.classList.toggle('is-over-hero', rect.bottom > 68 && rect.top < 68);
+    header.classList.toggle('is-over-hero', rect.bottom > 68 && rect.top < 68);
   }
-  showStage(0);
-  readScroll();
-  current = target;
-  repaint();
   overHero();
-  window.addEventListener('scroll', () => { overHero(); readScroll(); }, { passive: true });
-  window.addEventListener('resize', () => { placed = false; readScroll(); repaint(); });
-  LAYERS.forEach(L => { if (!L.img.complete) L.img.addEventListener('load', () => { placed = false; repaint(); }); });
+  window.addEventListener('scroll', overHero, { passive: true });
 })();
 
 /* Liquid navigation indicator — shared by every page and mobile menu. */

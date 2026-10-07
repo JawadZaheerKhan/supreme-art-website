@@ -16,19 +16,11 @@
     <!-- HOME SCROLL STORY -->
     <section class="home-story" id="home-hero" aria-label="Supreme Art introduction">
       <div class="home-story__sticky">
+        <!-- The walk in, built in 3D by hero-walk.js and driven by the page's scroll. The still photograph of the
+             building sits behind the canvas until the rooms are ready (and stays if there is no WebGL). -->
         <div class="home-story__media" aria-hidden="true">
-          <!-- The camera glides from the front of the press hall round to the Speedmaster's side. -->
-          <img class="home-story__shot home-story__shot--hall" src="/images/home/hero-press-hall.webp" alt="" />
-          <img class="home-story__shot home-story__shot--press" src="/images/home/hero-speedmaster.webp" alt="" />
-          <!-- The way in, back to front: the open showroom doors, the lobby doors, the entrance doors and the building
-               on top. Each scroll dives through the doors of the layer in front; where the doors are shut, their two
-               leaves swing open as the camera passes (script.js cuts them from the photo and places every layer). -->
-          <div class="home-story__layer home-story__layer--showroom" data-layer="showroom"><img src="/images/home/hero-showroom.webp" alt="" /></div>
-          <div class="home-story__layer home-story__layer--lobby" data-layer="lobby"><img src="/images/home/hero-lobby.webp" alt="" /><span class="home-story__leaf home-story__leaf--l"></span><span class="home-story__leaf home-story__leaf--r"></span></div>
-          <div class="home-story__layer home-story__layer--entrance" data-layer="entrance"><img src="/images/home/hero-entrance.webp" alt="" /><span class="home-story__leaf home-story__leaf--l"></span><span class="home-story__leaf home-story__leaf--r"></span></div>
-          <div class="home-story__layer home-story__facade" data-layer="facade">
-            <img class="home-story__building" src="/images/home/hero-building.webp" alt="" fetchpriority="high" />
-          </div>
+          <img class="home-story__still" src="/images/home/hero-building.webp" alt="" fetchpriority="high" />
+          <canvas class="home-story__canvas"></canvas>
           <span class="home-story__shade"></span>
         </div>
         <div class="home-story__scenes" aria-live="polite">
@@ -163,5 +155,6 @@
 
   <script src="/script.js"></script>
   <script src="/glass-photos.js"></script>
+  <script type="module" src="/hero-walk.js"></script>
 </body>
 </html>

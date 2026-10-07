@@ -1673,17 +1673,11 @@ a { color: inherit; }
 .home-story__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; will-change: transform, opacity; backface-visibility: hidden; }
 .home-story__shot--press { opacity: 0; }
 /* object-position and transform-origin share the window under the signage, so it stays on screen at any viewport shape (script.js SIGN/WINDOW). */
-/* Door layers: each is sized by script.js to its photo's cover-fitted box and anchored on its doors. The two leaves
-   are cut from the same photo and hinge on their outer edges; the photo under them has that doorway cut out. */
-.home-story__layer { position: absolute; left: 0; top: 0; width: 100%; height: 100%; transform-origin: 50% 60%; perspective: 1200px; will-change: transform, opacity; }
-.home-story__layer--showroom { z-index: 2; }
-.home-story__layer--lobby { z-index: 3; }
-.home-story__layer--entrance { z-index: 4; }
-.home-story__facade { z-index: 5; }
-.home-story__leaf { position: absolute; background-repeat: no-repeat; backface-visibility: hidden; will-change: transform; }
-.home-story__leaf--l { transform-origin: 0 50%; }
-.home-story__leaf--r { transform-origin: 100% 50%; }
-.home-story__shade { position: absolute; z-index: 2; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0,.48), rgba(0, 0, 0,.12) 38%, rgba(0, 0, 0,.48)), linear-gradient(90deg, rgba(0, 0, 0,.44), transparent 55%, rgba(0, 0, 0,.12)); }
+/* The 3D walk (hero-walk.js) draws on the canvas; the still photograph shows until the rooms are ready. */
+.home-story__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .8s ease; }
+.home-story.is-walking .home-story__canvas { opacity: 1; }
+.home-story__media img.home-story__still { object-position: 60% 60%; }
+.home-story__shade { position: absolute; z-index: 2; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0,.42), rgba(0, 0, 0,.04) 34%, rgba(0, 0, 0,0) 60%, rgba(0, 0, 0,.34)); }
 .home-story__scenes { position: absolute; inset: 0; }
 .home-story__scene {
   position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
