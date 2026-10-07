@@ -326,94 +326,49 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
   }
 
-  // The hero is a stepper, not a scrubber: one gesture moves one stage along the timeline, and the move
-  // itself is animated. The stops are the building, the entrance, the lobby, the showroom doors, the press hall
-  // and the Speedmaster.
-  const STOPS = [0, 1, 2, 3, 4, 5];
-  const SCENE_FOR_STOP = [0, 1, 2, 3, 4, 5];
-  let stage = 0, busy = false, cooldownUntil = 0, tween = 0, moveEnds = 0;
-
-  function goTo(next) {
-    stage = Math.max(0, Math.min(STOPS.length - 1, next));
-    showStage(SCENE_FOR_STOP[stage]);
-    cancelAnimationFrame(tween);
-    const from = current, to = STOPS[stage];
-    if (still.matches) { current = to; paint(current); return; }
-    busy = true;
-    const started = performance.now(), duration = 1100;
-    moveEnds = started + duration;
-    const run = now => {
-      const t = Math.min(1, (now - started) / duration);
-      current = from + (to - from) * ease(t);
-      paint(current);
-      if (t < 1) tween = requestAnimationFrame(run);
-      else { busy = false; cooldownUntil = performance.now() + 350; }
-    };
-    tween = requestAnimationFrame(run);
+  // The hero is a walk, not a stepper: the page's own scroll is the playhead, as in the portfolio site's gallery
+  // tour. The section is 70svh of scrolling per stop (styles.css); the camera glides towards the scroll position
+  // with a damped lag, and slows into each stop without ever halting (a dwell), so scrolling back walks back out.
+  const STOPS = 6;
+  const smootherstep = t => t * t * t * (t * (t * 6 - 15) + 10);
+  const dwell = t => .3 * t + .7 * smootherstep(t);
+  const shaped = v => { const i = Math.min(Math.floor(v), STOPS - 2); return i + dwell(Math.min(1, v - i)); };
+  const repaint = () => paint(shaped(current));
+  let target = 0, frame = 0, last = 0, running = false;
+  function tick(now) {
+    const dt = Math.min((now - last) / 1000, .05);
+    last = now;
+    readScroll();
+    if (still.matches) current = target;
+    else {
+      current += (target - current) * (1 - Math.exp(-dt * 2.4));
+      if (Math.abs(target - current) < .002) current = target; // settle fully: no long, barely-moving tail
+    }
+    repaint();
+    if (current !== target) frame = requestAnimationFrame(tick); else running = false;
   }
-
-  // While the page sits at the top the hero owns the gestures. A downward gesture past the last stage, or an
-  // upward one at the first, is left alone so the page scrolls normally.
-  const pinned = () => window.scrollY <= 2;
-  const free = direction => (stage === STOPS.length - 1 && direction > 0) || (stage === 0 && direction < 0);
-  // If frames stopped mid-move (a throttled tab), land the move rather than swallow every gesture after it.
-  function settle() {
-    if (busy && performance.now() > moveEnds + 400) { cancelAnimationFrame(tween); current = STOPS[stage]; paint(current); busy = false; }
+  // The section holds the last stop for 60svh past its final stop, so the Speedmaster is in full view before
+  // the next chapter slides over it.
+  const HOLD = .6;
+  function readScroll() {
+    const travel = story.offsetHeight - sticky.clientHeight * (1 + HOLD);
+    const p = travel > 0 ? clamp01(-story.getBoundingClientRect().top / travel) : 0;
+    target = p * (STOPS - 1);
+    if (!running && current !== target) { running = true; last = performance.now(); frame = requestAnimationFrame(tick); }
   }
-  function step(direction, event) {
-    if (!pinned()) return false;
-    settle();
-    if (busy || performance.now() < cooldownUntil) { event.preventDefault(); return true; }
-    if (free(direction)) return false;
-    event.preventDefault();
-    goTo(stage + direction);
-    return true;
-  }
-  let lastWheel = -Infinity, wheelTravel = 0;
-  window.addEventListener('wheel', event => {
-    if (event.ctrlKey || !pinned()) return;
-    const now = performance.now();
-    const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
-    if (Math.abs(delta) < 1) return;
-    settle();
-    if (busy || now < cooldownUntil) { wheelTravel = 0; event.preventDefault(); return; }
-    if (free(delta > 0 ? 1 : -1)) return;
-    if (now - lastWheel > 160 || Math.sign(delta) !== Math.sign(wheelTravel)) wheelTravel = 0;
-    lastWheel = now;
-    wheelTravel += delta;
-    if (Math.abs(wheelTravel) < 12) { event.preventDefault(); return; }
-    wheelTravel = 0;
-    step(delta > 0 ? 1 : -1, event);
-  }, { passive: false });
-  let touchY = null, touchDone = false;
-  window.addEventListener('touchstart', event => { touchY = event.touches.length === 1 ? event.touches[0].clientY : null; touchDone = false; }, { passive: true });
-  window.addEventListener('touchmove', event => {
-    if (touchY === null || event.touches.length !== 1 || !pinned()) return;
-    const dy = touchY - event.touches[0].clientY, direction = dy > 0 ? 1 : -1;
-    settle();
-    if (busy) { event.preventDefault(); return; }
-    if (free(direction)) return;
-    if (touchDone) { event.preventDefault(); return; }
-    if (Math.abs(dy) >= 10) touchDone = step(direction, event);
-  }, { passive: false });
-  window.addEventListener('touchend', () => { touchY = null; touchDone = false; }, { passive: true });
-  window.addEventListener('keydown', event => {
-    if (event.target.closest('input, textarea, select, button, a, [contenteditable="true"]') || event.ctrlKey || event.metaKey || event.altKey) return;
-    const direction = ['ArrowDown', 'PageDown'].includes(event.key) || (event.key === ' ' && !event.shiftKey) ? 1
-      : ['ArrowUp', 'PageUp'].includes(event.key) || (event.key === ' ' && event.shiftKey) ? -1 : 0;
-    if (direction) step(direction, event);
-  });
 
   function overHero() {
     const rect = story.getBoundingClientRect();
     header?.classList.toggle('is-over-hero', rect.bottom > 68 && rect.top < 68);
   }
   showStage(0);
-  paint(0);
+  readScroll();
+  current = target;
+  repaint();
   overHero();
-  window.addEventListener('scroll', overHero, { passive: true });
-  window.addEventListener('resize', () => { placed = false; paint(current); });
-  LAYERS.forEach(L => { if (!L.img.complete) L.img.addEventListener('load', () => { placed = false; paint(current); }); });
+  window.addEventListener('scroll', () => { overHero(); readScroll(); }, { passive: true });
+  window.addEventListener('resize', () => { placed = false; readScroll(); repaint(); });
+  LAYERS.forEach(L => { if (!L.img.complete) L.img.addEventListener('load', () => { placed = false; repaint(); }); });
 })();
 
 /* Liquid navigation indicator — shared by every page and mobile menu. */
@@ -543,8 +498,10 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     let lastY = window.scrollY, travel = 0, direction = 0;
     let ticking = false, tracking = false, trackUntil = 0;
     const stagedStories = [...document.querySelectorAll('[data-home-process], [data-home-quality]')];
+    const heroWalk = document.querySelector('.home-story');
     const staticStages = matchMedia('(prefers-reduced-motion: reduce), (max-height: 540px), (max-width: 1024px) and (max-height: 600px)');
     function isPinned() {
+      if (heroWalk) { const r = heroWalk.getBoundingClientRect(); if (r.top <= 2 && r.bottom >= window.innerHeight - 2) return true; }
       return !staticStages.matches && stagedStories.some(story => {
         const rect = story.getBoundingClientRect();
         const sticky = story.querySelector('.home-process-story__sticky, .home-quality-story__sticky');

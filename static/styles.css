@@ -1664,7 +1664,8 @@ a { color: inherit; }
 .home-page .site-header .nav-toggle span { background: #fff; }
 .home-page .site-header:not(.is-over-hero) .nav-toggle span { background: var(--text); }
 .home-page main { margin-top: 0; }
-.home-story { position: relative; height: 100svh; min-height: 540px; background: #efebe4; }
+/* Six stops, 70svh of scrolling each: the walk in is driven by the page's own scroll (script.js). */
+.home-story { position: relative; height: calc(6 * 70svh + 60svh); min-height: calc(6 * 420px + 360px); background: #efebe4; }
 .home-story__sticky { position: sticky; top: 0; height: 100svh; min-height: 540px; overflow: hidden; color: #fff; }
 /* Fly-through: the building zooms into its entrance door, revealing the press hall; the camera then glides from
    the front of the hall round to the Speedmaster's side. script.js drives transform and opacity only, from scroll. */
@@ -1721,7 +1722,6 @@ a { color: inherit; }
   .home-story__hint { white-space: nowrap; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .home-story { height: 100svh; }
   .home-story__scene, .home-story__progress span { transition: none; }
   .home-story__hint span, .home-page .site-header .nav-links.is-flowing::before { animation: none; }
 }
