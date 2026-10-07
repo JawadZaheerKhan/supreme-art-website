@@ -6,18 +6,15 @@
 .service-family__header p { margin:0; color:var(--muted); }
 .service-family__products { display:flex; justify-content:center; align-items:flex-start; gap:clamp(28px,5vw,76px); }
 .service-display { flex:1 1 0; min-width:0; max-width:470px; text-align:center; }
-.service-display__visual { animation:serviceFloat 7s ease-in-out infinite; animation-play-state:paused; }
-.service-display:nth-child(even) .service-display__visual { animation-delay:-3.5s; }
+/* Every product floats the way the client logos do: always, out of phase with its neighbour. */
+.service-display__visual { animation:serviceFloat 6s ease-in-out infinite; }
+.service-display:nth-child(even) .service-display__visual { animation-delay:-3s; }
 .service-display__visual > img { display:block; width:100%; aspect-ratio:1.5; object-fit:cover; border-radius:20px; box-shadow:0 24px 30px -24px #3c2d1e66; }
 .service-display .product-box-view { aspect-ratio:1.5; overflow:visible; background:transparent; }
 .service-display .product-box-stage { bottom:36px; }
 .service-display__copy { margin:26px auto 0; max-width:420px; }
 .service-display__copy h3 { font-size:1.15rem; margin:0 0 10px; }
 .service-display__copy p { color:var(--muted); margin:0; }
-.service-display__visual:has(:focus-visible), .service-display__visual:hover { animation-play-state:paused; }
-.service-family.is-visible .service-display__visual { animation-play-state:running; }
-.service-family.is-visible .service-display__visual:hover,
-.service-family.is-visible .service-display__visual:focus-within { animation-play-state:paused; }
 @keyframes serviceFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
 @media(max-width:700px) {
  .service-family { padding:44px 0 52px; }

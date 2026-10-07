@@ -50,7 +50,6 @@ window.productBoxLabelBoxes = {
   if((!reduced.matches&&!paused&&!hover&&!drag)||Math.abs(target-angle)>.001)wake();else last=0;
  }
  function update(a){target=Math.max(-1.05,Math.min(1.05,a));manualUntil=performance.now()+1700;wake();}
- button.addEventListener('click',()=>{paused=!paused;if(paused)target=angle;button.textContent=paused?'Play':'Pause';button.setAttribute('aria-label',paused?'Play automatic rotation':'Pause automatic rotation');wake();});
  view.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')hover=true;});
  view.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;drag={x:e.clientX,angle:target};view.setPointerCapture(e.pointerId);});
  view.addEventListener('pointermove',e=>{if(drag)update(drag.angle+(e.clientX-drag.x)*.009);else if(e.pointerType==='mouse'){const r=view.getBoundingClientRect();update(((e.clientX-r.left)/r.width-.5)*2.1);}});

@@ -513,15 +513,9 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let x = 0, y = 0, targetX = x, targetY = y, frame = 0, down = null, lastTime = 0;
   let leafletInsertion = 1, leafletTime = 0, leafletDesired = 1;
-  let visible = false, hovering = false, manualUntil = 0, autoTime = 0, autoPaused = false;
-  const toggle = view.querySelector('.product-box-toggle');
+  let visible = false, hovering = false, manualUntil = 0, autoTime = 0;
+  const autoPaused = false; // the carton always turns; there is no pause control
   function wake() { if (!frame && visible && !document.hidden) frame = requestAnimationFrame(render); }
-  toggle.addEventListener('click', () => {
-    autoPaused = !autoPaused;
-    toggle.textContent = autoPaused ? 'Play' : 'Pause';
-    toggle.setAttribute('aria-label', autoPaused ? 'Play automatic rotation' : 'Pause automatic rotation');
-    wake();
-  });
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
   function render(now) {
     const dt = lastTime ? Math.min(48, now - lastTime) : 16;
