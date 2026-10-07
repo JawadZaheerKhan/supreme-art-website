@@ -2855,6 +2855,12 @@ body:has(.page-banner) .site-header .nav-links a:focus-visible { outline-color: 
 .home-page .site-header:not(.is-over-hero) .nav-links a.current,
 .home-page .site-header:not(.is-over-hero) .nav-links a.nav-flow-target { color: var(--text) !important; }
 
+/* A banner with a photograph: the title on the left, the photo whole on the right (never cropped). */
+.page-banner--photo .page-banner__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); align-items: center; gap: clamp(24px, 5vw, 72px); }
+.page-banner__photo { margin: 0; justify-self: end; width: 100%; max-width: calc((58svh) * 4 / 3); }
+.page-banner__photo img { display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 26px 48px -26px rgba(60, 45, 30, .45), 0 0 0 1px rgba(60, 45, 30, .06); }
+@media (max-width: 860px) { .page-banner--photo .page-banner__inner { grid-template-columns: 1fr; } .page-banner__photo { justify-self: stretch; max-width: none; } }
+
 /* Call-to-action band: light kraft paper with a thin wood line. */
 .cta-band { color: var(--text); background: var(--kraft); box-shadow: inset 0 2px 0 var(--wood); }
 .cta-band h2 { color: var(--text); }
