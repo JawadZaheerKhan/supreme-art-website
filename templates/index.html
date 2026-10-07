@@ -20,8 +20,13 @@
           <!-- The camera glides from the front of the press hall round to the Speedmaster's side. -->
           <img class="home-story__shot home-story__shot--hall" src="/images/home/hero-press-hall.webp" alt="" />
           <img class="home-story__shot home-story__shot--press" src="/images/home/hero-speedmaster.webp" alt="" />
-          <!-- The building sits on top; scrolling dives through its entrance doors. -->
-          <div class="home-story__facade">
+          <!-- The way in, back to front: the open showroom doors, the lobby doors, the entrance doors and the building
+               on top. Each scroll dives through the doors of the layer in front; where the doors are shut, their two
+               leaves swing open as the camera passes (script.js cuts them from the photo and places every layer). -->
+          <div class="home-story__layer home-story__layer--showroom" data-layer="showroom"><img src="/images/home/hero-showroom.webp" alt="" /></div>
+          <div class="home-story__layer home-story__layer--lobby" data-layer="lobby"><img src="/images/home/hero-lobby.webp" alt="" /><span class="home-story__leaf home-story__leaf--l"></span><span class="home-story__leaf home-story__leaf--r"></span></div>
+          <div class="home-story__layer home-story__layer--entrance" data-layer="entrance"><img src="/images/home/hero-entrance.webp" alt="" /><span class="home-story__leaf home-story__leaf--l"></span><span class="home-story__leaf home-story__leaf--r"></span></div>
+          <div class="home-story__layer home-story__facade" data-layer="facade">
             <img class="home-story__building" src="/images/home/hero-building.webp" alt="" fetchpriority="high" />
           </div>
           <span class="home-story__shade"></span>
@@ -30,14 +35,17 @@
           <div class="home-story__scene is-active" data-home-stage="0">
             <h1 class="home-story__full-logo"><img src="/images/home/supreme-art-calligraphy.png" alt="سپریم آرٹ" width="720" height="325" fetchpriority="high" /><span>Supreme Art (Private) Limited</span></h1>
           </div>
-          <div class="home-story__scene" data-home-stage="1">
+          <div class="home-story__scene" data-home-stage="1"></div>
+          <div class="home-story__scene" data-home-stage="2"></div>
+          <div class="home-story__scene" data-home-stage="3"></div>
+          <div class="home-story__scene" data-home-stage="4">
             <h2>Pharmaceutical Packaging Specialist</h2>
           </div>
-          <div class="home-story__scene" data-home-stage="2">
+          <div class="home-story__scene" data-home-stage="5">
             <h2>1.5 Million Per Day<br />Production Capacity</h2>
           </div>
         </div>
-        <div class="home-story__progress" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="home-story__progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <p class="home-story__hint" aria-hidden="true">Scroll to explore <span>↓</span></p>
       </div>
     </section>

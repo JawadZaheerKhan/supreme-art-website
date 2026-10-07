@@ -236,8 +236,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const dots = [...story.querySelectorAll('.home-story__progress span')];
   const header = document.querySelector('.site-header');
   const sticky = story.querySelector('.home-story__sticky');
-  const facade = story.querySelector('.home-story__facade');
-  const building = story.querySelector('.home-story__building');
   const hall = story.querySelector('.home-story__shot--hall');
   const press = story.querySelector('.home-story__shot--press');
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -248,43 +246,75 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const span = (value, from, to) => clamp01((value - from) / (to - from));
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-  // Where the entrance doors are in the building photo, as fractions of it: the camera dives through them.
-  const DOOR = { x: .6, y: .69 };
-  const BUILDING_TOP = 103 / 900; // the facade's first horizontal joint line in the photo: it sits right under the menu bar
+  // The way in, front to back. Each layer is anchored on its doors (fractions of the photo): the camera dives
+  // through that point. Shut doors list their doorway (l, r, t, b, split) so the two leaves can swing open.
+  const BUILDING_TOP = 103 / 900; // the facade's first horizontal joint line: it sits right under the menu bar
   const navBottom = () => { const nav = document.querySelector('.site-header .nav-links'); return nav ? nav.getBoundingClientRect().bottom : 72; };
+  const LAYERS = [
+    { name: 'facade', anchor: { x: .6, y: .69 }, nw: 1600, nh: 900, zoom: 9, navClamp: true },
+    { name: 'entrance', anchor: { x: .503, y: .66 }, nw: 1600, nh: 1200, zoom: 6, door: { l: .31, r: .695, t: .37, b: .93, split: .514 } },
+    { name: 'lobby', anchor: { x: .508, y: .63 }, nw: 1600, nh: 1200, zoom: 6, door: { l: .357, r: .662, t: .372, b: .885, split: .51 } },
+    { name: 'showroom', anchor: { x: .51, y: .56 }, nw: 1600, nh: 1200, zoom: 6 }
+  ].map(L => {
+    L.el = story.querySelector(`[data-layer="${L.name}"]`);
+    L.img = L.el.querySelector('img');
+    L.leaves = [...L.el.querySelectorAll('.home-story__leaf')];
+    return L;
+  });
+  const building = LAYERS[0].img;
   let placed = false;
-  function placeFacade() {
+  function placeLayer(L) {
     const W = sticky.clientWidth, H = sticky.clientHeight;
-    const nw = building.naturalWidth || 1600, nh = building.naturalHeight || 900;
-    const s = Math.max(W / nw, H / nh), dw = nw * s, dh = nh * s;
-    // Anchor the photo on the doors, but never let the facade's joint line slip under the menu bar: on wide,
-    // short screens the photo is shifted down so the line meets the bar, and the dive's origin follows the doors.
-    const ox = (W - dw) * DOOR.x;
-    let oy = (H - dh) * DOOR.y;
-    oy = Math.max(H - dh, Math.min(0, Math.max(oy, navBottom() - BUILDING_TOP * dh)));
-    building.style.objectPosition = (DOOR.x * 100) + '% ' + ((H - dh) ? (oy / (H - dh)) * 100 : 50) + '%';
-    facade.style.transformOrigin = (ox + DOOR.x * dw) + 'px ' + (oy + DOOR.y * dh) + 'px';
-    placed = true;
+    const nw = L.img.naturalWidth || L.nw, nh = L.img.naturalHeight || L.nh;
+    const sc = Math.max(W / nw, H / nh), dw = nw * sc, dh = nh * sc;
+    const ox = (W - dw) * L.anchor.x;
+    let oy = (H - dh) * L.anchor.y;
+    // The building never lets its joint line slip under the menu bar: on wide, short screens the photo is
+    // shifted down so the line meets the bar, and the dive's origin follows the doors.
+    if (L.navClamp) oy = Math.max(H - dh, Math.min(0, Math.max(oy, navBottom() - BUILDING_TOP * dh)));
+    Object.assign(L.el.style, { left: ox + 'px', top: oy + 'px', width: dw + 'px', height: dh + 'px', transformOrigin: (L.anchor.x * dw) + 'px ' + (L.anchor.y * dh) + 'px' });
+    if (!L.door) return;
+    const d = L.door, l = d.l * dw, r = d.r * dw, t = d.t * dh, b = d.b * dh, m = d.split * dw;
+    const pct = v => (v * 100).toFixed(3) + '%';
+    // the doorway is cut out of the photo; the leaves carry those pixels and hinge on the frame
+    L.img.style.clipPath = `polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0, ${pct(d.l)} ${pct(d.t)}, ${pct(d.r)} ${pct(d.t)}, ${pct(d.r)} ${pct(d.b)}, ${pct(d.l)} ${pct(d.b)}, ${pct(d.l)} ${pct(d.t)})`;
+    const src = L.img.currentSrc || L.img.src;
+    [[l, m - l + 1], [m, r - m]].forEach(([x, w], i) => Object.assign(L.leaves[i].style, {
+      left: x + 'px', top: t + 'px', width: w + 'px', height: (b - t) + 'px',
+      backgroundImage: `url("${src}")`, backgroundSize: dw + 'px ' + dh + 'px', backgroundPosition: (-x) + 'px ' + (-t) + 'px'
+    }));
   }
+  function placeAll() { LAYERS.forEach(placeLayer); placed = true; }
 
-  // Scroll timeline: hold on the building; the camera dives through the entrance doors (.04–.5) straight into
-  // the press hall; then it glides from the front of the hall round to the Speedmaster's side (.58–.9) and holds.
-  // Only transform and opacity change, so the browser never re-rasterises the enlarged photos.
+  // Timeline in stages: 0 building, 1 entrance, 2 lobby, 3 showroom, 4 press hall, 5 Speedmaster. Between two
+  // stages the front layer scales up around its doors and fades out as the camera passes, its leaves swinging
+  // open on the way, while the layer behind settles from slightly enlarged to its resting size. The last move
+  // glides from the front of the hall round to the Speedmaster. Only transform and opacity change.
+  function dive(L, settleT, diveT) {
+    const settle = 1 + .18 * (1 - ease(settleT));
+    const zoom = Math.pow(L.zoom, ease(diveT));
+    L.el.style.transform = `scale(${settle * zoom})`;
+    L.el.style.opacity = String(1 - span(diveT, .72, .98));
+    if (L.leaves.length) {
+      const open = ease(span(diveT, 0, .62)) * 104;
+      L.leaves[0].style.transform = `rotateY(${open}deg)`;
+      L.leaves[1].style.transform = `rotateY(${-open}deg)`;
+    }
+  }
   function paint(p) {
-    if (!placed) placeFacade();
-    const zoom = span(p, .04, .5);
-    facade.style.transform = `scale(${Math.pow(9, ease(zoom))})`;
-    facade.style.opacity = String(1 - span(zoom, .72, .98));
+    if (!placed) placeAll();
+    const seg = k => clamp01(p - k);
+    LAYERS.forEach((L, i) => dive(L, i ? seg(i - 1) : 1, seg(i)));
 
-    const settle = ease(span(zoom, .5, 1));
-    const glide = ease(span(p, .58, .9));
+    const settle = ease(span(seg(3), .5, 1));
+    const glide = ease(seg(4));
     const swap = span(glide, .28, .72);
     hall.style.transform = `translateX(${-16 * glide}%) rotateY(${16 * glide}deg) scale(${1.08 + .22 * (1 - settle) + .3 * glide})`;
     hall.style.opacity = String(1 - swap);
     press.style.transform = `translateX(${16 * (1 - glide)}%) rotateY(${-16 * (1 - glide)}deg) scale(${1.02 + .34 * (1 - glide)})`;
     press.style.opacity = String(swap);
 
-    showStage(p < .3 ? 0 : p < .74 ? 1 : 2);
+    showStage(Math.floor(p + .4));
   }
 
   function showStage(index) {
@@ -297,9 +327,10 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   }
 
   // The hero is a stepper, not a scrubber: one gesture moves one stage along the timeline, and the move
-  // itself is animated. The stops are the building, the press hall and the Speedmaster.
-  const STOPS = [0, .5, .9];
-  const SCENE_FOR_STOP = [0, 1, 2];
+  // itself is animated. The stops are the building, the entrance, the lobby, the showroom doors, the press hall
+  // and the Speedmaster.
+  const STOPS = [0, 1, 2, 3, 4, 5];
+  const SCENE_FOR_STOP = [0, 1, 2, 3, 4, 5];
   let stage = 0, busy = false, cooldownUntil = 0, tween = 0, moveEnds = 0;
 
   function goTo(next) {
@@ -382,7 +413,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   overHero();
   window.addEventListener('scroll', overHero, { passive: true });
   window.addEventListener('resize', () => { placed = false; paint(current); });
-  if (!building.complete) building.addEventListener('load', () => { placed = false; paint(current); });
+  LAYERS.forEach(L => { if (!L.img.complete) L.img.addEventListener('load', () => { placed = false; paint(current); }); });
 })();
 
 /* Liquid navigation indicator — shared by every page and mobile menu. */
