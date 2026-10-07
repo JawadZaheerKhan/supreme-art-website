@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{{> head}}<link rel="stylesheet" href="/product-box.css?v=20261007-3" /><link rel="stylesheet" href="/service-families.css" />
+{{> head}}<link rel="stylesheet" href="/product-box.css?v=20261007-3" /><link rel="stylesheet" href="/clients-page.css?v=20261007-logos" /><link rel="stylesheet" href="/service-families.css?v=20261007-4" />
 </head>
 <body class="photo-zoom-page services-page">
 {{> gtm-body}}
@@ -20,50 +20,70 @@
     </section>
 
     {{#each page.range.groups}}
-    <section class="service-family" aria-labelledby="{{ id }}-heading">
+    <!-- Each family is a horizontal gallery like the Clients page: it opens on its middle product and the arrows,
+         a swipe or the keyboard move left and right (clients-gallery.js). -->
+    <section class="service-family client-group" aria-labelledby="{{ id }}-heading">
       <div class="container">
         <header class="service-family__header reveal">
           <h2 id="{{ id }}-heading">{{ heading }}</h2>
         </header>
-        <div class="service-family__products">
+        <div class="client-gallery-tools">
+          <p>Explore both ways · Swipe left/right or use the arrows</p>
+          <div><button type="button" class="client-gallery-prev" aria-label="Previous product">←</button><span class="client-gallery-count" aria-live="polite"></span><button type="button" class="client-gallery-next" aria-label="Next product">→</button></div>
+        </div>
+      </div>
+      <div class="client-gallery" tabindex="0" role="region" aria-label="{{ heading }} products">
+        <ul class="clients-page__list service-family__products">
           {{#each items}}
-          <article class="service-display">
+          <li class="client-pair service-display">
             <div class="service-display__visual">
               {{#if interactive_bottle}}{{> product-bottle}}{{else}}{{#if interactive_box}}{{> product-box}}{{else}}
               <img src="{{ image }}" alt="{{ alt }}" loading="lazy" />
               {{/if}}{{/if}}
             </div>
-          </article>
+          </li>
           {{/each}}
-        </div>
+        </ul>
       </div>
     </section>
     {{/each}}
 
-    <section class="service-family service-food" aria-labelledby="food-packaging-heading">
+    <section class="service-family service-food client-group" aria-labelledby="food-packaging-heading">
+      {{#with page.range.food}}
       <div class="container">
-        {{#with page.range.food}}
         <header class="service-family__header reveal"><h2 id="food-packaging-heading">{{ title }}</h2></header>
-        <div class="service-family__products">
-          {{#each items}}
-          <article class="service-display"><div class="service-display__visual">{{> product-box}}</div></article>
-          {{/each}}
+        <div class="client-gallery-tools">
+          <p>Explore both ways · Swipe left/right or use the arrows</p>
+          <div><button type="button" class="client-gallery-prev" aria-label="Previous product">←</button><span class="client-gallery-count" aria-live="polite"></span><button type="button" class="client-gallery-next" aria-label="Next product">→</button></div>
         </div>
-        {{/with}}
       </div>
+      <div class="client-gallery" tabindex="0" role="region" aria-label="{{ title }} products">
+        <ul class="clients-page__list service-family__products">
+          {{#each items}}
+          <li class="client-pair service-display"><div class="service-display__visual">{{> product-box}}</div></li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/with}}
     </section>
 
-    <section class="service-family service-neutra" aria-labelledby="neutra-products-heading">
+    <section class="service-family service-neutra client-group" aria-labelledby="neutra-products-heading">
+      {{#with page.neutra}}
       <div class="container">
-        {{#with page.neutra}}
         <header class="service-family__header reveal"><h2 id="neutra-products-heading">{{ heading }}</h2></header>
-        <div class="service-family__products">
-          {{#each items}}
-          <article class="service-display"><div class="service-display__visual">{{> product-box}}</div></article>
-          {{/each}}
+        <div class="client-gallery-tools">
+          <p>Explore both ways · Swipe left/right or use the arrows</p>
+          <div><button type="button" class="client-gallery-prev" aria-label="Previous product">←</button><span class="client-gallery-count" aria-live="polite"></span><button type="button" class="client-gallery-next" aria-label="Next product">→</button></div>
         </div>
-        {{/with}}
       </div>
+      <div class="client-gallery" tabindex="0" role="region" aria-label="{{ heading }} products">
+        <ul class="clients-page__list service-family__products">
+          {{#each items}}
+          <li class="client-pair service-display"><div class="service-display__visual">{{> product-box}}</div></li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/with}}
     </section>
     <section data-services-section class="section" aria-labelledby="finishes-heading">
       <div class="container">
@@ -90,6 +110,6 @@
 {{> footer}}
 
   <script src="/script.js"></script>
-  <script src="/product-box-syrups.js"></script><script src="/product-box-food.js"></script><script src="/product-box-neutra.js"></script><script src="/product-labels.js?v=20261007-3"></script><script src="/product-box-injections.js?v=20261007-3"></script><script src="/product-box.js?v=20261007-3"></script>
+  <script src="/product-box-syrups.js"></script><script src="/product-box-food.js"></script><script src="/product-box-neutra.js"></script><script src="/product-labels.js?v=20261007-3"></script><script src="/product-box-injections.js?v=20261007-3"></script><script src="/product-box.js?v=20261007-3"></script><script src="/clients-gallery.js?v=20261007-logos"></script>
 </body>
 </html>
