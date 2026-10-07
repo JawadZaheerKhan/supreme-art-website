@@ -16,28 +16,28 @@
     <!-- HOME SCROLL STORY -->
     <section class="home-story" id="home-hero" aria-label="Supreme Art introduction">
       <div class="home-story__sticky">
-        <!-- The walk in, built in 3D by hero-walk.js and driven by the page's scroll. The still photograph of the
-             building sits behind the canvas until the rooms are ready (and stays if there is no WebGL). -->
         <div class="home-story__media" aria-hidden="true">
-          <img class="home-story__still" src="/images/home/hero-building.webp" alt="" fetchpriority="high" />
-          <canvas class="home-story__canvas"></canvas>
+          <!-- The camera glides from the front of the press hall round to the Speedmaster's side. -->
+          <img class="home-story__shot home-story__shot--hall" src="/images/home/hero-press-hall.webp" alt="" />
+          <img class="home-story__shot home-story__shot--press" src="/images/home/hero-speedmaster.webp" alt="" />
+          <!-- The building sits on top; scrolling dives through its entrance doors. -->
+          <div class="home-story__facade">
+            <img class="home-story__building" src="/images/home/hero-building.webp" alt="" fetchpriority="high" />
+          </div>
           <span class="home-story__shade"></span>
         </div>
         <div class="home-story__scenes" aria-live="polite">
           <div class="home-story__scene is-active" data-home-stage="0">
             <h1 class="home-story__full-logo"><img src="/images/home/supreme-art-calligraphy.png" alt="سپریم آرٹ" width="720" height="325" fetchpriority="high" /><span>Supreme Art (Private) Limited</span></h1>
           </div>
-          <div class="home-story__scene" data-home-stage="1"></div>
-          <div class="home-story__scene" data-home-stage="2"></div>
-          <div class="home-story__scene" data-home-stage="3"></div>
-          <div class="home-story__scene" data-home-stage="4">
+          <div class="home-story__scene" data-home-stage="1">
             <h2>Pharmaceutical Packaging Specialist</h2>
           </div>
-          <div class="home-story__scene" data-home-stage="5">
+          <div class="home-story__scene" data-home-stage="2">
             <h2>1.5 Million Per Day<br />Production Capacity</h2>
           </div>
         </div>
-        <div class="home-story__progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="home-story__progress" aria-hidden="true"><span></span><span></span><span></span></div>
         <p class="home-story__hint" aria-hidden="true">Scroll to explore <span>↓</span></p>
       </div>
     </section>
@@ -155,6 +155,5 @@
 
   <script src="/script.js"></script>
   <script src="/glass-photos.js"></script>
-  <script type="module" src="/hero-walk.js"></script>
 </body>
 </html>

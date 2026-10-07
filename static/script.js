@@ -227,17 +227,162 @@ const countIO = new IntersectionObserver((entries) => {
 }, { threshold: 0.6 });
 document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 
-/* Homepage hero: the 3D walk lives in hero-walk.js. Here only the menu learns whether it is over the hero. */
+/* Homepage three-stage scroll story */
 (function () {
   const story = document.querySelector('.home-story');
+  if (!story) return;
+
+  const scenes = [...story.querySelectorAll('[data-home-stage]')];
+  const dots = [...story.querySelectorAll('.home-story__progress span')];
   const header = document.querySelector('.site-header');
-  if (!story || !header) return;
+  const sticky = story.querySelector('.home-story__sticky');
+  const facade = story.querySelector('.home-story__facade');
+  const building = story.querySelector('.home-story__building');
+  const hall = story.querySelector('.home-story__shot--hall');
+  const press = story.querySelector('.home-story__shot--press');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let activeStage = -1;
+  let current = 0;
+
+  const clamp01 = value => Math.max(0, Math.min(1, value));
+  const span = (value, from, to) => clamp01((value - from) / (to - from));
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+  // Where the entrance doors are in the building photo, as fractions of it: the camera dives through them.
+  const DOOR = { x: .6, y: .69 };
+  const BUILDING_TOP = 103 / 900; // the facade's first horizontal joint line in the photo: it sits right under the menu bar
+  const navBottom = () => { const nav = document.querySelector('.site-header .nav-links'); return nav ? nav.getBoundingClientRect().bottom : 72; };
+  let placed = false;
+  function placeFacade() {
+    const W = sticky.clientWidth, H = sticky.clientHeight;
+    const nw = building.naturalWidth || 1600, nh = building.naturalHeight || 900;
+    const s = Math.max(W / nw, H / nh), dw = nw * s, dh = nh * s;
+    // Anchor the photo on the doors, but never let the facade's joint line slip under the menu bar: on wide,
+    // short screens the photo is shifted down so the line meets the bar, and the dive's origin follows the doors.
+    const ox = (W - dw) * DOOR.x;
+    let oy = (H - dh) * DOOR.y;
+    oy = Math.max(H - dh, Math.min(0, Math.max(oy, navBottom() - BUILDING_TOP * dh)));
+    building.style.objectPosition = (DOOR.x * 100) + '% ' + ((H - dh) ? (oy / (H - dh)) * 100 : 50) + '%';
+    facade.style.transformOrigin = (ox + DOOR.x * dw) + 'px ' + (oy + DOOR.y * dh) + 'px';
+    placed = true;
+  }
+
+  // Scroll timeline: hold on the building; the camera dives through the entrance doors (.04–.5) straight into
+  // the press hall; then it glides from the front of the hall round to the Speedmaster's side (.58–.9) and holds.
+  // Only transform and opacity change, so the browser never re-rasterises the enlarged photos.
+  function paint(p) {
+    if (!placed) placeFacade();
+    const zoom = span(p, .04, .5);
+    facade.style.transform = `scale(${Math.pow(9, ease(zoom))})`;
+    facade.style.opacity = String(1 - span(zoom, .72, .98));
+
+    const settle = ease(span(zoom, .5, 1));
+    const glide = ease(span(p, .58, .9));
+    const swap = span(glide, .28, .72);
+    hall.style.transform = `translateX(${-16 * glide}%) rotateY(${16 * glide}deg) scale(${1.08 + .22 * (1 - settle) + .3 * glide})`;
+    hall.style.opacity = String(1 - swap);
+    press.style.transform = `translateX(${16 * (1 - glide)}%) rotateY(${-16 * (1 - glide)}deg) scale(${1.02 + .34 * (1 - glide)})`;
+    press.style.opacity = String(swap);
+
+    showStage(p < .3 ? 0 : p < .74 ? 1 : 2);
+  }
+
+  function showStage(index) {
+    index = Math.max(0, Math.min(scenes.length - 1, index));
+    if (index === activeStage) return;
+    activeStage = index;
+    story.dataset.activeStage = String(index);
+    scenes.forEach((sceneEl, sceneIndex) => sceneEl.classList.toggle('is-active', sceneIndex === index));
+    dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
+  }
+
+  // The hero is a stepper, not a scrubber: one gesture moves one stage along the timeline, and the move
+  // itself is animated. The stops are the building, the press hall and the Speedmaster.
+  const STOPS = [0, .5, .9];
+  const SCENE_FOR_STOP = [0, 1, 2];
+  let stage = 0, busy = false, cooldownUntil = 0, tween = 0, moveEnds = 0;
+
+  function goTo(next) {
+    stage = Math.max(0, Math.min(STOPS.length - 1, next));
+    showStage(SCENE_FOR_STOP[stage]);
+    cancelAnimationFrame(tween);
+    const from = current, to = STOPS[stage];
+    if (still.matches) { current = to; paint(current); return; }
+    busy = true;
+    const started = performance.now(), duration = 1100;
+    moveEnds = started + duration;
+    const run = now => {
+      const t = Math.min(1, (now - started) / duration);
+      current = from + (to - from) * ease(t);
+      paint(current);
+      if (t < 1) tween = requestAnimationFrame(run);
+      else { busy = false; cooldownUntil = performance.now() + 350; }
+    };
+    tween = requestAnimationFrame(run);
+  }
+
+  // While the page sits at the top the hero owns the gestures. A downward gesture past the last stage, or an
+  // upward one at the first, is left alone so the page scrolls normally.
+  const pinned = () => window.scrollY <= 2;
+  const free = direction => (stage === STOPS.length - 1 && direction > 0) || (stage === 0 && direction < 0);
+  // If frames stopped mid-move (a throttled tab), land the move rather than swallow every gesture after it.
+  function settle() {
+    if (busy && performance.now() > moveEnds + 400) { cancelAnimationFrame(tween); current = STOPS[stage]; paint(current); busy = false; }
+  }
+  function step(direction, event) {
+    if (!pinned()) return false;
+    settle();
+    if (busy || performance.now() < cooldownUntil) { event.preventDefault(); return true; }
+    if (free(direction)) return false;
+    event.preventDefault();
+    goTo(stage + direction);
+    return true;
+  }
+  let lastWheel = -Infinity, wheelTravel = 0;
+  window.addEventListener('wheel', event => {
+    if (event.ctrlKey || !pinned()) return;
+    const now = performance.now();
+    const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
+    if (Math.abs(delta) < 1) return;
+    settle();
+    if (busy || now < cooldownUntil) { wheelTravel = 0; event.preventDefault(); return; }
+    if (free(delta > 0 ? 1 : -1)) return;
+    if (now - lastWheel > 160 || Math.sign(delta) !== Math.sign(wheelTravel)) wheelTravel = 0;
+    lastWheel = now;
+    wheelTravel += delta;
+    if (Math.abs(wheelTravel) < 12) { event.preventDefault(); return; }
+    wheelTravel = 0;
+    step(delta > 0 ? 1 : -1, event);
+  }, { passive: false });
+  let touchY = null, touchDone = false;
+  window.addEventListener('touchstart', event => { touchY = event.touches.length === 1 ? event.touches[0].clientY : null; touchDone = false; }, { passive: true });
+  window.addEventListener('touchmove', event => {
+    if (touchY === null || event.touches.length !== 1 || !pinned()) return;
+    const dy = touchY - event.touches[0].clientY, direction = dy > 0 ? 1 : -1;
+    settle();
+    if (busy) { event.preventDefault(); return; }
+    if (free(direction)) return;
+    if (touchDone) { event.preventDefault(); return; }
+    if (Math.abs(dy) >= 10) touchDone = step(direction, event);
+  }, { passive: false });
+  window.addEventListener('touchend', () => { touchY = null; touchDone = false; }, { passive: true });
+  window.addEventListener('keydown', event => {
+    if (event.target.closest('input, textarea, select, button, a, [contenteditable="true"]') || event.ctrlKey || event.metaKey || event.altKey) return;
+    const direction = ['ArrowDown', 'PageDown'].includes(event.key) || (event.key === ' ' && !event.shiftKey) ? 1
+      : ['ArrowUp', 'PageUp'].includes(event.key) || (event.key === ' ' && event.shiftKey) ? -1 : 0;
+    if (direction) step(direction, event);
+  });
+
   function overHero() {
     const rect = story.getBoundingClientRect();
-    header.classList.toggle('is-over-hero', rect.bottom > 68 && rect.top < 68);
+    header?.classList.toggle('is-over-hero', rect.bottom > 68 && rect.top < 68);
   }
+  showStage(0);
+  paint(0);
   overHero();
   window.addEventListener('scroll', overHero, { passive: true });
+  window.addEventListener('resize', () => { placed = false; paint(current); });
+  if (!building.complete) building.addEventListener('load', () => { placed = false; paint(current); });
 })();
 
 /* Liquid navigation indicator — shared by every page and mobile menu. */
@@ -367,10 +512,8 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     let lastY = window.scrollY, travel = 0, direction = 0;
     let ticking = false, tracking = false, trackUntil = 0;
     const stagedStories = [...document.querySelectorAll('[data-home-process], [data-home-quality]')];
-    const heroWalk = document.querySelector('.home-story');
     const staticStages = matchMedia('(prefers-reduced-motion: reduce), (max-height: 540px), (max-width: 1024px) and (max-height: 600px)');
     function isPinned() {
-      if (heroWalk) { const r = heroWalk.getBoundingClientRect(); if (r.top <= 2 && r.bottom >= window.innerHeight - 2) return true; }
       return !staticStages.matches && stagedStories.some(story => {
         const rect = story.getBoundingClientRect();
         const sticky = story.querySelector('.home-process-story__sticky, .home-quality-story__sticky');
