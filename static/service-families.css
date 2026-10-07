@@ -41,7 +41,7 @@
 .product-bottle-view { aspect-ratio:1; position:relative; touch-action:pan-y; cursor:grab; }
 .product-bottle-view:focus-visible { outline:3px solid #a02830; outline-offset:-4px; }
 .bottle-stage { position:absolute; inset:20px 0 48px; display:flex; align-items:center; justify-content:center; }
-.bottle-stage::before { content:""; position:absolute; width:50%; height:10%; bottom:0; border-radius:50%; background:radial-gradient(ellipse,#3c2d1e40,transparent 70%); filter:blur(8px); }
+.bottle-stage::before { content:""; position:absolute; width:46%; height:32px; bottom:-14px; border-radius:50%; background:radial-gradient(ellipse,#3c2d1e45, #3c2d1e14 45%,transparent 72%); filter:blur(7px); }
 .bottle-canvas { position:relative; height:100%; width:auto; max-width:85%; object-fit:contain; }
 .product-bottle-view.is-ready .product-box-fallback { display:none; }
 .has-leaflet .box-top { background:#736f68; filter:none; }

@@ -545,6 +545,11 @@
       ? Math.min(1.18, view.clientWidth / 355,
           (view.querySelector('.product-box-stage').clientHeight - 36) / (dimensions.height + dimensions.depth * .4 + (dimensions.hanger ? 44 : dimensions.leaflet ? 180 : 0)))
       : Math.min(1.18, view.clientWidth / 355) * (dimensions.scale || 1);
+    // where the box's lower edge sits in its stage, so the ground shadow can sit right under it
+    const stageH = view.querySelector('.product-box-stage').clientHeight;
+    const boxBottom = Math.round(stageH / 2 + dimensions.height * scale / 2 + (dimensions.leaflet ? 48 : 0));
+    const boxWidth = Math.round((dimensions.width || 280) * scale);
+    if (boxBottom !== view._boxBottom || boxWidth !== view._boxWidth) { view._boxBottom = boxBottom; view._boxWidth = boxWidth; view.style.setProperty('--box-bottom', boxBottom + 'px'); view.style.setProperty('--box-width', boxWidth + 'px'); }
     x += (targetX - x) * blend;
     y += (targetY - y) * blend;
     model.style.transform = (dimensions.leaflet ? 'translateY(48px) ' : '') + 'scale(' + scale + ') rotateX(' + x + 'deg) rotateY(' + y + 'deg) scaleX('+((dimensions.width || 280)/280)+') scaleY('+(dimensions.height/178)+') scaleZ('+(dimensions.depth/32)+')';

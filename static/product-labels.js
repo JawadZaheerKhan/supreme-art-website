@@ -15,7 +15,7 @@ window.productBoxLabelBoxes = {
  let ready=false,visible=false,paused=false,hover=false,drag=null,angle=0,target=0,time=0,last=0,frame=0,manualUntil=0;
  const load=src=>new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=reject;i.src=src;});
  let bottle,label;
- Promise.all([load('/images/bottle-mockup/amber-bottle.png'),load('/images/bottle-mockup/clarion-sticker.jpg')]).then(([b,sticker])=>{
+ Promise.all([load('/images/bottle-mockup/amber-bottle.png?v=20261008'),load('/images/bottle-mockup/clarion-sticker.jpg')]).then(([b,sticker])=>{
   bottle=b;
   // Rectify the photographed sticker at runtime, preserving its original lettering.
   const source=document.createElement('canvas');source.width=sticker.width;source.height=sticker.height;
