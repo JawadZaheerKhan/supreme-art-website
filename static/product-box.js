@@ -494,6 +494,7 @@
   Object.assign(additionalBoxes, window.productBoxSyrupBoxes || {}, window.productBoxFoodBoxes || {}, window.productBoxNeutraBoxes || {}, window.productBoxLabelBoxes || {}, window.productBoxInjectionBoxes || {});
   document.querySelectorAll('.product-box-view').forEach(view => {
   const model = view.querySelector('.product-box-model');
+  view.classList.add('is-loading');
   const dimensions = additionalBoxes[view.dataset.box] || {height:178,depth:32};
   if (dimensions.leaflet) {
     view.classList.add('has-leaflet');
@@ -592,7 +593,10 @@
     if(e.key==='Home')update(0,0);
     else update(targetX+(e.key==='ArrowUp'?-4:e.key==='ArrowDown'?4:0),targetY+(e.key==='ArrowLeft'?-12:e.key==='ArrowRight'?12:0));
   });
-    new ResizeObserver(wake).observe(view);
+  // Establish the real proportions even before an offscreen model starts animating.
+  // Texture readiness and IntersectionObserver callbacks can arrive in either order.
+  render(performance.now());
+    new ResizeObserver(() => { if (!visible) render(performance.now()); else wake(); }).observe(view);
   new IntersectionObserver(entries => {
     visible = entries[0].isIntersecting;
     if (visible) { lastTime=0; wake(); }
@@ -653,6 +657,23 @@
     ['left',[[530,333],[587,342],[595,681],[542,669]],96,534],
     ['top',[[395,339],[960,337],[975,361],[393,364]],840,96]
   ]);
-  Promise.all(faces.map(face => texture(...face))).then(()=>view.classList.add('is-ready')).catch(()=>{});
+  // Avoid decoding every full-size source photo on a long catalogue at once.
+  // Keep a failed load retryable when the user returns to the product.
+  let loading = false;
+  const textureObserver = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting || loading || view.classList.contains('is-ready')) return;
+    loading = true;
+    Promise.all(faces.map(face => texture(...face))).then(() => {
+      if (!frame) render(performance.now());
+      view.classList.add('is-ready');
+      view.classList.remove('is-loading', 'has-texture-error');
+      textureObserver.disconnect();
+    }).catch(() => {
+      loading = false;
+      view.classList.add('has-texture-error');
+      view.classList.remove('is-loading');
+    });
+  }, { rootMargin: '500px' });
+  textureObserver.observe(view);
   });
 })();
