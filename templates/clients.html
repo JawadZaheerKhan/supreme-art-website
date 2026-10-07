@@ -3,7 +3,7 @@
 <head>
 {{> head}}
   <link rel="stylesheet" href="/product-box.css?v=20261007-2" />
-  <link rel="stylesheet" href="/clients-page.css?v=20261007-gallery" />
+  <link rel="stylesheet" href="/clients-page.css?v=20261007-straight" />
 </head>
 <body>
 {{> gtm-body}}
@@ -16,7 +16,7 @@
       <div class="container">
         <p class="clients-page__intro">{{ page.intro }}</p>
         <div class="client-gallery-tools">
-          <p id="client-gallery-help">Explore the collection · Scroll, swipe or use the arrows</p>
+          <p id="client-gallery-help">Explore the collection · Swipe left/right or use the arrows</p>
           <div><button type="button" class="client-gallery-prev" aria-label="Previous client">←</button><span class="client-gallery-count" aria-live="polite">1 / {{ page.items.length }}</span><button type="button" class="client-gallery-next" aria-label="Next client">→</button></div>
         </div>
       </div>
@@ -45,6 +45,6 @@
 
   <script src="/script.js"></script>
   <script src="/product-box-syrups.js"></script><script src="/product-box-food.js"></script><script src="/product-box-neutra.js"></script><script src="/product-box-injections.js?v=20261007-2"></script><script src="/product-box.js?v=20261007-2"></script>
-  <script src="/clients-gallery.js"></script>
+  <script src="/clients-gallery.js?v=20261007-straight"></script>
 </body>
 </html>
