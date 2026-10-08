@@ -245,12 +245,24 @@
         "more": false
       },
       {
-        "title": "Specialised and customised coatings",
-        "text": "Matte, gloss, soft-touch or textured coatings mixed and applied to a brand’s own specification."
+        "title": "Lamination",
+        "text": "A thin film bonded over the printed board, in gloss or matte, for a tougher surface that resists scuffs and moisture.",
+        "photos": [
+          {
+            "image": "/images/finishes/lamination-tuff.webp",
+            "alt": "TUFF injection carton with a laminated finish"
+          }
+        ]
       },
       {
-        "title": "Food-grade coatings",
-        "text": "Low-migration coatings approved for packaging that touches food, as on our food and nutrition cartons."
+        "title": "Food-grade coatings (water-based)",
+        "text": "Water-based, low-migration coatings safe for packaging that touches food or medicine, with a clean, bright gloss.",
+        "photos": [
+          {
+            "image": "/images/finishes/food-grade-esomega.webp",
+            "alt": "Esomega carton finished with a water-based food-grade coating"
+          }
+        ]
       },
       {
         "title": "Drip-off coatings",
