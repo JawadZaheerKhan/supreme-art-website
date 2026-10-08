@@ -2302,6 +2302,8 @@ a { color: inherit; }
   overflow: hidden;
   white-space: nowrap;
 }
+/* The About us item must not clip its dropdown, except while the menu is collapsed (its items shrink to nothing). */
+.site-header:not(.nav-condensed) .nav-links > .has-dropdown, .site-header:not(.nav-condensed) .nav-links > .has-dropdown:not(:has(> a.current)) { overflow: visible; }
 .site-header.nav-condensed .nav-links { gap: 0; }
 .site-header.nav-condensed .nav-links > a:not(.current),
 .site-header.nav-condensed .nav-links > .has-dropdown:not(:has(> a.current)) {
