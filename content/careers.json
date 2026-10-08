@@ -24,18 +24,28 @@
     "items": [
       {
         "type": "Full-time · On site",
-        "title": "Offset Press Operator",
-        "text": "Run and maintain our Heidelberg presses, holding colour and register across production runs."
+        "title": "Designer",
+        "text": "Shape artwork, dielines and proofs for pharmaceutical cartons, labels and leaflets, from the first sketch to the approved file."
       },
       {
         "type": "Full-time · On site",
-        "title": "Prepress Designer",
-        "text": "Prepare artwork, dielines and proofs, bridging brand files and the pressroom."
+        "title": "Machine Operator",
+        "text": "Run and care for our Heidelberg presses and finishing machines, holding colour, register and quality through every run."
       },
       {
         "type": "Full-time · On site",
-        "title": "Quality Inspector",
-        "text": "Check board, colour and dimensions at every stage, keeping batches traceable and compliant."
+        "title": "Accountant",
+        "text": "Keep our books, invoices and payments in order, and help the business plan with clear, accurate numbers."
+      },
+      {
+        "type": "Full-time · On site",
+        "title": "HR & Admin",
+        "text": "Look after our people and the office: hiring, records, attendance and the everyday running of the factory."
+      },
+      {
+        "type": "Full-time · On site",
+        "title": "Driver",
+        "text": "Carry finished cartons safely to our clients across Pakistan, on time and with care."
       }
     ],
     "footnote_before": "Don't see your role? We still want to hear from good people — ",

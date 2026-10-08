@@ -29,12 +29,13 @@
   ],
   "about": {
     "eyebrow": "Who we are",
-    "heading": "Pharmaceutical packaging, made on advanced machinery.",
-    "text": "Supreme Art makes printed cartons, labels and leaflets for pharmaceutical brands in Pakistan and abroad. What sets us apart is the equipment behind every job: Heidelberg Speedmaster presses that print five colours and a coating in a single pass, a high-precision hot-stamping machine for foils and security finishes, specialised coatings such as colour-shifting seals, and a new high-quality carton inspection machine now being installed.",
+    "heading": "Where careful hands meet remarkable machines.",
+    "text": "Every medicine deserves a box that keeps its promise. At Supreme Art, that promise is made on some of the finest machinery in the trade: Heidelberg Speedmaster presses laying down five colours and a gleaming coat in a single pass, a hot-stamping machine that presses foil into the board with quiet precision, colour-shifting seals that guard against imitation, and a high-quality carton inspection machine keeping watch over the work. And when it is finished, we carry it to you ourselves, to every corner of Pakistan.",
     "points": [
-      "Heidelberg Speedmaster CD 102 and SM 74: five colours plus coater",
+      "Heidelberg Speedmaster CD 102 and SM 74: five colours and a coat, in one pass",
       "Hot stamping, colour-shifting seals and specialised coatings",
-      "A new high-quality carton inspection machine, being installed"
+      "A high-quality carton inspection machine",
+      "Delivery to every corner of Pakistan"
     ],
     "button_label": "More about us",
     "button_href": "about.html",
@@ -306,7 +307,7 @@
       {
         "date": "Jun 2026",
         "title": "A new high-quality inspection machine",
-        "text": "A new carton inspection machine is being installed to check every unit carton for colour, print and text.",
+        "text": "Our new high-quality carton inspection machine is installed on the finishing floor, another pair of eyes on every run.",
         "href": "contact.html"
       },
       {

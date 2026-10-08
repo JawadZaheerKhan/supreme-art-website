@@ -321,7 +321,9 @@
   },
   "capabilities": {
     "eyebrow": "How it's made",
-    "heading": "One factory. The whole carton."
+    "heading": "One factory. The whole carton.",
+    "button_label": "See our process",
+    "button_href": "process.html"
   },
   "cta": {
     "heading": "Need a specific carton?",

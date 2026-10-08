@@ -25,7 +25,16 @@
       </div>
     </section>
 
-{{> company-message}}
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.numbers.eyebrow }}</p>
+        <h2 class="reveal">{{ page.numbers.heading }}</h2>
+        <div class="stat-row reveal" style="margin-top:24px">
+          {{#each page.numbers.stats}}<div class="stat"><b data-count="{{ number }}">0</b><span>{{ label }}</span></div>
+          {{/each}}
+        </div>
+      </div>
+    </section>
 
     <section class="section band">
       <div class="container">
@@ -33,17 +42,6 @@
         <h2 class="reveal">{{ page.values.heading }}</h2>
         <div class="grid">
           {{#each page.values.items}}<article class="card reveal"><span class="card__num">{{ tag }}</span><h3>{{ title }}</h3><p>{{ text }}</p></article>
-          {{/each}}
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <p class="eyebrow reveal">{{ page.numbers.eyebrow }}</p>
-        <h2 class="reveal">{{ page.numbers.heading }}</h2>
-        <div class="stat-row reveal" style="margin-top:24px">
-          {{#each page.numbers.stats}}<div class="stat"><b data-count="{{ number }}">0</b><span>{{ label }}</span></div>
           {{/each}}
         </div>
       </div>

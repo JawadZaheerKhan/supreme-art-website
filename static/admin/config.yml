@@ -415,6 +415,8 @@ collections:
             widget: object
             hint: The cards themselves are edited in "Shared — menu, footer & contact".
             fields:
+              - { name: button_label, label: Button text, widget: string, required: false }
+              - { name: button_href, label: Button links to, widget: string, required: false }
               - { name: eyebrow, label: Small label above heading, widget: string }
               - { name: heading, label: Heading, widget: string }
           - name: cta
