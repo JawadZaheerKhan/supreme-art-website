@@ -349,6 +349,20 @@ collections:
                 fields:
                   - { name: number, label: Number, widget: number, value_type: int }
                   - { name: label, label: Text after the number, widget: string }
+          - name: compliance
+            label: 'Section — Registered and compliant'
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label above heading, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: text, label: Paragraph, widget: text }
+              - name: items
+                label: Registrations
+                widget: list
+                summary: '{{fields.title}}'
+                fields:
+                  - { name: title, label: Body, widget: string }
+                  - { name: text, label: Detail, widget: string }
           - name: gallery
             label: 'Section — Factory gallery (headings only)'
             widget: object

@@ -54,3 +54,11 @@
   .home-process__shot img { height: auto; max-height: 46svh; }
   .home-process__shot figcaption { font-size: .7rem; }
 }
+
+/* short laptop screens: a little tighter so every chapter still fits one screen */
+@media (min-width: 901px) and (max-height: 840px) {
+  .home-process__story { font-size: .98rem; line-height: 1.6; }
+  .home-process__facts { gap: 6px; }
+  .home-process__facts li { font-size: .86rem; line-height: 1.45; }
+  .home-process__facts-title { margin-top: 16px; }
+}

@@ -134,7 +134,7 @@
           {{#if show_process_link}}<p class="home-process__cta"><a class="btn btn--accent" href="{{ page.process.button_href }}">{{ page.process.button_label }}</a></p>{{/if}}
         </div>
         <div class="home-process__collage" aria-label="{{ title }} in pictures">
-          {{#each scenes}}{{#if hero}}<figure class="home-process__shot"><span class="glass-photo" data-glass="fit"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /></span><figcaption>{{ lead }}</figcaption></figure>{{else}}<figure class="home-process__shot"><span class="glass-photo" data-glass="fit"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /></span><figcaption>{{ lead }}</figcaption></figure>{{/if}}
+          {{#each scenes}}{{#if hero}}<figure class="home-process__shot"><span class="glass-photo" data-glass="fit"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /></span><figcaption>{{ lead }}</figcaption></figure>{{else}}{{#if home}}<figure class="home-process__shot"><span class="glass-photo" data-glass="fit"><img src="{{ home.image }}" alt="{{ home.alt }}" loading="lazy" decoding="async" /></span><figcaption>{{ lead }}</figcaption></figure>{{else}}<figure class="home-process__shot"><span class="glass-photo" data-glass="fit"><img src="{{ row.0.image }}" alt="{{ row.0.alt }}" loading="lazy" decoding="async" /></span><figcaption>{{ lead }}</figcaption></figure>{{/if}}{{/if}}
           {{/each}}
         </div>
       </div>

@@ -1,15 +1,12 @@
 {
   "title": "Supreme Art — Pharmaceutical Packaging & Printing",
-  "description": "Supreme Art manufactures pharmaceutical folding cartons — printed, die-cut, folded and glued in-house in Peshawar, Pakistan.",
+  "description": "Supreme Art manufactures pharmaceutical folding cartons, labels and leaflets in Pakistan, on Heidelberg, Bobst and hot-stamping machinery.",
   "hero": {
     "press": {
       "title": "Pharmaceutical packaging",
       "title_red": "specialists",
       "facts": [
-        "Since 2016",
-        "Up to 6 colours",
-        "Heidelberg & Bobst",
-        "Exporting worldwide"
+        "Since 2016"
       ],
       "footer": "Offset printing & packaging"
     },
@@ -32,12 +29,12 @@
   ],
   "about": {
     "eyebrow": "Who we are",
-    "heading": "A pharmaceutical carton maker, from prepress to pallet.",
-    "text": "Supreme Art is a Peshawar-based manufacturer of pharmaceutical folding cartons — the printed paper boxes that carry tablets, syrups, blisters and vials. We run the entire process in-house, so your artwork becomes a finished, machine-ready carton without ever leaving our floor.",
+    "heading": "Pharmaceutical packaging, made on advanced machinery.",
+    "text": "Supreme Art makes printed cartons, labels and leaflets for pharmaceutical brands in Pakistan and abroad. What sets us apart is the equipment behind every job: Heidelberg Speedmaster presses that print five colours and a coating in a single pass, a high-precision hot-stamping machine for foils and security finishes, specialised coatings such as colour-shifting seals, and a new high-quality carton inspection machine now being installed.",
     "points": [
-      "Offset printing, die-cutting, folding & gluing in-house",
-      "Pharma-grade board with full batch traceability",
-      "Short runs through to full production volumes"
+      "Heidelberg Speedmaster CD 102 and SM 74: five colours plus coater",
+      "Hot stamping, colour-shifting seals and specialised coatings",
+      "A new high-quality carton inspection machine, being installed"
     ],
     "button_label": "More about us",
     "button_href": "about.html",
@@ -53,18 +50,18 @@
       {
         "eyebrow": "Our services",
         "heading": "Cartons for every kind of product.",
-        "lead": "From blister-pack tablets to syrups, supplements and spices, every carton is printed and finished under one roof in Peshawar.",
+        "lead": "From blister-pack tablets to syrups, supplements and spices, every carton is printed and finished under one roof in Pakistan.",
         "items": [
           {
             "title": "Tablets & capsules",
-            "text": "Unit cartons for blister packs, from ten-tablet strips to thirty-tablet packs, with drip-off, foil and security finishes.",
+            "text": "Cartons for blister and alu-alu strip packs, capsule and softgel packs, and tablet bottles, in straight-tuck, reverse-tuck and lock-bottom styles, from single strips to thirty-tablet packs.",
             "image": "/images/home/services/tablets-capsules.webp",
             "alt": "Tablet and capsule cartons: Bexus, Novex, Zolt, Duet, Carveda, Vazkor and Imo",
             "href": "products.html#tablet-capsule-heading"
           },
           {
             "title": "Syrups & suspensions",
-            "text": "Bottle cartons for 60 to 120 ml syrups and suspensions, sized to the bottle with room for the leaflet.",
+            "text": "Bottle cartons for syrups, dry-powder suspensions and drops, from 30 ml to 120 ml, with tuck-end or lock-bottom bases and room for the leaflet.",
             "image": "/images/home/services/syrups-suspensions.webp",
             "alt": "Syrup cartons: Bronochol, Citolin, Fenbro 8, Fedralka, Pedrol and Novex Paracetamol",
             "href": "products.html#syrup-suspension-heading"
@@ -77,21 +74,21 @@
         "items": [
           {
             "title": "Nutraceuticals",
-            "text": "Cartons for softgels, creams, supplements and ampoules, and hanging packs with a euro slot for the pharmacy shelf.",
+            "text": "Cartons for softgels, sachets, creams and tubes, ampoules and supplement jars, plus hanging packs with a euro slot for the pharmacy shelf.",
             "image": "/images/home/services/nutraceuticals.webp",
             "alt": "Nutraceutical cartons: Vosun-D, Herbion Seaweed cream, Quench, Algae-Vit, Nova-Plast and Calciferol",
             "href": "products.html#neutra-products-heading"
           },
           {
             "title": "Food",
-            "text": "Full-colour spice and dessert-mix cartons, finished with food-grade coatings.",
+            "text": "Spice, masala and dessert-mix cartons in tuck-end and four- and six-corner styles, finished with food-grade water-base coatings.",
             "image": "/images/home/services/food.webp",
             "alt": "SwaaD food cartons: Chapli Kabab, Kali Mirch, Shahi Kheer and Bombay Biryani",
             "href": "products.html#food-packaging-heading"
           },
           {
             "title": "Labels & stickers",
-            "text": "Printed bottle labels and stickers for syrups and suspensions, in the same colours as their cartons and sized to wrap the bottle cleanly.",
+            "text": "Wrap-around bottle labels, front-and-back labels and stickers for syrups, drops and suspensions, printed to match their cartons.",
             "image": "/images/home/services/labels-stickers.webp",
             "alt": "Labelled syrup bottles: Bronochol, Omevex, Pedrol, Citolin, Imo IV and Feromalt",
             "href": "products.html#labels-leaflets-heading"
@@ -110,7 +107,7 @@
   "process": {
     "eyebrow": "How it's made",
     "heading": "From artwork to flat-packed carton.",
-    "lead": "Three chapters under one roof in Peshawar — this is how a carton is made at Supreme Art.",
+    "lead": "Three chapters under one roof in Pakistan — this is how a carton is made at Supreme Art.",
     "button_label": "View full process",
     "button_href": "process.html"
   },
@@ -302,20 +299,20 @@
     "posts": [
       {
         "date": "Aug 2026",
-        "title": "Expanding our folding-carton capacity",
-        "text": "New folder-gluer capacity means faster turnaround on high-volume runs.",
+        "title": "Expanding our production floor",
+        "text": "More space and more capacity on the factory floor, so large pharmaceutical orders move through faster.",
         "href": "contact.html"
       },
       {
         "date": "Jun 2026",
-        "title": "Colour-accuracy on every press pass",
-        "text": "How press-side colour control keeps pharma branding consistent.",
+        "title": "A new high-quality inspection machine",
+        "text": "A new carton inspection machine is being installed to check every unit carton for colour, print and text.",
         "href": "contact.html"
       },
       {
         "date": "Apr 2026",
-        "title": "Our commitment to pharma-grade quality",
-        "text": "Inside the documented checks behind every carton we ship.",
+        "title": "A new hot-stamping machine",
+        "text": "Sharper foils and security finishes, applied in-house with greater speed and precision.",
         "href": "contact.html"
       }
     ]

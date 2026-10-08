@@ -49,6 +49,19 @@
       </div>
     </section>
 
+    <!-- Registered and compliant: the four registrations from the company profile -->
+    <section class="section about-compliance">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.compliance.eyebrow }}</p>
+        <h2 class="reveal">{{ page.compliance.heading }}</h2>
+        <p class="lead reveal">{{ page.compliance.text }}</p>
+        <div class="grid">
+          {{#each page.compliance.items}}<article class="card reveal"><h3>{{ title }}</h3><p>{{ text }}</p></article>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
     <section class="section band">
       <div class="container">
         <p class="eyebrow reveal">{{ page.gallery.eyebrow }}</p>

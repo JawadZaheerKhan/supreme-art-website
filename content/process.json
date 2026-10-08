@@ -5,7 +5,7 @@
     "crumb": "Our process",
     "heading": "How your cartons are made"
   },
-  "intro": "Scroll through every stage — from the initial design to the packed cartons delivered to your facility, each production step is carefully controlled under one roof in Peshawar.",
+  "intro": "Scroll through every stage — from the initial design to the packed cartons delivered to your facility, each production step is carefully controlled under one roof in Pakistan.",
   "steps": [
     {
       "num": "01",
@@ -191,7 +191,11 @@
               "ratio": 1.333
             }
           ],
-          "row_sum": 2.666
+          "row_sum": 2.666,
+          "home": {
+            "image": "/images/process/prepress/plate-storage.webp",
+            "alt": "Printing plates stored in labelled glass-fronted cabinets."
+          }
         },
         {
           "layout": "surround",
@@ -222,11 +226,11 @@
       "id": "press",
       "title": "Press",
       "label": "Our process",
-      "story": "On our Heidelberg presses the plate meets the board. Up to six colours go down in one pass; ink, colour and registration are set, then measured sheet after sheet against the approved proof.",
+      "story": "On our Heidelberg presses the plate meets the board. Five colours and a coating go down in one pass; ink, colour and registration are set, then measured sheet after sheet against the approved proof.",
       "facts": [
-        "Heidelberg Speedmaster CD 102: a 70 × 100 cm multi-colour press rated at up to 15,000 sheets an hour.",
-        "Heidelberg Speedmaster SM 74 with CP2000 control: 53 × 74 cm format, up to 15,000 sheets an hour, with touchscreen inking control.",
-        "Up to six colours in one pass, with precise matching to specified brand colours and a choice of ink systems.",
+        "Heidelberg Speedmaster CD 102: five colours plus an inline coater, printing and coating in one pass at up to 15,000 sheets an hour, with sheet-to-sheet registration that holds across the whole run.",
+        "Heidelberg Speedmaster SM 74 with CP2000 control: five colours plus coater, up to 15,000 sheets an hour, with touchscreen inking control for precise, repeatable colour.",
+        "Every colour on the sheet, process or spot, is matched to the brand’s specified colours, with a choice of ink systems.",
         "Colour is measured with a spectrophotometer against the approved proof on every run, not judged by eye."
       ],
       "details": [
@@ -242,7 +246,7 @@
         {
           "title": "On the press",
           "items": [
-            "Up to six colours in one pass",
+            "Five colours plus a coater in one pass",
             "Precise matching to specified brand colours",
             "Choice of ink systems and colour management",
             "Specialist skills with a vigilant eye across the whole run"
@@ -332,7 +336,7 @@
       "label": "Our process",
       "story": "Printed sheets become cartons: coated, foiled where the design asks for it, cut, separated, inspected, folded, glued and packed for the client’s filling line.",
       "facts": [
-        "Bobst SP 102-E automatic die-cutter: 72 × 102 cm sheets at up to 7,500 an hour, cut and creased in one pass so each carton folds on its lines.",
+        "Bobst SP 102-E automatic die-cutter: up to 7,500 sheets an hour, cutting and creasing in one precise pass so each carton folds exactly on its lines.",
         "A cylinder automatic die-cutter and a manual die-cutter take short and special runs; a hot-stamping machine applies foils.",
         "UV, spot-UV, drip-off, food-grade and custom coatings, foils and colour-shifting security seals, all applied in-house.",
         "A Swiss-built Bobst folder-gluer folds and glues tuck, lock-bottom and four- and six-corner cartons, counted and packed for delivery."
@@ -515,7 +519,7 @@
   ],
   "overview": {
     "eyebrow": "The floor",
-    "heading": "A state-of-the-art facility in Peshawar.",
+    "heading": "A state-of-the-art facility in Pakistan.",
     "text": "Good printing needs modern machines, and ours are among the best: German-built Heidelberg Speedmaster presses, Swiss Bobst die-cutting and folder-gluing, and Amsky computer-to-plate imaging. Since 2016 that floor has grown into the only printing and packaging manufacturer in Khyber Pakhtunkhwa with a significant export presence, serving pharmaceutical companies at home and abroad.",
     "glance": [
       {
@@ -523,8 +527,8 @@
         "label": "boxes a day at full capacity"
       },
       {
-        "value": "6 colours",
-        "label": "in one pass on Heidelberg presses"
+        "value": "5 colours",
+        "label": "plus a coater, in one pass on Heidelberg presses"
       },
       {
         "value": "100",
@@ -532,7 +536,7 @@
       },
       {
         "value": "2016",
-        "label": "incorporated in Peshawar"
+        "label": "incorporated in Pakistan"
       }
     ]
   }
