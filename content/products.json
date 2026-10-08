@@ -75,32 +75,11 @@
             "box_front": "/images/vazkor-box/front.png"
           },
           {
-            "title": "Zeflox carton",
-            "interactive_box": true,
-            "box_id": "zeflox",
-            "box_name": "Zeflox",
-            "box_front": "/images/zeflox-box/front.png"
-          },
-          {
             "title": "Danidol carton",
             "interactive_box": true,
             "box_id": "danidol",
             "box_name": "Danidol",
             "box_front": "/images/danidol-box/front.png"
-          },
-          {
-            "title": "Novex carton",
-            "interactive_box": true,
-            "box_id": "novex",
-            "box_name": "Novex",
-            "box_front": "/images/novex-box/front.png"
-          },
-          {
-            "title": "Caber carton",
-            "interactive_box": true,
-            "box_id": "caber",
-            "box_name": "Caber",
-            "box_front": "/images/caber-box/front.png"
           },
           {
             "title": "Icon carton",
@@ -122,13 +101,6 @@
             "box_id": "novex-paracetamol",
             "box_name": "Novex Paracetamol",
             "box_front": "/images/novex-paracetamol-box/front.png"
-          },
-          {
-            "title": "Citolin carton",
-            "interactive_box": true,
-            "box_id": "citolin",
-            "box_name": "Citolin",
-            "box_front": "/images/citolin-box/front.png"
           },
           {
             "title": "Fenbro carton",

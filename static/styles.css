@@ -325,6 +325,8 @@ a { color: inherit; }
 
 /* leadership / company profile */
 #company-profile { scroll-margin-top: 90px; }
+/* product families and finishes reached from a home tile land just under the fixed menu */
+.service-family h2[id], #finishes-heading { scroll-margin-top: 96px; }
 .team {
   display: grid; grid-template-columns: repeat(2, 1fr);
   align-items: start; gap: 18px; margin-top: 22px; max-width: 440px;

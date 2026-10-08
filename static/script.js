@@ -949,3 +949,22 @@ document.querySelectorAll('.process-intro__facts li, .home-process__facts li').f
   window.addEventListener('resize', fit);
   window.addEventListener('load', fit);
 })();
+
+/* Arriving at a section of another page (a home tile opening products.html#syrup-suspension-heading): the smooth
+   scroll and the galleries settling can leave the page at the top, so jump there directly, once the layout is ready
+   and again when everything has loaded, unless the visitor has started scrolling themselves. */
+(function () {
+  const id = decodeURIComponent(location.hash.slice(1));
+  const target = id && document.getElementById(id);
+  if (!target) return;
+  let moved = false;
+  ['wheel', 'touchstart', 'keydown'].forEach(type => window.addEventListener(type, () => { moved = true; }, { once: true, passive: true }));
+  function land() {
+    if (moved) return;
+    const header = document.querySelector('.site-header');
+    const top = target.getBoundingClientRect().top + window.scrollY - (header ? header.offsetHeight : 0) - 24;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+  }
+  requestAnimationFrame(land);
+  window.addEventListener('load', () => { land(); setTimeout(land, 300); });
+})();

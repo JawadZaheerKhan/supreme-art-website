@@ -19,8 +19,9 @@
     const IN = Math.round(w * FEATHER), INY = Math.round(h * FEATHER);
     // average a few pixels in from the edge, so a thin border or shadow line does not decide the colour
     const at = (x0, x1, y0, y1) => {
-      const sum = [0, 0, 0]; let n = 0;
-      for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) { const i = (y * w + x) * 4; sum[0] += data[i]; sum[1] += data[i + 1]; sum[2] += data[i + 2]; n++; }
+      const sum = [0, 0, 0]; let n = 0; let alpha = 0;
+      for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) { const i = (y * w + x) * 4; sum[0] += data[i]; sum[1] += data[i + 1]; sum[2] += data[i + 2]; alpha += data[i + 3]; n++; }
+      if (alpha < n * 250) throw new Error('not decoded');
       return sum.map(v => v / n);
     };
     // a product can touch the edge of a photo: any stop that is clearly not background (far from the edge's typical
@@ -43,8 +44,13 @@
 
   function paint(frame) {
     const img = frame.querySelector('img');
-    if (!img || !img.naturalWidth) return;
-    if (!frame._matte) { try { frame._matte = read(img); } catch { return; } }
+    // a lazy photo knows its size before its pixels arrive: read it only once it is fully loaded, and never keep a
+    // reading taken from undecoded (transparent, so black) pixels
+    if (!img || !img.complete || !img.naturalWidth) return;
+    if (!frame._matte) {
+      try { frame._matte = read(img); }
+      catch { if ((frame._tries = (frame._tries || 0) + 1) < 8) setTimeout(() => paint(frame), 250); return; }
+    }
     const m = frame._matte;
     const wide = frame.clientWidth / Math.max(1, frame.clientHeight) > img.naturalWidth / img.naturalHeight;
     // bands at the sides follow the photo's left and right edges top to bottom; bands above and below follow its

@@ -111,10 +111,10 @@
           <p class="home-services__all"><a class="btn btn--accent" href="{{ page.services.finishes.button_href }}">{{ page.services.finishes.button_label }}</a></p>
         </div>
         <ul class="home-finishes__grid">
-          {{#each content.products.finishes.features}}{{#if photos}}<li class="home-finishes__item card">
+          {{#each content.products.finishes.features}}{{#if photos}}<li class="home-finishes__entry"><a class="home-finishes__item card" href="{{ page.services.finishes.button_href }}">
             <span class="home-finishes__photo glass-photo" data-matte><img src="{{ photos.0.image }}" alt="{{ photos.0.alt }}" loading="lazy" decoding="async" /></span>
             <span class="home-services__title">{{ title }}</span>
-          </li>{{/if}}{{/each}}
+          </a></li>{{/if}}{{/each}}
         </ul>
       </div>
     </section>
@@ -209,6 +209,6 @@
 
   <script src="/script.js"></script>
   <script src="/glass-photos.js"></script>
-  <script src="/photo-matte.js"></script>
+  <script src="/photo-matte.js?v=20261008-4"></script>
 </body>
 </html>
