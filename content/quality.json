@@ -8,7 +8,7 @@
   "commitment": {
     "eyebrow": "Our commitment",
     "heading": "Built for pharma standards.",
-    "text": "Medicine packaging doesn’t get second chances. We run documented quality assurance across every stage of production, with full batch traceability, so what leaves our floor is exactly what you approved. Colour is matched by a specialised team against Pantone standards and verified on press with a spectrophotometer; every unit carton passes an automated camera inspection; and a digital job card follows each order from board to delivery.",
+    "text": "Medicine packaging doesn’t get second chances. We run documented quality assurance across every stage of production, with full batch traceability, so what leaves our floor is exactly what you approved. Colour is matched by a specialised team against Pantone standards and verified on press with a spectrophotometer; every unit carton is inspected by hand by our trained QC team; and a digital job card follows each order from board to delivery.",
     "stats": [
       {
         "number": 25,
@@ -78,11 +78,11 @@
         "caption_3": "Measuring the finish across a coated sheet"
       },
       {
-        "title": "Automated carton inspection",
-        "text": "After die-cutting, an automated inspection machine with 3D cameras examines every unit carton for colour, print defects, registration and missing elements, rejecting any that fall outside the approved reference before folding and gluing.",
+        "title": "Carton inspection by hand",
+        "text": "After die-cutting, our trained QC team inspects every unit carton by eye against the approved sample, checking colour, print defects, registration, text and missing elements, and removes any that do not match before folding and gluing.",
         "image": "/images/process/sorting-1.jpg",
         "image_2": "/images/process/sorting-2.jpg",
-        "caption_2": "Inspected unit cartons leaving the sorting machine"
+        "caption_2": "Unit cartons sorted and checked by hand"
       },
       {
         "title": "Security features checked",
