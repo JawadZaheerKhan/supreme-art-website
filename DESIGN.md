@@ -470,7 +470,6 @@ Buttons never bounce, never darken to black and never lose their rim.
 
 ### Motion
 - Hero: one wheel tick, PageDown or swipe moves exactly one stage, tweened over 1.1s. No free scrolling inside the hero.
-- Opening titles (home page only): about four seconds, like a film opening. Letterbox bars and a dark veil over the out-of-focus building, a title card ("SUPREME ART" with a red rule, then "Pharmaceutical packaging, since 2016"), the veil lifting as a band of light crosses the facade, the bars sliding away, then the menu and stage marks fading in. Only exposure and focus change on the photo, never zoom. Any scroll, key or tap skips it without moving the hero; reduced motion and links to a section skip it entirely.
 - Chapter stack: native scroll, sticky sections, no JavaScript tween.
 - Everything else: 150 to 400ms eases on hover only.
 

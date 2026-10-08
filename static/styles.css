@@ -1743,43 +1743,6 @@ a { color: inherit; }
   .home-story__shade::after { background: linear-gradient(0deg, rgba(0, 0, 0, .65), rgba(0, 0, 0, .25) 55%, transparent 80%); }
 }
 
-/* Opening titles (home page). While html.home-intro-run is set, the hero opens like a film: dark, letterboxed and
-   out of focus; a title card fades in and out; the dark lifts as a band of light crosses the facade; the bars
-   slide away; then the menu and the stage marks settle in. Every animation ends on the hero's normal state, so
-   when script.js removes the class (at the end, or at the first scroll, key or tap) nothing jumps. The building
-   photo is never zoomed: only its exposure and focus change. */
-.home-intro { display: none; }
-html.home-intro-run .press-loader { display: none; }
-html.home-intro-run .home-intro { display: block; position: absolute; inset: 0; z-index: 6; pointer-events: none; overflow: hidden; }
-.home-intro__veil { position: absolute; inset: 0; background: #120f0c; opacity: 0; }
-.home-intro__bar { position: absolute; left: 0; right: 0; height: 11vh; background: #120f0c; }
-.home-intro__bar--top { top: 0; transform-origin: top; }
-.home-intro__bar--bottom { bottom: 0; transform-origin: bottom; }
-.home-intro__sweep { position: absolute; top: -10%; bottom: -10%; left: 0; width: 38%; background: linear-gradient(100deg, transparent, rgba(255, 246, 228, .28) 45%, rgba(255, 255, 255, .42) 50%, rgba(255, 246, 228, .28) 55%, transparent); mix-blend-mode: screen; opacity: 0; }
-.home-intro__title { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center; color: #fff; }
-.home-intro__kicker { margin: 0; font-family: var(--display); font-size: clamp(1.4rem, 3.2vw, 2.6rem); font-weight: 600; letter-spacing: .32em; text-transform: uppercase; padding-left: .32em; }
-.home-intro__kicker::after { content: ""; display: block; width: 64px; height: 3px; margin: 18px auto 0; background: #e3262d; transform-origin: center; }
-.home-intro__line { margin: 0; color: rgba(255, 255, 255, .82); font-size: clamp(.95rem, 1.5vw, 1.2rem); letter-spacing: .06em; }
-
-html.home-intro-run .home-intro__veil { animation: introVeil 3.9s ease both; }
-html.home-intro-run .home-story__media { animation: introFocus 3.9s cubic-bezier(.4, 0, .2, 1) both; }
-html.home-intro-run .home-intro__kicker { animation: introKicker 2.5s cubic-bezier(.16, 1, .3, 1) .25s both; }
-html.home-intro-run .home-intro__kicker::after { animation: introRule 2.25s cubic-bezier(.16, 1, .3, 1) .5s both; }
-html.home-intro-run .home-intro__line { animation: introLine 2.1s ease .7s both; }
-html.home-intro-run .home-intro__sweep { animation: introSweep 1.7s cubic-bezier(.45, 0, .2, 1) 1.95s both; }
-html.home-intro-run .home-intro__bar--top, html.home-intro-run .home-intro__bar--bottom { animation: introBar .9s cubic-bezier(.65, 0, .35, 1) 2.85s both; }
-html.home-intro-run .site-header { animation: introFade .8s ease 3.3s both; }
-html.home-intro-run .home-story__progress, html.home-intro-run .home-story__hint, html.home-intro-run .home-story__scene.is-active { animation: introFade .8s ease 3.5s both; }
-@keyframes introVeil { 0%, 42% { opacity: 1; } 100% { opacity: 0; } }
-@keyframes introFocus { 0%, 42% { filter: brightness(.45) blur(7px) saturate(.7); } 100% { filter: none; } }
-@keyframes introKicker { 0% { opacity: 0; letter-spacing: .6em; } 40% { opacity: 1; letter-spacing: .32em; } 72% { opacity: 1; } 100% { opacity: 0; letter-spacing: .32em; } }
-@keyframes introRule { 0% { transform: scaleX(0); } 40% { transform: scaleX(1); } 80% { opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
-@keyframes introLine { 0% { opacity: 0; transform: translateY(10px); } 35% { opacity: 1; transform: none; } 70% { opacity: 1; } 100% { opacity: 0; } }
-@keyframes introSweep { 0% { transform: translateX(-110%); opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { transform: translateX(300%); opacity: 0; } }
-@keyframes introBar { 0% { transform: scaleY(1); } 100% { transform: scaleY(0); } }
-@keyframes introFade { 0% { opacity: 0; } 100% { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { html.home-intro-run .home-intro { display: none; } }
-
 /* ---------- Site-wide liquid navigation ---------- */
 .site-header .nav-links { position: relative; isolation: isolate; }
 .site-header .nav-links::before {
