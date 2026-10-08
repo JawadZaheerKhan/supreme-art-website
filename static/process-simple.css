@@ -158,3 +158,12 @@
   .process-assembly .process-scene.process-intro { grid-template-areas: "copy" "details"; }
   .process-intro__facts { max-width: none; }
 }
+
+/* A little red to bring the story to life: a red stop after each chapter title, a short red rule over each
+   scene's lead line, and the machine or key name that opens each "On the floor" point set in maroon. */
+.scene-chapter::after { content: "."; color: var(--accent); }
+.scene-copy .scene-lead::before { content: ""; display: block; width: 36px; height: 3px; margin-bottom: 14px; background: var(--accent); }
+.process-intro .scene-copy .scene-lead::before { display: none; }
+.process-intro__facts li::before { background: var(--accent); }
+.fact-key { color: var(--accent); font-weight: 600; }
+.process-glance__facts dt { color: var(--accent); }

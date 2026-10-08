@@ -227,6 +227,19 @@ const countIO = new IntersectionObserver((entries) => {
 }, { threshold: 0.6 });
 document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 
+/* Process facts: the machine or key name that opens a point ("Heidelberg Speedmaster CD 102:") is set apart so it
+   can take the brand red. Points without a short lead-in before a colon are left as they are. */
+document.querySelectorAll('.process-intro__facts li, .home-process__facts li').forEach(li => {
+  if (li.children.length) return;
+  const text = li.textContent, cut = text.indexOf(': ');
+  if (cut < 1 || cut > 70) return;
+  const key = document.createElement('span');
+  key.className = 'fact-key';
+  key.textContent = text.slice(0, cut + 1);
+  li.textContent = '';
+  li.append(key, document.createTextNode(text.slice(cut + 1)));
+});
+
 /* Homepage three-stage scroll story */
 (function () {
   const story = document.querySelector('.home-story');

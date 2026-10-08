@@ -52,6 +52,7 @@
       {{#each page.process.steps}}<article class="qc-window" aria-label="{{ title }}">
         {{#if image}}<div class="qc-window__media" style="--qc-photo: url('{{ image }}')"><img src="{{ image }}" alt="{{ title }} at Supreme Art" loading="lazy" decoding="async" /></div>{{/if}}
         <div class="qc-window__band container">
+          <p class="qc-window__kicker">{{ page.process.eyebrow }}</p>
           <h3>{{ title }}</h3>
           <p>{{ text }}</p>
         </div>
