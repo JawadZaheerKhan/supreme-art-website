@@ -283,6 +283,8 @@ Sections alternate between white and one of the off-whites. There is no dark ban
 
 Maroon is a spot colour. It appears small and seldom. Wood brown is even quieter and never appears as text.
 
+The one exception is the home hero. Its press-hall and Speedmaster stages are set like print posters over the photographs, and there the logo's bright red (#e3262d) is used for the red headline words, the big figure and the short rules, because maroon reads dull on the dark machines. Do not use this red anywhere else.
+
 ### Hairlines & Shadows
 
 | Token | Value | Use |

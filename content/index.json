@@ -2,26 +2,29 @@
   "title": "Supreme Art — Pharmaceutical Packaging & Printing",
   "description": "Supreme Art manufactures pharmaceutical folding cartons — printed, die-cut, folded and glued in-house in Peshawar, Pakistan.",
   "hero": {
-    "title": "Supreme Art",
-    "tagline": "The box your medicine comes in.",
-    "slides": [
-      {
-        "image": "/images/pressroom.jpg",
-        "alt": "Offset printing press"
-      },
-      {
-        "image": "/images/foldergluer.jpg",
-        "alt": "Printing machine"
-      },
-      {
-        "image": "/images/diecutting.jpg",
-        "alt": "Paper cutting machine"
-      },
-      {
-        "image": "/images/factory.jpg",
-        "alt": "Print production line"
-      }
-    ]
+    "press": {
+      "kicker": "Supreme Art Private Limited",
+      "title": "Pharmaceutical packaging",
+      "title_red": "specialists",
+      "text": "Unit cartons, labels and leaflets for pharmaceutical brands in Pakistan and abroad, printed on German-built Heidelberg presses and finished on Swiss Bobst lines.",
+      "facts": [
+        "Since 2016",
+        "Up to 6 colours",
+        "Heidelberg & Bobst",
+        "Exporting worldwide"
+      ],
+      "footer": "Offset printing & packaging"
+    },
+    "capacity": {
+      "kicker": "Supreme Art Private Limited",
+      "title": "High production",
+      "title_red": "capacity",
+      "figure_red": "1.50",
+      "figure": "Million",
+      "figure_line2": "Boxes Per Day",
+      "text": "Built to handle large-scale orders efficiently, with precision and consistency.",
+      "footer": "Pharmaceuticals packaging specialists"
+    }
   },
   "marquee": [
     "Tablet cartons",

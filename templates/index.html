@@ -31,11 +31,25 @@
           <div class="home-story__scene is-active" data-home-stage="0">
             <h1 class="home-story__full-logo"><img src="/images/home/supreme-art-calligraphy.png" alt="سپریم آرٹ" width="720" height="325" fetchpriority="high" /><span>Supreme Art (Private) Limited</span></h1>
           </div>
-          <div class="home-story__scene" data-home-stage="1">
-            <h2>Pharmaceutical Packaging Specialist</h2>
+          <!-- Stages two and three are set like posters: a tracked company label with a red rule, a two-colour
+               headline, the copy and a footer label, on the left over the photograph. -->
+          <div class="home-story__scene home-story__scene--poster" data-home-stage="1">
+            {{#with page.hero.press}}<div class="home-story__poster">
+              <p class="home-story__kicker">{{ kicker }}</p>
+              <h2 class="home-story__title"><span>{{ title }}</span> <span class="is-red">{{ title_red }}</span></h2>
+              <p class="home-story__copy">{{ text }}</p>
+              <ul class="home-story__facts">{{#each facts}}<li>{{ . }}</li>{{/each}}</ul>
+              <p class="home-story__footer">{{ footer }}</p>
+            </div>{{/with}}
           </div>
-          <div class="home-story__scene" data-home-stage="2">
-            <h2>1.5 Million Per Day<br />Production Capacity</h2>
+          <div class="home-story__scene home-story__scene--poster" data-home-stage="2">
+            {{#with page.hero.capacity}}<div class="home-story__poster">
+              <p class="home-story__kicker">{{ kicker }}</p>
+              <h2 class="home-story__title"><span>{{ title }}</span> <span class="is-red">{{ title_red }}</span></h2>
+              <p class="home-story__figure"><span><span class="is-red">{{ figure_red }}</span> {{ figure }}</span> <span>{{ figure_line2 }}</span></p>
+              <p class="home-story__copy">{{ text }}</p>
+              <p class="home-story__footer">{{ footer }}</p>
+            </div>{{/with}}
           </div>
         </div>
         <div class="home-story__progress" aria-hidden="true"><span></span><span></span><span></span></div>
