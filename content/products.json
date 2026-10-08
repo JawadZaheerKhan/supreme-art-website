@@ -304,7 +304,18 @@
       },
       {
         "title": "UV and spot UV",
-        "text": "A clear UV gloss over the whole sheet to deepen the colours and protect the print, or on chosen areas only for a raised, textured accent."
+        "text": "A clear UV gloss over the whole sheet to deepen the colours and protect the print, or on chosen areas only for a raised, textured accent.",
+        "photos": [
+          {
+            "image": "/images/finishes/uv-zeflox.webp",
+            "alt": "Zeflox carton with a full UV gloss and raised spot-UV lettering"
+          },
+          {
+            "image": "/images/finishes/spot-uv-efloxin.webp",
+            "alt": "Efloxin carton with a spot-UV Herbion pattern over the print"
+          }
+        ],
+        "more": true
       }
     ]
   },

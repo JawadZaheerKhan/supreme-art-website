@@ -88,6 +88,13 @@
             "image": "/images/home/services/food.webp",
             "alt": "SwaaD food cartons: Chapli Kabab, Kali Mirch, Shahi Kheer and Bombay Biryani",
             "href": "products.html#food-packaging-heading"
+          },
+          {
+            "title": "Labels & stickers",
+            "text": "Printed bottle labels and stickers for syrups and suspensions, in the same colours as their cartons and sized to wrap the bottle cleanly.",
+            "image": "/images/home/services/labels-stickers.webp",
+            "alt": "Labelled syrup bottles: Bronochol, Omevex, Pedrol, Citolin, Imo IV and Feromalt",
+            "href": "products.html#labels-leaflets-heading"
           }
         ]
       }
