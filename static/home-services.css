@@ -37,8 +37,8 @@
   .home-services__top { flex-direction: column; align-items: flex-start; }
   .home-services__photo { max-height: none; }
   .home-services__grid:has(> li:nth-child(3)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .home-finishes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-finishes__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .home-finishes__photo { height: auto; aspect-ratio: 3 / 4; }
   .home-finishes__item > .home-services__text { -webkit-line-clamp: unset; display: block; }
 }
-@media (max-width: 700px) { .home-services__grid { grid-template-columns: 1fr; } }
+@media (max-width: 700px) { .home-services__grid { grid-template-columns: 1fr; } .home-finishes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

@@ -11,7 +11,7 @@
 /* The carton lane spans the full width; JS slides the 28%-wide carton between left (0), centre (.5) and right (1). */
 .assembly-rail { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
 .assembly-sticky { position: sticky; top: 100px; width: 28%; height: calc(100svh - 135px); display: flex; flex-direction: column; justify-content: center; align-items: center; transform: translateX(calc(var(--box-pos, 1) * 257.1429%)); will-change: transform; }
-.assembly-eyebrow { color: var(--accent); font-size: 9px; letter-spacing: .16em; text-align: center; margin: 0 12px; }
+.assembly-eyebrow { color: var(--accent); font-size: 10.5px; letter-spacing: .16em; text-align: center; margin: 0 12px; }
 .assembly-stage { position: relative; width: 100%; height: min(53svh,460px); }
 .assembly-stage .proc-box__scene { width: 100%; height: 100%; aspect-ratio: auto; --intro: 1; --box-scale: .5; }
 .assembly-stage .proc-box__rot { width: 550px; height: 460px; filter: none; opacity: 1; transform-style: preserve-3d; transform: translate(-50%,-50%) scale(var(--box-scale)) rotateX(calc(var(--view) * -18deg)) rotateY(calc(var(--view) * -32deg)); }
@@ -67,7 +67,7 @@
 .assembly-state { margin: 0 12px 12px; font-size: 14px; font-weight: 600; text-align: center; color: var(--text); }
 .assembly-meter { width: 100px; height: 3px; background: var(--border); }
 .assembly-meter span { display: block; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; }
-.assembly-hint { font-size: 10px; color: var(--muted); margin: 12px 0 0; }
+.assembly-hint { font-size: 11px; color: var(--muted); margin: 12px 0 0; }
 
 /* Scenes: text and photos share a grid with the 28% carton column, wherever the carton stops.
    No photo is cropped: each frame takes its photo's own ratio (--r), and the photos in a row share one height. */
@@ -113,7 +113,7 @@
   .scene-row { width: 100%; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
   .scene-row figure:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .scene-chapter { font-size: 2rem; }
-  .process-scene figcaption { font-size: 10px; }
+  .process-scene figcaption { font-size: 11.5px; }
   .scene-copy p { font-size: .88rem; line-height: 1.7; }
   .process-assembly .scene-copy .scene-lead { font-size: 1.15rem; margin-bottom: 9px; }
   .process-section-links a + a::before { width: 18px; margin: 0 10px; }
@@ -167,3 +167,6 @@
 .process-intro__facts li::before { background: var(--accent); }
 .fact-key { color: var(--accent); font-weight: 600; }
 .process-glance__facts dt { color: var(--accent); }
+
+/* the carton's printed sheet can reach past the edge on mid-size screens; clip it without breaking the sticky rail */
+.process-assembly { overflow-x: clip; }

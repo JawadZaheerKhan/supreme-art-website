@@ -2498,7 +2498,7 @@ a { color: inherit; }
   }
   .site-header .nav-links > a,
   .site-header .nav-links > .has-dropdown > a {
-    padding: clamp(5px, 1.4vw, 7px) clamp(5px, 1.5vw, 12px);
+    padding: clamp(5px, 1.4vw, 7px) clamp(3px, calc(2.6vw - 6px), 12px);
     font-size: clamp(8px, 2.2vw, 12.8px);
   }
   /* "About us" wraps a link plus its dropdown in a span - reset it back to a
