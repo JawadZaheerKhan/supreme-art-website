@@ -19,6 +19,8 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+/* the home hero steps with each swipe at the top of the page: no pull-to-refresh there */
+html:has(> body.home-page) { overscroll-behavior-y: none; }
 body {
   margin: 0;
   font-family: var(--font);

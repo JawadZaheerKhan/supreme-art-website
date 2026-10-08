@@ -315,21 +315,21 @@ document.querySelectorAll('.process-intro__facts li, .home-process__facts li').f
   const SCENE_FOR_STOP = [0, 1, 2];
   let stage = 0, busy = false, cooldownUntil = 0, tween = 0, moveEnds = 0;
 
-  function goTo(next) {
+  function goTo(next, quick) {
     stage = Math.max(0, Math.min(STOPS.length - 1, next));
     showStage(SCENE_FOR_STOP[stage]);
     cancelAnimationFrame(tween);
     const from = current, to = STOPS[stage];
     if (still.matches) { current = to; paint(current); return; }
     busy = true;
-    const started = performance.now(), duration = 1100;
+    const started = performance.now(), duration = quick ? 850 : 1100;
     moveEnds = started + duration;
     const run = now => {
       const t = Math.min(1, (now - started) / duration);
       current = from + (to - from) * ease(t);
       paint(current);
       if (t < 1) tween = requestAnimationFrame(run);
-      else { busy = false; cooldownUntil = performance.now() + 350; }
+      else { busy = false; cooldownUntil = performance.now() + (quick ? 120 : 350); }
     };
     tween = requestAnimationFrame(run);
   }
@@ -342,13 +342,13 @@ document.querySelectorAll('.process-intro__facts li, .home-process__facts li').f
   function settle() {
     if (busy && performance.now() > moveEnds + 400) { cancelAnimationFrame(tween); current = STOPS[stage]; paint(current); busy = false; }
   }
-  function step(direction, event) {
+  function step(direction, event, quick) {
     if (!pinned()) return false;
     settle();
     if (busy || performance.now() < cooldownUntil) { event.preventDefault(); return true; }
     if (free(direction)) return false;
     event.preventDefault();
-    goTo(stage + direction);
+    goTo(stage + direction, quick);
     return true;
   }
   let lastWheel = -Infinity, wheelTravel = 0;
@@ -376,7 +376,9 @@ document.querySelectorAll('.process-intro__facts li, .home-process__facts li').f
     if (busy) { event.preventDefault(); return; }
     if (free(direction)) return;
     if (touchDone) { event.preventDefault(); return; }
-    if (Math.abs(dy) >= 10) touchDone = step(direction, event);
+    // the hero claims the swipe from its first pixel, so the browser never starts its own scroll or pull-to-refresh
+    if (Math.abs(dy) >= 8) touchDone = step(direction, event, true);
+    else if (event.cancelable) event.preventDefault();
   }, { passive: false });
   window.addEventListener('touchend', () => { touchY = null; touchDone = false; }, { passive: true });
   window.addEventListener('keydown', event => {
