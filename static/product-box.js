@@ -520,7 +520,8 @@
   function render(now) {
     const dt = lastTime ? Math.min(48, now - lastTime) : 16;
     lastTime = now;
-    const blend = reduced.matches ? 1 : 1 - Math.exp(-dt / 125);
+    // a finger on the carton is followed closely; on its own the carton eases more slowly
+    const blend = reduced.matches ? 1 : 1 - Math.exp(-dt / (down ? 55 : 125));
     const automatic = !reduced.matches && !autoPaused && !hovering && !down && now >= manualUntil;
     if (automatic) {
       autoTime += dt;
@@ -564,7 +565,9 @@
   function update(rx, ry) {
     manualUntil = performance.now() + 2200;
     targetX = clamp(rx, -18, 0);
-    targetY = clamp(ry, -48, 48);
+    targetY = clamp(ry, -70, 70);
+    // the turning picks up from wherever the carton is left, instead of swinging back to where it was
+    autoTime = 1200 + Math.asin(clamp(targetY / 28, -1, 1)) / (Math.PI * 2) * 18000;
     wake();
   }
   view.addEventListener('pointerenter', e => { if(e.pointerType==='mouse'){ hovering=true; wake(); } });
@@ -572,18 +575,27 @@
   view.addEventListener('focusout', () => requestAnimationFrame(wake));
   view.addEventListener('pointerdown', e => {
     if (e.pointerType === 'mouse') return;
-    down = {id:e.pointerId,x:e.clientX,y:targetY};
+    down = {id:e.pointerId,x:e.clientX,y:targetY,tilt:targetX,lastX:e.clientX,prevX:e.clientX,lastT:e.timeStamp,v:0};
     view.setPointerCapture(e.pointerId);
   });
   view.addEventListener('pointermove', e => {
     if (e.pointerType !== 'mouse') {
-      if(down) update(-12,down.y+(e.clientX-down.x)*.55);
+      if(down){
+        const dt=Math.max(1,e.timeStamp-down.lastT);
+        down.v=down.v*.6+((e.clientX-down.lastX)*.55/dt)*.4;
+        down.lastX=e.clientX; down.lastT=e.timeStamp;
+        // each movement turns the carton from where it is now, so turning back answers at once even after it
+        // has reached its furthest angle
+        const step=(e.clientX-down.prevX)*.55; down.prevX=e.clientX;
+        update(down.tilt+(-8-down.tilt)*Math.min(1,Math.abs(e.clientX-down.x)/60),targetY+step);
+      }
       return;
     }
     const r=view.getBoundingClientRect();
     update(-4-(1-(e.clientY-r.top)/r.height)*20,((e.clientX-r.left)/r.width-.5)*96);
   });
-  view.addEventListener('pointerup', () => {down=null;});
+  // a flick keeps the carton gliding a little after the finger lifts
+  view.addEventListener('pointerup', () => {if(down&&Math.abs(down.v)>.02)update(targetX,targetY+down.v*220);down=null;});
   view.addEventListener('pointercancel', () => {down=null;});
   view.addEventListener('pointerleave', e => {if(e.pointerType==='mouse'){ hovering=false; manualUntil=performance.now()+600; wake(); }});
   view.addEventListener('keydown', e => {
