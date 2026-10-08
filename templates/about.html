@@ -25,7 +25,16 @@
       </div>
     </section>
 
-{{> company-message}}
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow reveal">{{ page.numbers.eyebrow }}</p>
+        <h2 class="reveal">{{ page.numbers.heading }}</h2>
+        <div class="stat-row reveal" style="margin-top:24px">
+          {{#each page.numbers.stats}}<div class="stat"><b data-count="{{ number }}">0</b><span>{{ label }}</span></div>
+          {{/each}}
+        </div>
+      </div>
+    </section>
 
     <section class="section band">
       <div class="container">
@@ -38,12 +47,14 @@
       </div>
     </section>
 
-    <section class="section">
+    <!-- Registered and compliant: the four registrations from the company profile -->
+    <section class="section about-compliance">
       <div class="container">
-        <p class="eyebrow reveal">{{ page.numbers.eyebrow }}</p>
-        <h2 class="reveal">{{ page.numbers.heading }}</h2>
-        <div class="stat-row reveal" style="margin-top:24px">
-          {{#each page.numbers.stats}}<div class="stat"><b data-count="{{ number }}">0</b><span>{{ label }}</span></div>
+        <p class="eyebrow reveal">{{ page.compliance.eyebrow }}</p>
+        <h2 class="reveal">{{ page.compliance.heading }}</h2>
+        <p class="lead reveal">{{ page.compliance.text }}</p>
+        <div class="grid">
+          {{#each page.compliance.items}}<article class="card reveal"><h3>{{ title }}</h3><p>{{ text }}</p></article>
           {{/each}}
         </div>
       </div>

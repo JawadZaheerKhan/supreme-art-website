@@ -2,177 +2,73 @@
 <html lang="en">
 <head>
 {{> head}}
+  <link rel="stylesheet" href="/process-simple.css" />
+  <link rel="stylesheet" href="/glass-photos.css" />
 </head>
-<body class="photo-zoom-page">
+<body class="photo-zoom-page process-simple-page">
 {{> gtm-body}}
-{{> loader}}
 {{> header}}
-
   <main>
 {{> banner}}
-
-    <section class="section">
+    <section class="section process-overview">
       <div class="container">
-        <p class="eyebrow reveal">Our process</p>
-        <p class="proc-intro reveal">{{ page.intro }}</p>
-      </div>
-
-      <!-- Desktop: pinned stage, crossfades as you scroll -->
-      <div class="proc" id="proc" aria-hidden="true">
-        <div class="proc__pin">
-          <div class="proc__inner container">
-            <div class="proc__stage">
-              {{#each page.steps}}<div class="proc__shot {{#if image_3}}quality-gallery quality-gallery--three{{else}}proc__pair{{#if image_2}}{{else}} proc__pair--single{{/if}}{{/if}}{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}">
-                {{#if image}}<img src="{{ image }}" alt="" loading="lazy" />{{/if}}
-                {{#if image_2}}<img src="{{ image_2 }}" alt="" loading="lazy" />{{/if}}
-                {{#if image_3}}<img src="{{ image_3 }}" alt="" loading="lazy" />{{/if}}
-                {{#if image_2}}<span class="{{#if image_3}}quality-gallery__dots{{else}}proc__pair-dots{{/if}}"><i></i><i></i>{{#if image_3}}<i></i>{{/if}}</span>{{/if}}
-              </div>
-              {{/each}}
-            </div>
-            <div class="proc__text">
-              {{#each page.steps}}<div class="proc__cap{{#if @index}}{{else}} on{{/if}}" data-step="{{ @index }}">
-                <span class="proc__ghost" aria-hidden="true">{{ num }}</span>
-                <span class="proc__num">{{ num }}</span>
-                <h2>{{ title }}</h2>
-                <p>{{ text }}</p>
-              </div>
-              {{/each}}
-              <div class="proc__meter">
-                <span class="proc__count"><b class="proc__cur">01</b> / <span class="proc__total">10</span></span>
-                <span class="proc__bar"><span class="proc__bar-fill"></span></span>
-              </div>
-            </div>
-
-            <!-- folding carton, assembles as you scroll (aligned to the steps) -->
-            <div class="proc-box" aria-hidden="true">
-{{> carton-scene}}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile / reduced-motion: simple stacked steps -->
-      <div class="proc-mob container">
-        <!-- same carton, folding as you scroll the steps -->
-        <div class="proc-mob__box proc-box" aria-hidden="true">
-{{> carton-scene}}
-        </div>
-        {{#each page.steps}}<article class="proc-mob__step reveal">
-          {{#if image}}<div class="proc-mob__img proc-mob__img--pair{{#if image_2}}{{else}} proc-mob__img--single{{/if}}">
-            <img src="{{ image }}" alt="{{ title }}" loading="lazy" />
-            {{#if image_2}}<img src="{{ image_2 }}" alt="{{ title }}" loading="lazy" />{{/if}}
-            {{#if image_3}}<img src="{{ image_3 }}" alt="{{ title }}" loading="lazy" />{{/if}}
-            {{#if image_2}}<span class="{{#if image_3}}quality-gallery__dots{{else}}proc__pair-dots{{/if}}"><i></i><i></i>{{#if image_3}}<i></i>{{/if}}</span>{{/if}}
-          </div>{{/if}}
-          <span class="proc__num">{{ num }}</span>
-          <h2>{{ title }}</h2>
-          <p>{{ text }}</p>
-        </article>
-        {{/each}}
+        <p class="eyebrow">Our process</p>
+        <p class="proc-intro">From the first design to the final delivery. Scroll through the photographs and see how each part of the process brings your carton to life.</p>
+        <nav class="process-section-links" aria-label="Process sections">
+          <a href="#prepress">Pre press</a><a href="#press">Press</a><a href="#postpress">Post press</a>
+        </nav>
       </div>
     </section>
-
+    <!-- The floor at a glance: the facility and four numbers from the company profile. -->
+    <section class="process-glance" aria-labelledby="process-glance-title">
+      <div class="container process-glance__inner">
+        <div class="process-glance__copy">
+          <p class="eyebrow">{{ page.overview.eyebrow }}</p>
+          <h2 id="process-glance-title">{{ page.overview.heading }}</h2>
+          <p>{{ page.overview.text }}</p>
+        </div>
+        <dl class="process-glance__facts">{{#each page.overview.glance}}<div><dt>{{ value }}</dt><dd>{{ label }}</dd></div>{{/each}}</dl>
+      </div>
+    </section>
+    <div class="process-assembly">
+      <aside class="assembly-rail" aria-label="Carton assembly progress">
+        <div class="assembly-sticky">
+          <p class="assembly-eyebrow">YOUR CARTON TAKES SHAPE</p>
+          <div class="assembly-stage proc-box" aria-hidden="true">{{> carton-scene}}</div>
+          <p class="assembly-state">A flat sheet of board</p>
+          <div class="assembly-meter" aria-hidden="true"><span></span></div>
+          <p class="assembly-hint">Scroll to build the carton</p>
+        </div>
+      </aside>
+    {{#each page.chapters}}<section class="process-chapter" id="{{ id }}" aria-labelledby="{{ id }}-title">
+      <!-- Chapter page: the story, the equipment behind it and what the chapter handles. It shares the first scene's
+           carton position so the travelling carton sits beside it. -->
+      <article class="process-scene process-scene--{{ scenes.0.box }} process-intro" data-box="{{ scenes.0.box }}" data-step="{{ scenes.0.step }}">
+        <div class="scene-copy process-intro__copy">
+          <div class="scene-head"><p class="scene-eyebrow">{{ label }}</p><h2 class="scene-chapter" id="{{ id }}-title">{{ title }}</h2></div>
+          <p class="scene-lead">{{ story }}</p>
+          <h3 class="process-intro__facts-title">On the floor</h3>
+          <ul class="process-intro__facts">{{#each facts}}<li>{{ . }}</li>{{/each}}</ul>
+        </div>
+        <div class="process-intro__details">{{#each details}}<div class="process-intro__list"><h3>{{ title }}</h3><ul>{{#each items}}<li>{{ . }}</li>{{/each}}</ul></div>{{/each}}</div>
+      </article>
+      {{#each scenes}}<article class="process-scene process-scene--{{ box }}{{#if hero_side}} process-scene--hero-{{ hero_side }}{{/if}}" data-box="{{ box }}" data-step="{{ step }}">
+        <div class="scene-copy">
+          <p class="scene-lead">{{ lead }}</p>
+          <p>{{ detail }}</p>
+        </div>
+        {{#if hero}}<figure class="scene-hero" style="--r: {{ hero.ratio }}"><div class="process-photo-frame glass-photo"><img src="{{ hero.image }}" alt="{{ hero.alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ hero.caption }}</figcaption></figure>{{/if}}
+        <div class="scene-row" style="--sum: {{ row_sum }}">
+          {{#each row}}<figure style="--r: {{ ratio }}"><div class="process-photo-frame glass-photo"><img src="{{ image }}" alt="{{ alt }}" loading="lazy" decoding="async" /></div><figcaption>{{ caption }}</figcaption></figure>{{/each}}
+        </div>
+      </article>{{/each}}
+    </section>{{/each}}
+    </div>
 {{> cta}}
   </main>
-
 {{> footer}}
-
   <script src="/script.js"></script>
-  <script>
-  (function () {
-    var section = document.getElementById('proc');
-    if (!section) return;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) { document.documentElement.classList.add('proc-static'); return; }
-
-    var shots = [].slice.call(section.querySelectorAll('.proc__shot'));
-    var caps  = [].slice.call(section.querySelectorAll('.proc__cap'));
-    var bar   = section.querySelector('.proc__bar-fill');
-    var curEl = section.querySelector('.proc__cur');
-    var n = caps.length, cur = -1, ticking = false;
-    var pad = function (i) { return (i < 10 ? '0' : '') + i; };
-    var totalEl = section.querySelector('.proc__total');
-    if (totalEl) totalEl.textContent = pad(n);
-
-    // folding carton on the side, driven by the same scroll progress
-    var box = section.querySelector('.proc-box__scene');
-    var norm = function (v, a, b) { return Math.min(1, Math.max(0, (v - a) / (b - a))); };
-    var ease = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
-
-    // The section is tall; the pin stays for its whole height. Scroll
-    // progress through it (0..1) maps to which step is showing.
-    function setHeight() { section.style.height = (n * 40 + 20) + 'vh'; }
-    function activate(i) {
-      if (i === cur) return;
-      cur = i;
-      for (var a = 0; a < shots.length; a++) shots[a].classList.toggle('on', a === i);
-      for (var b = 0; b < caps.length; b++)  caps[b].classList.toggle('on', b === i);
-      if (curEl) curEl.textContent = pad(i + 1);
-    }
-    function update() {
-      ticking = false;
-      var total = section.offsetHeight - window.innerHeight;
-      var p = Math.min(1, Math.max(0, -section.getBoundingClientRect().top / total));
-      activate(Math.min(n - 1, Math.floor(p * n)));
-      if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
-      if (box) {
-        box.style.setProperty('--intro', norm(p, 0, 0.05).toFixed(3));
-        box.style.setProperty('--print', norm(p, 0.36, 0.50).toFixed(3));       // step 05 — artwork prints on
-        box.style.setProperty('--cut',   norm(p, 0.58, 0.70).toFixed(3));       // step 07 — die-cut outline
-        box.style.setProperty('--foldA', ease(norm(p, 0.70, 0.82)).toFixed(3)); // step 08 — sides fold up
-        box.style.setProperty('--foldB', ease(norm(p, 0.78, 0.90)).toFixed(3)); // flaps close
-        box.style.setProperty('--view',  ease(norm(p, 0.70, 1.0)).toFixed(3));  // rotate to 3D after cutting
-      }
-    }
-    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
-
-    setHeight();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', function () { setHeight(); update(); });
-    update();
-  })();
-
-  // phones: the stacked steps get the same carton, pinned at the top and
-  // folding as you scroll down the list
-  (function () {
-    var wrap  = document.querySelector('.proc-mob');
-    var scene = wrap && wrap.querySelector('.proc-mob__box .proc-box__scene');
-    if (!scene) return;
-
-    var set = function (k, v) { scene.style.setProperty(k, v); };
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      // show the finished carton rather than animating it
-      set('--intro', 1); set('--print', 1); set('--cut', 0);
-      set('--foldA', 1); set('--foldB', 1); set('--view', 1);
-      return;
-    }
-
-    var mq = window.matchMedia('(max-width: 860px)');
-    var norm = function (v, a, b) { return Math.min(1, Math.max(0, (v - a) / (b - a))); };
-    var ease = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
-    var ticking = false;
-
-    function update() {
-      ticking = false;
-      if (!mq.matches) return;
-      var r = wrap.getBoundingClientRect();
-      var total = r.height - window.innerHeight;
-      if (total <= 0) return;
-      var p = Math.min(1, Math.max(0, -r.top / total));
-      set('--intro', norm(p, 0, 0.05).toFixed(3));
-      set('--print', norm(p, 0.36, 0.50).toFixed(3));
-      set('--cut',   norm(p, 0.58, 0.70).toFixed(3));
-      set('--foldA', ease(norm(p, 0.70, 0.82)).toFixed(3));
-      set('--foldB', ease(norm(p, 0.78, 0.90)).toFixed(3));
-      set('--view',  ease(norm(p, 0.70, 1.0)).toFixed(3));
-    }
-    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    update();
-  })();
-  </script>
+  <script src="/process-simple.js"></script>
+  <script src="/glass-photos.js"></script>
 </body>
 </html>

@@ -227,6 +227,19 @@ const countIO = new IntersectionObserver((entries) => {
 }, { threshold: 0.6 });
 document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 
+/* Process facts: the machine or key name that opens a point ("Heidelberg Speedmaster CD 102:") is set apart so it
+   can take the brand red. Points without a short lead-in before a colon are left as they are. */
+document.querySelectorAll('.process-intro__facts li, .home-process__facts li').forEach(li => {
+  if (li.children.length) return;
+  const text = li.textContent, cut = text.indexOf(': ');
+  if (cut < 1 || cut > 70) return;
+  const key = document.createElement('span');
+  key.className = 'fact-key';
+  key.textContent = text.slice(0, cut + 1);
+  li.textContent = '';
+  li.append(key, document.createTextNode(text.slice(cut + 1)));
+});
+
 /* Homepage three-stage scroll story */
 (function () {
   const story = document.querySelector('.home-story');
@@ -235,8 +248,57 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   const scenes = [...story.querySelectorAll('[data-home-stage]')];
   const dots = [...story.querySelectorAll('.home-story__progress span')];
   const header = document.querySelector('.site-header');
+  const sticky = story.querySelector('.home-story__sticky');
+  const facade = story.querySelector('.home-story__facade');
+  const building = story.querySelector('.home-story__building');
+  const hall = story.querySelector('.home-story__shot--hall');
+  const press = story.querySelector('.home-story__shot--press');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
   let activeStage = -1;
-  let ticking = false;
+  let current = 0;
+
+  const clamp01 = value => Math.max(0, Math.min(1, value));
+  const span = (value, from, to) => clamp01((value - from) / (to - from));
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+  // Where the entrance doors are in the building photo, as fractions of it: the camera dives through them.
+  const DOOR = { x: .6, y: .69 };
+  const BUILDING_TOP = 103 / 900; // the facade's first horizontal joint line in the photo: it sits right under the menu bar
+  const navBottom = () => { const nav = document.querySelector('.site-header .nav-links'); return nav ? nav.getBoundingClientRect().bottom : 72; };
+  let placed = false;
+  function placeFacade() {
+    const W = sticky.clientWidth, H = sticky.clientHeight;
+    const nw = building.naturalWidth || 1600, nh = building.naturalHeight || 900;
+    const s = Math.max(W / nw, H / nh), dw = nw * s, dh = nh * s;
+    // Anchor the photo on the doors, but never let the facade's joint line slip under the menu bar: on wide,
+    // short screens the photo is shifted down so the line meets the bar, and the dive's origin follows the doors.
+    const ox = (W - dw) * DOOR.x;
+    let oy = (H - dh) * DOOR.y;
+    oy = Math.max(H - dh, Math.min(0, Math.max(oy, navBottom() - BUILDING_TOP * dh)));
+    building.style.objectPosition = (DOOR.x * 100) + '% ' + ((H - dh) ? (oy / (H - dh)) * 100 : 50) + '%';
+    facade.style.transformOrigin = (ox + DOOR.x * dw) + 'px ' + (oy + DOOR.y * dh) + 'px';
+    placed = true;
+  }
+
+  // Scroll timeline: hold on the building; the camera dives through the entrance doors (.04–.5) straight into
+  // the press hall; then it glides from the front of the hall round to the Speedmaster's side (.58–.9) and holds.
+  // Only transform and opacity change, so the browser never re-rasterises the enlarged photos.
+  function paint(p) {
+    if (!placed) placeFacade();
+    const zoom = span(p, .04, .5);
+    facade.style.transform = `scale(${Math.pow(9, ease(zoom))})`;
+    facade.style.opacity = String(1 - span(zoom, .72, .98));
+
+    const settle = ease(span(zoom, .5, 1));
+    const glide = ease(span(p, .58, .9));
+    const swap = span(glide, .28, .72);
+    hall.style.transform = `translateX(${-16 * glide}%) rotateY(${16 * glide}deg) scale(${1.08 + .22 * (1 - settle) + .3 * glide})`;
+    hall.style.opacity = String(1 - swap);
+    press.style.transform = `translateX(${16 * (1 - glide)}%) rotateY(${-16 * (1 - glide)}deg) scale(${1.02 + .34 * (1 - glide)})`;
+    press.style.opacity = String(swap);
+
+    showStage(p < .3 ? 0 : p < .74 ? 1 : 2);
+  }
 
   function showStage(index) {
     index = Math.max(0, Math.min(scenes.length - 1, index));
@@ -247,26 +309,93 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
   }
 
-  function updateStory() {
+  // The hero is a stepper, not a scrubber: one gesture moves one stage along the timeline, and the move
+  // itself is animated. The stops are the building, the press hall and the Speedmaster.
+  const STOPS = [0, .5, .9];
+  const SCENE_FOR_STOP = [0, 1, 2];
+  let stage = 0, busy = false, cooldownUntil = 0, tween = 0, moveEnds = 0;
+
+  function goTo(next) {
+    stage = Math.max(0, Math.min(STOPS.length - 1, next));
+    showStage(SCENE_FOR_STOP[stage]);
+    cancelAnimationFrame(tween);
+    const from = current, to = STOPS[stage];
+    if (still.matches) { current = to; paint(current); return; }
+    busy = true;
+    const started = performance.now(), duration = 1100;
+    moveEnds = started + duration;
+    const run = now => {
+      const t = Math.min(1, (now - started) / duration);
+      current = from + (to - from) * ease(t);
+      paint(current);
+      if (t < 1) tween = requestAnimationFrame(run);
+      else { busy = false; cooldownUntil = performance.now() + 350; }
+    };
+    tween = requestAnimationFrame(run);
+  }
+
+  // While the page sits at the top the hero owns the gestures. A downward gesture past the last stage, or an
+  // upward one at the first, is left alone so the page scrolls normally.
+  const pinned = () => window.scrollY <= 2;
+  const free = direction => (stage === STOPS.length - 1 && direction > 0) || (stage === 0 && direction < 0);
+  // If frames stopped mid-move (a throttled tab), land the move rather than swallow every gesture after it.
+  function settle() {
+    if (busy && performance.now() > moveEnds + 400) { cancelAnimationFrame(tween); current = STOPS[stage]; paint(current); busy = false; }
+  }
+  function step(direction, event) {
+    if (!pinned()) return false;
+    settle();
+    if (busy || performance.now() < cooldownUntil) { event.preventDefault(); return true; }
+    if (free(direction)) return false;
+    event.preventDefault();
+    goTo(stage + direction);
+    return true;
+  }
+  let lastWheel = -Infinity, wheelTravel = 0;
+  window.addEventListener('wheel', event => {
+    if (event.ctrlKey || !pinned()) return;
+    const now = performance.now();
+    const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
+    if (Math.abs(delta) < 1) return;
+    settle();
+    if (busy || now < cooldownUntil) { wheelTravel = 0; event.preventDefault(); return; }
+    if (free(delta > 0 ? 1 : -1)) return;
+    if (now - lastWheel > 160 || Math.sign(delta) !== Math.sign(wheelTravel)) wheelTravel = 0;
+    lastWheel = now;
+    wheelTravel += delta;
+    if (Math.abs(wheelTravel) < 12) { event.preventDefault(); return; }
+    wheelTravel = 0;
+    step(delta > 0 ? 1 : -1, event);
+  }, { passive: false });
+  let touchY = null, touchDone = false;
+  window.addEventListener('touchstart', event => { touchY = event.touches.length === 1 ? event.touches[0].clientY : null; touchDone = false; }, { passive: true });
+  window.addEventListener('touchmove', event => {
+    if (touchY === null || event.touches.length !== 1 || !pinned()) return;
+    const dy = touchY - event.touches[0].clientY, direction = dy > 0 ? 1 : -1;
+    settle();
+    if (busy) { event.preventDefault(); return; }
+    if (free(direction)) return;
+    if (touchDone) { event.preventDefault(); return; }
+    if (Math.abs(dy) >= 10) touchDone = step(direction, event);
+  }, { passive: false });
+  window.addEventListener('touchend', () => { touchY = null; touchDone = false; }, { passive: true });
+  window.addEventListener('keydown', event => {
+    if (event.target.closest('input, textarea, select, button, a, [contenteditable="true"]') || event.ctrlKey || event.metaKey || event.altKey) return;
+    const direction = ['ArrowDown', 'PageDown'].includes(event.key) || (event.key === ' ' && !event.shiftKey) ? 1
+      : ['ArrowUp', 'PageUp'].includes(event.key) || (event.key === ' ' && event.shiftKey) ? -1 : 0;
+    if (direction) step(direction, event);
+  });
+
+  function overHero() {
     const rect = story.getBoundingClientRect();
-    const travel = Math.max(1, story.offsetHeight - window.innerHeight);
-    const progress = Math.max(0, Math.min(1, -rect.top / travel));
-    showStage(Math.round(progress * (scenes.length - 1)));
     header?.classList.toggle('is-over-hero', rect.bottom > 68 && rect.top < 68);
-    ticking = false;
   }
-
-  function requestUpdate() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(updateStory);
-  }
-
   showStage(0);
-  updateStory();
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate);
-
+  paint(0);
+  overHero();
+  window.addEventListener('scroll', overHero, { passive: true });
+  window.addEventListener('resize', () => { placed = false; paint(current); });
+  if (!building.complete) building.addEventListener('load', () => { placed = false; paint(current); });
 })();
 
 /* Liquid navigation indicator — shared by every page and mobile menu. */
@@ -282,7 +411,13 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     const linkPath = new URL(link.href, window.location.href).pathname.replace(/index\.html$/, '');
     return linkPath === pagePath;
   });
-  const activeLink = topLevelLink(nav.querySelector('a.current') || matchingLink || topLinks[0]);
+  const pathOf = link => new URL(link.href, window.location.href).pathname.replace(/index\.html$/, '');
+  function activeLink() {
+    const current = nav.querySelector(':scope > a.current, :scope > .has-dropdown > a.current');
+    if (current && current.offsetParent !== null) return current;
+    const sub = [...nav.querySelectorAll('.dropdown a')].find(link => pathOf(link) === pagePath && topLevelLink(link).offsetParent !== null);
+    return topLevelLink(sub || current || matchingLink || topLinks[0]);
+  }
   let targetTimer;
 
   function topLevelLink(link) {
@@ -317,7 +452,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
   }
 
   function syncIndicator() {
-    requestAnimationFrame(() => positionIndicator(activeLink, false));
+    requestAnimationFrame(() => positionIndicator(activeLink(), false));
   }
 
   function setupDropdownIndicator(dropdown) {
@@ -416,7 +551,7 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       if (tracking) return;
       tracking = true;
       const frame = now => {
-        positionIndicator(activeLink, false);
+        positionIndicator(activeLink(), false);
         if (now < trackUntil) requestAnimationFrame(frame);
         else { tracking = false; nav.classList.remove('is-tracking'); }
       };
@@ -447,57 +582,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       setCondensed(event.detail.direction > 0);
     });
   }
-})();
-/* Homepage continuing scroll chapters */
-(function () {
-  const overview = document.querySelector('[data-home-overview]');
-
-  if (!overview) return;
-
-
-
-
-  let ticking = false;
-
-  function storyProgress(element) {
-    const rect = element.getBoundingClientRect();
-    const travel = Math.max(1, element.offsetHeight - window.innerHeight);
-    return Math.max(0, Math.min(1, -rect.top / travel));
-  }
-
-  function updateOverview() {
-    if (!overview) return;
-    const progress = storyProgress(overview);
-    const revealProgress = Math.min(1, progress / 0.38);
-    const eased = 1 - Math.pow(1 - revealProgress, 3);
-    overview.style.setProperty('--overview-progress', eased.toFixed(4));
-    overview.style.setProperty('--overview-opacity', (0.18 + eased * 0.82).toFixed(4));
-    overview.style.setProperty('--overview-y', `${((1 - eased) * 105).toFixed(2)}px`);
-    overview.style.setProperty('--overview-copy-y', `${((1 - eased) * 120).toFixed(2)}px`);
-    overview.style.setProperty('--overview-scale', (0.72 + eased * 0.28).toFixed(4));
-    overview.style.setProperty('--overview-clip-y', `${((1 - eased) * 36).toFixed(2)}%`);
-    overview.style.setProperty('--overview-clip-x', `${((1 - eased) * 13).toFixed(2)}%`);
-    overview.style.setProperty('--overview-image-scale', (1.13 - eased * 0.13).toFixed(4));
-    overview.style.setProperty('--overview-bar-width', `${(progress * 100).toFixed(2)}%`);
-  }
-
-  function update() {
-    updateOverview();
-
-    ticking = false;
-  }
-
-  function requestUpdate() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  }
-
-
-
-  update();
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate);
 })();
 /* Homepage story stages: one gesture slides, then lifts the stage at center. */
 (function () {
@@ -648,8 +732,6 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
     staticLayout.addEventListener('change', reset);
   });
 })();
-/* Standalone contact scroll reveal */
-(function(){const story=document.querySelector('[data-home-contact]');if(!story)return;let ticking=false;function update(){const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-innerHeight),p=Math.max(0,Math.min(1,-rect.top/travel)),e=1-Math.pow(1-p,3);story.style.setProperty('--contact-opacity',e.toFixed(3));story.style.setProperty('--contact-scale',(.78+e*.22).toFixed(3));ticking=false}function request(){if(ticking)return;ticking=true;requestAnimationFrame(update)}update();addEventListener('scroll',request,{passive:true});addEventListener('resize',request)})();
 /* Desktop Process / Quality galleries: horizontal trackpad swipe and mouse drag. */
 (function () {
   document.querySelectorAll('.proc__stage .proc__shot').forEach(gallery => {
@@ -813,15 +895,13 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 // Glass expansion for the requested page actions.
 (() => {
   const page = location.pathname.split('/').pop().replace(/\.html$/, '') || 'index';
-  const selectors = {
-    careers: '.cta-band .btn, a.btn[href="#career-contact"]',
-    about: '.cta-band .btn',
-    'company-profile': '.cta-band .btn',
-    products: '.cta-band .btn',
+  const extra = {
+    careers: 'a.btn[href="#career-contact"]',
     index: '.home-contact-story__inner .hero-actions .btn'
   };
-  if (!selectors[page]) return;
-  document.querySelectorAll(selectors[page]).forEach(button => {
+  // Every button on every page gets the glass expansion.
+  const selector = '.btn';
+  document.querySelectorAll(selector).forEach(button => {
     button.classList.add('glass-action');
     let touch = false;
     let opening = false;
@@ -849,4 +929,42 @@ document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
       }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1100);
     }, true);
   });
+})();
+
+/* Home chapter stack: each chapter after the hero pins once read, and the next slides up over it. */
+(function () {
+  const main = document.querySelector('.home-page main');
+  if (!main) return;
+  // Short in-between blocks (data-stack-skip) just scroll; only real chapters pin.
+  const chapters = [...main.children].filter(el => !el.classList.contains('home-story') && !el.hasAttribute('data-stack-skip') && el.tagName !== 'SCRIPT' && getComputedStyle(el).display !== 'none');
+  chapters.forEach((el, i) => { el.classList.add('home-stack'); el.style.setProperty('--stack-z', String(i + 1)); });
+  function fit() {
+    chapters.forEach(el => el.style.setProperty('--stack-top', Math.min(0, window.innerHeight - el.offsetHeight) + 'px'));
+  }
+  fit();
+  if ('ResizeObserver' in window) {
+    const watch = new ResizeObserver(fit);
+    chapters.forEach(el => watch.observe(el));
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+})();
+
+/* Arriving at a section of another page (a home tile opening products.html#syrup-suspension-heading): the smooth
+   scroll and the galleries settling can leave the page at the top, so jump there directly, once the layout is ready
+   and again when everything has loaded, unless the visitor has started scrolling themselves. */
+(function () {
+  const id = decodeURIComponent(location.hash.slice(1));
+  const target = id && document.getElementById(id);
+  if (!target) return;
+  let moved = false;
+  ['wheel', 'touchstart', 'keydown'].forEach(type => window.addEventListener(type, () => { moved = true; }, { once: true, passive: true }));
+  function land() {
+    if (moved) return;
+    const header = document.querySelector('.site-header');
+    const top = target.getBoundingClientRect().top + window.scrollY - (header ? header.offsetHeight : 0) - 24;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+  }
+  requestAnimationFrame(land);
+  window.addEventListener('load', () => { land(); setTimeout(land, 300); });
 })();

@@ -1,46 +1,302 @@
 {
   "title": "Services — Supreme Art",
   "description": "Printed packaging for tablets, capsules, syrups and food products, plus pharmaceutical leaflets and product labels.",
-  "banner": { "crumb": "Services", "heading": "Services" },
+  "banner": {
+    "crumb": "Services",
+    "heading": "Services"
+  },
   "range": {
     "eyebrow": "What we make",
     "heading": "Packaging for pharmaceutical and food products.",
     "lead": "From medicine cartons to food packs, leaflets and labels, we print and finish every product to your artwork, dimensions and required specification.",
     "items": [
-      { "title": "Tablet packaging", "text": "Printed cartons made to fit tablet blister and strip packs, with accurate dimensions and clear product information.", "alt": "Tablet packaging", "image": "/images/products/tablet-packaging.jpg" },
-      { "title": "Capsule packaging", "text": "Precisely produced cartons for capsule blister, strip and bottle formats in a range of pack sizes.", "alt": "Capsule packaging", "image": "/images/products/capsule-packaging.jpg" },
-      { "title": "Syrup packaging", "text": "Protective bottle cartons for syrups and liquid medicines, with partitions or inserts where required.", "alt": "Syrup packaging", "image": "/images/products/syrup-packaging.jpg" },
-      { "title": "Leaflets & inserts", "text": "Printed and folded information leaflets and package inserts prepared to fit inside the finished pack.", "alt": "Pharmaceutical leaflets and inserts", "image": "/images/products/leaflets-inserts.jpg" },
-      { "title": "Labels", "text": "Clear, colour-accurate printed labels for bottles, products and outer packaging.", "alt": "Printed product labels", "image": "/images/products/labels.jpg" },
-      { "title": "Food packaging", "text": "Printed folding cartons and pouches for food products, including masala packaging produced for Stanley Foods and SwaaD Foods.", "alt": "Supreme Art masala and food packaging", "image": "/images/products/food-packaging.jpg" }
-    ]
-  },
-  "box_types": {
-    "eyebrow": "Box types",
-    "heading": "Choose the right box structure.",
-    "items": [
-      { "title": "Straight Tuck Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:158/144;--image-width:486.07595%;--image-left:-140.50633%;--image-top:-17.36111%;", "text": "One of the most common box styles, straight tuck boxes are easy to assemble and require little storage space. They are well suited to lightweight products." },
-      { "title": "Reverse Tuck Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:130/129;--image-width:590.76923%;--image-left:-447.69231%;--image-top:-68.21705%;clip-path:polygon(0 0,72% 0,72% 32%,100% 48%,100% 100%,0 100%);", "text": "Similar to a straight tuck box, but with the closing panels folding in opposite directions. This multipurpose design can be customised with cutouts, windows and locks." },
-      { "title": "Lock Bottom Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:157/97;--image-width:489.17197%;--image-left:-143.31210%;--image-top:-288.65979%;", "text": "Also known as a 1-2-3 bottom box, this structure is designed for heavier items. The bottom flaps interlock to form a sturdy base that supports the product inside." },
-      { "title": "Four Corner Folding Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:121/138;--image-width:634.71074%;--image-left:-510.74380%;--image-top:-188.40580%;", "text": "A display box designed to showcase products while providing protection. Suitable for electronics, frozen food, household goods and other products." },
-      { "title": "Six Corner Box", "image": "/images/products/box-types-reference.png", "frame": "aspect-ratio:125/131;--image-width:614.40000%;--image-left:-384.00000%;--image-top:-345.03817%;", "text": "A wide, deep box made from durable material to stay sturdy and rigid. Its spacious design provides room for heavy products or more than one item." }
-    ]
+      {
+        "title": "Tablet packaging",
+        "interactive_box": true,
+        "text": "Printed cartons made to fit tablet blister and strip packs, with accurate dimensions and clear product information.",
+        "alt": "Tablet packaging",
+        "image": "/images/products/tablet-packaging.jpg",
+        "box_id": "imo",
+        "box_name": "IMO",
+        "box_front": "/images/imo-box/front.jpg"
+      },
+      {
+        "title": "Capsule packaging",
+        "text": "Precisely produced cartons for capsule blister, strip and bottle formats in a range of pack sizes.",
+        "alt": "Capsule packaging",
+        "image": "/images/products/capsule-packaging.jpg"
+      },
+      {
+        "title": "Syrup packaging",
+        "text": "Protective bottle cartons for syrups and liquid medicines, with partitions or inserts where required.",
+        "alt": "Syrup packaging",
+        "image": "/images/products/syrup-packaging.jpg"
+      },
+      {
+        "title": "Leaflets & inserts",
+        "text": "Printed and folded information leaflets and package inserts prepared to fit inside the finished pack.",
+        "alt": "Pharmaceutical leaflets and inserts",
+        "image": "/images/products/leaflets-inserts.jpg"
+      },
+      {
+        "title": "Labels",
+        "text": "Clear, colour-accurate printed labels for bottles, products and outer packaging.",
+        "alt": "Printed product labels",
+        "image": "/images/products/labels.jpg"
+      },
+      {
+        "title": "Food packaging",
+        "text": "Printed folding cartons and pouches for food products, including masala packaging produced for Stanley Foods and SwaaD Foods.",
+        "alt": "Supreme Art masala and food packaging",
+        "image": "/images/products/food-packaging.jpg"
+      }
+    ],
+    "groups": [
+      {
+        "id": "tablet-capsule",
+        "heading": "Tablet & Capsule Packaging",
+        "text": "Printed cartons for tablet and capsule packs, made to your product dimensions and artwork.",
+        "items": [
+          {
+            "title": "Tablet packaging",
+            "interactive_box": true,
+            "text": "Printed cartons made to fit tablet blister and strip packs, with accurate dimensions and clear product information.",
+            "alt": "Tablet packaging",
+            "image": "/images/products/tablet-packaging.jpg",
+            "box_id": "imo",
+            "box_name": "IMO",
+            "box_front": "/images/imo-box/front.jpg"
+          },
+          {
+            "title": "Vazkor tablet carton",
+            "interactive_box": true,
+            "box_id": "vazkor",
+            "box_name": "Vazkor",
+            "box_front": "/images/vazkor-box/front.png"
+          },
+          {
+            "title": "Danidol carton",
+            "interactive_box": true,
+            "box_id": "danidol",
+            "box_name": "Danidol",
+            "box_front": "/images/danidol-box/front.png"
+          },
+          {
+            "title": "Icon carton",
+            "interactive_box": true,
+            "box_id": "icon",
+            "box_name": "Icon",
+            "box_front": "/images/icon-box/front.png"
+          }
+        ]
+      },
+      {
+        "id": "syrup-suspension",
+        "heading": "Syrup & Suspension Packaging",
+        "text": "Protective cartons for liquid medicine bottles, with partitions and inserts where required.",
+        "items": [
+          {
+            "title": "Novex Paracetamol carton",
+            "interactive_box": true,
+            "box_id": "novex-paracetamol",
+            "box_name": "Novex Paracetamol",
+            "box_front": "/images/novex-paracetamol-box/front.png"
+          },
+          {
+            "title": "Fenbro carton",
+            "interactive_box": true,
+            "box_id": "fenbro",
+            "box_name": "Fenbro",
+            "box_front": "/images/fenbro-box/front.jpg"
+          },
+          {
+            "title": "Pedrol carton",
+            "interactive_box": true,
+            "box_id": "pedrol",
+            "box_name": "Pedrol",
+            "box_front": "/images/pedrol-box/front.jpg"
+          }
+        ]
+      },
+      {
+        "id": "injection-packaging",
+        "heading": "Injection Packaging",
+        "text": "Printed cartons for injection packs, made to the required dimensions and artwork.",
+        "items": [
+          {
+            "interactive_box": true,
+            "box_id": "tuff",
+            "box_name": "TUFF injection",
+            "box_front": "/images/tuff-box/front.jpg"
+          },
+          {
+            "interactive_box": true,
+            "box_id": "norbac",
+            "box_name": "Norbac injection",
+            "box_front": "/images/norbac-box/front.jpg"
+          }
+        ]
+      },
+      {
+        "id": "labels-leaflets",
+        "heading": "Labels & Leaflets",
+        "text": "Clear product identification and carefully folded information, designed to complete your packaging.",
+        "items": [
+          {
+            "interactive_bottle": true,
+            "box_name": "Clarion",
+            "box_front": "/images/clarion-box/front.png"
+          },
+          {
+            "interactive_box": true,
+            "box_id": "caber-leaflet",
+            "box_name": "Caber carton with inserting leaflet",
+            "box_front": "/images/caber-leaflet-box/front.png"
+          }
+        ]
+      }
+    ],
+    "food": {
+      "title": "Food packaging",
+      "text": "Printed folding cartons and pouches for food products, including masala packaging produced for Stanley Foods and SwaaD Foods.",
+      "alt": "Supreme Art masala and food packaging",
+      "image": "/images/products/food-packaging.jpg",
+      "items": [
+        {
+          "interactive_box": true,
+          "box_id": "swaad-biryani",
+          "box_name": "SwaaD Bombay Biryani",
+          "box_front": "/images/swaad-biryani-box/front.png"
+        },
+        {
+          "interactive_box": true,
+          "box_id": "swaad-chapli",
+          "box_name": "SwaaD Chapli Kabab",
+          "box_front": "/images/swaad-chapli-box/front.jpg"
+        },
+        {
+          "interactive_box": true,
+          "box_id": "swaad-kheer",
+          "box_name": "SwaaD Shahi Kheer",
+          "box_front": "/images/swaad-kheer-box/front.jpg"
+        },
+        {
+          "interactive_box": true,
+          "box_id": "swaad-pepper",
+          "box_name": "SwaaD Black Pepper",
+          "box_front": "/images/swaad-pepper-box/front.jpg"
+        }
+      ]
+    }
   },
   "finishes": {
     "heading": "Finishes",
-    "text": "A variety of finishing methods can elevate your packaging from good to exceptional. We provide a range of surface treatments and finishes to enhance the appeal of your products.",
-    "features_heading": "Features",
+    "text": "A variety of finishing methods can elevate your packaging from good to exceptional. We provide a range of surface treatments and finishes, applied in-house after printing, to protect the carton, lift the artwork and make it harder to copy.",
+    "features_heading": "What we apply",
     "features": [
-      { "title": "Anti-Counterfeit Packaging" },
-      { "title": "Color Shifting Seal" },
-      { "title": "Specialized & Customized Coatings" },
-      { "title": "Food Grade Coatings" },
-      { "title": "Drip-off Coatings" },
-      { "title": "Thermal Foiling" },
-      { "title": "Hot Stamping (Foiling)" }
+      {
+        "title": "Anti-counterfeit packaging",
+        "text": "Security features printed and finished into the carton itself, so they cannot be peeled off and moved to a fake.",
+        "photos": [
+          {
+            "image": "/images/finishes/anti-counterfeit-proflox.webp",
+            "alt": "Proflox carton with a repeating Ferozsons security pattern embossed over the whole face"
+          }
+        ],
+        "more": false
+      },
+      {
+        "title": "Colour-shifting seal",
+        "text": "An ink that changes colour as the carton is tilted: a quick check of authenticity that an ordinary printer cannot reproduce.",
+        "photos": [
+          {
+            "image": "/images/finishes/colour-shift-icon.webp",
+            "alt": "Icon carton with a colour-shifting Ferozsons seal on a metallised face"
+          }
+        ],
+        "more": false
+      },
+      {
+        "title": "Lamination",
+        "text": "A thin film bonded over the printed board, in gloss or matte, for a tougher surface that resists scuffs and moisture.",
+        "photos": [
+          {
+            "image": "/images/finishes/lamination-tuff.webp",
+            "alt": "TUFF injection carton with a laminated finish"
+          }
+        ]
+      },
+      {
+        "title": "Food-grade coatings (water base)",
+        "text": "Water-base, low-migration coatings safe for packaging that touches food or medicine, with a clean, bright gloss.",
+        "photos": [
+          {
+            "image": "/images/finishes/food-grade-esomega.webp",
+            "alt": "Esomega carton finished with a water-base food-grade coating"
+          }
+        ]
+      },
+      {
+        "title": "Drip-off coatings",
+        "text": "Matte and gloss on one sheet: the gloss stands out in relief against a matte ground, without a second pass.",
+        "photos": [
+          {
+            "image": "/images/finishes/drip-off-imo-1.webp",
+            "alt": "Imo carton standing on end, its gloss swirls raised against a matte ground"
+          },
+          {
+            "image": "/images/finishes/drip-off-imo-2.webp",
+            "alt": "Imo carton lying flat, showing the drip-off gloss pattern"
+          },
+          {
+            "image": "/images/finishes/drip-off-vazkor-imo.webp",
+            "alt": "Vazkor and Imo cartons side by side with drip-off gloss highlights"
+          }
+        ],
+        "more": true
+      },
+      {
+        "title": "Thermal foiling",
+        "text": "Metallic foil fused to the board with heat for logos, borders and highlights."
+      },
+      {
+        "title": "Hot stamping (foiling)",
+        "text": "A heated die presses metallic or holographic foil into the board for a crisp, raised finish that doubles as a security layer.",
+        "photos": [
+          {
+            "image": "/images/finishes/hot-stamping-duet.webp",
+            "alt": "Duet carton with hot-stamped metallic blue lettering"
+          },
+          {
+            "image": "/images/finishes/hot-stamping-vosun-duet.webp",
+            "alt": "Vosun-D and Duet cartons with gold and blue hot-stamped foil"
+          }
+        ],
+        "more": true
+      },
+      {
+        "title": "UV and spot UV",
+        "text": "A clear UV gloss over the whole sheet to deepen the colours and protect the print, or on chosen areas only for a raised, textured accent.",
+        "photos": [
+          {
+            "image": "/images/finishes/uv-zeflox.webp",
+            "alt": "Zeflox carton with a full UV gloss and raised spot-UV lettering"
+          },
+          {
+            "image": "/images/finishes/spot-uv-efloxin.webp",
+            "alt": "Efloxin carton with a spot-UV Herbion pattern over the print"
+          }
+        ],
+        "more": true
+      }
     ]
   },
-  "capabilities": { "eyebrow": "How it's made", "heading": "One factory. The whole carton." },
+  "capabilities": {
+    "eyebrow": "How it's made",
+    "heading": "One factory. The whole carton.",
+    "button_label": "See our process",
+    "button_href": "process.html"
+  },
   "cta": {
     "heading": "Need a specific carton?",
     "text": "Send us your artwork or dieline and we'll come back with a quote and a timeline.",
@@ -48,5 +304,40 @@
     "primary_href": "contact.html",
     "secondary_label": "Our quality process",
     "secondary_href": "quality.html"
+  },
+  "neutra": {
+    "heading": "Neutra Products",
+    "items": [
+      {
+        "interactive_box": true,
+        "box_id": "duet",
+        "box_name": "Duet D3 K2",
+        "box_front": "/images/duet-box/front.png"
+      },
+      {
+        "interactive_box": true,
+        "box_id": "algae-vit",
+        "box_name": "Algae-Vit",
+        "box_front": "/images/algae-vit-box/front.jpg"
+      },
+      {
+        "interactive_box": true,
+        "box_id": "herbion-seaweed",
+        "box_name": "Herbion Seaweed Cream",
+        "box_front": "/images/herbion-seaweed-box/front.png"
+      },
+      {
+        "interactive_box": true,
+        "box_id": "quench",
+        "box_name": "Quench Cream",
+        "box_front": "/images/quench-box/front.jpg"
+      },
+      {
+        "interactive_box": true,
+        "box_id": "nova-plast",
+        "box_name": "Herbion Nova-Plast",
+        "box_front": "/images/nova-plast-box/front.png"
+      }
+    ]
   }
 }

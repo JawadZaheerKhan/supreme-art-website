@@ -48,7 +48,9 @@ collections:
                   - name: slug
                     label: Page it belongs to
                     widget: select
-                    options: [index, about, products, quality, careers, contact]
+                    options: [index, about, products, clients, process, quality, careers, contact]
+                  - { name: desktop_only, label: Only on desktop (hidden on phones and tablets), widget: boolean, required: false }
+                  - { name: dropdown_mobile_only, label: Dropdown only on phones and tablets, widget: boolean, required: false }
                     hint: Used to highlight this item when you are on that page.
                   - name: dropdown
                     label: Dropdown items
@@ -57,6 +59,7 @@ collections:
                     summary: '{{fields.label}}'
                     hint: Leave empty for a plain link with no dropdown.
                     fields:
+                      - { name: mobile_only, label: Only on phones and tablets, widget: boolean, required: false }
                       - { name: label, label: Text, widget: string }
                       - { name: href, label: Links to, widget: string }
               - name: cta
@@ -127,19 +130,26 @@ collections:
           - name: hero
             label: Hero
             widget: object
+            hint: The building and the logo are fixed; these are the words on the press-hall and Speedmaster stages.
             fields:
-              - { name: title, label: Heading, widget: string }
-              - { name: tagline, label: Tagline, widget: string }
-              - name: slides
-                label: Background slideshow
-                widget: list
-                min: 4
-                max: 4
-                summary: '{{fields.alt}}'
-                hint: Exactly four photos — the cross-fade timing is built around four.
+              - name: press
+                label: 'Stage 2 — press hall'
+                widget: object
                 fields:
-                  - { name: image, label: Photo, widget: image }
-                  - { name: alt, label: Description (for screen readers), widget: string }
+                  - { name: title, label: Headline (white), widget: string }
+                  - { name: title_red, label: Headline (red), widget: string }
+                  - { name: facts, label: Facts row, widget: list }
+                  - { name: footer, label: Small label at the bottom, widget: string }
+              - name: capacity
+                label: 'Stage 3 — Speedmaster'
+                widget: object
+                fields:
+                  - { name: title, label: Headline (white), widget: string }
+                  - { name: title_red, label: Headline (red), widget: string }
+                  - { name: figure_red, label: Big figure (red), widget: string }
+                  - { name: figure, label: Big figure (white), widget: string }
+                  - { name: figure_line2, label: Big figure second line, widget: string }
+                  - { name: footer, label: Small label at the bottom, widget: string }
           - name: marquee
             label: Scrolling ticker
             widget: list
@@ -160,24 +170,6 @@ collections:
                 fields:
                   - { name: image, label: Photo, widget: image, required: false }
                   - { name: alt, label: Caption if no photo is set, widget: string }
-          - name: products
-            label: 'Section — What we make'
-            widget: object
-            fields:
-              - { name: eyebrow, label: Small label above heading, widget: string }
-              - { name: heading, label: Heading, widget: string }
-              - { name: lead, label: Intro line, widget: text }
-              - name: items
-                label: Product cards
-                widget: list
-                summary: '{{fields.title}}'
-                fields:
-                  - { name: title, label: Title, widget: string }
-                  - { name: text, label: Description, widget: string }
-                  - { name: image, label: Photo, widget: image, required: false }
-                  - { name: alt, label: Caption if no photo is set, widget: string }
-              - { name: button_label, label: Button text, widget: string }
-              - { name: button_href, label: Button links to, widget: string }
           - name: capabilities
             label: 'Section — Capabilities (headings only)'
             widget: object
@@ -207,6 +199,52 @@ collections:
                 fields:
                   - { name: image, label: Photo, widget: image, required: false }
                   - { name: alt, label: Caption if no photo is set, widget: string }
+          - name: services
+            label: 'Section — Our services'
+            widget: object
+            hint: Two pages of product families, then the finishes that have photos on the Services page.
+            fields:
+              - { name: button_label, label: Button text, widget: string }
+              - { name: button_href, label: Button links to, widget: string }
+              - name: pages
+                label: Pages
+                widget: list
+                summary: '{{fields.heading}}'
+                fields:
+                  - { name: eyebrow, label: Small label above heading, widget: string }
+                  - { name: heading, label: Heading, widget: string }
+                  - { name: lead, label: Intro line, widget: text }
+                  - { name: show_all, label: Show the button on this page, widget: boolean, required: false }
+                  - name: items
+                    label: Product families
+                    widget: list
+                    summary: '{{fields.title}}'
+                    fields:
+                      - { name: title, label: Title, widget: string }
+                      - { name: text, label: Description, widget: text }
+                      - { name: image, label: Photo, widget: image }
+                      - { name: alt, label: Photo description (for screen readers), widget: string }
+                      - { name: href, label: Links to, widget: string }
+              - name: finishes
+                label: Finishes page
+                widget: object
+                hint: The finishes themselves, with their photos, come from the Services page.
+                fields:
+                  - { name: eyebrow, label: Small label above heading, widget: string }
+                  - { name: heading, label: Heading, widget: string }
+                  - { name: lead, label: Intro line, widget: text }
+                  - { name: button_label, label: Button text, widget: string }
+                  - { name: button_href, label: Button links to, widget: string }
+          - name: process
+            label: 'Section — Our process'
+            widget: object
+            hint: The chapters, photos and words below the heading come from the Process page.
+            fields:
+              - { name: eyebrow, label: Small label above heading, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: lead, label: Intro line, widget: text }
+              - { name: button_label, label: Button text, widget: string }
+              - { name: button_href, label: Button links to, widget: string }
           - name: gallery
             label: 'Section — Factory gallery (headings only)'
             widget: object
@@ -221,18 +259,20 @@ collections:
               - { name: eyebrow, label: Small label above heading, widget: string }
               - { name: heading, label: Heading, widget: string }
               - { name: lead, label: Intro line, widget: text }
-              - name: items
-                label: Clients
+              - name: groups
+                label: Client groups
                 widget: list
-                summary: '{{fields.name}}'
+                summary: '{{fields.title}}'
+                hint: Local and international clients, in the order they appear on the page.
                 fields:
-                  - { name: name, label: Client name, widget: string }
-                  - { name: logo, label: Logo, widget: image, required: false }
-                  - name: initials
-                    label: Initials
-                    widget: string
-                    hint: Shown as a fallback if the logo image fails to load.
-                  - { name: colour, label: Initials colour, widget: color, required: false }
+                  - { name: title, label: Group title, widget: string }
+                  - name: items
+                    label: Clients
+                    widget: list
+                    summary: '{{fields.name}}'
+                    fields:
+                      - { name: name, label: Client name, widget: string }
+                      - { name: logo, label: Logo, widget: image }
           - name: news
             label: 'Section — News & updates'
             widget: object
@@ -312,6 +352,20 @@ collections:
                 fields:
                   - { name: number, label: Number, widget: number, value_type: int }
                   - { name: label, label: Text after the number, widget: string }
+          - name: compliance
+            label: 'Section — Registered and compliant'
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label above heading, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: text, label: Paragraph, widget: text }
+              - name: items
+                label: Registrations
+                widget: list
+                summary: '{{fields.title}}'
+                fields:
+                  - { name: title, label: Body, widget: string }
+                  - { name: text, label: Detail, widget: string }
           - name: gallery
             label: 'Section — Factory gallery (headings only)'
             widget: object
@@ -364,6 +418,8 @@ collections:
             widget: object
             hint: The cards themselves are edited in "Shared — menu, footer & contact".
             fields:
+              - { name: button_label, label: Button text, widget: string, required: false }
+              - { name: button_href, label: Button links to, widget: string, required: false }
               - { name: eyebrow, label: Small label above heading, widget: string }
               - { name: heading, label: Heading, widget: string }
           - name: cta
@@ -410,6 +466,19 @@ collections:
                 fields:
                   - { name: image, label: Photo, widget: image, required: false }
                   - { name: alt, label: Caption if no photo is set, widget: string }
+          - name: pillars
+            label: 'Section — What quality rests on'
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label above heading, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - name: items
+                label: Cards
+                widget: list
+                summary: '{{fields.title}}'
+                fields:
+                  - { name: title, label: Title, widget: string }
+                  - { name: text, label: Text, widget: text }
           - name: process
             label: 'Section — Our process'
             widget: object
@@ -425,9 +494,11 @@ collections:
                 fields:
                   - { name: title, label: Title, widget: string }
                   - { name: text, label: Description, widget: text }
-                  - { name: image, label: First photo, widget: image, required: false, hint: Upload this checkpoint photo when it is ready. }
-                  - { name: image_2, label: Second photo, widget: image, required: false, hint: Optional. Hidden when left empty. }
-                  - { name: image_3, label: Third photo, widget: image, required: false, hint: Optional. Hidden when left empty. }
+                  - { name: image, label: First photo, widget: image, required: false, hint: Shown full-screen behind this check's text. }
+                  - { name: image_2, label: Second photo, widget: image, required: false, hint: Optional. Shown in the detail band below. }
+                  - { name: caption_2, label: Second photo caption, widget: string, required: false }
+                  - { name: image_3, label: Third photo, widget: image, required: false, hint: Optional. Shown in the detail band below. }
+                  - { name: caption_3, label: Third photo caption, widget: string, required: false }
           - name: cta
             label: 'Section — Closing call to action'
             widget: object
@@ -440,6 +511,40 @@ collections:
               - { name: secondary_href, label: Second button links to, widget: string }
 
       # --------------------------------------------------------- careers page
+      # --------------------------------------------------------- clients page
+      - name: clients
+        label: Clients page
+        file: content/clients.json
+        fields:
+          - { name: title, label: Browser tab / search result title, widget: string }
+          - { name: description, label: Search engine description, widget: text }
+          - name: banner
+            label: Page banner
+            widget: object
+            fields:
+              - { name: crumb, label: Small label, widget: string }
+              - { name: heading, label: Main heading, widget: string }
+          - { name: intro, label: Introduction, widget: text }
+          - name: items
+            label: Clients and their cartons
+            widget: list
+            summary: '{{fields.client}} — {{fields.product}}'
+            fields:
+              - { name: client, label: Client name, widget: string }
+              - { name: logo, label: Client logo, widget: image }
+              - { name: product, label: Product name, widget: string }
+              - { name: note, label: One-line note about the carton, widget: string }
+              - { name: box_id, label: Carton box id, widget: string, hint: "Must match a box on the Services page, e.g. zeflox, duet, quench, nova-plast, swaad-biryani, pedrol." }
+              - { name: box_name, label: Carton name (for screen readers), widget: string }
+              - { name: box_front, label: Carton front photo, widget: image }
+          - name: cta
+            label: Closing call to action
+            widget: object
+            fields:
+              - { name: heading, label: Heading, widget: string }
+              - { name: text, label: Paragraph, widget: text }
+              - { name: label, label: Button text, widget: string }
+              - { name: href, label: Button links to, widget: string }
       - name: careers
         label: Careers page
         file: content/careers.json
@@ -546,6 +651,20 @@ collections:
               - { name: crumb, label: Small label, widget: string }
               - { name: heading, label: Main heading, widget: string }
           - { name: intro, label: Introduction, widget: text }
+          - name: overview
+            label: 'Section — The floor at a glance'
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label above heading, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: text, label: Paragraph, widget: text }
+              - name: glance
+                label: Numbers
+                widget: list
+                summary: '{{fields.value}} {{fields.label}}'
+                fields:
+                  - { name: value, label: Number, widget: string }
+                  - { name: label, label: Text under the number, widget: string }
           - name: steps
             label: Process stages
             widget: list

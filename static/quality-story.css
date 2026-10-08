@@ -1,0 +1,96 @@
+/* Quality checks as windows: each article clips a full-screen photo that stays fixed while the page scrolls,
+   so the next photo is uncovered as the previous section slides away. */
+.qc-story { --qc-ink: #faf8f4; background: var(--qc-ink); color: var(--text); }
+
+.qc-intro { padding: clamp(72px,10vw,128px) 0 clamp(56px,8vw,96px); }
+.qc-intro .eyebrow { color: var(--accent); }
+.qc-intro h2 { color: var(--text); font-family: var(--display); font-size: clamp(2rem,4vw,3.2rem); line-height: 1.1; margin: 8px 0 18px; max-width: 20ch; text-wrap: balance; }
+.qc-intro__text { color: var(--muted); max-width: 60ch; font-size: 1.05rem; line-height: 1.8; margin: 0; }
+
+/* The photo is shown whole, at its own shape, beside the text; a pale, airy blur of it fills the rest of the screen. */
+.qc-window { position: relative; height: 115svh; clip-path: inset(0); --qc-edge: max(24px, calc((100vw - 1392px) / 2)); }
+.qc-window__media { position: fixed; inset: 0; z-index: 0; overflow: hidden; background: var(--qc-ink); }
+.qc-window__media::before { content: ""; position: absolute; inset: -60px; background: var(--qc-photo) center / cover no-repeat; filter: blur(40px) saturate(.6); }
+.qc-window__media::after { content: ""; position: absolute; inset: 0; background: rgba(250,248,244,.8); }
+.qc-window__media img { position: absolute; top: 96px; bottom: 32px; right: var(--qc-edge); height: calc(100% - 128px); width: auto; max-width: 46vw; object-fit: contain; border-radius: 6px; box-shadow: 0 30px 70px -30px rgba(60,45,30,.35); z-index: 1; }
+.qc-window:nth-of-type(even) .qc-window__media img { right: auto; left: var(--qc-edge); }
+
+.qc-window__band { position: relative; z-index: 1; padding-top: 30svh; display: flex; flex-direction: column; align-items: flex-start; }
+.qc-window:nth-of-type(even) .qc-window__band { align-items: flex-end; text-align: right; }
+.qc-window__band h3 { color: var(--text); font-family: var(--display); font-size: clamp(2rem,4.2vw,3.4rem); line-height: 1.08; margin: 0 0 18px; max-width: min(16ch, 44vw); text-wrap: balance; }
+.qc-window__band p { color: var(--muted); font-size: 1.08rem; line-height: 1.8; margin: 0; max-width: min(46ch, 44vw); }
+
+.qc-details { position: relative; z-index: 1; background: var(--qc-ink); padding: clamp(56px,7vw,104px) 0; }
+.qc-details__grid { display: flex; justify-content: center; align-items: flex-end; gap: clamp(16px,2.4vw,32px); }
+.qc-details figure { flex: 0 1 auto; min-width: 0; margin: 0; }
+.qc-details__frame { overflow: hidden; border-radius: 6px; background: #efebe4; }
+.qc-details__frame img { display: block; width: auto; height: auto; max-width: 100%; max-height: min(62vh, 600px); transition: transform .9s cubic-bezier(.22,1,.36,1); }
+.qc-details figure:hover img { transform: scale(1.03); }
+.qc-details figcaption { color: var(--text); font-size: 1.05rem; font-weight: 600; line-height: 1.4; margin-top: 16px; max-width: 36ch; }
+/* A single detail photo sits beside its caption instead of leaving the band half empty. */
+.qc-details figure:only-child { display: flex; align-items: flex-end; gap: clamp(20px,3vw,44px); }
+.qc-details figure:only-child figcaption { font-family: var(--display); font-size: clamp(1.4rem,2.4vw,2rem); line-height: 1.25; margin: 0; max-width: 18ch; text-wrap: balance; }
+
+/* Fuller type for the checks, so a short text still fills its side of the screen: a small maroon label with a red
+   rule, a larger title and larger, slightly darker words. The home Quality chapter shares these rules. */
+.qc-window__band .qc-window__kicker, .qc-window__band .home-chapters__count { margin: 0 0 16px; color: var(--accent); font-size: .78rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.qc-window__kicker::before, .qc-window__band .home-chapters__count::before { content: ""; display: block; width: 44px; height: 3px; margin-bottom: 14px; background: var(--accent); }
+.qc-window:nth-of-type(even) .qc-window__kicker::before, .qc-window:nth-of-type(even) .qc-window__band .home-chapters__count::before { margin-left: auto; }
+.qc-window__band { padding-top: 24svh; }
+.qc-window__band h3 { font-size: clamp(2.4rem, 4.8vw, 4.2rem); line-height: 1.04; letter-spacing: -.01em; margin-bottom: 24px; max-width: min(15ch, 46vw); }
+.qc-window__band p { color: #4a4b50; font-size: clamp(1.12rem, 1.45vw, 1.38rem); line-height: 1.7; max-width: min(40ch, 44vw); }
+.qc-intro h2 { font-size: clamp(2.3rem, 4.6vw, 3.8rem); }
+.qc-intro__text { color: #4a4b50; font-size: clamp(1.08rem, 1.35vw, 1.28rem); line-height: 1.7; }
+.quality-pillars .card h3 { font-size: 1.2rem; }
+.quality-pillars .card p { color: #4a4b50; font-size: 1.02rem; line-height: 1.65; }
+
+@media (max-width: 900px) {
+  .qc-window { height: 110svh; }
+  .qc-window__band { padding-top: 12svh; }
+  .qc-window:nth-of-type(even) .qc-window__band { align-items: flex-start; text-align: left; }
+  .qc-window:nth-of-type(even) .qc-window__kicker::before, .qc-window:nth-of-type(even) .qc-window__band .home-chapters__count::before { margin-left: 0; }
+  .qc-window__band { padding-top: 12svh; }
+  .qc-window__media img, .qc-window:nth-of-type(even) .qc-window__media img { top: auto; bottom: 0; left: 0; right: 0; width: 100%; height: auto; max-width: none; max-height: 54svh; border-radius: 0; box-shadow: none; }
+  .qc-window__band h3 { font-size: 2rem; max-width: none; }
+  .qc-window__band p { font-size: .98rem; line-height: 1.7; max-width: none; }
+  .qc-details__grid { gap: 12px; }
+  .qc-details figure { flex: 1 1 0; }
+  .qc-details figure:only-child { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .qc-details figcaption { font-size: .85rem; margin-top: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .qc-details__frame img { transition: none; }
+}
+
+/* Home: "Who we are" uses the same window — the hero slides up and uncovers its fixed photo. */
+.home-about-window { --qc-ink: #faf8f4; height: 135svh; color: var(--text); }
+.home-about-window .qc-window__band { padding-top: 24svh; }
+.home-about-window .eyebrow { color: var(--accent); }
+.home-about-window h2 { color: var(--text); font-family: var(--display); font-size: clamp(2rem,3.8vw,3.2rem); line-height: 1.08; margin: 6px 0 18px; max-width: min(18ch, 44vw); text-wrap: balance; }
+.home-about-window .about-points { max-width: min(46ch, 44vw); margin: 22px 0 0; }
+.home-about-window .about-points li { color: var(--text); }
+.home-about-window__action { margin-top: 26px; }
+@media (max-width: 900px) {
+  .home-about-window { height: 150svh; }
+  .home-about-window .qc-window__band { padding-top: 96px; }
+  .home-about-window h2 { font-size: 1.9rem; max-width: none; }
+  .home-about-window .about-points { display: none; }
+}
+
+/* Home: every chapter after the hero pins once it has been read, and the next slides up over it — the same
+   page turn as the process and quality windows. script.js sets --stack-top (0, or the viewport height minus
+   the chapter's own height for tall chapters, so the whole chapter is read before it pins) and --stack-z. */
+.home-page main > .home-stack { position: sticky; top: var(--stack-top, 0px); z-index: var(--stack-z, 1); }
+.home-page main > .home-stack:not(.qc-window) { background: var(--paper, #faf8f4); }
+
+/* Home quality chapter: an opening page (title, story, the four things quality rests on), then the windows. */
+.home-quality-chapter .home-chapter { display: grid; align-content: center; min-height: 100svh; padding: clamp(88px, 10vw, 120px) 0 clamp(40px, 5vw, 64px); background: var(--paper, #faf8f4); border-top: 1px solid var(--line, #e7e1d6); }
+.home-quality-chapter .home-chapter__title { margin: 0 0 16px; color: var(--text); font-family: var(--display); font-size: clamp(2.6rem, 5.6vw, 5rem); line-height: .95; letter-spacing: -.01em; }
+.home-quality-chapter .home-chapter__story { margin: 0; max-width: 62ch; color: var(--muted); font-size: clamp(1rem, 1.25vw, 1.12rem); line-height: 1.7; }
+.home-chapter__points { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px 32px; margin: clamp(26px, 3vw, 40px) 0 0; }
+.home-chapter__points div { padding-top: 12px; border-top: 1px solid var(--line, #e7e1d6); }
+.home-chapter__points dt { margin: 0 0 6px; color: var(--text); font-family: var(--display); font-size: 1.05rem; font-weight: 600; }
+.home-chapter__points dd { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+.home-quality-chapter .home-chapters__count { margin: 0 0 10px; color: var(--accent); font-size: .72rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+.home-quality-chapter .home-chapters__all { padding: clamp(32px, 5vw, 56px) 24px; margin: 0 auto; text-align: center; background: var(--paper, #faf8f4); }
+@media (max-width: 780px) { .home-quality-chapter .home-chapter { min-height: 0; padding-top: 84px; } .home-quality-chapter .home-chapter__title { font-size: clamp(2.2rem, 10vw, 3.2rem); } }

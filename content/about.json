@@ -1,15 +1,15 @@
 {
   "title": "About us — Supreme Art",
-  "description": "Supreme Art is a Peshawar-based manufacturer of pharmaceutical folding cartons, running the whole process — prepress, printing, die-cutting, folding and gluing — in-house.",
+  "description": "Supreme Art makes pharmaceutical cartons, labels and leaflets in Pakistan on Heidelberg, Bobst and hot-stamping machinery, with specialised security coatings.",
   "banner": { "crumb": "About us", "heading": "About Supreme Art" },
   "intro": {
     "eyebrow": "Who we are",
-    "heading": "The paper box your medicine comes in — made under one roof.",
+    "heading": "The paper box your medicine comes in, made with care on remarkable machines.",
     "paragraphs": [
-      "Supreme Art (Pvt) Ltd is a Peshawar-based manufacturer of pharmaceutical folding cartons. From the first proof to the flat-packed, glued carton on your filling line, every stage of production happens in our own facility.",
-      "We work with pharmaceutical brands who need packaging that is accurate, consistent and traceable — because for medicine, the box is part of patient safety."
+      "Every carton that leaves Supreme Art (Pvt) Ltd begins as a promise to the patient who will one day open it. We keep that promise on machinery chosen for its precision: Heidelberg Speedmaster presses laying down five colours and a coat in a single pass, Bobst die-cutters and folder-gluers that shape each box true to its lines, a hot-stamping machine that sets foil into the board, colour-shifting seals that guard against imitation, and a high-quality carton inspection machine keeping watch over the work.",
+      "We work with pharmaceutical brands who need packaging that is accurate, consistent and traceable, because for medicine the box is part of patient safety. And when the work is done, we deliver it ourselves, to every corner of Pakistan."
     ],
-    "media": { "alt": "Supreme Art Heidelberg printing line", "image": "/images/home/heidelberg-line-hero.jpg" }
+    "media": { "alt": "The lobby at Supreme Art: glass doors between two hexagon showcases of the cartons we print", "image": "/images/about/lobby-showcase.webp" }
   },
   "values": {
     "eyebrow": "What drives us",
@@ -29,6 +29,17 @@
       { "number": 100, "label": "% in-house production" },
       { "number": 48, "label": "hr proofing turnaround" },
       { "number": 6, "label": "carton formats" }
+    ]
+  },
+  "compliance": {
+    "eyebrow": "Registered and compliant",
+    "heading": "Registered, certified and accountable.",
+    "text": "Incorporated with the Securities and Exchange Commission of Pakistan in 2016, registered with the Khyber Pakhtunkhwa Directorate of Labour under the Factories Act, registered with the Federal Board of Revenue, and a corporate member of the Sarhad Chamber of Commerce and Industry.",
+    "items": [
+      { "title": "Securities and Exchange Commission of Pakistan", "text": "Incorporated as Supreme Art (Private) Limited in 2016." },
+      { "title": "Directorate of Labour, Khyber Pakhtunkhwa", "text": "Registered under the Factories Act." },
+      { "title": "Federal Board of Revenue", "text": "A registered taxpayer." },
+      { "title": "Sarhad Chamber of Commerce and Industry", "text": "A corporate member." }
     ]
   },
   "gallery": { "eyebrow": "Inside the factory", "heading": "Where your cartons are made." },

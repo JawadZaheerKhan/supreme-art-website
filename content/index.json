@@ -1,27 +1,23 @@
 {
   "title": "Supreme Art — Pharmaceutical Packaging & Printing",
-  "description": "Supreme Art manufactures pharmaceutical folding cartons — printed, die-cut, folded and glued in-house in Peshawar, Pakistan.",
+  "description": "Supreme Art manufactures pharmaceutical folding cartons, labels and leaflets in Pakistan, on Heidelberg, Bobst and hot-stamping machinery.",
   "hero": {
-    "title": "Supreme Art",
-    "tagline": "The box your medicine comes in.",
-    "slides": [
-      {
-        "image": "/images/pressroom.jpg",
-        "alt": "Offset printing press"
-      },
-      {
-        "image": "/images/foldergluer.jpg",
-        "alt": "Printing machine"
-      },
-      {
-        "image": "/images/diecutting.jpg",
-        "alt": "Paper cutting machine"
-      },
-      {
-        "image": "/images/factory.jpg",
-        "alt": "Print production line"
-      }
-    ]
+    "press": {
+      "title": "Pharmaceutical packaging",
+      "title_red": "specialists",
+      "facts": [
+        "Since 2016"
+      ],
+      "footer": "Offset printing & packaging"
+    },
+    "capacity": {
+      "title": "High production",
+      "title_red": "capacity",
+      "figure_red": "1.50",
+      "figure": "Million",
+      "figure_line2": "Boxes Per Day",
+      "footer": "Pharmaceuticals packaging specialists"
+    }
   },
   "marquee": [
     "Tablet cartons",
@@ -33,70 +29,87 @@
   ],
   "about": {
     "eyebrow": "Who we are",
-    "heading": "A pharmaceutical carton maker, from prepress to pallet.",
-    "text": "Supreme Art is a Peshawar-based manufacturer of pharmaceutical folding cartons — the printed paper boxes that carry tablets, syrups, blisters and vials. We run the entire process in-house, so your artwork becomes a finished, machine-ready carton without ever leaving our floor.",
+    "heading": "Where careful hands meet remarkable machines.",
+    "text": "Every medicine deserves a box that keeps its promise. At Supreme Art, that promise is made on some of the finest machinery in the trade: Heidelberg Speedmaster presses laying down five colours and a gleaming coat in a single pass, a hot-stamping machine that presses foil into the board with quiet precision, colour-shifting seals that guard against imitation, and a high-quality carton inspection machine keeping watch over the work. And when it is finished, we carry it to you ourselves, to every corner of Pakistan.",
     "points": [
-      "Offset printing, die-cutting, folding & gluing in-house",
-      "Pharma-grade board with full batch traceability",
-      "Short runs through to full production volumes"
+      "Heidelberg Speedmaster CD 102 and SM 74: five colours and a coat, in one pass",
+      "Hot stamping, colour-shifting seals and specialised coatings",
+      "A high-quality carton inspection machine",
+      "Delivery to every corner of Pakistan"
     ],
     "button_label": "More about us",
     "button_href": "about.html",
     "media": {
-      "alt": "Supreme Art offset printing and inspection area",
-      "image": "/images/home/who-we-are-press.jpg"
+      "alt": "Heidelberg SM-74 press line at Supreme Art",
+      "image": "/images/home/who-we-are-press-hall.webp"
     }
   },
-  "products": {
-    "eyebrow": "What we make",
-    "heading": "Packaging for pharmaceutical and food products.",
-    "lead": "We produce printed cartons, leaflets and labels for medicines and food products.",
-    "items": [
+  "services": {
+    "button_label": "See all services",
+    "button_href": "products.html",
+    "pages": [
       {
-        "title": "Tablet packaging",
-        "text": "Cartons for tablet blister and strip packs.",
-        "alt": "Tablet packaging",
-        "image": "/images/products/tablet-packaging.jpg"
+        "eyebrow": "Our services",
+        "heading": "Cartons for every kind of product.",
+        "lead": "From blister-pack tablets to syrups, supplements and spices, every carton is printed and finished under one roof in Pakistan.",
+        "items": [
+          {
+            "title": "Tablets & capsules",
+            "text": "Cartons for blister and alu-alu strip packs, capsule and softgel packs, and tablet bottles, in straight-tuck, reverse-tuck and lock-bottom styles, from single strips to thirty-tablet packs.",
+            "image": "/images/home/services/tablets-capsules.webp",
+            "alt": "Tablet and capsule cartons: Bexus, Novex, Zolt, Duet, Carveda, Vazkor and Imo",
+            "href": "products.html#tablet-capsule-heading"
+          },
+          {
+            "title": "Syrups & suspensions",
+            "text": "Bottle cartons for syrups, dry-powder suspensions and drops, from 30 ml to 120 ml, with tuck-end or lock-bottom bases and room for the leaflet.",
+            "image": "/images/home/services/syrups-suspensions.webp",
+            "alt": "Syrup cartons: Bronochol, Citolin, Fenbro 8, Fedralka, Pedrol and Novex Paracetamol",
+            "href": "products.html#syrup-suspension-heading"
+          }
+        ]
       },
       {
-        "title": "Capsule packaging",
-        "text": "Cartons for capsule blister, strip and bottle formats.",
-        "alt": "Capsule packaging",
-        "image": "/images/products/capsule-packaging.jpg"
-      },
-      {
-        "title": "Syrup packaging",
-        "text": "Protective bottle cartons with optional inserts.",
-        "alt": "Syrup packaging",
-        "image": "/images/products/syrup-packaging.jpg"
-      },
-      {
-        "title": "Leaflets & inserts",
-        "text": "Printed and folded product-information inserts.",
-        "alt": "Pharmaceutical leaflets and inserts",
-        "image": "/images/products/leaflets-inserts.jpg"
-      },
-      {
-        "title": "Labels",
-        "text": "Colour-accurate labels for bottles and products.",
-        "alt": "Printed product labels",
-        "image": "/images/products/labels.jpg"
-      },
-      {
-        "title": "Food packaging",
-        "text": "Masala and food packaging for brands including Stanley Foods and SwaaD Foods.",
-        "alt": "Supreme Art masala and food packaging",
-        "image": "/images/products/food-packaging.jpg"
+        "eyebrow": "Our services",
+        "show_all": true,
+        "items": [
+          {
+            "title": "Nutraceuticals",
+            "text": "Cartons for softgels, sachets, creams and tubes, ampoules and supplement jars, plus hanging packs with a euro slot for the pharmacy shelf.",
+            "image": "/images/home/services/nutraceuticals.webp",
+            "alt": "Nutraceutical cartons: Vosun-D, Herbion Seaweed cream, Quench, Algae-Vit, Nova-Plast and Calciferol",
+            "href": "products.html#neutra-products-heading"
+          },
+          {
+            "title": "Food",
+            "text": "Spice, masala and dessert-mix cartons in tuck-end and four- and six-corner styles, finished with food-grade water-base coatings.",
+            "image": "/images/home/services/food.webp",
+            "alt": "SwaaD food cartons: Chapli Kabab, Kali Mirch, Shahi Kheer and Bombay Biryani",
+            "href": "products.html#food-packaging-heading"
+          },
+          {
+            "title": "Labels & stickers",
+            "text": "Wrap-around bottle labels, front-and-back labels and stickers for syrups, drops and suspensions, printed to match their cartons.",
+            "image": "/images/home/services/labels-stickers.webp",
+            "alt": "Labelled syrup bottles: Bronochol, Omevex, Pedrol, Citolin, Imo IV and Feromalt",
+            "href": "products.html#labels-leaflets-heading"
+          }
+        ]
       }
     ],
-    "button_label": "Explore our services",
-    "button_href": "products.html"
+    "finishes": {
+      "eyebrow": "Finishes",
+      "heading": "Finishes that protect and stand out.",
+      "lead": "Security features, special coatings and foils, applied in-house after printing.",
+      "button_label": "All finishes",
+      "button_href": "products.html#finishes-heading"
+    }
   },
   "process": {
     "eyebrow": "How it's made",
     "heading": "From artwork to flat-packed carton.",
-    "lead": "Eleven stages, all under one roof in Peshawar.",
-    "button_label": "See the full process",
+    "lead": "Three chapters under one roof in Pakistan — this is how a carton is made at Supreme Art.",
+    "button_label": "View full process",
     "button_href": "process.html"
   },
   "capabilities": {
@@ -106,7 +119,7 @@
   "quality": {
     "eyebrow": "Quality",
     "heading": "Built for pharma standards.",
-    "text": "Medicine packaging doesn't get second chances. We run documented quality assurance across every stage — incoming board, colour control on press, dimensional checks after die-cutting, and final inspection before dispatch.",
+    "text": "Medicine packaging doesn’t get second chances. We run documented quality assurance across every stage: incoming board, Pantone-matched colour verified with a spectrophotometer on press, coating checks, hand inspection of every unit carton by our QC team, and a digital job card that follows each order from board to delivery.",
     "stats": [
       {
         "number": 25,
@@ -136,60 +149,148 @@
     "eyebrow": "Trusted by",
     "heading": "Our clients.",
     "lead": "Pharmaceutical and consumer brands that rely on Supreme Art for their packaging.",
-    "items": [
+    "groups": [
       {
-        "name": "SwaaD",
-        "logo": "/images/clients/stanley.png",
-        "initials": "SW",
-        "colour": "#00a8cc"
+        "title": "Local clients",
+        "items": [
+          {
+            "name": "Stanley Pharmaceuticals",
+            "logo": "/images/clients/stanley.png"
+          },
+          {
+            "name": "Ferozsons Laboratories",
+            "logo": "/images/clients/ferozsons.png"
+          },
+          {
+            "name": "Global Pharmaceuticals",
+            "logo": "/images/clients/global.png"
+          },
+          {
+            "name": "Vision Pharmaceuticals",
+            "logo": "/images/clients/vision.png"
+          },
+          {
+            "name": "Legacy Pharmaceuticals",
+            "logo": "/images/clients/legacy.png"
+          },
+          {
+            "name": "Universal Pharmaceuticals",
+            "logo": "/images/clients/universal.png"
+          },
+          {
+            "name": "Danas",
+            "logo": "/images/clients/danas.png"
+          },
+          {
+            "name": "Evolution",
+            "logo": "/images/clients/evolution.png"
+          },
+          {
+            "name": "Bio-Labs",
+            "logo": "/images/clients/bio-labs.png"
+          },
+          {
+            "name": "Medicraft",
+            "logo": "/images/clients/medicraft.png"
+          },
+          {
+            "name": "SwaaD — Stanley Food",
+            "logo": "/images/clients/swaad.png"
+          },
+          {
+            "name": "Nutrabiotics",
+            "logo": "/images/clients/nutrabiotics.png"
+          },
+          {
+            "name": "Fedro",
+            "logo": "/images/clients/fedro.png"
+          },
+          {
+            "name": "Shaigan",
+            "logo": "/images/clients/shaigan.png"
+          },
+          {
+            "name": "Herbion Pharma",
+            "logo": "/images/clients/herbion.png"
+          }
+        ]
       },
       {
-        "name": "Global Pharmaceuticals",
-        "logo": "/images/clients/global.png",
-        "initials": "GP",
-        "colour": "#d6347f"
-      },
-      {
-        "name": "Ferozsons",
-        "logo": "/images/clients/ferozsons.png",
-        "initials": "FZ",
-        "colour": "#1b6fb3"
-      },
-      {
-        "name": "Shaigan",
-        "logo": "/images/clients/shaigan.png",
-        "initials": "SH",
-        "colour": "#c99a00"
-      },
-      {
-        "name": "Herbion",
-        "logo": "/images/clients/herbion.png",
-        "initials": "HB",
-        "colour": "#2e9e5b"
-      },
-      {
-        "name": "Evolution",
-        "logo": "/images/clients/evolution.png",
-        "initials": "EV",
-        "colour": "#17171a"
-      },
-      {
-        "name": "Danas",
-        "logo": "/images/clients/danas.jpg",
-        "initials": "DA",
-        "colour": "#1aa5b8"
-      },
-      {
-        "name": "Stanley Pharmaceuticals",
-        "logo": "/images/clients/stanley-pharma.png",
-        "initials": "ST",
-        "colour": "#2e9e5b"
-      },
-      {
-        "name": "Bio-Labs",
-        "logo": "/images/clients/biolabs.jpg",
-        "initials": "BL",
-        "colour": "#1b6fb3"
+        "title": "International clients",
+        "items": [
+          {
+            "name": "Asia Noor Pharmaceuticals",
+            "logo": "/images/clients/asia-noor.png"
+          },
+          {
+            "name": "Life Pearl Pharmaceutical",
+            "logo": "/images/clients/life-pearl.png"
+          },
+          {
+            "name": "Khalid Irshad Pharma",
+            "logo": "/images/clients/khalid-irshad.png"
+          },
+          {
+            "name": "Marzada Niazi Ltd",
+            "logo": "/images/clients/marzada.png"
+          },
+          {
+            "name": "Mayar Brothers",
+            "logo": "/images/clients/mayar-brothers.png"
+          },
+          {
+            "name": "Pharma Health Pharmaceuticals",
+            "logo": "/images/clients/pharma-health.png"
+          },
+          {
+            "name": "Elmy Complex",
+            "logo": "/images/clients/elmy.png"
+          },
+          {
+            "name": "Abwar",
+            "logo": "/images/clients/abwar.png"
+          },
+          {
+            "name": "Ameer Afghan Pharmaceutical Industry",
+            "logo": "/images/clients/aapi.png"
+          },
+          {
+            "name": "Sami Pharmaceuticals",
+            "logo": "/images/clients/sami.png"
+          },
+          {
+            "name": "Hayat Mubarak",
+            "logo": "/images/clients/hayat-mubarak.png"
+          },
+          {
+            "name": "Moon Bright Pharmaceutical",
+            "logo": "/images/clients/moon-bright.png"
+          },
+          {
+            "name": "Al-Karim Pharma",
+            "logo": "/images/clients/al-karim.png"
+          },
+          {
+            "name": "Pesaran Akhundzada Ltd",
+            "logo": "/images/clients/pesaran.png"
+          },
+          {
+            "name": "Zafaran Pharmaceuticals",
+            "logo": "/images/clients/zafaran.png"
+          },
+          {
+            "name": "Bright Pharma",
+            "logo": "/images/clients/bright-pharma.png"
+          },
+          {
+            "name": "Life Care Pharma",
+            "logo": "/images/clients/life-care.png"
+          },
+          {
+            "name": "Atal Pharma",
+            "logo": "/images/clients/atal.png"
+          }
+        ]
       }
     ]
   },
@@ -199,20 +300,20 @@
     "posts": [
       {
         "date": "Aug 2026",
-        "title": "Expanding our folding-carton capacity",
-        "text": "New folder-gluer capacity means faster turnaround on high-volume runs.",
+        "title": "Expanding our production floor",
+        "text": "More space and more capacity on the factory floor, so large pharmaceutical orders move through faster.",
         "href": "contact.html"
       },
       {
         "date": "Jun 2026",
-        "title": "Colour-accuracy on every press pass",
-        "text": "How press-side colour control keeps pharma branding consistent.",
+        "title": "A new high-quality inspection machine",
+        "text": "Our new high-quality carton inspection machine is installed on the finishing floor, another pair of eyes on every run.",
         "href": "contact.html"
       },
       {
         "date": "Apr 2026",
-        "title": "Our commitment to pharma-grade quality",
-        "text": "Inside the documented checks behind every carton we ship.",
+        "title": "A new hot-stamping machine",
+        "text": "Sharper foils and security finishes, applied in-house with greater speed and precision.",
         "href": "contact.html"
       }
     ]
