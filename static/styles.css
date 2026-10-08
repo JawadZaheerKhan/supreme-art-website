@@ -1721,17 +1721,15 @@ a { color: inherit; }
    red, used only here over the photographs, where the maroon would read dull. */
 .home-story { --hero-red: #e3262d; }
 .home-story__scene.home-story__scene--poster { align-items: stretch; justify-content: center; text-align: left; padding: clamp(96px, 12vh, 130px) max(24px, calc((100vw - 1140px) / 2 + 24px)) clamp(48px, 8vh, 80px); }
-.home-story__poster { max-width: min(720px, 92vw); display: flex; flex-direction: column; align-items: flex-start; gap: clamp(14px, 2.2vh, 24px); text-shadow: 0 3px 22px rgba(0, 0, 0, .55); }
+.home-story__poster { max-width: min(760px, 92vw); display: flex; flex-direction: column; align-items: flex-start; gap: clamp(18px, 2.8vh, 30px); text-shadow: 0 3px 22px rgba(0, 0, 0, .55); }
+.home-story__poster::before { content: ""; width: 72px; height: 4px; margin-bottom: clamp(-4px, -.4vh, 0px); background: var(--hero-red); box-shadow: none; }
 .home-story__poster .is-red { color: var(--hero-red); }
-.home-story__kicker, .home-story__footer { margin: 0; color: rgba(255, 255, 255, .88); font-family: var(--font); font-size: clamp(.68rem, .95vw, .82rem); font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
-.home-story__kicker::after { content: ""; display: block; width: 64px; height: 3px; margin-top: 12px; background: var(--hero-red); box-shadow: none; }
-.home-story__footer::before { content: ""; display: block; width: 64px; height: 3px; margin-bottom: 12px; background: var(--hero-red); }
+.home-story__footer { margin: clamp(8px, 2vh, 22px) 0 0; padding-top: clamp(14px, 2vh, 20px); border-top: 1px solid rgba(255, 255, 255, .28); color: rgba(255, 255, 255, .88); font-family: var(--font); font-size: clamp(.68rem, .95vw, .82rem); font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
 .home-story__scene--poster h2.home-story__title { width: auto; margin: 0; font-family: var(--display); font-size: clamp(2rem, 4.6vw, 4.4rem); font-weight: 700; line-height: .98; letter-spacing: -.01em; text-transform: uppercase; text-wrap: balance; }
 .home-story__title span { display: block; }
 .home-story__figure { margin: 0; color: #fff; font-family: var(--display); font-size: clamp(2.8rem, 7.4vw, 7rem); font-weight: 700; line-height: .95; letter-spacing: -.02em; }
 .home-story__figure > span { display: block; }
-.home-story__copy { margin: 0; max-width: 38ch; color: rgba(255, 255, 255, .92); font-size: clamp(1rem, 1.45vw, 1.3rem); line-height: 1.45; }
-.home-story__facts { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; color: #fff; font-size: clamp(.8rem, 1vw, .95rem); font-weight: 600; letter-spacing: .04em; }
+.home-story__facts { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px 26px; color: #fff; font-size: clamp(.85rem, 1.15vw, 1.08rem); font-weight: 600; letter-spacing: .04em; }
 .home-story__facts li { display: flex; align-items: center; gap: 10px; }
 .home-story__facts li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--hero-red); }
 /* a deeper shade on the left while a poster stage shows, so the type reads over the machines */
@@ -1742,7 +1740,6 @@ a { color: inherit; }
   .home-story__poster { gap: 12px; }
   .home-story__scene--poster h2.home-story__title { font-size: clamp(1.9rem, 9vw, 2.8rem); line-height: 1; }
   .home-story__figure { font-size: clamp(2.6rem, 13vw, 4rem); }
-  .home-story__copy { font-size: .98rem; }
   .home-story__shade::after { background: linear-gradient(0deg, rgba(0, 0, 0, .65), rgba(0, 0, 0, .25) 55%, transparent 80%); }
 }
 

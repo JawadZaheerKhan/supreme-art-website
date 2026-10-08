@@ -133,23 +133,19 @@ collections:
                 label: 'Stage 2 — press hall'
                 widget: object
                 fields:
-                  - { name: kicker, label: Small label at the top, widget: string }
                   - { name: title, label: Headline (white), widget: string }
                   - { name: title_red, label: Headline (red), widget: string }
                   - { name: facts, label: Facts row, widget: list }
-                  - { name: text, label: Copy, widget: text }
                   - { name: footer, label: Small label at the bottom, widget: string }
               - name: capacity
                 label: 'Stage 3 — Speedmaster'
                 widget: object
                 fields:
-                  - { name: kicker, label: Small label at the top, widget: string }
                   - { name: title, label: Headline (white), widget: string }
                   - { name: title_red, label: Headline (red), widget: string }
                   - { name: figure_red, label: Big figure (red), widget: string }
                   - { name: figure, label: Big figure (white), widget: string }
                   - { name: figure_line2, label: Big figure second line, widget: string }
-                  - { name: text, label: Copy, widget: text }
                   - { name: footer, label: Small label at the bottom, widget: string }
           - name: marquee
             label: Scrolling ticker
