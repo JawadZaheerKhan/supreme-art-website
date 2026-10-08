@@ -48,7 +48,9 @@ collections:
                   - name: slug
                     label: Page it belongs to
                     widget: select
-                    options: [index, about, products, quality, careers, contact]
+                    options: [index, about, products, clients, process, quality, careers, contact]
+                  - { name: desktop_only, label: Only on desktop (hidden on phones and tablets), widget: boolean, required: false }
+                  - { name: dropdown_mobile_only, label: Dropdown only on phones and tablets, widget: boolean, required: false }
                     hint: Used to highlight this item when you are on that page.
                   - name: dropdown
                     label: Dropdown items
@@ -57,6 +59,7 @@ collections:
                     summary: '{{fields.label}}'
                     hint: Leave empty for a plain link with no dropdown.
                     fields:
+                      - { name: mobile_only, label: Only on phones and tablets, widget: boolean, required: false }
                       - { name: label, label: Text, widget: string }
                       - { name: href, label: Links to, widget: string }
               - name: cta

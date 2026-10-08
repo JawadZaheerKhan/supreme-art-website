@@ -411,7 +411,13 @@ document.querySelectorAll('.process-intro__facts li, .home-process__facts li').f
     const linkPath = new URL(link.href, window.location.href).pathname.replace(/index\.html$/, '');
     return linkPath === pagePath;
   });
-  const activeLink = topLevelLink(nav.querySelector('a.current') || matchingLink || topLinks[0]);
+  const pathOf = link => new URL(link.href, window.location.href).pathname.replace(/index\.html$/, '');
+  function activeLink() {
+    const current = nav.querySelector(':scope > a.current, :scope > .has-dropdown > a.current');
+    if (current && current.offsetParent !== null) return current;
+    const sub = [...nav.querySelectorAll('.dropdown a')].find(link => pathOf(link) === pagePath && topLevelLink(link).offsetParent !== null);
+    return topLevelLink(sub || current || matchingLink || topLinks[0]);
+  }
   let targetTimer;
 
   function topLevelLink(link) {
@@ -446,7 +452,7 @@ document.querySelectorAll('.process-intro__facts li, .home-process__facts li').f
   }
 
   function syncIndicator() {
-    requestAnimationFrame(() => positionIndicator(activeLink, false));
+    requestAnimationFrame(() => positionIndicator(activeLink(), false));
   }
 
   function setupDropdownIndicator(dropdown) {
@@ -545,7 +551,7 @@ document.querySelectorAll('.process-intro__facts li, .home-process__facts li').f
       if (tracking) return;
       tracking = true;
       const frame = now => {
-        positionIndicator(activeLink, false);
+        positionIndicator(activeLink(), false);
         if (now < trackUntil) requestAnimationFrame(frame);
         else { tracking = false; nav.classList.remove('is-tracking'); }
       };

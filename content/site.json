@@ -23,8 +23,9 @@
             "href": "about.html"
           },
           {
-            "label": "Quality Control",
-            "href": "quality.html"
+            "label": "Clients",
+            "href": "clients.html",
+            "mobile_only": true
           },
           {
             "label": "Careers",
@@ -42,7 +43,8 @@
         "label": "Clients",
         "href": "clients.html",
         "slug": "clients",
-        "dropdown": []
+        "dropdown": [],
+        "desktop_only": true
       },
       {
         "label": "Process",
@@ -60,12 +62,20 @@
         "label": "Careers",
         "href": "careers.html",
         "slug": "careers",
-        "dropdown": []
+        "dropdown": [
+          {
+            "label": "Get a quote",
+            "href": "contact.html",
+            "mobile_only": true
+          }
+        ],
+        "dropdown_mobile_only": true
       }
     ],
     "cta": {
       "label": "Get a quote",
-      "href": "contact.html"
+      "href": "contact.html",
+      "desktop_only": true
     }
   },
   "contact": {
