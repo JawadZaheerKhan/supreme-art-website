@@ -227,6 +227,26 @@ const countIO = new IntersectionObserver((entries) => {
 }, { threshold: 0.6 });
 document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
 
+/* Opening titles: html.home-intro-run is set by an inline script before first paint (index.html). The titles end
+   by themselves after 4.2 s; the first wheel, key, touch or click ends them at once and is swallowed, so the hero
+   does not also move a stage. */
+(function () {
+  const root = document.documentElement;
+  if (!root.classList.contains('home-intro-run')) return;
+  const events = ['wheel', 'keydown', 'touchstart', 'pointerdown'];
+  let done = false;
+  function end(event) {
+    if (done) return;
+    done = true;
+    root.classList.remove('home-intro-run');
+    events.forEach(type => window.removeEventListener(type, skip, true));
+    if (event && event.cancelable) { event.preventDefault(); event.stopImmediatePropagation(); }
+  }
+  function skip(event) { end(event); }
+  events.forEach(type => window.addEventListener(type, skip, { capture: true, passive: false }));
+  setTimeout(() => end(), 4200);
+})();
+
 /* Homepage three-stage scroll story */
 (function () {
   const story = document.querySelector('.home-story');

@@ -129,6 +129,12 @@ collections:
             widget: object
             hint: The building and the logo are fixed; these are the words on the press-hall and Speedmaster stages.
             fields:
+              - name: intro
+                label: 'Opening titles'
+                widget: object
+                fields:
+                  - { name: kicker, label: Title, widget: string }
+                  - { name: line, label: Line under the title, widget: string }
               - name: press
                 label: 'Stage 2 — press hall'
                 widget: object

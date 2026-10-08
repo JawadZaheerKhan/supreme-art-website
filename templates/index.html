@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="/home-clients.css" />
 </head>
 <body class="home-page">
+<script>
+  // The opening titles play when the home page opens, unless the visitor prefers reduced motion or is arriving at
+  // a section further down. Set before first paint so nothing flashes; script.js ends it or skips it.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !location.hash) document.documentElement.classList.add('home-intro-run');
+</script>
 {{> gtm-body}}
 {{> loader}}
 {{> header}}
@@ -50,6 +55,18 @@
         </div>
         <div class="home-story__progress" aria-hidden="true"><span></span><span></span><span></span></div>
         <p class="home-story__hint" aria-hidden="true">Scroll to explore <span>↓</span></p>
+        <!-- Opening titles: letterbox bars, a dark veil, a title card and a band of light across the facade. Purely
+             decorative; it plays once as the page opens (styles.css, script.js). -->
+        <div class="home-intro" aria-hidden="true">
+          <span class="home-intro__veil"></span>
+          <span class="home-intro__sweep"></span>
+          <span class="home-intro__bar home-intro__bar--top"></span>
+          <span class="home-intro__bar home-intro__bar--bottom"></span>
+          <div class="home-intro__title">
+            <p class="home-intro__kicker">{{ page.hero.intro.kicker }}</p>
+            <p class="home-intro__line">{{ page.hero.intro.line }}</p>
+          </div>
+        </div>
       </div>
     </section>
 
