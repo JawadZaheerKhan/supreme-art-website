@@ -18,6 +18,7 @@
             <li><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></li>
             <li><a href="tel:{{ site.contact.phone_link }}">{{ site.contact.phone }}</a></li>
             <li><a href="tel:{{ site.contact.phone_secondary_link }}">{{ site.contact.phone_secondary }}</a></li>
+            {{#if site.contact.phone_third}}<li><a href="tel:{{ site.contact.phone_third_link }}">{{ site.contact.phone_third }}</a></li>{{/if}}
             <li>{{ site.contact.address }}</li>
           </ul>
         </div>

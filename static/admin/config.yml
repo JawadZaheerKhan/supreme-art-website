@@ -85,6 +85,12 @@ collections:
                 label: Additional phone (dialling format)
                 widget: string
                 hint: International format, e.g. +923135585784
+              - { name: phone_third, label: Third phone (as displayed), widget: string, required: false }
+              - name: phone_third_link
+                label: Third phone (dialling format)
+                widget: string
+                required: false
+                hint: International format, e.g. +923135585784
               - { name: address_long, label: Address (full), widget: string }
           - name: capabilities
             label: Capability cards
